@@ -34,28 +34,28 @@ export default function LanguageSelection () {
                     bounces={true}
                 >
                     <View style={styles.slide1}>
-                        <TouchableOpacity style={styles.continue}>
-                            <Text style={styles.button_text}>العربــية</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={styles.slide2}>
-                        <TouchableOpacity style={styles.continue}>
+                        <TouchableOpacity style={[styles.language_active, styles.buttons]}>
                             <Text style={styles.button_text}>English</Text>
                         </TouchableOpacity>
                     </View>
+                    <View style={styles.slide2}>
+                        <TouchableOpacity style={[styles.language_not_active, styles.buttons]} disabled={true}>
+                            <Text style={styles.button_text}>العربــية</Text>
+                        </TouchableOpacity>
+                    </View>
                     <View style={styles.slide3}>
-                        <TouchableOpacity style={styles.continue}>
+                        <TouchableOpacity style={[styles.language_not_active, styles.buttons]} disabled={true}>
                             <Text style={styles.button_text}>Spanish</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.slide4}>
-                        <TouchableOpacity style={styles.continue}>
+                        <TouchableOpacity style={[styles.language_not_active, styles.buttons]} disabled={true}>
                             <Text style={styles.button_text}>French</Text>
                         </TouchableOpacity>
                     </View>
                 </Swiper>
                 <View style={styles.button_container}>
-                    <TouchableOpacity style={styles.continue}>
+                    <TouchableOpacity style={[styles.continue, styles.buttons]}>
                         <Text style={styles.button_text}>Continue</Text>
                     </TouchableOpacity>
                 </View>
@@ -126,13 +126,23 @@ const styles = StyleSheet.create({
         gap: 15,
         paddingTop: 10
     },
-    continue: {
+    buttons: {
         width: 285,
         height: 57,
         borderRadius: 20,
-        backgroundColor: '#BF8148',
         justifyContent: "center",
         alignItems: "center",
+    },
+    continue: {
+        backgroundColor: '#BF8148',
+    },
+    language_active: {
+        backgroundColor: '#1B7B94',
+    },
+    language_not_active: {
+        backgroundColor: 'transparent',
+        borderWidth: 2,
+        borderColor: '#1B7B94',
     },
     button_text: {
         fontFamily: 'Montserrat-Bold',
