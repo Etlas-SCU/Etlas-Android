@@ -8,8 +8,16 @@
     "ios": "expo start --ios",
     "web": "expo start --web"
   },
+  "rnpm": {
+    "assets": [
+      "./assets/fonts"
+    ]
+  },
   "dependencies": {
+    "@expo-google-fonts/dev": "^0.2.3",
+    "@expo-google-fonts/montserrat": "^0.2.3",
     "expo": "~48.0.5",
+    "expo-font": "~11.1.1",
     "expo-status-bar": "~1.4.4",
     "react": "18.2.0",
     "react-native": "0.71.3"
