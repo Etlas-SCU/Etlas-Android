@@ -6,7 +6,7 @@ import LanguageSelection from './Components/LanguageSelection/LanguageSelection'
 export default function App() {
   return (
     <View style={styles.container}>
-      <OnBoarding/>
+      <LanguageSelection />
     </View>
   );
 }
