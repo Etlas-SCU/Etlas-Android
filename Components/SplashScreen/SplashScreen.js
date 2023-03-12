@@ -1,9 +1,9 @@
-import { StyleSheet, Text, View, ImageBackground } from 'react-native';
+import { StyleSheet, View, ImageBackground } from 'react-native';
 
 const SplashScreen = () => {
     return (
         <View style={styles.container}>
-            <ImageBackground source={require('../../assets/Splash/Splash.png')} resizeMode="stretch" style={styles.image}/>
+            <ImageBackground source={require('../../assets/splash/Splash.png')} resizeMode="stretch" style={styles.image}/>
         </View>
     );
 }  

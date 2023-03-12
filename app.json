@@ -4,10 +4,10 @@
     "slug": "Etlas",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/Etlas-logo.png",
-    "userInterfaceStyle": "light",
+    "icon": "./assets/logo/Etlas-logo.png",
+    "userInterfaceStyle": "dark",
     "splash": {
-      "image": "./assets/Splash/Splash.png",
+      "image": "./assets/splash/Splash.png",
       "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
@@ -19,7 +19,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/Splash/Splash.png",
+        "foregroundImage": "./assets/splash/Splash.png",
         "resizeMode": "cover",
         "backgroundColor": "#ffffff"
       }
