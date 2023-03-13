@@ -53,7 +53,7 @@ export function SecondPage() {
             </TouchableOpacity>
             <View style={styles.signIn}>
                 <Text style={styles.haveAccount}>Already have an account? </Text>
-                <TouchableOpacity style={{fontWeight: 'bold'}}>
+                <TouchableOpacity>
                         <Text style={styles.signInText}>Sign In</Text>
                 </TouchableOpacity>
             </View>
