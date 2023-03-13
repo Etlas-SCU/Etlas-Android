@@ -21,6 +21,7 @@ export const colors = {
     DarkCyan: '#003441',
     Cyan: '#55C4E0',
     LightSeaGreen: '#1B7B94',
+    Grey: '#ABAAAA'
 }
 
 // padding used in the app

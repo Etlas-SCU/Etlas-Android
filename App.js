@@ -1,8 +1,10 @@
 import { View } from 'react-native';
-import LanguageSelection from './Components/LanguageSelection/LanguageSelection'
 import { styles } from './AppStyles';
 import { useFonts } from 'expo-font';
 import OnBoarding from "./Components/OnBoarding/OnBoarding";
+import LanguageSelection from './Components/LanguageSelection/LanguageSelection'
+import { FirstPage } from './Components/Register/FirstPage';
+import { SecondPage } from './Components/Register/SecondPage'
 
 export default function App() {
 
@@ -23,7 +25,7 @@ export default function App() {
     // if the font loaded, return the components
     return (
         <View style={styles.container}>
-            <LanguageSelection />
+            <SecondPage/>
         </View>
     );
 }
