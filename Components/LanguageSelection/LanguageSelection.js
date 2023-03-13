@@ -1,7 +1,7 @@
 import { Text, View, TouchableOpacity, ImageBackground, Image } from "react-native";
 import { useFonts } from 'expo-font';
 import Swiper from 'react-native-swiper'
-import { styles } from "./styles";
+import { styles } from "./Styles";
 
 export default function LanguageSelection () {
     

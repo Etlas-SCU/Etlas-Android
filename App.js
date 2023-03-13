@@ -1,4 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import OnBoarding from "./Components/OnBoarding/OnBoarding";
 import LanguageSelection from './Components/LanguageSelection/LanguageSelection'
