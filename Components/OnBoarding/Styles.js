@@ -1,25 +1,26 @@
 import { StyleSheet } from "react-native";
+import { fontFamily, colors, dimensions } from "../../AppStyles";
 
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#003441',
+        backgroundColor: colors.DarkCyan,
         Width: "2rem"
     },
     text_box: {
         flexDirection: "row",
     },
     header: {
-        fontFamily: 'CapitalisTypOasis',
-        color: '#BF8148',
+        fontFamily: fontFamily.CapitalisTypOasis,
+        color: colors.Gold,
         fontSize: 50,
         textAlign: 'left',
         marginTop: 102,
         marginLeft: 24,
     },
     desc: {
-        fontFamily: 'Montserrat-Medium',
-        color: '#FFFFFF',
+        fontFamily: fontFamily.MontserratMedium,
+        color: colors.White,
         fontSize: 20,
         textAlign: 'left',
         marginTop: 23,
@@ -29,8 +30,8 @@ export const styles = StyleSheet.create({
         width: 284
     },
     worry: {
-        fontFamily: 'Montserrat-Bold',
-        color: '#FFFFFF',
+        fontFamily: fontFamily.MontserratBold,
+        color: colors.White,
         fontSize: 20,
         textAlign: 'left',
         marginTop: 23,
@@ -64,22 +65,22 @@ export const styles = StyleSheet.create({
         width: 181,
         height: 57,
         borderRadius: 20,
-        backgroundColor: '#BF8148',
+        backgroundColor: colors.Gold,
         justifyContent: "center",
         alignItems: "center",
     },
     button_text: {
-        fontFamily: 'Montserrat-Bold',
-        color: '#FFFFFF',
+        fontFamily: fontFamily.MontserratBold,
+        color: colors.White,
         fontSize: 20,
         textAlign: 'center',
     },
     sign_in: {
-        backgroundColor: '#BF8148',
+        backgroundColor: colors.Gold,
     },
     sign_up: {
         backgroundColor: 'transparent',
         borderWidth: 2,
-        borderColor: '#BF8148',
+        borderColor: colors.Gold,
     }
 });

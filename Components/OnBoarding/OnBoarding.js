@@ -1,20 +1,7 @@
 import { Text, View, Image, TouchableOpacity } from "react-native";
-import { useFonts } from 'expo-font';
 import { styles } from "./Styles";
 
-export default function OnBoarding () {
-    
-    // get the font from the local fonts
-    let [fontsLoaded] = useFonts({
-        'CapitalisTypOasis': require('../../assets/fonts/CapitalisTypOasis.ttf'),
-        'Montserrat-Medium': require('../../assets/fonts/Montserrat-Medium.ttf'),
-        'Montserrat-Bold': require('../../assets/fonts/Montserrat-Bold.ttf')
-    });    
-
-    // if the font not loaded don't appear anything
-    if (!fontsLoaded)
-        return null
-    
+export default function OnBoarding() {
 
     // if the font loaded, return the text
     return (
