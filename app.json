@@ -19,8 +19,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/splash/Splash.png",
-        "resizeMode": "cover",
+        "foregroundImage": "./assets/logo/Etlas-logo.png",
         "backgroundColor": "#ffffff"
       }
     },
