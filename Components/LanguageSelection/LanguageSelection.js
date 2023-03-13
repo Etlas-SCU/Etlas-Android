@@ -1,20 +1,9 @@
-import { StyleSheet, Text, View, TouchableOpacity, ImageBackground, Image } from "react-native";
-import { useFonts } from 'expo-font';
+import { Text, View, TouchableOpacity, ImageBackground, Image } from "react-native";
 import Swiper from 'react-native-swiper'
+import { styles } from "./Styles";
 
-export default function LanguageSelection () {
-    
-    // get the font from the local fonts
-    let [fontsLoaded] = useFonts({
-        'CapitalisTypOasis': require('../../assets/fonts/CapitalisTypOasis.ttf'),
-        'Montserrat-Medium': require('../../assets/fonts/Montserrat-Medium.ttf'),
-        'Montserrat-Bold': require('../../assets/fonts/Montserrat-Bold.ttf')
-    });    
+export default function LanguageSelection() {
 
-    // if the font not loaded don't appear anything
-    if (!fontsLoaded)
-        return null
-    
     // if the font loaded, return the text
     return (
         <View style={styles.container}>
@@ -23,12 +12,12 @@ export default function LanguageSelection () {
                 <View style={styles.text_box}>
                     <Text style={styles.desc}>Please, choose your preferred language that you want to be set on the application, it can also be changed anytime.</Text>
                 </View>
-                <Swiper style={styles.wrapper} 
-                    showsButtons={true} 
-                    horizontal={false} 
+                <Swiper style={styles.wrapper}
+                    showsButtons={true}
+                    horizontal={false}
                     buttonWrapperStyle={styles.arrows}
-                    nextButton={<Image source={require('../../assets/language_selection/material-symbols_keyboard-arrow-down.png')}/>}
-                    prevButton={<Image source={require('../../assets/language_selection/material-symbols_keyboard-arrow-up.png')}/>}
+                    nextButton={<Image source={require('../../assets/language_selection/material-symbols_keyboard-arrow-down.png')} />}
+                    prevButton={<Image source={require('../../assets/language_selection/material-symbols_keyboard-arrow-up.png')} />}
                     showsPagination={false}
                     containerStyle={styles.swipper}
                     bounces={true}
@@ -63,135 +52,3 @@ export default function LanguageSelection () {
         </View>
     );
 }
-
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-    image: {
-        flex: 1,
-    },
-    text_box: {
-        flexDirection: "row",
-    },
-    header: {
-        fontFamily: 'CapitalisTypOasis',
-        color: '#BF8148',
-        fontSize: 50,
-        textAlign: 'left',
-        marginTop: 102,
-        marginLeft: 24,
-    },
-    desc: {
-        fontFamily: 'Montserrat-Medium',
-        color: '#FFFFFF',
-        fontSize: 20,
-        textAlign: 'left',
-        marginTop: 23,
-        marginLeft: 24,
-        flexDirection: "row",
-        flexWrap: "wrap",
-        width: 284,
-        marginBottom: 20
-    },
-    worry: {
-        fontFamily: 'Montserrat-Bold',
-        color: '#FFFFFF',
-        fontSize: 20,
-        textAlign: 'left',
-        marginTop: 23,
-        marginLeft: 24,
-        flexDirection: "row",
-        flexWrap: "wrap",
-        width: 287
-    },
-    logoContainer: {
-        alignItems: 'flex-end',
-    },
-    wolf: {
-        flex: 1,
-        width: "55%",
-        height: "65%",
-        resizeMode: 'contain',
-        position: 'absolute',
-        bottom: "-15%",
-        marginLeft: "-1%",
-        marginTop: 30
-    },
-    button_container: {
-        flexDirection: "column",
-        justifyContent: "space-between",
-        alignItems: "center",
-        gap: 15,
-        paddingTop: 10
-    },
-    buttons: {
-        width: 285,
-        height: 57,
-        borderRadius: 20,
-        justifyContent: "center",
-        alignItems: "center",
-    },
-    continue: {
-        backgroundColor: '#BF8148',
-    },
-    language_active: {
-        backgroundColor: '#1B7B94',
-    },
-    language_not_active: {
-        backgroundColor: 'transparent',
-        borderWidth: 2,
-        borderColor: '#1B7B94',
-    },
-    button_text: {
-        fontFamily: 'Montserrat-Bold',
-        color: '#FFFFFF',
-        fontSize: 20,
-        textAlign: 'center',
-    },
-    swipper: {
-        flex: 0.7,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginVertical: 30,
-    },
-    wrapper: { },
-    slide1: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    slide2: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    slide3: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    slide4: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    text: {
-        color: '#FFFFFF',
-        fontSize: 30,
-        fontWeight: 'bold',
-        fontFamily: 'Montserrat-Bold',
-        textAlign: 'center',
-        verticalAlign: 'middle'
-    },
-    arrows: {
-        backgroundColor: 'transparent', 
-        flexDirection: 'column', 
-        position: 'absolute', 
-        justifyContent: 'space-between', 
-        alignItems: 'center',
-        color: '#FFFFFF',
-        verticalAlign: 'middle',
-    }
-});
