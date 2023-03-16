@@ -1,7 +1,11 @@
 import { Text, View, Image, TouchableOpacity } from "react-native";
+import { useNavigation } from '@react-navigation/native';
 import { styles } from "./Styles";
 
 export default function OnBoarding() {
+
+    // get the navigation
+    const navigation = useNavigation();    
 
     // if the font loaded, return the text
     return (
@@ -16,10 +20,10 @@ export default function OnBoarding() {
             </View>
             <Image style={styles.wolf} source={require('../../assets/on_boarding/EG_by_Onlywolfs.png')}></Image>
             <View style={styles.button_container}>
-                <TouchableOpacity style={[styles.sign_buttons, styles.sign_in]}>
+                <TouchableOpacity style={[styles.sign_buttons, styles.sign_in]} onPress={() => navigation.navigate('login')}>
                     <Text style={styles.button_text}>Sign in</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.sign_buttons, styles.sign_up]}>
+                <TouchableOpacity style={[styles.sign_buttons, styles.sign_up]} onPress={() => navigation.navigate('firstPage')}>
                     <Text style={styles.button_text}>Sign up</Text>
                 </TouchableOpacity>
             </View>

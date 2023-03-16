@@ -38,7 +38,7 @@ export const styles = StyleSheet.create({
         marginLeft: 24,
     },
     inputView: {
-        marginTop: 14,
+        marginTop: 8,
         marginLeft: 24,
         marginRight: 24,
         gap: 13
@@ -78,13 +78,14 @@ export const styles = StyleSheet.create({
         fontSize: 12,
         color: colors.Grey,
         marginTop: 8,
+        textAlign: 'right',
     },
     usingAppText: {
         fontFamily: fontFamily.MontserratRegular,
         fontSize: 18,
         color: colors.White,
         alignSelf: "center",
-        marginTop: 20,
+        marginTop: 60,
     },
     usingAppicons: {
         flexDirection: 'row',
@@ -99,7 +100,7 @@ export const styles = StyleSheet.create({
         height: 58,
         borderRadius: 20,
         alignSelf: "flex-start",
-        marginTop: 20,
+        marginTop: 60,
         marginLeft: 24,
         justifyContent: "center",
         alignItems: "center"
@@ -126,25 +127,4 @@ export const styles = StyleSheet.create({
         color: colors.Gold,
     },
 
-    // Second Page
-    nextButtonSecond: {
-        backgroundColor: colors.Gold,
-        width: 181,
-        height: 58,
-        borderRadius: 20,
-        alignSelf: "flex-start",
-        marginTop: 120,
-        marginLeft: 24,
-        justifyContent: "center",
-        alignItems: "center"
-    },
-    usingAppSecond: {
-        marginTop: 70
-    },
-    inputFormText: {
-        fontFamily: fontFamily.MontserratSemiBold,
-        fontSize: 20,
-        color: colors.Black,
-        textAlign: 'left'
-    }
 });
