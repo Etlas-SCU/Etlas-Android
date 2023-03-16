@@ -1,52 +1,59 @@
 import React, { useState } from "react";
 import { View, Text, Image, TouchableOpacity, TextInput, ScrollView, SafeAreaView } from "react-native";
-import IntlPhoneField from 'react-native-intl-phone-field';
 import { useNavigation } from '@react-navigation/native';
 import { styles } from './Styles';
 import { colors } from "../../AppStyles";
 
-export function SecondPage({ route }) {
+export default function Login() {
 
     // get the navigation
     const navigation = useNavigation();    
 
-    // get the fullname, email and password from route params 
-    const { fullname, email, password } = route.params;
-    const [phoneNumber, setPhoneNumber] = useState('');
-    const [address, setAddress] = useState('');
-        
+    // get the data from input
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [hidden, setHidden] = useState(false);
+
+
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView style={styles.container}>
                 <View style={styles.header_container}>
-                    <Text style={styles.header}>Register</Text>
+                    <Text style={styles.header}>Login</Text>
                     <TouchableOpacity style={styles.header} onPress={() => navigation.goBack()}>
                         <Image style={styles.arrow} source={require('../../assets/register/left-arrow.png')}></Image>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.line}/>
-                <Text style={styles.helpingText}>Please, fill your information up carefully.</Text>
+                <Text style={styles.helpingText}>Please, Enter Your Account.</Text>
                 <View style={styles.inputView}>
-                    <Text style={styles.stateName}>Phone Number</Text>
-                    <IntlPhoneField
-                        defaultCountry="EG"
-                        defaultPrefix="+20"
-                        onChangeText={(phoneNumber) => setPhoneNumber(phoneNumber)}
-                        containerStyle={styles.inputForm}
-                        textInputStyle={styles.inputFormText}
-                    />
-                </View>
-                <View style={styles.inputView}>
-                    <Text style={styles.stateName}>Address</Text>
+                    <Text style={styles.stateName}>E-mail</Text>
                     <TextInput 
                         style={styles.inputForm} 
-                        placeholder="Address" 
+                        placeholder="E-mail" 
                         placeholderTextColor={colors.Grey} 
-                        onChangeText={(address) => setAddress(address)}
+                        onChangeText={(email) => setEmail(email)}
                         cursorColor={colors.LightSeaGreen}
                     />
                 </View>
-                <View style={styles.usingAppSecond}>
+                <View style={styles.inputView}>
+                    <Text style={styles.stateName}>Password</Text>
+                    <View style={styles.passwordContainer}>
+                        <TextInput 
+                            style={[styles.inputForm, {flex: 1}]} 
+                            placeholder="Password" 
+                            placeholderTextColor={colors.Grey} 
+                            onChangeText={(password) => setPassword(password)}
+                            secureTextEntry={!hidden}
+                            cursorColor={colors.LightSeaGreen}
+                        />
+                        <TouchableOpacity style={styles.passwordEyeButton} onPress={() => setHidden(!hidden)}>
+                            <Image style={styles.passwordContainerImage} source={require('../../assets/register/codicon_eye.png')} />
+                        </TouchableOpacity>
+                    </View>
+                    <Text style={styles.passText}>Forgot password?</Text>
+                </View>
+                <View style={styles.usingApp}>
                     <Text style={styles.usingAppText}>OR <Text style={{fontWeight: 'bold'}}>Sign Up</Text> Using</Text>
                     <View style={styles.usingAppicons}>
                         <TouchableOpacity>
@@ -60,16 +67,18 @@ export function SecondPage({ route }) {
                         </TouchableOpacity>
                     </View>
                 </View>
-                <TouchableOpacity style={styles.nextButtonSecond}>
-                        <Text style={styles.nextText}>Register</Text>
+                <TouchableOpacity 
+                    style={styles.nextButton} 
+                >
+                    <Text style={styles.nextText}>Sign in</Text>
                 </TouchableOpacity>
                 <View style={styles.signIn}>
-                    <Text style={styles.haveAccount}>Already have an account? </Text>
-                    <TouchableOpacity onPress={() => navigation.navigate('login')}>
-                            <Text style={styles.signInText}>Sign In</Text>
+                    <Text style={styles.haveAccount}>Don't have an account yet? </Text>
+                    <TouchableOpacity onPress={() => { navigation.navigate({name: 'firstPage'})}}>
+                            <Text style={styles.signInText}>Sign Up</Text>
                     </TouchableOpacity>
                 </View>
-            </ScrollView>
+            </ScrollView>    
         </SafeAreaView>
     );
 }
