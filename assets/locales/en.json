@@ -14,5 +14,17 @@
         "worrytext": "No worries, your tour guide is here ;)",
         "signin": "Sign in",
         "signup": "Sign up"
+    },
+    "Login": {
+        "title": "Login",
+        "description": "Please, Enter Your Account",
+        "email": "E-mail",
+        "password": "Password",
+        "forgotpassword": "Forgot Password?",
+        "signin": "Sign in",
+        "signup": "Sign up",
+        "haveaccount": "Don't have an account yet?",
+        "or": "OR",
+        "using": "Using"
     }
 }
