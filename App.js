@@ -45,9 +45,10 @@ export default function App() {
         'Montserrat-Thin': require('./assets/fonts/Montserrat-Thin.ttf'),
     });
 
-    const clearAsyncStorage = async() => {
-        AsyncStorage.clear();
-    }    
+    // // clear the storage
+    // const clearAsyncStorage = async() => {
+    //     AsyncStorage.clear();
+    // }    
 
     // if the font not loaded don't appear anything
     if (!fontsLoaded)
