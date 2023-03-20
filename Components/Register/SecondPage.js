@@ -4,6 +4,7 @@ import IntlPhoneField from 'react-native-intl-phone-field';
 import { useNavigation } from '@react-navigation/native';
 import { styles } from './Styles';
 import { colors } from "../../AppStyles";
+import { translate } from '../../Localization'
 
 export function SecondPage({ route }) {
 
@@ -19,15 +20,15 @@ export function SecondPage({ route }) {
         <SafeAreaView style={styles.container}>
             <ScrollView style={styles.container}>
                 <View style={styles.header_container}>
-                    <Text style={styles.header}>Register</Text>
+                    <Text style={styles.header}>{translate('Register.title')}</Text>
                     <TouchableOpacity style={styles.header} onPress={() => navigation.goBack()}>
                         <Image style={styles.arrow} source={require('../../assets/register/left-arrow.png')}></Image>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.line}/>
-                <Text style={styles.helpingText}>Please, fill your information up carefully.</Text>
+                <Text style={styles.helpingText}>{translate('Register.description')}</Text>
                 <View style={styles.inputView}>
-                    <Text style={styles.stateName}>Phone Number</Text>
+                    <Text style={styles.stateName}>{translate('Register.phonenumber')}</Text>
                     <IntlPhoneField
                         defaultCountry="EG"
                         defaultPrefix="+20"
@@ -37,17 +38,17 @@ export function SecondPage({ route }) {
                     />
                 </View>
                 <View style={styles.inputView}>
-                    <Text style={styles.stateName}>Address</Text>
+                    <Text style={styles.stateName}>{translate('Register.address')}</Text>
                     <TextInput 
                         style={styles.inputForm} 
-                        placeholder="Address" 
+                        placeholder={translate('Register.address')} 
                         placeholderTextColor={colors.Grey} 
                         onChangeText={(address) => setAddress(address)}
                         cursorColor={colors.LightSeaGreen}
                     />
                 </View>
                 <View style={styles.usingAppSecond}>
-                    <Text style={styles.usingAppText}>OR <Text style={{fontWeight: 'bold'}}>Sign Up</Text> Using</Text>
+                    <Text style={styles.usingAppText}>{translate('Register.or')} <Text style={{fontWeight: 'bold'}}>{translate('Register.signup')}</Text> {translate('Register.using')}</Text>
                     <View style={styles.usingAppicons}>
                         <TouchableOpacity>
                             <Image source={require('../../assets/register/google.png')} />
@@ -61,12 +62,12 @@ export function SecondPage({ route }) {
                     </View>
                 </View>
                 <TouchableOpacity style={styles.nextButtonSecond}>
-                        <Text style={styles.nextText}>Register</Text>
+                        <Text style={styles.nextText}>{translate('Register.signup')}</Text>
                 </TouchableOpacity>
                 <View style={styles.signIn}>
-                    <Text style={styles.haveAccount}>Already have an account? </Text>
+                    <Text style={styles.haveAccount}>{translate('Register.haveaccount')} </Text>
                     <TouchableOpacity onPress={() => navigation.navigate('login')}>
-                            <Text style={styles.signInText}>Sign In</Text>
+                            <Text style={styles.signInText}>{translate('Register.signin')}</Text>
                     </TouchableOpacity>
                 </View>
             </ScrollView>

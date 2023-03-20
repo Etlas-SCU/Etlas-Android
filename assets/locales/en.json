@@ -39,6 +39,8 @@
         "or": "OR",
         "using": "Using",
         "next": "Next",
-        "passwordhint": "Password must be at least 8 characters and must contain letters and symbols."
+        "passwordhint": "Password must be at least 8 characters and must contain letters and symbols.",
+        "phonenumber": "Phone Number",
+        "address": "Address"
     }
 }
