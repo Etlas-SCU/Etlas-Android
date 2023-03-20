@@ -1,0 +1,46 @@
+{
+    "LanguageSelection": {
+        "title": "Language Selection",
+        "description": "Please, choose your preferred language that you want to be set on the application, it can also be changed anytime.",
+        "english": "English",
+        "arabic": "العـربــيـــة",
+        "spanish": "Spanish",
+        "french": "French",
+        "continue": "continue"
+    },
+    "OnBoarding": {
+        "title": "Etlas",
+        "description": "Is an augmented reality application that helps people to recognize monuments during their tour in anywhere in  the world by only a scan using your mobile camera.",
+        "worrytext": "No worries, your tour guide is here ;)",
+        "signin": "Sign in",
+        "signup": "Sign up"
+    },
+    "Login": {
+        "title": "Login",
+        "description": "Please, Enter Your Account",
+        "email": "E-mail",
+        "password": "Password",
+        "forgotpassword": "Forgot Password?",
+        "signin": "Sign in",
+        "signup": "Sign up",
+        "haveaccount": "Don't have an account yet?",
+        "or": "OR",
+        "using": "Using"
+    },
+    "Register": {
+        "title": "Register",
+        "description": "Please, fill your information up carefully.",
+        "fullname": "Full Name",
+        "email": "E-mail",
+        "password": "Password",
+        "signin": "Sign in",
+        "signup": "Sign up",
+        "haveaccount": "Already have an account?",
+        "or": "OR",
+        "using": "Using",
+        "next": "Next",
+        "passwordhint": "Password must be at least 8 characters and must contain letters and symbols.",
+        "phonenumber": "Phone Number",
+        "address": "Address"
+    }
+}

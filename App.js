@@ -8,10 +8,14 @@ import { FirstPage } from './Components/Register/FirstPage';
 import { SecondPage } from './Components/Register/SecondPage'
 import Login from './Components/Login/Login'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { init, translate } from './Localization';
 
 const Stack = createStackNavigator();
 
 export default function App() {
+    
+    // initialize the language
+    init();
 
     // Retrieve onboarding status from local storage
     const [ language, setLanguage ] = useState('None');
@@ -27,6 +31,7 @@ export default function App() {
         }
     };
 
+    // get the language choice
     useEffect(() => {
         getLanguageChoice();
     }, []);    
@@ -41,14 +46,20 @@ export default function App() {
         'Montserrat-Thin': require('./assets/fonts/Montserrat-Thin.ttf'),
     });
 
+    // // clear the storage
+    // const clearAsyncStorage = async() => {
+    //     AsyncStorage.clear();
+    // }    
+    // clearAsyncStorage();
+
     // if the font not loaded don't appear anything
     if (!fontsLoaded)
         return null
-    
+
     // if the font loaded, return the components
     return (
         <NavigationContainer>
-            <Stack.Navigator screenOptions={{ header: () => null }}>
+            <Stack.Navigator screenOptions={{ header: () => null, gestureEnabled: true }}>
                 { language !== 'None' ? null : <Stack.Screen name="languageSelection" component={LanguageSelection} />}
                 <Stack.Screen name="onBoarding" component={OnBoarding} />
                 <Stack.Screen name="firstPage" component={FirstPage} />

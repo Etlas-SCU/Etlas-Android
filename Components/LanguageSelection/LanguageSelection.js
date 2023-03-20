@@ -3,12 +3,12 @@ import Swiper from 'react-native-swiper'
 import { styles } from "./Styles";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
-
+import { translate } from '../../Localization'
 
 export default function LanguageSelection() {
 
     // get the navigation
-    const navigation = useNavigation();    
+    const navigation = useNavigation();
 
     const storeLanguageChoice = async (language) => {
         try {
@@ -28,9 +28,9 @@ export default function LanguageSelection() {
     return (
         <View style={styles.container}>
             <ImageBackground source={require('../../assets/language_selection/Language_Selection.png')} resizeMode='cover' style={styles.image}>
-                <Text style={styles.header}>Language Selection</Text>
+                <Text style={styles.header}>{translate('LanguageSelection.title')}</Text>
                 <View style={styles.text_box}>
-                    <Text style={styles.desc}>Please, choose your preferred language that you want to be set on the application, it can also be changed anytime.</Text>
+                    <Text style={styles.desc}>{translate('LanguageSelection.description')}</Text>
                 </View>
                 <Swiper style={styles.wrapper}
                     showsButtons={true}
@@ -44,28 +44,28 @@ export default function LanguageSelection() {
                 >
                     <View style={styles.slide1}>
                         <TouchableOpacity style={[styles.language_active, styles.buttons]}>
-                            <Text style={styles.button_text}>English</Text>
+                            <Text style={styles.button_text}>{translate('LanguageSelection.english')}</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.slide2}>
                         <TouchableOpacity style={[styles.language_not_active, styles.buttons]} disabled={true}>
-                            <Text style={styles.button_text}>العربــية</Text>
+                            <Text style={styles.button_text}>{translate('LanguageSelection.arabic')}</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.slide3}>
                         <TouchableOpacity style={[styles.language_not_active, styles.buttons]} disabled={true}>
-                            <Text style={styles.button_text}>Spanish</Text>
+                            <Text style={styles.button_text}>{translate('LanguageSelection.spanish')}</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.slide4}>
                         <TouchableOpacity style={[styles.language_not_active, styles.buttons]} disabled={true}>
-                            <Text style={styles.button_text}>French</Text>
+                            <Text style={styles.button_text}>{translate('LanguageSelection.french')}</Text>
                         </TouchableOpacity>
                     </View>
                 </Swiper>
                 <View style={styles.button_container}>
                     <TouchableOpacity style={[styles.continue, styles.buttons]} onPress={handleLanguage}>
-                        <Text style={styles.button_text}>Continue</Text>
+                        <Text style={styles.button_text}>{translate('LanguageSelection.continue')}</Text>
                     </TouchableOpacity>
                 </View>
             </ImageBackground>

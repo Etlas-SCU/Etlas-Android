@@ -3,6 +3,7 @@ import { View, Text, Image, TouchableOpacity, TextInput, ScrollView, SafeAreaVie
 import { useNavigation } from '@react-navigation/native';
 import { styles } from './Styles';
 import { colors } from "../../AppStyles";
+import { translate } from '../../Localization'
 
 export default function Login() {
 
@@ -19,29 +20,29 @@ export default function Login() {
         <SafeAreaView style={styles.container}>
             <ScrollView style={styles.container}>
                 <View style={styles.header_container}>
-                    <Text style={styles.header}>Login</Text>
+                    <Text style={styles.header}>{translate('Login.title')}</Text>
                     <TouchableOpacity style={styles.header} onPress={() => navigation.goBack()}>
                         <Image style={styles.arrow} source={require('../../assets/register/left-arrow.png')}></Image>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.line}/>
-                <Text style={styles.helpingText}>Please, Enter Your Account.</Text>
+                <Text style={styles.helpingText}>{translate('Login.description')}</Text>
                 <View style={styles.inputView}>
-                    <Text style={styles.stateName}>E-mail</Text>
+                    <Text style={styles.stateName}>{translate('Login.email')}</Text>
                     <TextInput 
                         style={styles.inputForm} 
-                        placeholder="E-mail" 
+                        placeholder={translate('Login.email')} 
                         placeholderTextColor={colors.Grey} 
                         onChangeText={(email) => setEmail(email)}
                         cursorColor={colors.LightSeaGreen}
                     />
                 </View>
                 <View style={styles.inputView}>
-                    <Text style={styles.stateName}>Password</Text>
+                    <Text style={styles.stateName}>{translate('Login.password')}</Text>
                     <View style={styles.passwordContainer}>
                         <TextInput 
                             style={[styles.inputForm, {flex: 1}]} 
-                            placeholder="Password" 
+                            placeholder={translate('Login.password')}
                             placeholderTextColor={colors.Grey} 
                             onChangeText={(password) => setPassword(password)}
                             secureTextEntry={!hidden}
@@ -51,10 +52,10 @@ export default function Login() {
                             <Image style={styles.passwordContainerImage} source={require('../../assets/register/codicon_eye.png')} />
                         </TouchableOpacity>
                     </View>
-                    <Text style={styles.passText}>Forgot password?</Text>
+                    <Text style={styles.passText}>{translate('Login.forgotpassword')}</Text>
                 </View>
                 <View style={styles.usingApp}>
-                    <Text style={styles.usingAppText}>OR <Text style={{fontWeight: 'bold'}}>Sign Up</Text> Using</Text>
+                    <Text style={styles.usingAppText}>{translate('Login.or')} <Text style={{fontWeight: 'bold'}}>{translate('Login.signup')}</Text> {translate('Login.using')}</Text>
                     <View style={styles.usingAppicons}>
                         <TouchableOpacity>
                             <Image source={require('../../assets/register/google.png')} />
@@ -70,12 +71,12 @@ export default function Login() {
                 <TouchableOpacity 
                     style={styles.nextButton} 
                 >
-                    <Text style={styles.nextText}>Sign in</Text>
+                    <Text style={styles.nextText}>{translate('Login.signin')}</Text>
                 </TouchableOpacity>
                 <View style={styles.signIn}>
-                    <Text style={styles.haveAccount}>Don't have an account yet? </Text>
+                    <Text style={styles.haveAccount}>{translate('Login.haveaccount')} </Text>
                     <TouchableOpacity onPress={() => { navigation.navigate({name: 'firstPage'})}}>
-                            <Text style={styles.signInText}>Sign Up</Text>
+                            <Text style={styles.signInText}>{translate('Login.signup')}</Text>
                     </TouchableOpacity>
                 </View>
             </ScrollView>    
