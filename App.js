@@ -31,6 +31,7 @@ export default function App() {
         }
     };
 
+    // get the language choice
     useEffect(() => {
         getLanguageChoice();
     }, []);    
@@ -58,7 +59,7 @@ export default function App() {
     // if the font loaded, return the components
     return (
         <NavigationContainer>
-            <Stack.Navigator screenOptions={{ header: () => null }}>
+            <Stack.Navigator screenOptions={{ header: () => null, gestureEnabled: true }}>
                 { language !== 'None' ? null : <Stack.Screen name="languageSelection" component={LanguageSelection} />}
                 <Stack.Screen name="onBoarding" component={OnBoarding} />
                 <Stack.Screen name="firstPage" component={FirstPage} />
