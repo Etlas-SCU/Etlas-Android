@@ -26,5 +26,19 @@
         "haveaccount": "Don't have an account yet?",
         "or": "OR",
         "using": "Using"
+    },
+    "Register": {
+        "title": "Register",
+        "description": "Please, fill your information up carefully.",
+        "fullname": "Full Name",
+        "email": "E-mail",
+        "password": "Password",
+        "signin": "Sign in",
+        "signup": "Sign up",
+        "haveaccount": "Already have an account?",
+        "or": "OR",
+        "using": "Using",
+        "next": "Next",
+        "passwordhint": "Password must be at least 8 characters and must contain letters and symbols."
     }
 }

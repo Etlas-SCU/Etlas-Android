@@ -3,6 +3,7 @@ import { View, Text, Image, TouchableOpacity, TextInput, ScrollView, SafeAreaVie
 import { useNavigation } from '@react-navigation/native';
 import { styles } from './Styles';
 import { colors } from "../../AppStyles";
+import { translate } from '../../Localization'
 
 export function FirstPage() {
 
@@ -20,39 +21,39 @@ export function FirstPage() {
         <SafeAreaView style={styles.container}>
             <ScrollView style={styles.container}>
                 <View style={styles.header_container}>
-                    <Text style={styles.header}>Register</Text>
+                    <Text style={styles.header}>{translate('Register.title')}</Text>
                     <TouchableOpacity style={styles.header} onPress={() => navigation.goBack()}>
                         <Image style={styles.arrow} source={require('../../assets/register/left-arrow.png')}></Image>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.line}/>
-                <Text style={styles.helpingText}>Please, fill your information up carefully.</Text>
+                <Text style={styles.helpingText}>{translate('Register.description')}</Text>
                 <View style={styles.inputView}>
-                    <Text style={styles.stateName}>Full Name</Text>
+                    <Text style={styles.stateName}>{translate('Register.fullname')}</Text>
                     <TextInput 
                         style={styles.inputForm} 
-                        placeholder="Full Name" 
+                        placeholder={translate('Register.fullname')} 
                         placeholderTextColor={colors.Grey} 
                         onChangeText={(fullname) => setFullName(fullname)}
                         cursorColor={colors.LightSeaGreen}
                     />
                 </View>
                 <View style={styles.inputView}>
-                    <Text style={styles.stateName}>E-mail</Text>
+                    <Text style={styles.stateName}>{translate('Register.email')}</Text>
                     <TextInput 
                         style={styles.inputForm} 
-                        placeholder="E-mail" 
+                        placeholder={translate('Register.email')} 
                         placeholderTextColor={colors.Grey} 
                         onChangeText={(email) => setEmail(email)}
                         cursorColor={colors.LightSeaGreen}
                     />
                 </View>
                 <View style={styles.inputView}>
-                    <Text style={styles.stateName}>Password</Text>
+                    <Text style={styles.stateName}>{translate('Register.password')}</Text>
                     <View style={styles.passwordContainer}>
                         <TextInput 
                             style={[styles.inputForm, {flex: 1}]} 
-                            placeholder="Password" 
+                            placeholder={translate('Register.password')} 
                             placeholderTextColor={colors.Grey} 
                             onChangeText={(password) => setPassword(password)}
                             secureTextEntry={!hidden}
@@ -62,10 +63,10 @@ export function FirstPage() {
                             <Image style={styles.passwordContainerImage} source={require('../../assets/register/codicon_eye.png')} />
                         </TouchableOpacity>
                     </View>
-                    <Text style={styles.passText}>Password must be at least 8 characters and must contain letters and symbols.</Text>
+                    <Text style={styles.passText}>{translate('Register.passwordhint')}</Text>
                 </View>
                 <View style={styles.usingApp}>
-                    <Text style={styles.usingAppText}>OR <Text style={{fontWeight: 'bold'}}>Sign Up</Text> Using</Text>
+                    <Text style={styles.usingAppText}>{translate('Register.or')} <Text style={{fontWeight: 'bold'}}>{translate('Register.signup')}</Text> {translate('Register.using')}</Text>
                     <View style={styles.usingAppicons}>
                         <TouchableOpacity>
                             <Image source={require('../../assets/register/google.png')} />
@@ -91,12 +92,12 @@ export function FirstPage() {
                         })
                     }}
                 >
-                    <Text style={styles.nextText}>Next</Text>
+                    <Text style={styles.nextText}>{translate('Register.next')}</Text>
                 </TouchableOpacity>
                 <View style={styles.signIn}>
-                    <Text style={styles.haveAccount}>Already have an account? </Text>
+                    <Text style={styles.haveAccount}>{translate('Register.haveaccount')} </Text>
                     <TouchableOpacity onPress={() => navigation.navigate('login')}>
-                            <Text style={styles.signInText}>Sign In</Text>
+                            <Text style={styles.signInText}>{translate('Register.signin')}</Text>
                     </TouchableOpacity>
                 </View>
             </ScrollView>    
