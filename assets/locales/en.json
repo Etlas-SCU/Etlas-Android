@@ -7,5 +7,12 @@
         "spanish": "Spanish",
         "french": "French",
         "continue": "continue"
+    },
+    "OnBoarding": {
+        "title": "Etlas",
+        "description": "Is an augmented reality application that helps people to recognize monuments during their tour in anywhere in  the world by only a scan using your mobile camera.",
+        "worrytext": "No worries, your tour guide is here ;)",
+        "signin": "Sign in",
+        "signup": "Sign up"
     }
 }

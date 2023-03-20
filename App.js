@@ -49,13 +49,11 @@ export default function App() {
     // const clearAsyncStorage = async() => {
     //     AsyncStorage.clear();
     // }    
+    // clearAsyncStorage();
 
     // if the font not loaded don't appear anything
     if (!fontsLoaded)
         return null
-
-    // clear the storage
-    clearAsyncStorage();
 
     // if the font loaded, return the components
     return (
