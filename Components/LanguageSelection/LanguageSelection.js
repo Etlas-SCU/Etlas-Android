@@ -1,8 +1,28 @@
 import { Text, View, TouchableOpacity, ImageBackground, Image } from "react-native";
 import Swiper from 'react-native-swiper'
 import { styles } from "./Styles";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
+
 
 export default function LanguageSelection() {
+
+    // get the navigation
+    const navigation = useNavigation();    
+
+    const storeLanguageChoice = async (language) => {
+        try {
+            await AsyncStorage.setItem('language', language);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    // to store the language and move to the next slides
+    const handleLanguage = () => {
+        storeLanguageChoice('English');
+        navigation.navigate('onBoarding');
+    }
 
     // if the font loaded, return the text
     return (
@@ -44,7 +64,7 @@ export default function LanguageSelection() {
                     </View>
                 </Swiper>
                 <View style={styles.button_container}>
-                    <TouchableOpacity style={[styles.continue, styles.buttons]}>
+                    <TouchableOpacity style={[styles.continue, styles.buttons]} onPress={handleLanguage}>
                         <Text style={styles.button_text}>Continue</Text>
                     </TouchableOpacity>
                 </View>
