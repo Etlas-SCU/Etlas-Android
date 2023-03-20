@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useFonts } from 'expo-font';
 import { NavigationContainer } from '@react-navigation/native'
-import { createStackNavigator } from '@react-navigation/stack'
+import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack'
 import OnBoarding from "./Components/OnBoarding/OnBoarding";
 import LanguageSelection from './Components/LanguageSelection/LanguageSelection'
 import { FirstPage } from './Components/Register/FirstPage';
@@ -9,6 +9,7 @@ import { SecondPage } from './Components/Register/SecondPage'
 import Login from './Components/Login/Login'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { init, translate } from './Localization';
+import { Easing } from 'react-native';
 
 const Stack = createStackNavigator();
 
@@ -56,10 +57,29 @@ export default function App() {
     if (!fontsLoaded)
         return null
 
+
+    // animation config
+    const timingConfig = {
+        animation: 'timing',
+        config: {
+          duration: 500,
+          easing: Easing.linear,
+        },
+    };      
+
     // if the font loaded, return the components
     return (
         <NavigationContainer>
-            <Stack.Navigator screenOptions={{ header: () => null, gestureEnabled: true }}>
+            <Stack.Navigator screenOptions={{ 
+                    header: () => null, 
+                    gestureEnabled: true, 
+                    cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS, 
+                    transitionSpec: {
+                        open: timingConfig,
+                        close: timingConfig,
+                    },
+                }}
+            >
                 { language !== 'None' ? null : <Stack.Screen name="languageSelection" component={LanguageSelection} />}
                 <Stack.Screen name="onBoarding" component={OnBoarding} />
                 <Stack.Screen name="firstPage" component={FirstPage} />
