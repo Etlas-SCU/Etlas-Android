@@ -8,10 +8,14 @@ import { FirstPage } from './Components/Register/FirstPage';
 import { SecondPage } from './Components/Register/SecondPage'
 import Login from './Components/Login/Login'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { init, translate } from './Localization';
 
 const Stack = createStackNavigator();
 
 export default function App() {
+    
+    // initialize the language
+    init();
 
     // Retrieve onboarding status from local storage
     const [ language, setLanguage ] = useState('None');
@@ -41,10 +45,17 @@ export default function App() {
         'Montserrat-Thin': require('./assets/fonts/Montserrat-Thin.ttf'),
     });
 
+    const clearAsyncStorage = async() => {
+        AsyncStorage.clear();
+    }    
+
     // if the font not loaded don't appear anything
     if (!fontsLoaded)
         return null
-    
+
+    // clear the storage
+    clearAsyncStorage();
+
     // if the font loaded, return the components
     return (
         <NavigationContainer>

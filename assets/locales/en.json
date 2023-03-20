@@ -1,0 +1,11 @@
+{
+    "LanguageSelection": {
+        "title": "Language Selection",
+        "description": "Please, choose your preferred language that you want to be set on the application, it can also be changed anytime.",
+        "english": "English",
+        "arabic": "العـربــيـــة",
+        "spanish": "Spanish",
+        "french": "French",
+        "continue": "continue"
+    }
+}
