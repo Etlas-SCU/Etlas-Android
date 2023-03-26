@@ -52,7 +52,9 @@ export default function Login() {
                             <Image style={styles.passwordContainerImage} source={require('../../assets/register/codicon_eye.png')} />
                         </TouchableOpacity>
                     </View>
-                    <Text style={styles.passText}>{translate('Login.forgotpassword')}</Text>
+                    <TouchableOpacity>
+                        <Text style={styles.passText}>{translate('Login.forgotpassword')}</Text>
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.usingApp}>
                     <Text style={styles.usingAppText}>{translate('Login.or')} <Text style={{fontWeight: 'bold'}}>{translate('Login.signup')}</Text> {translate('Login.using')}</Text>
