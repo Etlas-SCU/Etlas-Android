@@ -1,23 +1,11 @@
 import { styles } from "./Styles"
-import { colors } from "../../AppStyles";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Login from "../Login/Login";
-import { Easing, Image, TouchableOpacity, Platform } from 'react-native';
-
+import { Image, TouchableOpacity, Platform } from 'react-native';
+import AboutUs from "../AboutUs/AboutUs";
 
 export default function MenuBar(){
 
     const Tab = createBottomTabNavigator();
-
-    // animation config
-    const timingConfig = {
-        animation: 'timing',
-        config: {
-            duration: 500,
-            easing: Easing.linear,
-        },
-    };      
-
 
     const Icons = {
         Home: require('../../assets/MenuBar/Home.png'),
@@ -51,11 +39,11 @@ export default function MenuBar(){
             })}
             
         >
-            <Tab.Screen name="Home" component={Login} />
-            <Tab.Screen name="AR" component={Login} />
-            <Tab.Screen name="Scan" component={Login} />
-            <Tab.Screen name="KnowledgeCheck" component={Login} />
-            <Tab.Screen name="Settings" component={Login} />
+            <Tab.Screen name="Home" component={AboutUs} />
+            <Tab.Screen name="AR" component={AboutUs} />
+            <Tab.Screen name="Scan" component={AboutUs} />
+            <Tab.Screen name="KnowledgeCheck" component={AboutUs} />
+            <Tab.Screen name="Settings" component={AboutUs} />
         </Tab.Navigator>
     )
 }

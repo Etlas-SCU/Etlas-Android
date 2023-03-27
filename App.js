@@ -7,11 +7,13 @@ import LanguageSelection from './Components/LanguageSelection/LanguageSelection'
 import { FirstPage } from './Components/Register/FirstPage';
 import { SecondPage } from './Components/Register/SecondPage'
 import Login from './Components/Login/Login'
-import MenuBar from './Components/MenuBar/MenuBar';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { init, translate } from './Localization';
+import { init } from './Localization';
 import { Easing } from 'react-native';
+import AboutUs from './Components/AboutUs/AboutUs';
+import MenuBar from './Components/MenuBar/MenuBar';
 
+// import the screen
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -81,8 +83,8 @@ export default function App() {
                     },
                 }}
             >
-                {/* { language !== 'None' ? null : <Stack.Screen name="languageSelection" component={LanguageSelection} />}
-                <Stack.Screen name="onBoarding" component={OnBoarding} />
+                {/* { language !== 'None' ? null : <Stack.Screen name="languageSelection" component={LanguageSelection} />} */}
+                {/* <Stack.Screen name="onBoarding" component={OnBoarding} />
                 <Stack.Screen name="firstPage" component={FirstPage} />
                 <Stack.Screen name="secondPage" component={SecondPage} />
                 <Stack.Screen name="login" component={Login} /> */}

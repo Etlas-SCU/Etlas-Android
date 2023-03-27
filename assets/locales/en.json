@@ -42,5 +42,10 @@
         "passwordhint": "Password must be at least 8 characters and must contain letters and symbols.",
         "phonenumber": "Phone Number",
         "address": "Address"
+    },
+    "AboutUs": {
+        "copyright": "© Etlas all rights reserved 2023",
+        "description": "We are a Computer Science students that graduated from faculty of computers and informatics Suez Canal university who wanted to make an E-Tourism application to make tourism more easy and also much fun to try and experience.",
+        "findus": "You can find us on!"
     }
 }
