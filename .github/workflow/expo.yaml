@@ -1,4 +1,6 @@
 on: [pull_request]
+  workflow_dispatch:
+
 jobs:
   preview:
     runs-on: ubuntu-latest
