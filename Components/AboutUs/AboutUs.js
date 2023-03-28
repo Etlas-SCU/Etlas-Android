@@ -2,11 +2,13 @@ import { translate } from '../../Localization'
 import { View, Text, Image, ImageBackground, TouchableOpacity } from 'react-native';
 import { styles } from './Styles';
 
-export default function AboutUs() {
+export default function AboutUs({ navigation }) {
     return (
         <View style={styles.container}>
             <ImageBackground source={require('../../assets/AboutUs/AboutUs.png')} style={styles.background}>
-                <Text style={styles.copyright}>{translate('AboutUs.copyright')}</Text>
+                <TouchableOpacity onPress={() => navigation.goBack()}>
+                    <Image source={require('../../assets/AboutUs/ep_close-bold.png')} style={styles.close}/>
+                </TouchableOpacity><Text style={styles.copyright}>{translate('AboutUs.copyright')}</Text>
                 <Text style={styles.description}>{translate('AboutUs.description')}</Text>
                 <View style={styles.usingAppicons}>
                     <TouchableOpacity>

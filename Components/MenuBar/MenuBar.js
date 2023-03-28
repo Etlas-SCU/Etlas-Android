@@ -1,9 +1,10 @@
 import { styles } from "./Styles"
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Image, TouchableOpacity, Platform } from 'react-native';
+import KnowledgeCheck from "../KnowledgeCheck/KnowledgeCheck";
 import AboutUs from "../AboutUs/AboutUs";
 
-export default function MenuBar(){
+export default function MenuBar({ navigation }){
 
     const Tab = createBottomTabNavigator();
 
@@ -15,21 +16,31 @@ export default function MenuBar(){
         Settings: require('../../assets/MenuBar/Settings.png')
     }
 
+    const Pages = {
+        Home: 'KnowledgeCheck',
+        AR: 'KnowledgeCheck',
+        Scan: 'KnowledgeCheck',
+        KnowledgeCheck: 'KnowledgeCheck',
+        Settings: 'AboutUs'
+    }
+
     return (
         <Tab.Navigator style={styles.container}
-            initialRouteName="login"
+            initialRouteName="Home"
             screenOptions={({ route }) => ({
                 headerShown: false,
                 tabBarShowLabel: false,
                 tabBarStyle: styles.menuBar,
                 tabBarIcon: () => {
-                    let isRightBorder = route.name == 'Home' || route.name == 'KnowledgeCheck';
-                    let isScan = route.name == 'Scan';
-                    let isIos = Platform.OS == 'ios';
+                    let isRightBorder = (route.name == 'Home' || route.name == 'KnowledgeCheck');
+                    let isScan = (route.name == 'Scan');
+                    let isIos = (Platform.OS == 'ios');
                     return (
-                        <TouchableOpacity style={
+                        <TouchableOpacity 
+                            style={
                                 [styles.menuBarIconsContainer, isRightBorder ? styles.rightBorder : null, isScan ? [styles.Scan, {bottom: isIos ? "25%" : "30%"}] : null]
                             }
+                            onPress={() => { navigation.navigate({name: Pages[route.name]}) }}
                         >
                             <Image source={Icons[route.name]} style={ isScan ? styles.ScanIcon : styles.menuBarIcons } />
                         </TouchableOpacity>
@@ -39,11 +50,12 @@ export default function MenuBar(){
             })}
             
         >
-            <Tab.Screen name="Home" component={AboutUs} />
-            <Tab.Screen name="AR" component={AboutUs} />
-            <Tab.Screen name="Scan" component={AboutUs} />
-            <Tab.Screen name="KnowledgeCheck" component={AboutUs} />
+            <Tab.Screen name="Home" component={KnowledgeCheck}/>
+            <Tab.Screen name="AR" component={KnowledgeCheck} />
+            <Tab.Screen name="Scan" component={KnowledgeCheck} />
+            <Tab.Screen name="KnowledgeCheck" component={KnowledgeCheck} />
             <Tab.Screen name="Settings" component={AboutUs} />
+            <Tab.Screen name="AboutUs" component={AboutUs} options={{tabBarButton: () => null, tabBarVisible: false }} />
         </Tab.Navigator>
     )
 }
