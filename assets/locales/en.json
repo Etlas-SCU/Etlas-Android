@@ -47,5 +47,17 @@
         "copyright": "© Etlas all rights reserved 2023",
         "description": "We are a Computer Science students that graduated from faculty of computers and informatics Suez Canal university who wanted to make an E-Tourism application to make tourism more easy and also much fun to try and experience.",
         "findus": "You can find us on!"
+    },
+    "KnowledgeCheck": {
+        "title": "Knowledge Check",
+        "Statues": "Statues",
+        "StatuesText": "Test yourself in the most popular statues.",
+        "StatuesScore": "7/60",
+        "Monuments": "Monuments",
+        "MonumentsText": "The world of monuments is in your mind, time to test.",
+        "MonumentsScore": "50/107",
+        "Landmarks": "Landmarks",
+        "LandmarksText": "of course you know alot of landmarks, let's try.",
+        "LandmarksScore": "12/96"
     }
 }

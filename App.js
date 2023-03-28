@@ -83,12 +83,12 @@ export default function App() {
                     },
                 }}
             >
-                {/* { language !== 'None' ? null : <Stack.Screen name="languageSelection" component={LanguageSelection} />} */}
-                {/* <Stack.Screen name="onBoarding" component={OnBoarding} />
+                <Stack.Screen name="menuBar" component={MenuBar} />
+                { language !== 'None' ? null : <Stack.Screen name="languageSelection" component={LanguageSelection} />}
+                <Stack.Screen name="onBoarding" component={OnBoarding} />
                 <Stack.Screen name="firstPage" component={FirstPage} />
                 <Stack.Screen name="secondPage" component={SecondPage} />
-                <Stack.Screen name="login" component={Login} /> */}
-                <Stack.Screen name="menuBar" component={MenuBar} />
+                <Stack.Screen name="login" component={Login} />
             </Stack.Navigator>
         </NavigationContainer>
     );

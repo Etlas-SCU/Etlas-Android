@@ -5,10 +5,7 @@ import { styles } from './Styles';
 import { colors } from "../../AppStyles";
 import { translate } from '../../Localization'
 
-export default function Login() {
-
-    // get the navigation
-    const navigation = useNavigation();    
+export default function Login({ navigation }) {
 
     // get the data from input
     const [email, setEmail] = useState('');

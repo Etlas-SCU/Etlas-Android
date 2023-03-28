@@ -6,10 +6,7 @@ import { styles } from './Styles';
 import { colors } from "../../AppStyles";
 import { translate } from '../../Localization'
 
-export function SecondPage({ route }) {
-
-    // get the navigation
-    const navigation = useNavigation();    
+export function SecondPage({ route, navigation }) {
 
     // get the fullname, email and password from route params 
     const { fullname, email, password } = route.params;

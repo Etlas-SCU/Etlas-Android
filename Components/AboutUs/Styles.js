@@ -40,5 +40,11 @@ export const styles = StyleSheet.create({
         color: colors.White,
         fontSize: 15,
         fontFamily: fontFamily.MontserratRegular,
+    },
+    close: {
+        position: "absolute",
+        marginTop: 53,
+        alignSelf: 'flex-end',
+        right: 24,
     }
 });
