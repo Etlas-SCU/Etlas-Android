@@ -22,7 +22,13 @@ export const colors = {
     Cyan: '#55C4E0',
     LightSeaGreen: '#1B7B94',
     Grey: '#ABAAAA',
-    SolidGrey: '#D9D9D9'
+    SolidGrey: '#D9D9D9',
+    LightGrey: '#F2F2F2',
+    DarkGrey: '#707070',
+    Red: '#e24c4b',
+    Green: '#0aa06e',
+    Blue: '#0000FF',
+    Yellow: '#fe9800',
 }
 
 // padding used in the app
