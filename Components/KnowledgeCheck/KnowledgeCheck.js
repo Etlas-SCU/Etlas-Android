@@ -1,7 +1,6 @@
 import { View, Image, Text, TouchableOpacity } from "react-native";
 import { styles } from './Styles'
 import { translate } from "../../Localization";
-import Loader from "../Loader/Loader";
 
 export default function KnowledgeCheck({ navigation }){
     return (
@@ -42,7 +41,6 @@ export default function KnowledgeCheck({ navigation }){
                     <Image source={require('../../assets/KnowledgeCheck/Statue_3.png')} style={styles.image}/>
                 </View>
             </TouchableOpacity>
-            <Loader text={'while your photo is being recognized.'}/>
         </View>
     );
 }

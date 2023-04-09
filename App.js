@@ -10,7 +10,6 @@ import Login from './Components/Login/Login'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { init } from './Localization';
 import { Easing } from 'react-native';
-import AboutUs from './Components/AboutUs/AboutUs';
 import MenuBar from './Components/MenuBar/MenuBar';
 
 // import the screen
