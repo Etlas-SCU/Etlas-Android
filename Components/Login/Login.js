@@ -69,6 +69,7 @@ export default function Login({ navigation }) {
                 </View>
                 <TouchableOpacity 
                     style={styles.nextButton} 
+                    onPress={() => { navigation.navigate({name: 'menuBar'})}}
                 >
                     <Text style={styles.nextText}>{translate('Login.signin')}</Text>
                 </TouchableOpacity>
