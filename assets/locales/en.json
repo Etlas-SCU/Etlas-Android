@@ -59,5 +59,8 @@
         "Landmarks": "Landmarks",
         "LandmarksText": "of course you know alot of landmarks, let's try.",
         "LandmarksScore": "12/96"
+    },
+    "Loader": {
+        "Wait": "Please wait"
     }
 }
