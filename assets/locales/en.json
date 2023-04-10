@@ -62,5 +62,10 @@
     },
     "Loader": {
         "Wait": "Please wait"
+    },
+    "RecognitionFailed": {
+        "title": "Recognition Failed",
+        "text": "We couldn't recognize the monument",
+        "retry": "Try Again"
     }
 }

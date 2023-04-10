@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Image, TouchableOpacity, Platform } from 'react-native';
 import KnowledgeCheck from "../KnowledgeCheck/KnowledgeCheck";
 import AboutUs from "../AboutUs/AboutUs";
+import RecognitionFailed from '../RecognitionFailed/RecognitionFailed'
 
 export default function MenuBar({ navigation }){
 
@@ -21,7 +22,7 @@ export default function MenuBar({ navigation }){
         AR: 'KnowledgeCheck',
         Scan: 'KnowledgeCheck',
         KnowledgeCheck: 'KnowledgeCheck',
-        Settings: 'AboutUs'
+        Settings: 'RecognitionFailed'
     }
 
     return (
@@ -54,8 +55,9 @@ export default function MenuBar({ navigation }){
             <Tab.Screen name="AR" component={KnowledgeCheck} />
             <Tab.Screen name="Scan" component={KnowledgeCheck} />
             <Tab.Screen name="KnowledgeCheck" component={KnowledgeCheck} />
-            <Tab.Screen name="Settings" component={AboutUs} />
+            <Tab.Screen name="Settings" component={RecognitionFailed} />
             <Tab.Screen name="AboutUs" component={AboutUs} options={{tabBarButton: () => null, tabBarVisible: false }} />
+            <Tab.Screen name="RecognitionFailed" component={RecognitionFailed} options={{tabBarButton: () => null, tabBarVisible: false }} />
         </Tab.Navigator>
     )
 }
