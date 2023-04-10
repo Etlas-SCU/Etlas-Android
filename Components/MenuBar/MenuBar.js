@@ -4,6 +4,7 @@ import { Image, TouchableOpacity, Platform } from 'react-native';
 import KnowledgeCheck from "../KnowledgeCheck/KnowledgeCheck";
 import AboutUs from "../AboutUs/AboutUs";
 import RecognitionFailed from '../RecognitionFailed/RecognitionFailed'
+import CameraScreen from "../CameraScreen/CameraScreen";
 
 export default function MenuBar({ navigation }){
 
@@ -20,7 +21,7 @@ export default function MenuBar({ navigation }){
     const Pages = {
         Home: 'KnowledgeCheck',
         AR: 'KnowledgeCheck',
-        Scan: 'KnowledgeCheck',
+        Scan: 'CameraScreen',
         KnowledgeCheck: 'KnowledgeCheck',
         Settings: 'RecognitionFailed'
     }
@@ -53,7 +54,7 @@ export default function MenuBar({ navigation }){
         >
             <Tab.Screen name="Home" component={KnowledgeCheck}/>
             <Tab.Screen name="AR" component={KnowledgeCheck} />
-            <Tab.Screen name="Scan" component={KnowledgeCheck} />
+            <Tab.Screen name="Scan" component={CameraScreen} />
             <Tab.Screen name="KnowledgeCheck" component={KnowledgeCheck} />
             <Tab.Screen name="Settings" component={RecognitionFailed} />
             <Tab.Screen name="AboutUs" component={AboutUs} options={{tabBarButton: () => null, tabBarVisible: false }} />

@@ -67,5 +67,12 @@
         "title": "Recognition Failed",
         "text": "We couldn't recognize the monument",
         "retry": "Try Again"
+    },
+    "BestScore": {
+        "title": "Best Score",
+        "score": "374",
+        "text": "is your total score",
+        "ask": "want to record a new high score ?",
+        "playnow": "Play Now!"        
     }
 }
