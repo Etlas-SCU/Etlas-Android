@@ -11,7 +11,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { init } from './Localization';
 import { Easing } from 'react-native';
 import MenuBar from './Components/MenuBar/MenuBar';
-import BestScore from './Components/BestScore/BestScore';
+import CameraScreen from './Components/CameraScreen/CameraScreen';
 
 // import the screen
 const Stack = createStackNavigator();

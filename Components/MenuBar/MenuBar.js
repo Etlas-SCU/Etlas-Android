@@ -21,7 +21,7 @@ export default function MenuBar({ navigation }){
     const Pages = {
         Home: 'KnowledgeCheck',
         AR: 'KnowledgeCheck',
-        Scan: 'CameraScreen',
+        Scan: 'Scan',
         KnowledgeCheck: 'KnowledgeCheck',
         Settings: 'RecognitionFailed'
     }
@@ -54,7 +54,7 @@ export default function MenuBar({ navigation }){
         >
             <Tab.Screen name="Home" component={KnowledgeCheck}/>
             <Tab.Screen name="AR" component={KnowledgeCheck} />
-            <Tab.Screen name="Scan" component={CameraScreen} />
+            <Tab.Screen name="Scan" component={CameraScreen} options={{tabBarStyle: { display: 'none' }}}/>
             <Tab.Screen name="KnowledgeCheck" component={KnowledgeCheck} />
             <Tab.Screen name="Settings" component={RecognitionFailed} />
             <Tab.Screen name="AboutUs" component={AboutUs} options={{tabBarButton: () => null, tabBarVisible: false }} />

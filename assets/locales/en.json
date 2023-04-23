@@ -74,5 +74,11 @@
         "text": "is your total score",
         "ask": "want to record a new high score ?",
         "playnow": "Play Now!"        
+    },
+    "Scan": {
+        "title": "Scan your monument, please.",
+        "retake": "Re-Take",
+        "save": "Save",
+        "saved": "Picture has been saved 🎉"
     }
 }

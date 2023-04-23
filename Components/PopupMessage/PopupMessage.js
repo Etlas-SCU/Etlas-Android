@@ -5,7 +5,7 @@ import { FancyAlert } from 'react-native-expo-fancy-alerts';
 import { colors } from "../../AppStyles";
 
 
-export default function PopupMessage({ state, message }){
+export default function PopupMessage({ state, message, pageNanme, navigation }){
 
     // Use the useState hook to manage the visibility state of the alert
     const [visible, setVisible] = useState(true);
@@ -14,6 +14,7 @@ export default function PopupMessage({ state, message }){
     // and preventing unnecessary re-renders
     const toggleAlert = useCallback(() => {
         setVisible(!visible);
+        navigation.navigate({name: pageNanme});
     }, [visible]);
 
     // Define the icons to be used in the alert and their corresponding image paths
