@@ -22,14 +22,14 @@ export default function Login({ navigation }) {
                         <Image style={styles.arrow} source={require('../../assets/register/left-arrow.png')}></Image>
                     </TouchableOpacity>
                 </View>
-                <View style={styles.line}/>
+                <View style={styles.line} />
                 <Text style={styles.helpingText}>{translate('Login.description')}</Text>
                 <View style={styles.inputView}>
                     <Text style={styles.stateName}>{translate('Login.email')}</Text>
-                    <TextInput 
-                        style={styles.inputForm} 
-                        placeholder={translate('Login.email')} 
-                        placeholderTextColor={colors.Grey} 
+                    <TextInput
+                        style={styles.inputForm}
+                        placeholder={translate('Login.email')}
+                        placeholderTextColor={colors.Grey}
                         onChangeText={(email) => setEmail(email)}
                         cursorColor={colors.LightSeaGreen}
                     />
@@ -37,10 +37,10 @@ export default function Login({ navigation }) {
                 <View style={styles.inputView}>
                     <Text style={styles.stateName}>{translate('Login.password')}</Text>
                     <View style={styles.passwordContainer}>
-                        <TextInput 
-                            style={[styles.inputForm, {flex: 1}]} 
+                        <TextInput
+                            style={[styles.inputForm, { flex: 1 }]}
                             placeholder={translate('Login.password')}
-                            placeholderTextColor={colors.Grey} 
+                            placeholderTextColor={colors.Grey}
                             onChangeText={(password) => setPassword(password)}
                             secureTextEntry={!hidden}
                             cursorColor={colors.LightSeaGreen}
@@ -54,7 +54,7 @@ export default function Login({ navigation }) {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.usingApp}>
-                    <Text style={styles.usingAppText}>{translate('Login.or')} <Text style={{fontWeight: 'bold'}}>{translate('Login.signup')}</Text> {translate('Login.using')}</Text>
+                    <Text style={styles.usingAppText}>{translate('Login.or')} <Text style={{ fontWeight: 'bold' }}>{translate('Login.signup')}</Text> {translate('Login.using')}</Text>
                     <View style={styles.usingAppicons}>
                         <TouchableOpacity>
                             <Image source={require('../../assets/register/google.png')} />
@@ -67,19 +67,19 @@ export default function Login({ navigation }) {
                         </TouchableOpacity>
                     </View>
                 </View>
-                <TouchableOpacity 
-                    style={styles.nextButton} 
-                    onPress={() => { navigation.navigate({name: 'menuBar'})}}
+                <TouchableOpacity
+                    style={styles.nextButton}
+                    onPress={() => { navigation.navigate({ name: 'menuBar' }) }}
                 >
                     <Text style={styles.nextText}>{translate('Login.signin')}</Text>
                 </TouchableOpacity>
                 <View style={styles.signIn}>
                     <Text style={styles.haveAccount}>{translate('Login.haveaccount')} </Text>
-                    <TouchableOpacity onPress={() => { navigation.navigate({name: 'firstPage'})}}>
-                            <Text style={styles.signInText}>{translate('Login.signup')}</Text>
+                    <TouchableOpacity onPress={() => { navigation.navigate({ name: 'firstPage' }) }}>
+                        <Text style={styles.signInText}>{translate('Login.signup')}</Text>
                     </TouchableOpacity>
                 </View>
-            </ScrollView>    
+            </ScrollView>
         </SafeAreaView>
     );
 }

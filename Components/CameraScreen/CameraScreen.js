@@ -28,7 +28,7 @@ export default function CameraScreen({ navigation }) {
 
     // If camera permission is not granted, show an error message
     if (hasCameraPermission === false) {
-        return <PopupMessage state={'Error'} message={translate('Scan.ErroAcces')} pageName={'Home'} navigation={navigation}/>
+        return <PopupMessage state={'Error'} message={translate('Scan.ErroAcces')} pageName={'Home'} navigation={navigation} />
     }
 
     // Take a picture with the camera and set the image state variable to the picture URI
@@ -45,7 +45,7 @@ export default function CameraScreen({ navigation }) {
 
     // Save the current image to the media library
     const saveImage = async () => {
-        if(image){
+        if (image) {
             try {
                 await MediaLibrary.createAssetAsync(image);
                 alert(translate('Scan.saved'));
@@ -60,7 +60,7 @@ export default function CameraScreen({ navigation }) {
     const flashClick = () => {
         if (flash == Camera.Constants.FlashMode.off)
             setFlash(Camera.Constants.FlashMode.on);
-        else 
+        else
             setFlash(Camera.Constants.FlashMode.off);
     }
 
@@ -77,7 +77,7 @@ export default function CameraScreen({ navigation }) {
         <View style={styles.container}>
             <View style={styles.topBar}>
                 <Text style={styles.title}>{translate('Scan.title')}</Text>
-                <TouchableOpacity onPress={() => {navigation.goBack()}}>
+                <TouchableOpacity onPress={() => { navigation.goBack() }}>
                     <Image source={require('../../assets/Scan/Arr.png')} />
                 </TouchableOpacity>
             </View>
@@ -86,7 +86,7 @@ export default function CameraScreen({ navigation }) {
                     <Camera
                         style={styles.camera}
                         type={type}
-                        flashMode={flash? Camera.Constants.FlashMode.torch : Camera.Constants.FlashMode.off}
+                        flashMode={flash ? Camera.Constants.FlashMode.torch : Camera.Constants.FlashMode.off}
                         ref={cameraRef}
                     />
                     :
@@ -99,24 +99,24 @@ export default function CameraScreen({ navigation }) {
                 !image ?
                     <View style={styles.bottomBar}>
                         <TouchableOpacity onPress={CameraClick}>
-                            <Entypo name="retweet" size={30} style={styles.icon}/>
+                            <Entypo name="retweet" size={30} style={styles.icon} />
                         </TouchableOpacity>
                         <TouchableOpacity
                             style={styles.button}
                             onPress={takePicture}
                         />
                         <TouchableOpacity onPress={flashClick}>
-                            <Entypo name="flash" size={30} style={[styles.flash, { color:  flash == Camera.Constants.FlashMode.off ? colors.White : colors.Yellow}]}/>
+                            <Entypo name="flash" size={30} style={[styles.flash, { color: flash == Camera.Constants.FlashMode.off ? colors.White : colors.Yellow }]} />
                         </TouchableOpacity>
                     </View>
                     :
                     <View style={styles.bottomBar}>
                         <TouchableOpacity onPress={() => setImage(null)}>
-                            <Entypo name="retweet" size={30} style={styles.icon}/>
+                            <Entypo name="retweet" size={30} style={styles.icon} />
                             <Text style={styles.buttonTxt}>{translate('Scan.retake')}</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={saveImage}>
-                            <Entypo name="check" size={30} style={styles.icon}/>
+                            <Entypo name="check" size={30} style={styles.icon} />
                             <Text style={styles.buttonTxt}>{translate('Scan.save')}</Text>
                         </TouchableOpacity>
                     </View>

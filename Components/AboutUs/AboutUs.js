@@ -7,7 +7,7 @@ export default function AboutUs({ navigation }) {
         <View style={styles.container}>
             <ImageBackground source={require('../../assets/AboutUs/AboutUs.png')} style={styles.background}>
                 <TouchableOpacity onPress={() => navigation.goBack()}>
-                    <Image source={require('../../assets/AboutUs/ep_close-bold.png')} style={styles.close}/>
+                    <Image source={require('../../assets/AboutUs/ep_close-bold.png')} style={styles.close} />
                 </TouchableOpacity>
                 <Text style={styles.copyright}>{translate('AboutUs.copyright')}</Text>
                 <Text style={styles.description}>{translate('AboutUs.description')}</Text>

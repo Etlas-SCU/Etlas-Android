@@ -16,7 +16,7 @@ export const styles = StyleSheet.create({
         zIndex: 9999
     },
     icon: {
-        flex:1,
+        flex: 1,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',

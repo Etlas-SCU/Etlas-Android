@@ -12,7 +12,7 @@ export function SecondPage({ route, navigation }) {
     const { fullname, email, password } = route.params;
     const [phoneNumber, setPhoneNumber] = useState('');
     const [address, setAddress] = useState('');
-        
+
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView style={styles.container}>
@@ -22,7 +22,7 @@ export function SecondPage({ route, navigation }) {
                         <Image style={styles.arrow} source={require('../../assets/register/left-arrow.png')}></Image>
                     </TouchableOpacity>
                 </View>
-                <View style={styles.line}/>
+                <View style={styles.line} />
                 <Text style={styles.helpingText}>{translate('Register.description')}</Text>
                 <View style={styles.inputView}>
                     <Text style={styles.stateName}>{translate('Register.phonenumber')}</Text>
@@ -36,16 +36,16 @@ export function SecondPage({ route, navigation }) {
                 </View>
                 <View style={styles.inputView}>
                     <Text style={styles.stateName}>{translate('Register.address')}</Text>
-                    <TextInput 
-                        style={styles.inputForm} 
-                        placeholder={translate('Register.address')} 
-                        placeholderTextColor={colors.Grey} 
+                    <TextInput
+                        style={styles.inputForm}
+                        placeholder={translate('Register.address')}
+                        placeholderTextColor={colors.Grey}
                         onChangeText={(address) => setAddress(address)}
                         cursorColor={colors.LightSeaGreen}
                     />
                 </View>
                 <View style={styles.usingAppSecond}>
-                    <Text style={styles.usingAppText}>{translate('Register.or')} <Text style={{fontWeight: 'bold'}}>{translate('Register.signup')}</Text> {translate('Register.using')}</Text>
+                    <Text style={styles.usingAppText}>{translate('Register.or')} <Text style={{ fontWeight: 'bold' }}>{translate('Register.signup')}</Text> {translate('Register.using')}</Text>
                     <View style={styles.usingAppicons}>
                         <TouchableOpacity>
                             <Image source={require('../../assets/register/google.png')} />
@@ -59,12 +59,12 @@ export function SecondPage({ route, navigation }) {
                     </View>
                 </View>
                 <TouchableOpacity style={styles.nextButtonSecond}>
-                        <Text style={styles.nextText}>{translate('Register.signup')}</Text>
+                    <Text style={styles.nextText}>{translate('Register.signup')}</Text>
                 </TouchableOpacity>
                 <View style={styles.signIn}>
                     <Text style={styles.haveAccount}>{translate('Register.haveaccount')} </Text>
                     <TouchableOpacity onPress={() => navigation.navigate('login')}>
-                            <Text style={styles.signInText}>{translate('Register.signin')}</Text>
+                        <Text style={styles.signInText}>{translate('Register.signin')}</Text>
                     </TouchableOpacity>
                 </View>
             </ScrollView>

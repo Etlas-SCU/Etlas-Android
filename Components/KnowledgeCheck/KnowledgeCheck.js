@@ -2,11 +2,11 @@ import { View, Image, Text, TouchableOpacity } from "react-native";
 import { styles } from './Styles'
 import { translate } from "../../Localization";
 
-export default function KnowledgeCheck({ navigation }){
+export default function KnowledgeCheck({ navigation }) {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <TouchableOpacity style={styles.aboutus} onPress={() => { navigation.navigate({name: 'AboutUs'})}}>
+                <TouchableOpacity style={styles.aboutus} onPress={() => { navigation.navigate({ name: 'AboutUs' }) }}>
                     <Image source={require('../../assets/KnowledgeCheck/tabler_exclamation-circle.png')} />
                 </TouchableOpacity>
                 <Text style={styles.title}>{translate('KnowledgeCheck.title')}</Text>
@@ -18,7 +18,7 @@ export default function KnowledgeCheck({ navigation }){
                     <Text style={styles.bodyScore}>{translate('KnowledgeCheck.StatuesScore')}</Text>
                 </View>
                 <View style={styles.bodyImage}>
-                    <Image source={require('../../assets/KnowledgeCheck/Statue_1.png')} style={styles.image}/>
+                    <Image source={require('../../assets/KnowledgeCheck/Statue_1.png')} style={styles.image} />
                 </View>
             </TouchableOpacity>
             <TouchableOpacity style={styles.body}>
@@ -28,7 +28,7 @@ export default function KnowledgeCheck({ navigation }){
                     <Text style={styles.bodyScore}>{translate('KnowledgeCheck.MonumentsScore')}</Text>
                 </View>
                 <View style={styles.bodyImage}>
-                    <Image source={require('../../assets/KnowledgeCheck/Statue_2.png')} style={styles.image}/>
+                    <Image source={require('../../assets/KnowledgeCheck/Statue_2.png')} style={styles.image} />
                 </View>
             </TouchableOpacity>
             <TouchableOpacity style={styles.body}>
@@ -38,7 +38,7 @@ export default function KnowledgeCheck({ navigation }){
                     <Text style={styles.bodyScore}>{translate('KnowledgeCheck.LandmarksScore')}</Text>
                 </View>
                 <View style={styles.bodyImage}>
-                    <Image source={require('../../assets/KnowledgeCheck/Statue_3.png')} style={styles.image}/>
+                    <Image source={require('../../assets/KnowledgeCheck/Statue_3.png')} style={styles.image} />
                 </View>
             </TouchableOpacity>
         </View>

@@ -17,18 +17,18 @@ import CameraScreen from './Components/CameraScreen/CameraScreen';
 const Stack = createStackNavigator();
 
 export default function App() {
-    
+
     // initialize the language
     init();
 
     // Retrieve onboarding status from local storage
-    const [ language, setLanguage ] = useState('None');
+    const [language, setLanguage] = useState('None');
 
     // Retrieve language choice from local storage
     const getLanguageChoice = async () => {
         try {
             const getLang = await AsyncStorage.getItem('language');
-            if (getLang !== null) 
+            if (getLang !== null)
                 setLanguage(getLang);
         } catch (error) {
             console.log(error);
@@ -38,7 +38,7 @@ export default function App() {
     // get the language choice
     useEffect(() => {
         getLanguageChoice();
-    }, []);    
+    }, []);
 
     // get the font from the local fonts
     let [fontsLoaded] = useFonts({
@@ -65,25 +65,25 @@ export default function App() {
     const timingConfig = {
         animation: 'timing',
         config: {
-          duration: 500,
-          easing: Easing.linear,
+            duration: 500,
+            easing: Easing.linear,
         },
-    };      
+    };
 
     // if the font loaded, return the components
     return (
         <NavigationContainer>
-            <Stack.Navigator screenOptions={{ 
-                    header: () => null, 
-                    gestureEnabled: true, 
-                    cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS, 
-                    transitionSpec: {
-                        open: timingConfig,
-                        close: timingConfig,
-                    },
-                }}
+            <Stack.Navigator screenOptions={{
+                header: () => null,
+                gestureEnabled: true,
+                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+                transitionSpec: {
+                    open: timingConfig,
+                    close: timingConfig,
+                },
+            }}
             >
-                { language !== 'None' ? null : <Stack.Screen name="languageSelection" component={LanguageSelection} />}
+                {language !== 'None' ? null : <Stack.Screen name="languageSelection" component={LanguageSelection} />}
                 <Stack.Screen name="onBoarding" component={OnBoarding} />
                 <Stack.Screen name="firstPage" component={FirstPage} />
                 <Stack.Screen name="secondPage" component={SecondPage} />

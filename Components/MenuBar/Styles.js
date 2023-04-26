@@ -4,7 +4,7 @@ import { colors } from "../../AppStyles";
 
 export const styles = StyleSheet.create({
     container: {
-        flex: 1, 
+        flex: 1,
         backgroundColor: colors.SolidGrey,
         borderRadius: 20,
     },
