@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native'
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: colors.DarkCyan,
+        backgroundColor: colors.Black,
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -13,7 +13,7 @@ export const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
         alignItems: 'center',
-        borderRadius: 20
+        borderRadius: 20,
     },
     button: {
         backgroundColor: colors.Cyan,
@@ -22,7 +22,6 @@ export const styles = StyleSheet.create({
         borderWidth: 5,
         height: 85.4,
         width: 85.4,
-        bottom: "8%",
     },
     topBar: {
         // position: 'absolute',
@@ -49,15 +48,17 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 20,
         resizeMode: 'contain',
+        backgroundColor: colors.Black
     },
     bottomBar: {
-        // position: 'absolute',
         height: "15%",
         flexDirection: 'row',
         justifyContent: 'space-between',
         width: "100%" ,
         paddingHorizontal: "8%",
-        backgroundColor: colors.Black
+        backgroundColor: colors.Black,
+        verticalAlign: "middle",
+        alignItems: 'center',
     },
     icon: {
         color: colors.White,
@@ -68,5 +69,11 @@ export const styles = StyleSheet.create({
         textAlign: 'center',
         fontFamily: fontFamily.MontserratBold,
         fontSize: 13,
+    },
+    flash: {
+        textAlign: 'center',
+    },
+    absolute: {
+        position: 'absolute',
     }
 });

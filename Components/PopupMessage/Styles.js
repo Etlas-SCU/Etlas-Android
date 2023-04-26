@@ -13,6 +13,7 @@ export const styles = StyleSheet.create({
         top: "35%",
         left: "10%",
         borderRadius: 30,
+        zIndex: 9999
     },
     icon: {
         flex:1,

@@ -79,6 +79,7 @@
         "title": "Scan your monument, please.",
         "retake": "Re-Take",
         "save": "Save",
-        "saved": "Picture has been saved 🎉"
+        "saved": "Picture has been saved 🎉",
+        "ErroAcces": "Can't Access the camera of Media Library"
     }
 }
