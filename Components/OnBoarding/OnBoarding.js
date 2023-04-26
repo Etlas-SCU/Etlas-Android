@@ -3,12 +3,8 @@ import { useNavigation } from '@react-navigation/native';
 import { styles } from "./Styles";
 import { translate } from '../../Localization';
 
-export default function OnBoarding() {
+export default function OnBoarding({ navigation }) {
 
-    // get the navigation
-    const navigation = useNavigation();    
-
-    // if the font loaded, return the text
     return (
         <View style={styles.container}>
             <Text style={styles.header}>{translate('OnBoarding.title')}</Text>
