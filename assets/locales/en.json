@@ -81,5 +81,15 @@
         "save": "Save",
         "saved": "Picture has been saved 🎉",
         "ErroAcces": "Can't Access the camera of Media Library"
+    },
+    "Profile": {
+        "title": "Profile",
+        "name": "Ahmed Hossam",
+        "email": "E-mail",
+        "phone": "Phone Number",
+        "address": "Address",
+        "user_email": "ahmed.7oskaa@gmail.com",
+        "user_phone": "01208822340",
+        "user_address": "Port Said, Egypt"
     }
 }
