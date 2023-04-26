@@ -26,7 +26,7 @@ export const styles = StyleSheet.create({
         alignSelf: "center",
         marginTop: "20%",
         borderRadius: 20,
-        
+
     },
     score: {
         color: colors.White,
@@ -48,7 +48,7 @@ export const styles = StyleSheet.create({
         width: "35%",
         alignSelf: "center",
         marginTop: "8%",
-    }, 
+    },
     bestScore: {
         color: colors.Gold,
         fontSize: 30,

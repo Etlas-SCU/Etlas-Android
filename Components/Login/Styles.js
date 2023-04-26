@@ -29,7 +29,7 @@ export const styles = StyleSheet.create({
         marginTop: 13,
         marginLeft: 24,
         width: 80,
-    }, 
+    },
     helpingText: {
         fontFamily: fontFamily.MontserratRegular,
         fontSize: 15,

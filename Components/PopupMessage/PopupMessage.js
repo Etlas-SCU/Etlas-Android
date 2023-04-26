@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import { colors } from "../../AppStyles";
 import { CommonActions } from '@react-navigation/native';
 
-export default function PopupMessage({ state, message, pageName, navigation}){
+export default function PopupMessage({ state, message, pageName, navigation }) {
 
     // Use the useState hook to manage the visibility state of the alert
     const [visible, setVisible] = useState(true);
@@ -48,11 +48,11 @@ export default function PopupMessage({ state, message, pageName, navigation}){
     return (
         <FancyAlert
             visible={visible}
-            icon={<Image source={Icons[state]} style={styles.icon}/>}
+            icon={<Image source={Icons[state]} style={styles.icon} />}
             style={styles.container}
         >
             <Text style={styles.message}>{message}</Text>
-            <TouchableOpacity onPress={() => toggleAlert()} style={[styles.button, {backgroundColor: Button_colors[state]}]}>
+            <TouchableOpacity onPress={() => toggleAlert()} style={[styles.button, { backgroundColor: Button_colors[state] }]}>
                 <Text style={styles.buttonText}>{ButtonText[state]}</Text>
             </TouchableOpacity>
         </FancyAlert>

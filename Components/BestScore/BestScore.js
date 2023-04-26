@@ -2,7 +2,7 @@ import { styles } from './Styles'
 import { translate } from "../../Localization";
 import { View, Text, ImageBackground, TouchableOpacity } from 'react-native';
 
-export default function KnowledgeCheck({ navigation }){
+export default function KnowledgeCheck({ navigation }) {
     return (
         <View style={styles.container}>
             <ImageBackground source={require('../../assets/HighScore/HighScore.png')} resizeMode='cover' style={styles.image}>
@@ -12,7 +12,7 @@ export default function KnowledgeCheck({ navigation }){
                 <View style={styles.ScoreBox}>
                     <Text style={styles.score}>{translate('BestScore.score')}</Text>
                     <Text style={styles.scoreTxt}>{translate('BestScore.text')}</Text>
-                    <View style={styles.line}/>
+                    <View style={styles.line} />
                     <Text style={styles.bestScore}>{translate('BestScore.title')}</Text>
                 </View>
                 <View style={styles.buttonContainer}>
