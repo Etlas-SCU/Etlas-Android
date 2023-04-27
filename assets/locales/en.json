@@ -91,5 +91,14 @@
         "user_email": "ahmed.7oskaa@gmail.com",
         "user_phone": "01208822340",
         "user_address": "Port Said, Egypt"
+    },
+    "Home": {
+        "title": "Home",
+        "etlas": "Etlas",
+        "desc": "we are here to help you make your tour much easier",
+        "search": "Search",
+        "New": "New",
+        "see_all": "See all",
+        "tours": "Check populars tours"
     }
 }
