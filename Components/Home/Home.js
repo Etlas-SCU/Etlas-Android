@@ -3,10 +3,25 @@ import { View, Text, Image, TextInput, TouchableOpacity, ScrollView } from "reac
 import { styles } from "./Styles";
 import { translate } from "../../Localization";
 import { colors } from "../../AppStyles";
+import ToursCard from "./ToursCard";
+
 
 export default function Home({ navigation }) {
     
     const [searchTerm, setSearchTerm] = useState('');
+    
+    const Tour = {
+        Title: "Gize tour",
+        Description: "where you can visit the pyramids and ride the camels.",
+        Rate: "3.5",
+        Img: require('../../assets/Home/tour.png')
+    };
+
+    toursList = [];
+    for(let i = 0; i < 5; i++)
+        toursList.push(Tour);
+
+    const tours = toursList.map((tour, idx) => <ToursCard tour={tour} key={idx}/>);
     
     return (
         <View style={styles.container}>
@@ -29,13 +44,13 @@ export default function Home({ navigation }) {
             <View styles={styles.Box}>
                 <View style={styles.boxHeader}>
                     <Text style={styles.boxTitle}>{translate('Home.tours')}</Text>
-                    <Text style={styles.New}>{translate('Home.New')}</Text>
+                    <Image source={require('../../assets/Home/New.png')} />
                     <TouchableOpacity style={styles.see_all}>
                         <Text style={styles.see_all_text}>{translate('Home.see_all')}</Text>
                     </TouchableOpacity>
                 </View>
-                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-
+                <ScrollView style={styles.swipper} horizontal={true} showsHorizontalScrollIndicator={false}>
+                    {tours}
                 </ScrollView>
             </View>
         </View>

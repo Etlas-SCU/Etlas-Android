@@ -44,7 +44,7 @@ export const styles = StyleSheet.create({
         position: "absolute",
     },
     SearchForm: {
-        backgroundColor: colors.LightGrey,
+        backgroundColor: colors.SolidGrey,
         borderRadius: 20,
         width: "90%",
         height: 64,
@@ -53,6 +53,7 @@ export const styles = StyleSheet.create({
         fontSize: 18,
         fontFamily: fontFamily.MontserratRegular,
         paddingHorizontal: "5%",
+        textAlign: "left"
     },
     Box: {
         width: "90%",
@@ -70,18 +71,6 @@ export const styles = StyleSheet.create({
         textAlign: "center",
         margin: "5%"
     },
-    New: {
-        color: colors.Gold,
-        fontSize: 12,
-        fontFamily: fontFamily.MontserratBold,
-        textAlign: "center",
-        borderColor: colors.Gold,
-        borderWidth: 1,
-        borderRadius: 20,
-        borderBottomLeftRadius: 0,
-        paddingHorizontal: 4,
-        paddingVertical: 2,
-    },
     see_all: {
         alignContent: 'flex-end',
         position: "absolute",
@@ -92,6 +81,59 @@ export const styles = StyleSheet.create({
         fontSize: 16,
         fontFamily: fontFamily.MontserratBold,
         textAlign: "center",
+    },
+    swipper: {
+        marginLeft: 20,
+        borderRadius: 20,
+    },
+
+    // tours cards
+
+    ToursCard: {
+        backgroundColor: colors.SolidGrey,
+        borderRadius: 30,
+        flexDirection: 'row',
+        width: 346,
+        height: 120,
+        marginHorizontal: 5
+    },
+    ToursCardImg: {
+        width: 116,
+        height: 120,
+        borderTopLeftRadius: 30,
+        borderBottomLeftRadius: 30,
+    },
+    ToursCardText: {
+        flexDirection: 'column'
+    },
+    ToursCardTitle: {
+        color: colors.DarkCyan,
+        fontSize: 18,
+        fontFamily: fontFamily.MontserratBold,
+        marginLeft: "5%",
+        marginTop: "2%",
+    },
+    ToursCardDesc: {
+        color: colors.DarkGrey,
+        fontSize: 12,
+        fontFamily: fontFamily.MontserratRegular,
+        marginLeft: "5%",
+        marginTop: "2%",
+        width: "60%"
+    },
+
+    // stars
+    stars: {
+        flexDirection: 'row',
+        backgroundColor: colors.LightGrey,
+        borderRadius: 20,
+        width: "60%",
+        marginLeft: "5%",
+        marginTop: "2%",
+        alignContent: "center",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: 5,
+        padding: 5
     }
-        
 });
