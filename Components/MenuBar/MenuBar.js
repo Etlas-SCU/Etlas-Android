@@ -5,6 +5,7 @@ import KnowledgeCheck from "../KnowledgeCheck/KnowledgeCheck";
 import AboutUs from "../AboutUs/AboutUs";
 import RecognitionFailed from '../RecognitionFailed/RecognitionFailed'
 import CameraScreen from "../CameraScreen/CameraScreen";
+import Profile from "../Profile/Profile";
 
 export default function MenuBar({ navigation }) {
 
@@ -20,7 +21,7 @@ export default function MenuBar({ navigation }) {
 
     const Pages = {
         Home: 'KnowledgeCheck',
-        AR: 'KnowledgeCheck',
+        AR: 'Profile',
         Scan: 'Scan',
         KnowledgeCheck: 'KnowledgeCheck',
         Settings: 'RecognitionFailed'
@@ -59,6 +60,7 @@ export default function MenuBar({ navigation }) {
             <Tab.Screen name="Settings" component={RecognitionFailed} />
             <Tab.Screen name="AboutUs" component={AboutUs} options={{ tabBarButton: () => null, tabBarVisible: false }} />
             <Tab.Screen name="RecognitionFailed" component={RecognitionFailed} options={{ tabBarButton: () => null, tabBarVisible: false }} />
+            <Tab.Screen name="Profile" component={Profile} options={{ tabBarButton: () => null, tabBarVisible: false }} />
         </Tab.Navigator>
     )
 }
