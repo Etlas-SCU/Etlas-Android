@@ -7,7 +7,7 @@ import ToursCard from "../ToursCard/ToursCard";
 
 
 export default function ToursPage({ navigation }) {
-    
+
     const [searchTerm, setSearchTerm] = useState('');
 
     const Tour = {
@@ -18,7 +18,7 @@ export default function ToursPage({ navigation }) {
     };
 
     let toursList = [];
-    for(let i = 0; i < 20; i++)
+    for (let i = 0; i < 20; i++)
         toursList.push(Tour);
 
     const tours = toursList.map((tour, idx) => <ToursCard tour={tour} key={idx} />);

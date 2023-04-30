@@ -55,7 +55,7 @@ export default function HomePage({ navigation }) {
                 <View styles={styles.Box}>
                     <View style={styles.boxHeader}>
                         <Text style={styles.boxTitle}>{translate('Home.tours')}</Text>
-                        <Image source={require('../../assets/Home/New.png')} />
+                        <Image source={require('../../assets/HomePage/New.png')} />
                         <TouchableOpacity style={styles.see_all} onPress={() => { navigation.navigate({ name: 'ToursPage' }) }}>
                             <Text style={styles.see_all_text}>{translate('Home.see_all')}</Text>
                         </TouchableOpacity>
@@ -68,8 +68,8 @@ export default function HomePage({ navigation }) {
                 </View>
                 <View styles={styles.Box}>
                     <View style={styles.boxHeader}>
-                        <Text style={styles.boxTitle}>{translate('Home.tours')}</Text>
-                        <Image source={require('../../assets/Home/New.png')} />
+                        <Text style={styles.boxTitle}>{translate('Home.article')}</Text>
+                        <Image source={require('../../assets/HomePage/New.png')} />
                         <TouchableOpacity style={styles.see_all} onPress={() => { navigation.navigate({ name: 'ArticlesPage' }) }}>
                             <Text style={styles.see_all_text}>{translate('Home.see_all')}</Text>
                         </TouchableOpacity>

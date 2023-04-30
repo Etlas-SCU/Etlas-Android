@@ -7,7 +7,7 @@ import MonumentsCard from "../MonumentsCard/MonumentsCard";
 
 
 export default function ArticlesPage({ navigation }) {
-    
+
     const [searchTerm, setSearchTerm] = useState('');
 
     const Monument = {
@@ -18,7 +18,7 @@ export default function ArticlesPage({ navigation }) {
     };
 
     let monumentList = [];
-    for(let i = 0; i < 20; i++)
+    for (let i = 0; i < 20; i++)
         monumentList.push(Monument);
 
     const monuments = monumentList.map((monument, idx) => <MonumentsCard monument={monument} key={idx} />);

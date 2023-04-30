@@ -43,6 +43,6 @@ export const styles = StyleSheet.create({
     Box: {
         marginTop: "10%",
         alignItems: "center",
-        gap: 20        
+        gap: 20
     },
 });
