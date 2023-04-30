@@ -3,9 +3,8 @@ import { View, Text, Image, TextInput, TouchableOpacity, ScrollView, SafeAreaVie
 import { styles } from "./Styles";
 import { translate } from "../../Localization";
 import { colors } from "../../AppStyles";
-import ToursCard from "./ToursCard";
-import MonumentsCard from "./MonumentsCard";
-
+import ToursCard from "../ToursCard/ToursCard";
+import MonumentsCard from "../MonumentsCard/MonumentsCard";
 
 export default function Home({ navigation }) {
 
