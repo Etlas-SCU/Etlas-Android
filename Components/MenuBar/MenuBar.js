@@ -1,13 +1,14 @@
 import { styles } from "./Styles"
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Image, Platform } from 'react-native';
+import { Image, Platform, View } from 'react-native';
 import KnowledgeCheck from "../KnowledgeCheck/KnowledgeCheck";
 import AboutUs from "../AboutUs/AboutUs";
-import RecognitionFailed from '../RecognitionFailed/RecognitionFailed'
 import CameraScreen from "../CameraScreen/CameraScreen";
 import Profile from "../Profile/Profile";
 import HomePage from "../HomePage/HomePage";
-import { View } from "react-native-animatable";
+import ArticlesPage from "../ArticlesPage/ArticlesPage";
+import ToursPage from "../ToursPage/ToursPage";
+import RecognitionFailed from '../RecognitionFailed/RecognitionFailed'
 
 export default function MenuBar({ navigation }) {
 
@@ -19,14 +20,6 @@ export default function MenuBar({ navigation }) {
         Scan: require('../../assets/MenuBar/Scan.png'),
         KnowledgeCheck: require('../../assets/MenuBar/Knowledge_Check.png'),
         Settings: require('../../assets/MenuBar/Settings.png')
-    }
-
-    const Pages = {
-        Home: 'Home',
-        AR: 'Profile',
-        Scan: 'Scan',
-        KnowledgeCheck: 'KnowledgeCheck',
-        Settings: 'RecognitionFailed'
     }
 
     return (
@@ -54,13 +47,15 @@ export default function MenuBar({ navigation }) {
             })}
         >
             <Tab.Screen name="Home" component={HomePage} />
-            <Tab.Screen name="AR" component={KnowledgeCheck} />
+            <Tab.Screen name="AR" component={ArticlesPage} />
             <Tab.Screen name="Scan" component={CameraScreen} options={{ tabBarStyle: { display: 'none' } }} />
             <Tab.Screen name="KnowledgeCheck" component={KnowledgeCheck} />
-            <Tab.Screen name="Settings" component={RecognitionFailed} />
+            <Tab.Screen name="Settings" component={ToursPage} />
             <Tab.Screen name="AboutUs" component={AboutUs} options={{ tabBarButton: () => null, tabBarVisible: false }} />
             <Tab.Screen name="RecognitionFailed" component={RecognitionFailed} options={{ tabBarButton: () => null, tabBarVisible: false }} />
             <Tab.Screen name="Profile" component={Profile} options={{ tabBarButton: () => null, tabBarVisible: false }} />
+            <Tab.Screen name="ArticlesPage" component={ArticlesPage} options={{ tabBarButton: () => null, tabBarVisible: false }} />
+            <Tab.Screen name="ToursPage" component={ToursPage} options={{ tabBarButton: () => null, tabBarVisible: false }} />
         </Tab.Navigator>
     )
 }

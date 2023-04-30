@@ -101,5 +101,13 @@
         "see_all": "See all",
         "tours": "Check populars tours",
         "learnmore": "Learn more >"
+    },
+    "Articles": {
+        "title": "Articles",
+        "search": "Search"
+    },
+    "Tours": {
+        "title": "Tours",
+        "search": "Search"
     }
 }
