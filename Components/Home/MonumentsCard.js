@@ -8,7 +8,7 @@ export default function MonumentsCard({ monument }) {
     const { Title, Description, Date, Img } = monument;
 
     return (
-        <TouchableOpacity style={styles.MonumentsCard}>
+        <View style={styles.MonumentsCard}>
             <Image style={styles.MonumentsCardImg} source={Img} />
             <View style={styles.MonumentsCardText}>
                 <Text style={styles.MonumentsCardTitle} numberOfLines={1}>{Title}</Text>
@@ -19,6 +19,6 @@ export default function MonumentsCard({ monument }) {
             <TouchableOpacity>
                 <Text style={styles.learn}>{translate('Home.learnmore')}</Text>
             </TouchableOpacity>
-        </TouchableOpacity>
+        </View>
     )
 }
