@@ -37,10 +37,10 @@ export const styles = StyleSheet.create({
         borderRightWidth: StyleSheet.hairlineWidth,
     },
     Scan: {
-        position: "absolute",
         alignSelf: "center",
         width: "100%",
         height: "100%",
+
     },
     ScanIcon: {
         width: 72,

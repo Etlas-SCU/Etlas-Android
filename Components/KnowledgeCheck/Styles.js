@@ -8,20 +8,20 @@ export const styles = StyleSheet.create({
     },
     header: {
         flexDirection: "row",
-        marginTop: 61,
-        paddingLeft: 24,
+        marginTop: "15%",
         justifyContent: "center",
         alignItems: "center",
     },
     aboutus: {
         position: "absolute",
         alignContent: 'flex-start',
-        left: 24,
+        left: "5%",
     },
     title: {
         color: colors.White,
         fontSize: 18,
         fontFamily: fontFamily.MontserratBold,
+        textAlign: "center",
     },
     body: {
         width: "90%",

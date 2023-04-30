@@ -6,6 +6,7 @@ import AboutUs from "../AboutUs/AboutUs";
 import RecognitionFailed from '../RecognitionFailed/RecognitionFailed'
 import CameraScreen from "../CameraScreen/CameraScreen";
 import Profile from "../Profile/Profile";
+import Home from "../Home/Home";
 
 export default function MenuBar({ navigation }) {
 
@@ -20,7 +21,7 @@ export default function MenuBar({ navigation }) {
     }
 
     const Pages = {
-        Home: 'KnowledgeCheck',
+        Home: 'Home',
         AR: 'Profile',
         Scan: 'Scan',
         KnowledgeCheck: 'KnowledgeCheck',
@@ -41,7 +42,7 @@ export default function MenuBar({ navigation }) {
                     return (
                         <TouchableOpacity
                             style={
-                                [styles.menuBarIconsContainer, isRightBorder ? styles.rightBorder : null, isScan ? [styles.Scan, { bottom: isIos ? "25%" : "30%" }] : null]
+                                [styles.menuBarIconsContainer, isRightBorder ? styles.rightBorder : null, isScan ? [styles.Scan, { marginTop: isIos ? "-50%" : "-80%" }] : null]
                             }
                             onPress={() => { navigation.navigate({ name: Pages[route.name] }) }}
                         >
@@ -53,7 +54,7 @@ export default function MenuBar({ navigation }) {
             })}
 
         >
-            <Tab.Screen name="Home" component={KnowledgeCheck} />
+            <Tab.Screen name="Home" component={Home} />
             <Tab.Screen name="AR" component={KnowledgeCheck} />
             <Tab.Screen name="Scan" component={CameraScreen} options={{ tabBarStyle: { display: 'none' } }} />
             <Tab.Screen name="KnowledgeCheck" component={KnowledgeCheck} />

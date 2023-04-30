@@ -74,7 +74,6 @@ export default function App() {
         <NavigationContainer>
             <Stack.Navigator screenOptions={{
                 header: () => null,
-                gestureEnabled: true,
                 cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
                 transitionSpec: {
                     open: timingConfig,
