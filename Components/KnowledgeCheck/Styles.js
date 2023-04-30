@@ -6,6 +6,9 @@ export const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: colors.DarkCyan,
     },
+    contentContainer: {
+        paddingBottom: "40%"
+    },
     header: {
         flexDirection: "row",
         marginTop: "15%",
@@ -25,7 +28,7 @@ export const styles = StyleSheet.create({
     },
     body: {
         width: "90%",
-        height: "20%",
+        height: "25%",
         backgroundColor: colors.Gold,
         alignSelf: "center",
         marginTop: "10%",
@@ -49,6 +52,7 @@ export const styles = StyleSheet.create({
         color: colors.White,
         fontSize: 13,
         fontFamily: fontFamily.MontserratRegular,
+        width: "90%"
     },
     bodyScore: {
         color: colors.White,

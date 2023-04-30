@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { View, TouchableOpacity, Text, Image, ImageBackground } from "react-native";
+import { View, TouchableOpacity, Text, Image } from "react-native";
 import { styles } from "./Styles";
 import { Camera } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";

@@ -8,8 +8,11 @@ export const styles = StyleSheet.create({
         backgroundColor: colors.SolidGrey,
         borderRadius: 20,
     },
+    barContainer: {
+        flexDirection: "row"
+    },
     menuBar: {
-        height: "10%",
+        height: "11%",
         backgroundColor: colors.SolidGrey,
         position: 'absolute',
         borderTopRightRadius: 20,
@@ -19,7 +22,8 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         alignSelf: 'center',
         verticalAlign: 'center',
-        elevation: 0
+        elevation: 0,
+        paddingHorizontal: "5%"
     },
     menuBarIcons: {
         width: 35,
@@ -27,23 +31,28 @@ export const styles = StyleSheet.create({
     },
     menuBarIconsContainer: {
         flexDirection: 'row',
-        width: "70%",
-        justifyContent: 'space-between',
         alignItems: 'center',
         verticalAlign: 'center',
     },
     rightBorder: {
         borderRightColor: colors.DarkCyan,
         borderRightWidth: StyleSheet.hairlineWidth,
+        paddingLeft: "25%"
     },
     Scan: {
         alignSelf: "center",
         width: "100%",
         height: "100%",
-
     },
     ScanIcon: {
         width: 72,
         height: 72,
     },
+    line: {
+        borderBottomColor: colors.DarkCyan,
+        borderBottomWidth: 2,
+        width: "100%",
+        marginTop: 8,
+        alignSelf: "center",
+    }
 })
