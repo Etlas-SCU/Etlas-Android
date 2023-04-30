@@ -6,7 +6,7 @@ import { colors } from "../../AppStyles";
 import ToursCard from "../ToursCard/ToursCard";
 import MonumentsCard from "../MonumentsCard/MonumentsCard";
 
-export default function Home({ navigation }) {
+export default function HomePage({ navigation }) {
 
     const [searchTerm, setSearchTerm] = useState('');
 

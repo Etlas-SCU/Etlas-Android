@@ -6,7 +6,7 @@ import AboutUs from "../AboutUs/AboutUs";
 import RecognitionFailed from '../RecognitionFailed/RecognitionFailed'
 import CameraScreen from "../CameraScreen/CameraScreen";
 import Profile from "../Profile/Profile";
-import Home from "../Home/Home";
+import HomePage from "../HomePage/HomePage";
 
 export default function MenuBar({ navigation }) {
 
@@ -54,7 +54,7 @@ export default function MenuBar({ navigation }) {
             })}
 
         >
-            <Tab.Screen name="Home" component={Home} />
+            <Tab.Screen name="Home" component={HomePage} />
             <Tab.Screen name="AR" component={KnowledgeCheck} />
             <Tab.Screen name="Scan" component={CameraScreen} options={{ tabBarStyle: { display: 'none' } }} />
             <Tab.Screen name="KnowledgeCheck" component={KnowledgeCheck} />
