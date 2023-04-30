@@ -4,7 +4,10 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: colors.DarkCyan
+        backgroundColor: colors.DarkCyan,
+    },
+    contentContainer: {
+        paddingBottom: "30%"
     },
     header: {
         flexDirection: "row",
@@ -57,12 +60,10 @@ export const styles = StyleSheet.create({
     },
     Box: {
         width: "90%",
-        margin: "auto"
     },
     boxHeader: {
         flexDirection: "row",
         alignItems: "center",
-        marginTop: "10%",
     },
     boxTitle: {
         color: colors.White,
@@ -83,6 +84,7 @@ export const styles = StyleSheet.create({
         textAlign: "center",
     },
     swipper: {
+        flex: 1,
         marginLeft: 20,
         borderRadius: 20,
     },
@@ -135,5 +137,60 @@ export const styles = StyleSheet.create({
         justifyContent: "center",
         gap: 5,
         padding: 5
+    },
+
+    // MonumentsCard
+    MonumentsCard: {
+        width: 161,
+        height: 213,
+        backgroundColor: colors.SolidGrey,
+        marginHorizontal: 5,
+        borderRadius: 20,
+    },
+    MonumentsCardImg: {
+        alignContent: "center",
+        alignSelf: "center",
+        marginTop: 9,
+        width: 147,
+        height: 88
+    },
+    MonumentsCardText: {
+        flexDirection: "column",
+        width: 139,
+        paddingLeft: 9,
+        paddingRight: 14,
+    },
+    MonumentsCardTitle: {
+        color: colors.DarkCyan,
+        fontSize: 16,
+        fontFamily: fontFamily.MontserratBold,
+        width: "90%",
+        marginTop: "3%"
+    },
+    MonumentsCardDesc: {
+        color: colors.DarkGrey,
+        fontSize: 12,
+        fontFamily: fontFamily.MontserratRegular,
+        marginTop: "3%"
+    },
+    MonumentsCardDate: {
+        color: colors.Black,
+        fontSize: 12,
+        fontFamily: fontFamily.MontserratRegular,
+        marginTop: "3%"
+    },
+    line: {
+        width: "80%",
+        height: 2,
+        backgroundColor: colors.LightGrey,
+        alignSelf: "center",
+        marginTop: "5%"
+    },
+    learn: {
+        color: colors.LightSeaGreen,
+        fontSize: 12,
+        fontFamily: fontFamily.MontserratRegular,
+        marginTop: "2%",
+        alignSelf: "center"
     }
 });
