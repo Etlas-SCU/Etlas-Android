@@ -6,6 +6,25 @@ import { colors } from "../../AppStyles";
 import ToursCard from "../ToursCard/ToursCard";
 import MonumentsCard from "../MonumentsCard/MonumentsCard";
 
+function Section({ navigation, title, children, pageName }){
+    return (
+        <View styles={styles.Box}>
+            <View style={styles.boxHeader}>
+                <Text style={styles.boxTitle}>{title}</Text>
+                <Image source={require('../../assets/HomePage/New.png')} />
+                <TouchableOpacity style={styles.see_all} onPress={() => { navigation.navigate({ name: pageName }) }}>
+                    <Text style={styles.see_all_text}>{translate('Home.see_all')}</Text>
+                </TouchableOpacity>
+            </View>
+            <SafeAreaView style={styles.swipper} >
+                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} nestedScrollEnabled={true}>
+                    {children}
+                </ScrollView>
+            </SafeAreaView>
+        </View>
+    )
+}
+
 export default function HomePage({ navigation }) {
 
     const [searchTerm, setSearchTerm] = useState('');
@@ -52,34 +71,18 @@ export default function HomePage({ navigation }) {
                     onChangeText={(searchTerm) => setSearchTerm(searchTerm)}
                     cursorColor={colors.DarkCyan}
                 />
-                <View styles={styles.Box}>
-                    <View style={styles.boxHeader}>
-                        <Text style={styles.boxTitle}>{translate('Home.tours')}</Text>
-                        <Image source={require('../../assets/HomePage/New.png')} />
-                        <TouchableOpacity style={styles.see_all} onPress={() => { navigation.navigate({ name: 'ToursPage' }) }}>
-                            <Text style={styles.see_all_text}>{translate('Home.see_all')}</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <SafeAreaView style={styles.swipper} >
-                        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} nestedScrollEnabled={true}>
-                            {tours}
-                        </ScrollView>
-                    </SafeAreaView>
-                </View>
-                <View styles={styles.Box}>
-                    <View style={styles.boxHeader}>
-                        <Text style={styles.boxTitle}>{translate('Home.article')}</Text>
-                        <Image source={require('../../assets/HomePage/New.png')} />
-                        <TouchableOpacity style={styles.see_all} onPress={() => { navigation.navigate({ name: 'ArticlesPage' }) }}>
-                            <Text style={styles.see_all_text}>{translate('Home.see_all')}</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <SafeAreaView style={styles.swipper}>
-                        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} nestedScrollEnabled={true}>
-                            {monuments}
-                        </ScrollView>
-                    </SafeAreaView>
-                </View>
+                <Section
+                    navigation={navigation}
+                    title={translate('Home.tours')}
+                    pageName='ToursPage'
+                    children={tours}
+                />
+                <Section
+                    navigation={navigation}
+                    title={translate('Home.article')}
+                    pageName='ArticlesPage'
+                    children={monuments}
+                />
             </ScrollView>
         </SafeAreaView>
     )
