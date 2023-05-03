@@ -9,6 +9,7 @@ import HomePage from "../HomePage/HomePage";
 import ArticlesPage from "../ArticlesPage/ArticlesPage";
 import ToursPage from "../ToursPage/ToursPage";
 import RecognitionFailed from '../RecognitionFailed/RecognitionFailed'
+import MainMenu from "../MainMenu/MainMenu";
 
 export default function MenuBar({ navigation }) {
 
@@ -56,6 +57,7 @@ export default function MenuBar({ navigation }) {
             <Tab.Screen name="Profile" component={Profile} options={{ tabBarButton: () => null, tabBarVisible: false }} />
             <Tab.Screen name="ArticlesPage" component={ArticlesPage} options={{ tabBarButton: () => null, tabBarVisible: false }} />
             <Tab.Screen name="ToursPage" component={ToursPage} options={{ tabBarButton: () => null, tabBarVisible: false }} />
+            <Tab.Screen name="mainMenu" component={MainMenu} options={{ tabBarButton: () => null, tabBarVisible: false }} />
         </Tab.Navigator>
     )
 }

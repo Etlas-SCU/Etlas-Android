@@ -2,7 +2,6 @@ import { styles } from "./Styles";
 import React, { useState, useCallback } from "react";
 import { TouchableOpacity, Text, Image } from "react-native";
 import { FancyAlert } from 'react-native-expo-fancy-alerts';
-import { useNavigation } from '@react-navigation/native';
 import { colors } from "../../AppStyles";
 import { CommonActions } from '@react-navigation/native';
 

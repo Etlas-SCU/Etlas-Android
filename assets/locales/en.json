@@ -110,5 +110,12 @@
     "Tours": {
         "title": "Tours",
         "search": "Search"
+    },
+    "MainMenu": {
+        "message": "Learn More",
+        "aboutus": "About Us",
+        "contactus": "Contact Us",
+        "terms": "Terms",
+        "copyright": "© Etlas all rights reserved 2023"
     }
 }

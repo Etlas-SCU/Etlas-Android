@@ -66,6 +66,14 @@ export const fontFamily = {
     MontserratRegular: 'Montserrat-Regular',
     MontserratSemiBold: 'Montserrat-SemiBold',
     MontserratThin: 'Montserrat-Thin',
+    MontserratLight: 'Montserrat-Light',
+    PoppinsRegular: 'Poppins-Regular',
+    PoppinsBold: 'Poppins-Bold',
+    PoppinsMedium: 'Poppins-Medium',
+    PoppinsSemiBold: 'Poppins-SemiBold',
+    PoppinsThin: 'Poppins-Thin',
+    PoppinsLight: 'Poppins-Light',
+    PoppinsExtraLight: 'Poppins-Black', 
 }
 
 // font weight used in the app

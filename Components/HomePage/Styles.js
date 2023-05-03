@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
         backgroundColor: colors.DarkCyan,
     },
     contentContainer: {
-        paddingBottom: "30%"
+        paddingBottom: "35%"
     },
     header: {
         flexDirection: "row",
