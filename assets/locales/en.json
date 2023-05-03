@@ -1,0 +1,114 @@
+{
+    "LanguageSelection": {
+        "title": "Language Selection",
+        "description": "Please, choose your preferred language that you want to be set on the application, it can also be changed anytime.",
+        "english": "English",
+        "arabic": "العـربــيـــة",
+        "spanish": "Spanish",
+        "french": "French",
+        "continue": "continue"
+    },
+    "OnBoarding": {
+        "title": "Etlas",
+        "description": "Is an augmented reality application that helps people to recognize monuments during their tour in anywhere in  the world by only a scan using your mobile camera.",
+        "worrytext": "No worries, your tour guide is here ;)",
+        "signin": "Sign in",
+        "signup": "Sign up"
+    },
+    "Login": {
+        "title": "Login",
+        "description": "Please, Enter Your Account",
+        "email": "E-mail",
+        "password": "Password",
+        "forgotpassword": "Forgot Password?",
+        "signin": "Sign in",
+        "signup": "Sign up",
+        "haveaccount": "Don't have an account yet?",
+        "or": "OR",
+        "using": "Using"
+    },
+    "Register": {
+        "title": "Register",
+        "description": "Please, fill your information up carefully.",
+        "fullname": "Full Name",
+        "email": "E-mail",
+        "password": "Password",
+        "signin": "Sign in",
+        "signup": "Sign up",
+        "haveaccount": "Already have an account?",
+        "or": "OR",
+        "using": "Using",
+        "next": "Next",
+        "passwordhint": "Password must be at least 8 characters and must contain letters and symbols.",
+        "phonenumber": "Phone Number",
+        "address": "Address"
+    },
+    "AboutUs": {
+        "copyright": "© Etlas all rights reserved 2023",
+        "description": "We are a Computer Science students that graduated from faculty of computers and informatics Suez Canal university who wanted to make an E-Tourism application to make tourism more easy and also much fun to try and experience.",
+        "findus": "You can find us on!"
+    },
+    "KnowledgeCheck": {
+        "title": "Knowledge Check",
+        "Statues": "Statues",
+        "StatuesText": "Test yourself in the most popular statues.",
+        "StatuesScore": "7/60",
+        "Monuments": "Monuments",
+        "MonumentsText": "The world of monuments is in your mind, time to test.",
+        "MonumentsScore": "50/107",
+        "Landmarks": "Landmarks",
+        "LandmarksText": "of course you know alot of landmarks, let's try.",
+        "LandmarksScore": "12/96"
+    },
+    "Loader": {
+        "Wait": "Please wait"
+    },
+    "RecognitionFailed": {
+        "title": "Recognition Failed",
+        "text": "We couldn't recognize the monument",
+        "retry": "Try Again"
+    },
+    "BestScore": {
+        "title": "Best Score",
+        "score": "374",
+        "text": "is your total score",
+        "ask": "want to record a new high score ?",
+        "playnow": "Play Now!"        
+    },
+    "Scan": {
+        "title": "Scan your monument, please.",
+        "retake": "Re-Take",
+        "save": "Save",
+        "saved": "Picture has been saved 🎉",
+        "ErroAcces": "Can't Access the camera of Media Library"
+    },
+    "Profile": {
+        "title": "Profile",
+        "name": "Ahmed Hossam",
+        "email": "E-mail",
+        "phone": "Phone Number",
+        "address": "Address",
+        "user_email": "ahmed.7oskaa@gmail.com",
+        "user_phone": "01208822340",
+        "user_address": "Port Said, Egypt"
+    },
+    "Home": {
+        "title": "Home",
+        "etlas": "Etlas",
+        "desc": "we are here to help you make your tour much easier",
+        "search": "Search",
+        "New": "New",
+        "see_all": "See all",
+        "tours": "Check populars tours",
+        "article": "Check populars articles",
+        "learnmore": "Learn more >"
+    },
+    "Articles": {
+        "title": "Articles",
+        "search": "Search"
+    },
+    "Tours": {
+        "title": "Tours",
+        "search": "Search"
+    }
+}
