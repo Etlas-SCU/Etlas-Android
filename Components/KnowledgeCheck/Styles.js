@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
         backgroundColor: colors.DarkCyan,
     },
     contentContainer: {
-        paddingBottom: "40%"
+        paddingBottom: "80%"
     },
     header: {
         flexDirection: "row",
@@ -26,9 +26,17 @@ export const styles = StyleSheet.create({
         fontFamily: fontFamily.MontserratBold,
         textAlign: "center",
     },
-    body: {
+    cards: {
         width: "90%",
-        height: "25%",
+        alignSelf: "center",
+        marginTop: "10%",
+        marginBottom: "10%",
+        justifyContent: "center",
+        alignItems: "center",
+        flex: 1,
+    },
+    body: {
+        height: "30%",
         backgroundColor: colors.Gold,
         alignSelf: "center",
         marginTop: "10%",
@@ -45,7 +53,7 @@ export const styles = StyleSheet.create({
     },
     bodyTitle: {
         color: colors.White,
-        fontSize: 30,
+        fontSize: 24,
         fontFamily: fontFamily.MontserratBold,
     },
     bodyText: {
@@ -56,7 +64,7 @@ export const styles = StyleSheet.create({
     },
     bodyScore: {
         color: colors.White,
-        fontSize: 48,
+        fontSize: 38,
         fontFamily: fontFamily.MontserratBold,
     },
     bodyImage: {

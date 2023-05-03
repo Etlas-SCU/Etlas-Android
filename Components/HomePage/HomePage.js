@@ -7,13 +7,15 @@ import ToursCard from "../ToursCard/ToursCard";
 import MonumentsCard from "../MonumentsCard/MonumentsCard";
 import MainMenu from "../MainMenu/MainMenu";
 import { UserContext } from "../Context/Context";
+import { dimensions } from "../../AppStyles";
+
 
 function Section({ navigation, title, children, pageName }){
     return (
         <View styles={styles.Box}>
             <View style={styles.boxHeader}>
                 <Text style={styles.boxTitle}>{title}</Text>
-                <Image source={require('../../assets/HomePage/New.png')} />
+                <Image style={styles.new_image} source={require('../../assets/HomePage/New.png')} />
                 <TouchableOpacity style={styles.see_all} onPress={() => { navigation.navigate({ name: pageName }) }}>
                     <Text style={styles.see_all_text}>{translate('Home.see_all')}</Text>
                 </TouchableOpacity>
@@ -57,7 +59,7 @@ export default function HomePage({ navigation }) {
 
     return (
         <SafeAreaView style={styles.container}>
-            <ScrollView contentContainerStyle={styles.contentContainer}>
+            <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
                 <View style={styles.header}>
                     <TouchableOpacity style={styles.aboutus} onPress={ showModal }>
                         <Image source={require('../../assets/KnowledgeCheck/tabler_exclamation-circle.png')} />

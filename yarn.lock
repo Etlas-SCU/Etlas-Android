@@ -6104,6 +6104,13 @@ react-native-codegen@^0.71.5:
     jscodeshift "^0.13.1"
     nullthrows "^1.1.1"
 
+react-native-custom-swiper@^1.0.16:
+  version "1.0.16"
+  resolved "https://registry.yarnpkg.com/react-native-custom-swiper/-/react-native-custom-swiper-1.0.16.tgz#cd93aba4912e9a83777411e8cd7353ea754276a1"
+  integrity sha512-fQm52Ejl23zmc+MI9CsYG19Mh+yzkt+/5wRfoX7OM9E4S9nK8y65FyFAA0tWrNvVl2UWgjIIAkhYVpxZKN9q6Q==
+  dependencies:
+    prop-types "^15.7.2"
+
 react-native-expo-fancy-alerts@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/react-native-expo-fancy-alerts/-/react-native-expo-fancy-alerts-2.1.1.tgz#2cf514d12ee8b0680e3ea4581113d486a1803876"
@@ -6827,6 +6834,11 @@ sprintf-js@~1.0.2:
   resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
   integrity sha512-D9cPgkvLlV3t3IzL0D0YLvGA9Ahk4PcvVwUbN0dSGr1aP0Nrt4AEnTUbuGvquEC0mA64Gqt1fzirlRs5ibXx8g==
 
+ssr-window@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/ssr-window/-/ssr-window-4.0.2.tgz#dc6b3ee37be86ac0e3ddc60030f7b3bc9b8553be"
+  integrity sha512-ISv/Ch+ig7SOtw7G2+qkwfVASzazUnvlDTwypdLoPoySv+6MqlOV10VwPSE6EWkGjhW50lUmghPmpYZXMu/+AQ==
+
 ssri@^8.0.1:
   version "8.0.1"
   resolved "https://registry.yarnpkg.com/ssri/-/ssri-8.0.1.tgz#638e4e439e2ffbd2cd289776d5ca457c4f51a2af"
@@ -7011,6 +7023,13 @@ supports-preserve-symlinks-flag@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz#6eda4bd344a3c94aea376d4cc31bc77311039e09"
   integrity sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==
+
+swiper@^9.2.4:
+  version "9.2.4"
+  resolved "https://registry.yarnpkg.com/swiper/-/swiper-9.2.4.tgz#2fa3cf58cef586366f674a10fa56fe6eec2026fe"
+  integrity sha512-L7y3K/iiMXNYQ94FbfcJn7jex4QPnS4+voXGupTdC+UHW4XrR40QDdm4c9hXJ+Br0Il7PP0vP1W3goM9/Ly6Sg==
+  dependencies:
+    ssr-window "^4.0.2"
 
 tar@^6.0.2, tar@^6.0.5:
   version "6.1.13"

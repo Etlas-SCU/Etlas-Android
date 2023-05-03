@@ -15,7 +15,7 @@ export function SecondPage({ route, navigation }) {
 
     return (
         <SafeAreaView style={styles.container}>
-            <ScrollView style={styles.container}>
+            <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
                 <View style={styles.header_container}>
                     <Text style={styles.header}>{translate('Register.title')}</Text>
                     <TouchableOpacity style={styles.header} onPress={() => navigation.goBack()}>

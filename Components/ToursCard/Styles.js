@@ -7,17 +7,17 @@ export const styles = StyleSheet.create({
         borderRadius: 30,
         flexDirection: 'row',
         width: 346,
-        height: 120,
         marginHorizontal: 5
     },
     ToursCardImg: {
-        width: 116,
-        height: 120,
+        width: "35%",
+        height: "100%",
         borderTopLeftRadius: 30,
         borderBottomLeftRadius: 30,
     },
     ToursCardText: {
-        flexDirection: 'column'
+        flexDirection: 'column',
+        width: "65%"
     },
     ToursCardTitle: {
         color: colors.DarkCyan,
@@ -32,7 +32,7 @@ export const styles = StyleSheet.create({
         fontFamily: fontFamily.MontserratRegular,
         marginLeft: "5%",
         marginTop: "2%",
-        width: "60%"
+        width: "90%"
     },
 
     
@@ -41,13 +41,13 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         backgroundColor: colors.LightGrey,
         borderRadius: 20,
-        width: "60%",
-        marginLeft: "5%",
-        marginTop: "2%",
+        marginTop: "3%",
         alignContent: "center",
         alignItems: "center",
         justifyContent: "center",
-        gap: 5,
-        padding: 5
+        padding: "2%",
+        marginBottom: "3%",
+        width: "80%",
+        alignSelf: "center"
     },
 });

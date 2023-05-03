@@ -1,4 +1,4 @@
-import { colors, fontFamily } from "../../AppStyles";
+import { colors, fontFamily, dimensions } from "../../AppStyles";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
@@ -67,7 +67,7 @@ export const styles = StyleSheet.create({
     },
     boxTitle: {
         color: colors.White,
-        fontSize: 18,
+        fontSize: (dimensions.fullHeight / dimensions.fullWidth) * 8,
         fontFamily: fontFamily.MontserratRegular,
         textAlign: "center",
         margin: "5%"
@@ -79,7 +79,7 @@ export const styles = StyleSheet.create({
     },
     see_all_text: {
         color: colors.Gold,
-        fontSize: 16,
+        fontSize: (dimensions.fullHeight / dimensions.fullWidth) * 6,
         fontFamily: fontFamily.MontserratBold,
         textAlign: "center",
     },

@@ -5,7 +5,6 @@ export const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: colors.DarkCyan,
-        Width: "2rem"
     },
     text_box: {
         flexDirection: "row",
@@ -15,47 +14,43 @@ export const styles = StyleSheet.create({
         color: colors.Gold,
         fontSize: 50,
         textAlign: 'left',
-        marginTop: 102,
-        marginLeft: 24,
+        marginTop: "20%",
+        marginLeft: "5%",
     },
     desc: {
         fontFamily: fontFamily.MontserratMedium,
         color: colors.White,
         fontSize: 20,
         textAlign: 'left',
-        marginTop: 23,
-        marginLeft: 24,
+        marginTop: "10%",
+        marginLeft: "5%",
         flexDirection: "row",
         flexWrap: "wrap",
-        width: 284
+        width: "60%"
     },
     worry: {
         fontFamily: fontFamily.MontserratBold,
         color: colors.White,
         fontSize: 20,
         textAlign: 'left',
-        marginTop: 23,
-        marginLeft: 24,
+        marginTop: "10%",
+        marginLeft: "5%",
         flexDirection: "row",
         flexWrap: "wrap",
-        width: 287
+        width: "70%"
     },
     logoContainer: {
         alignItems: 'flex-end',
     },
     wolf: {
         flex: 1,
-        width: "55%",
-        height: "65%",
         resizeMode: 'contain',
-        position: 'absolute',
-        bottom: "-15%",
-        marginLeft: "-1%",
-        marginTop: 30
+        marginLeft: "-8%",
+        marginBottom: "-8%",
     },
     button_container: {
         flexDirection: "column",
-        justifyContent: "space-between",
+        alignItems: 'center',
         alignItems: "flex-end",
         marginRight: "10%",
         marginTop: "5%",
@@ -82,5 +77,9 @@ export const styles = StyleSheet.create({
         backgroundColor: 'transparent',
         borderWidth: 2,
         borderColor: colors.Gold,
+    },
+    bottom_container: {
+        flexDirection: "row",   
+        justifyContent: 'space-around',
     }
 });

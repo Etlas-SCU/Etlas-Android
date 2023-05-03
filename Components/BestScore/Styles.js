@@ -5,6 +5,9 @@ export const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
+    scrollContainer: {
+        paddingBottom: "50%"
+    },
     image: {
         flex: 1,
     },
@@ -21,7 +24,7 @@ export const styles = StyleSheet.create({
     },
     ScoreBox: {
         width: "90%",
-        height: "40%",
+        height: "50%",
         backgroundColor: colors.DarkCyan,
         alignSelf: "center",
         marginTop: "20%",
@@ -58,7 +61,7 @@ export const styles = StyleSheet.create({
     },
     buttonContainer: {
         width: "90%",
-        marginTop: "20%",
+        marginTop: "10%",
         alignSelf: "center",
         alignItems: "center"
     },

@@ -4,7 +4,6 @@ import { StyleSheet } from 'react-native'
 export const styles = StyleSheet.create({
     MonumentsCard: {
         width: 161,
-        height: 213,
         backgroundColor: colors.SolidGrey,
         marginHorizontal: 5,
         borderRadius: 20,
@@ -53,6 +52,8 @@ export const styles = StyleSheet.create({
         fontSize: 12,
         fontFamily: fontFamily.MontserratRegular,
         marginTop: "2%",
-        alignSelf: "center"
+        marginBottom: "5%",
+        alignSelf: "center",
+        textAlign: "center",
     }
 });

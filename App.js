@@ -59,7 +59,7 @@ export default function App() {
         'Poppins-Black': require('./assets/fonts/Poppins-Black.ttf'),
     });
 
-    // // clear the storage
+    // clear the storage
     // const clearAsyncStorage = async() => {
     //     AsyncStorage.clear();
     // }    

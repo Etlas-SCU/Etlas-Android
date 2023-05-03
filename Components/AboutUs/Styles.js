@@ -1,14 +1,20 @@
 import { StyleSheet } from "react-native";
-import { colors, fontFamily } from "../../AppStyles";
+import { colors, fontFamily, dimensions } from "../../AppStyles";
 
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: colors.DarkCyan,
     },
+    contentContainer: {
+    },
+    logo: {
+        alignSelf: "center",
+        marginTop: "20%",
+    },
     background: {
         flex: 1,
-        resizeMode: 'cover',
+        resizeMode: 'contain',
         width: "100%",
         height: "100%",
     },
@@ -20,18 +26,17 @@ export const styles = StyleSheet.create({
         width: "40%",
     },
     copyright: {
-        marginTop: "90%",
         alignSelf: "center",
         color: colors.White,
         fontSize: 13,
-        fontFamily: fontFamily.MontserratRegular,
+        fontFamily: fontFamily.PoppinsRegular,
     },
     description: {
         marginTop: "10%",
         alignSelf: "center",
         textAlign: "center",
         color: colors.White,
-        fontSize: 15,
+        fontSize: (dimensions.fullHeight / dimensions.fullWidth) * 8,
         fontFamily: fontFamily.MontserratRegular,
         width: "80%"
     },
@@ -63,7 +68,7 @@ export const styles = StyleSheet.create({
         width: "80%",
         alignSelf: "center",
         marginTop: "15%",
-        paddingBottom: "50%",
+        paddingBottom: "30%",
     },
     icon: {
         backgroundColor: colors.DarkCyan,

@@ -7,6 +7,9 @@ export const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: colors.DarkCyan,
     },
+    contentContainer: {
+        paddingBottom: "30%"
+    },
     arrow: {
         width: 32,
         height: 32,

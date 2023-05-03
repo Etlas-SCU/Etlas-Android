@@ -6,14 +6,17 @@ export const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: colors.DarkCyan,
     },
+    scrollContainer: {
+        paddingBottom: "30%"
+    },
     aboutus: {
         position: "absolute",
         alignContent: 'flex-start',
         marginTop: "15%",
-        left: 24,
+        left: "5%",
     },
     body: {
-        marginTop: "40%",
+        marginTop: "30%",
         flex: 1
     },
     sad: {
@@ -34,7 +37,7 @@ export const styles = StyleSheet.create({
         fontFamily: fontFamily.MontserratRegular,
         alignSelf: "center",
         textAlign: "center",
-        width: "50%",
+        width: "60%",
     },
     button: {
         backgroundColor: colors.Gold,
@@ -44,7 +47,7 @@ export const styles = StyleSheet.create({
         borderRadius: 20,
         justifyContent: "center",
         alignItems: "center",
-        marginTop: "20%",
+        marginTop: "15%",
     },
     button_text: {
         color: colors.White,

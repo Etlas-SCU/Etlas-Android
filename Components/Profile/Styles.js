@@ -6,6 +6,9 @@ export const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: colors.White,
     },
+    scrollContainer: {
+        paddingBottom: "50%",
+    },
     close: {
         width: 32,
         height: 32,
@@ -20,8 +23,8 @@ export const styles = StyleSheet.create({
         alignSelf:"center"
     },
     body: {
-        backgroundColor: colors.DarkCyan,
         flex: 1,
+        backgroundColor: colors.DarkCyan,
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
         marginTop: "50%",
