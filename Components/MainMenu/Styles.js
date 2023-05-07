@@ -1,4 +1,4 @@
-import { colors, fontFamily, dimensions, normalize } from "../../AppStyles";
+import { colors, fontFamily, dimensions, normalize, responsiveHeight, responsiveWidth } from "../../AppStyles";
 import { StyleSheet } from "react-native";
 
 
@@ -6,48 +6,48 @@ export const styles = StyleSheet.create({
     container: {
         flex: 1,
         position: "absolute",
-        width: 358,
-        height: 506,
+        width: responsiveWidth(358),
+        height: responsiveHeight(506),
         alignSelf: "center",
         borderRadius: 20,
-        top: (dimensions.fullHeight - (506 + dimensions.fullHeight * 11 / 100)) / 2
+        top: responsiveHeight((dimensions.fullHeight - 458) / 2),
     },
     background: {
         flex: 1,
-        resizeMode: 'contain',
-        borderRadius: 20
+        width: responsiveWidth(358),
+        height: responsiveHeight(506), 
     },
     close: {
         alignSelf: "flex-end",
-        marginTop: "10%",
-        marginRight: "10%",
+        marginTop: responsiveHeight(32),
+        marginRight: responsiveWidth(24),
     },
     title: {
         color: colors.DarkCyan,
         fontSize: normalize(32),
         fontFamily: fontFamily.CapitalisTypOasis,
         textAlign: "center",
-        marginTop: "10%",
+        marginTop: responsiveHeight(23),
     },
     line: {
-        width: "30%",
+        width: responsiveWidth(90),
         height: 2,
         backgroundColor: colors.DarkCyan,
-        marginTop: "5%",
+        marginTop: responsiveHeight(10),
         alignSelf: "center",
     },
     buttons: {
         alignSelf: "center",
         justifyContent: "center",
-        marginTop: "10%",
-        gap: 15
+        marginTop: responsiveHeight(43),
+        gap: responsiveHeight(10)
     },
     button: {
         borderRadius: 20,
         borderColor: colors.DarkCyan,
         borderWidth: 2,
-        width: 217,
-        height: 57,
+        width: responsiveWidth(217),
+        height: responsiveHeight(57),
         alignSelf: "center",
         justifyContent: "center",
     },
@@ -63,6 +63,6 @@ export const styles = StyleSheet.create({
         fontSize: normalize(16),
         fontFamily: fontFamily.PoppinsRegular,
         textAlign: "center",
-        marginTop: "20%",
+        marginTop: responsiveHeight(97),
     },
 });

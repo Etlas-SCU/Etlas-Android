@@ -47,7 +47,7 @@ export default function MainMenu({ pageName }) {
             onRequestClose={() => closeModal(pageName)}
         >
             <View style={styles.container}>
-                <ImageBackground source={require('../../assets/MainMenu/Background.png')} style={styles.background}>
+                <ImageBackground source={require('../../assets/MainMenu/Background.png')} style={styles.background} borderRadius={20}>
                     <TouchableOpacity onPress={() => closeModal(pageName)}>
                         <Image source={require('../../assets/MainMenu/close.png')} style={styles.close}/>
                     </TouchableOpacity>
