@@ -48,7 +48,7 @@ export default function MenuBar({ navigation }) {
             })}
         >
             <Tab.Screen name="Home" component={HomePage} />
-            <Tab.Screen name="AR" component={BestScore} />
+            <Tab.Screen name="AR" component={RecognitionFailed} />
             <Tab.Screen name="Scan" component={CameraScreen} options={{ tabBarStyle: { display: 'none' } }} />
             <Tab.Screen name="KnowledgeCheck" component={KnowledgeCheck} />
             <Tab.Screen name="Settings" component={ToursPage} />

@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { colors, fontFamily, normalize } from "../../AppStyles";
+import { colors, fontFamily, normalize, responsiveHeight, responsiveWidth } from "../../AppStyles";
 
 export const styles = StyleSheet.create({
     container: {
@@ -7,21 +7,20 @@ export const styles = StyleSheet.create({
         backgroundColor: colors.DarkCyan,
     },
     scrollContainer: {
-        paddingBottom: "30%"
+        paddingBottom: responsiveHeight(200)
     },
     aboutus: {
         position: "absolute",
         alignContent: 'flex-start',
-        marginTop: "15%",
-        left: "5%",
+        marginTop: responsiveHeight(60),
+        left: responsiveWidth(24),
     },
     body: {
-        marginTop: "30%",
-        flex: 1
+        flex: 1,
+        marginTop: responsiveHeight(127)
     },
     sad: {
         alignSelf: "center",
-        marginBottom: "10%",
     },
     title: {
         color: colors.White,
@@ -29,7 +28,7 @@ export const styles = StyleSheet.create({
         fontFamily: fontFamily.MontserratBold,
         alignSelf: "center",
         textAlign: "center",
-        marginBottom: "5%",
+        marginTop: responsiveHeight(45),
     },
     text: {
         color: colors.White,
@@ -37,17 +36,18 @@ export const styles = StyleSheet.create({
         fontFamily: fontFamily.MontserratRegular,
         alignSelf: "center",
         textAlign: "center",
-        width: "60%",
+        marginTop: responsiveHeight(17),
+        width: responsiveWidth(188),
     },
     button: {
         backgroundColor: colors.Gold,
-        width: 285,
-        height: 57,
+        width: responsiveWidth(285),
+        height: responsiveHeight(57),
         alignSelf: "center",
         borderRadius: 20,
         justifyContent: "center",
         alignItems: "center",
-        marginTop: "15%",
+        marginTop: responsiveHeight(99),
     },
     button_text: {
         color: colors.White,
