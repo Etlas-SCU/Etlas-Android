@@ -1,65 +1,69 @@
-import { colors, fontFamily } from "../../AppStyles";
+import { colors, fontFamily, normalize, responsiveHeight, responsiveWidth } from "../../AppStyles";
 import { StyleSheet } from "react-native";
-
+    
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: colors.DarkCyan,
     },
     contentContainer: {
-        paddingBottom: "30%"
+        paddingBottom: responsiveHeight(200)
     },
     header: {
         flexDirection: "row",
-        marginTop: "15%",
+        marginTop: responsiveHeight(68),
         justifyContent: "center",
         alignItems: "center",
     },
     aboutus: {
         position: "absolute",
         alignContent: 'flex-start',
-        left: "5%",
+        left: responsiveWidth(24),
     },
     title: {
         color: colors.White,
-        fontSize: 18,
+        fontSize: normalize(18),
         fontFamily: fontFamily.MontserratBold,
         textAlign: "center",
     },
     etlas: {
         color: colors.Gold,
-        fontSize: 48,
+        fontSize: normalize(48),
         fontFamily: fontFamily.CapitalisTypOasis,
         textAlign: "center",
-        marginTop: "15%",
+        marginTop: responsiveHeight(67),
     },
     desc: {
         color: colors.White,
-        fontSize: 18,
+        fontSize: normalize(18),
         fontFamily: fontFamily.MontserratSemiBold,
         textAlign: "center",
-        marginTop: "10%",
-        marginHorizontal: "10%",
+        marginTop: responsiveHeight(33),
+        width: responsiveWidth(330),
+        alignSelf: "center"
     },
     logo: {
         alignSelf: "center",
-        marginTop: "20%",
+        marginTop: responsiveHeight(100),
         position: "absolute",
+        height: responsiveHeight(300),
+        width: responsiveWidth(300),
+        resizeMode: "cover"
     },
     SearchForm: {
         backgroundColor: colors.SolidGrey,
         borderRadius: 20,
-        width: "90%",
-        height: 64,
+        width: responsiveWidth(382),
+        height: responsiveHeight(64),
         alignSelf: "center",
-        marginTop: "10%",
-        fontSize: 18,
+        marginTop: responsiveHeight(33),
+        fontSize: normalize(18),
         fontFamily: fontFamily.MontserratRegular,
-        paddingHorizontal: "5%",
+        paddingHorizontal: responsiveWidth(22),
         textAlign: "left"
     },
     Box: {
-        width: "90%",
+        width: responsiveWidth(406),
     },
     boxHeader: {
         flexDirection: "row",
@@ -67,25 +71,25 @@ export const styles = StyleSheet.create({
     },
     boxTitle: {
         color: colors.White,
-        fontSize: 18,
+        fontSize: normalize(18),
         fontFamily: fontFamily.MontserratRegular,
         textAlign: "center",
-        margin: "5%"
+        margin: responsiveWidth(24)
     },
     see_all: {
         alignContent: 'flex-end',
         position: "absolute",
-        right: "5%",
+        right: responsiveWidth(24),
     },
     see_all_text: {
         color: colors.Gold,
-        fontSize: 16,
+        fontSize: normalize(14),
         fontFamily: fontFamily.MontserratBold,
         textAlign: "center",
     },
     swipper: {
         flex: 1,
-        marginLeft: 20,
+        marginLeft: responsiveWidth(20),
         borderRadius: 20,
     },
 });

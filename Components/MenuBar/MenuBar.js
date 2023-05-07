@@ -1,6 +1,6 @@
 import { styles } from "./Styles"
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Image, Platform, View } from 'react-native';
+import { Image, View } from 'react-native';
 import KnowledgeCheck from "../KnowledgeCheck/KnowledgeCheck";
 import AboutUs from "../AboutUs/AboutUs";
 import CameraScreen from "../CameraScreen/CameraScreen";
@@ -9,6 +9,9 @@ import HomePage from "../HomePage/HomePage";
 import ArticlesPage from "../ArticlesPage/ArticlesPage";
 import ToursPage from "../ToursPage/ToursPage";
 import RecognitionFailed from '../RecognitionFailed/RecognitionFailed'
+import MainMenu from "../MainMenu/MainMenu";
+import BestScore from "../BestScore/BestScore";
+
 
 export default function MenuBar({ navigation }) {
 
@@ -30,13 +33,12 @@ export default function MenuBar({ navigation }) {
                 tabBarShowLabel: false,
                 tabBarStyle: styles.menuBar,
                 tabBarIcon: ({ focused }) => {
-                    let isRightBorder = (route.name == 'Home' || route.name == 'KnowledgeCheck');
-                    let isScan = (route.name == 'Scan');
-                    let isIos = (Platform.OS == 'ios');
+                    const isRightBorder = (route.name == 'Home' || route.name == 'KnowledgeCheck');
+                    const isScan = (route.name == 'Scan');
                     return (
                         <View style={styles.barContainer}>
-                            <View>
-                                <Image source={Icons[route.name]} style={isScan ? [styles.ScanIcon, { marginTop: isIos ? "-90%" : "-105%" }] : styles.menuBarIcons} />
+                            <View style={isScan ? styles.Scan : null}>
+                                <Image source={Icons[route.name]} style={isScan ? styles.ScanIcon : styles.menuBarIcons} />
                                 {focused ? <View style={styles.line} /> : null}
                             </View>
                             {isRightBorder ? <View style={styles.rightBorder} /> : null}
@@ -47,7 +49,7 @@ export default function MenuBar({ navigation }) {
             })}
         >
             <Tab.Screen name="Home" component={HomePage} />
-            <Tab.Screen name="AR" component={ArticlesPage} />
+            <Tab.Screen name="AR" component={RecognitionFailed} />
             <Tab.Screen name="Scan" component={CameraScreen} options={{ tabBarStyle: { display: 'none' } }} />
             <Tab.Screen name="KnowledgeCheck" component={KnowledgeCheck} />
             <Tab.Screen name="Settings" component={ToursPage} />
@@ -56,6 +58,8 @@ export default function MenuBar({ navigation }) {
             <Tab.Screen name="Profile" component={Profile} options={{ tabBarButton: () => null, tabBarVisible: false }} />
             <Tab.Screen name="ArticlesPage" component={ArticlesPage} options={{ tabBarButton: () => null, tabBarVisible: false }} />
             <Tab.Screen name="ToursPage" component={ToursPage} options={{ tabBarButton: () => null, tabBarVisible: false }} />
+            <Tab.Screen name="mainMenu" component={MainMenu} options={{ tabBarButton: () => null, tabBarVisible: false }} />
+            <Tab.Screen name="BestScore" component={BestScore} options={{ tabBarButton: () => null, tabBarVisible: false }} />
         </Tab.Navigator>
     )
 }

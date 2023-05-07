@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { colors, fontFamily } from "../../AppStyles";
+import { colors, dimensions, fontFamily, normalize, responsiveHeight, responsiveWidth } from "../../AppStyles";
 
 export const styles = StyleSheet.create({
     container: {
@@ -7,68 +7,73 @@ export const styles = StyleSheet.create({
         backgroundColor: colors.DarkCyan,
     },
     contentContainer: {
-        paddingBottom: "40%"
+        paddingBottom: responsiveHeight(150)
     },
     header: {
         flexDirection: "row",
-        marginTop: "15%",
+        marginTop: responsiveHeight(61),
         justifyContent: "center",
         alignItems: "center",
     },
     aboutus: {
         position: "absolute",
         alignContent: 'flex-start',
-        left: "5%",
+        left: responsiveWidth(24),
     },
     title: {
         color: colors.White,
-        fontSize: 18,
+        fontSize: normalize(18),
         fontFamily: fontFamily.MontserratBold,
         textAlign: "center",
     },
+    cards: {
+        flexDirection: 'column',
+        width: responsiveWidth(382),
+        marginHorizontal: responsiveWidth(24),
+        gap: responsiveWidth(44),
+        marginTop: responsiveHeight(64),
+    },
     body: {
-        width: "90%",
-        height: "25%",
+        height: responsiveHeight(188.39),
         backgroundColor: colors.Gold,
         alignSelf: "center",
-        marginTop: "10%",
         borderRadius: 20,
         flexDirection: "row",
-        paddingLeft: 16,
+        paddingLeft: responsiveWidth(16),
     },
     bodyContent: {
-        width: "60%",
-        height: "100%",
+        width: responsiveWidth(235.62),
         justifyContent: 'space-between',
-        paddingTop: "2%",
-        paddingBottom: "2%",
+        paddingTop: responsiveHeight(16),
+        paddingBottom: responsiveHeight(17),
     },
     bodyTitle: {
         color: colors.White,
-        fontSize: 30,
+        fontSize: normalize(32),
         fontFamily: fontFamily.MontserratBold,
     },
     bodyText: {
         color: colors.White,
-        fontSize: 13,
-        fontFamily: fontFamily.MontserratRegular,
-        width: "90%"
+        fontSize: normalize(14),
+        fontFamily: fontFamily.MontserratLight,
+        width: responsiveWidth(220)
     },
     bodyScore: {
         color: colors.White,
-        fontSize: 48,
+        fontSize: normalize(48),
         fontFamily: fontFamily.MontserratBold,
     },
     bodyImage: {
-        width: "40%",
-        height: "100%",
+        width: responsiveWidth(146.38),
+        height: responsiveHeight(188.39),
         borderTopRightRadius: 20,
         borderBottomRightRadius: 20,
     },
     image: {
-        width: "100%",
-        height: "100%",
         borderTopRightRadius: 20,
         borderBottomRightRadius: 20,
+        width: responsiveHeight(146.38),
+        height: responsiveHeight(188.39),
+        alignSelf: "flex-end"
     }
 });

@@ -1,23 +1,23 @@
-import { styles } from "./Styles";
+import { Page, Swipper } from "./Styles";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import { translate } from "../../Localization";
 
 
-export default function MonumentsCard({ monument }) {
+export default function MonumentsCard({ monument, isPage }) {
 
     const { Title, Description, Date, Img } = monument;
 
     return (
-        <View style={styles.MonumentsCard}>
-            <Image style={styles.MonumentsCardImg} source={Img} />
-            <View style={styles.MonumentsCardText}>
-                <Text style={styles.MonumentsCardTitle} numberOfLines={1}>{Title}</Text>
-                <Text style={styles.MonumentsCardDesc} numberOfLines={2} >{Description}</Text>
-                <Text style={styles.MonumentsCardDate}>{Date}</Text>
+        <View style={ isPage ? Page.MonumentsCard : Swipper.MonumentsCard }>
+            <Image style={ isPage ? Page.MonumentsCardImg : Swipper.MonumentsCardImg } source={Img} borderRadius={20}/>
+            <View style={ isPage ? Page.MonumentsCardText : Swipper.MonumentsCardText }>
+                <Text style={ isPage ? Page.MonumentsCardTitle : Swipper.MonumentsCardTitle } numberOfLines={1}>{Title}</Text>
+                <Text style={ isPage ? Page.MonumentsCardDesc : Swipper.MonumentsCardDesc } numberOfLines={2} >{Description}</Text>
+                <Text style={ isPage ? Page.MonumentsCardDate : Swipper.MonumentsCardDate }>{Date}</Text>
             </View>
-            <View style={styles.line} />
+            <View style={ isPage ? Page.line : Swipper.line } />
             <TouchableOpacity>
-                <Text style={styles.learn}>{translate('Home.learnmore')}</Text>
+                <Text style={ isPage ? Page.learn : Swipper.learn }>{translate('Home.learnmore')}</Text>
             </TouchableOpacity>
         </View>
     )

@@ -2,7 +2,6 @@ import { styles } from "./Styles";
 import React, { useState, useCallback } from "react";
 import { TouchableOpacity, Text, Image } from "react-native";
 import { FancyAlert } from 'react-native-expo-fancy-alerts';
-import { useNavigation } from '@react-navigation/native';
 import { colors } from "../../AppStyles";
 import { CommonActions } from '@react-navigation/native';
 
@@ -50,6 +49,7 @@ export default function PopupMessage({ state, message, pageName, navigation }) {
             visible={visible}
             icon={<Image source={Icons[state]} style={styles.icon} />}
             style={styles.container}
+            onRequestClose={() => toggleAlert()}
         >
             <Text style={styles.message}>{message}</Text>
             <TouchableOpacity onPress={() => toggleAlert()} style={[styles.button, { backgroundColor: Button_colors[state] }]}>

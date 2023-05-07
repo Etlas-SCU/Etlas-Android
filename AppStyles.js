@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions } from "react-native";
+import { StyleSheet, Dimensions, PixelRatio, Platform } from "react-native";
 
 // styles in app.js
 export const styles = StyleSheet.create({
@@ -12,6 +12,35 @@ export const dimensions = {
     fullHeight: Dimensions.get('window').height,
     fullWidth: Dimensions.get('window').width
 }
+
+// normalize font size
+export const normalize = (size) => {
+    const fontScale = PixelRatio.getFontScale();
+    const getFontSize = size => size / fontScale;
+    const fontSize = getFontSize(size);
+    return Math.round(PixelRatio.roundToNearestPixel(fontSize));
+};
+
+
+// get the dimensions of the screen
+const heightMobileUI = 932;
+const widthMobileUI = 430;
+
+// get the responsive width
+export const responsiveWidth = width => {
+    return (dimensions.fullWidth * width) / widthMobileUI;
+};
+  
+// get the responsive height
+export const responsiveHeight = height => {
+    return (dimensions.fullHeight * height) / heightMobileUI;
+};
+  
+
+// check if it's iphone
+export const isIOS = () => {
+    return Platform.OS === 'ios';
+};
 
 // colors used in the app
 export const colors = {
@@ -66,6 +95,14 @@ export const fontFamily = {
     MontserratRegular: 'Montserrat-Regular',
     MontserratSemiBold: 'Montserrat-SemiBold',
     MontserratThin: 'Montserrat-Thin',
+    MontserratLight: 'Montserrat-Light',
+    PoppinsRegular: 'Poppins-Regular',
+    PoppinsBold: 'Poppins-Bold',
+    PoppinsMedium: 'Poppins-Medium',
+    PoppinsSemiBold: 'Poppins-SemiBold',
+    PoppinsThin: 'Poppins-Thin',
+    PoppinsLight: 'Poppins-Light',
+    PoppinsExtraLight: 'Poppins-Black', 
 }
 
 // font weight used in the app

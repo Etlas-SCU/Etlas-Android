@@ -1,26 +1,31 @@
 import { styles } from './Styles'
 import { translate } from "../../Localization";
-import { View, Text, ImageBackground, TouchableOpacity } from 'react-native';
+import { View, Text, ImageBackground, TouchableOpacity, ScrollView, Image } from 'react-native';
 
-export default function KnowledgeCheck({ navigation }) {
+export default function BestScore({ navigation }) {
     return (
         <View style={styles.container}>
             <ImageBackground source={require('../../assets/HighScore/HighScore.png')} resizeMode='cover' style={styles.image}>
-                <View style={styles.header}>
-                    <Text style={styles.title}>{translate('BestScore.title')}</Text>
-                </View>
-                <View style={styles.ScoreBox}>
-                    <Text style={styles.score}>{translate('BestScore.score')}</Text>
-                    <Text style={styles.scoreTxt}>{translate('BestScore.text')}</Text>
-                    <View style={styles.line} />
-                    <Text style={styles.bestScore}>{translate('BestScore.title')}</Text>
-                </View>
-                <View style={styles.buttonContainer}>
-                    <Text style={styles.ask}>{translate('BestScore.ask')}</Text>
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.buttonText}>{translate('BestScore.playnow')}</Text>
-                    </TouchableOpacity>
-                </View>
+                <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
+                    <View style={styles.header}>
+                        <Text style={styles.title}>{translate('BestScore.title')}</Text>
+                        <TouchableOpacity onPress={() => navigation.navigate({ name: 'Home' })} style={styles.close}>
+                            <Image source={require('../../assets/Profile/Arr.png')} />
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.ScoreBox}>
+                        <Text style={styles.score}>{translate('BestScore.score')}</Text>
+                        <Text style={styles.scoreTxt}>{translate('BestScore.text')}</Text>
+                        <View style={styles.line} />
+                        <Text style={styles.bestScore}>{translate('BestScore.title')}</Text>
+                    </View>
+                    <View style={styles.buttonContainer}>
+                        <Text style={styles.ask}>{translate('BestScore.ask')}</Text>
+                        <TouchableOpacity style={styles.button} onPress={() => { navigation.navigate({ name: 'KnowledgeCheck' }) }}>
+                            <Text style={styles.buttonText}>{translate('BestScore.playnow')}</Text>
+                        </TouchableOpacity>
+                    </View>
+                </ScrollView>
             </ImageBackground>
         </View>
     );

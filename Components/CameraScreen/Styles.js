@@ -1,4 +1,4 @@
-import { colors, fontFamily } from '../../AppStyles'
+import { colors, fontFamily, normalize, responsiveHeight, responsiveWidth, dimensions } from '../../AppStyles'
 import { StyleSheet } from 'react-native'
 
 export const styles = StyleSheet.create({
@@ -10,8 +10,8 @@ export const styles = StyleSheet.create({
     },
     camera: {
         flex: 1,
-        width: '100%',
-        height: '100%',
+        width: dimensions.fullWidth,
+        height: dimensions.fullHeight,
         alignItems: 'center',
         borderRadius: 20,
     },
@@ -19,43 +19,42 @@ export const styles = StyleSheet.create({
         backgroundColor: colors.Cyan,
         borderRadius: 100,
         borderColor: colors.DarkCyan,
-        borderWidth: 5,
-        height: 85.4,
-        width: 85.4,
+        borderWidth: responsiveWidth(5),
+        height: responsiveHeight(85.4),
+        width: responsiveWidth(85.4),
     },
     topBar: {
-        // position: 'absolute',
-        height: "12%",
+        height: responsiveHeight(120),
         flexDirection: 'row',
         justifyContent: 'space-between',
-        width: "100%",
+        width: dimensions.fullWidth,
         top: 0,
         alignItems: 'stretch',
-        paddingTop: "15%",
-        paddingHorizontal: "5%",
+        paddingTop: responsiveHeight(65),
+        paddingHorizontal: responsiveWidth(24),
         backgroundColor: colors.Black,
     },
     title: {
         fontFamily: fontFamily.MontserratBold,
         color: colors.White,
-        fontSize: 13,
+        fontSize: normalize(13),
         textAlign: 'center',
     },
     imageCap: {
         flex: 1,
-        width: '100%',
-        height: '100%',
+        width: dimensions.fullWidth,
+        height: dimensions.fullHeight,
         alignItems: 'center',
         borderRadius: 20,
         resizeMode: 'contain',
         backgroundColor: colors.Black
     },
     bottomBar: {
-        height: "15%",
+        height: responsiveHeight(150),
         flexDirection: 'row',
         justifyContent: 'space-between',
-        width: "100%",
-        paddingHorizontal: "8%",
+        width: dimensions.fullWidth,
+        paddingHorizontal: responsiveWidth(24),
         backgroundColor: colors.Black,
         verticalAlign: "middle",
         alignItems: 'center',
@@ -68,7 +67,7 @@ export const styles = StyleSheet.create({
         color: colors.White,
         textAlign: 'center',
         fontFamily: fontFamily.MontserratBold,
-        fontSize: 13,
+        fontSize: normalize(13),
     },
     flash: {
         textAlign: 'center',

@@ -1,50 +1,82 @@
 import { StyleSheet } from "react-native";
-import { colors, fontFamily } from "../../AppStyles";
+import { colors, fontFamily, normalize,responsiveHeight, responsiveWidth, dimensions } from "../../AppStyles";
 
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: colors.DarkCyan,
+    },
+    contentContainer: {
+    },
+    logo: {
+        alignSelf: "center",
+        marginTop: responsiveHeight(136),
     },
     background: {
         flex: 1,
-        resizeMode: "cover",
-        width: "100%",
-        height: "100%",
+        resizeMode: 'contain',
+        width: dimensions.fullWidth,
+        height: dimensions.fullHeight,
+    },
+    line: {
+        borderBottomColor: colors.White,
+        borderBottomWidth: 2,
+        alignSelf: "center",
+        marginTop: responsiveHeight(45),
+        width: responsiveWidth(175),
     },
     copyright: {
-        marginTop: "98%",
         alignSelf: "center",
         color: colors.White,
-        fontSize: 13,
-        fontFamily: fontFamily.MontserratRegular,
+        fontSize: normalize(13),
+        fontFamily: fontFamily.PoppinsRegular,
     },
     description: {
-        marginTop: "15%",
+        marginTop: responsiveHeight(34),
         alignSelf: "center",
         textAlign: "center",
         color: colors.White,
-        fontSize: 15,
+        fontSize: normalize(18),
         fontFamily: fontFamily.MontserratRegular,
-        width: 315
+        width: responsiveWidth(350)
     },
     usingAppicons: {
         flexDirection: "row",
         justifyContent: "space-evenly",
-        width: 250,
+        width: dimensions.fullWidth,
         alignSelf: "center",
-        marginTop: "8%"
+        marginTop: responsiveHeight(-30),
+        width: responsiveWidth(338)        
     },
     findus: {
-        marginTop: "5%",
+        marginTop: responsiveHeight(13),
         alignSelf: "center",
         color: colors.White,
-        fontSize: 15,
+        fontSize: normalize(15),
         fontFamily: fontFamily.MontserratRegular,
     },
     close: {
         position: "absolute",
-        marginTop: 53,
         alignSelf: 'flex-end',
-        right: 24,
+        right: responsiveWidth(24),
+        top: responsiveHeight(60),
+    },
+    contactus: {
+        borderColor: colors.White,
+        borderWidth: responsiveWidth(2),
+        borderRadius: 20,
+        width: responsiveWidth(342),
+        alignSelf: "center",
+        marginTop: responsiveHeight(70),
+        paddingBottom: responsiveHeight(200),
+    },
+    icon: {
+        backgroundColor: colors.DarkCyan,
+    },
+    IconButton: {
+        backgroundColor: colors.DarkCyan,
+        paddingHorizontal: responsiveWidth(7),
+        alignContent: "center",
+        justifyContent: "center",
     }
 });

@@ -1,54 +1,57 @@
 import { StyleSheet } from "react-native";
-import { colors, fontFamily } from "../../AppStyles";
+import { colors, fontFamily, normalize, responsiveHeight, responsiveWidth } from "../../AppStyles";
 
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: colors.DarkCyan,
     },
+    scrollContainer: {
+        paddingBottom: responsiveHeight(200)
+    },
     aboutus: {
         position: "absolute",
         alignContent: 'flex-start',
-        marginTop: "15%",
-        left: 24,
+        marginTop: responsiveHeight(60),
+        left: responsiveWidth(24),
     },
     body: {
-        marginTop: "40%",
-        flex: 1
+        flex: 1,
+        marginTop: responsiveHeight(127)
     },
     sad: {
         alignSelf: "center",
-        marginBottom: "10%",
     },
     title: {
         color: colors.White,
-        fontSize: 24,
+        fontSize: normalize(24),
         fontFamily: fontFamily.MontserratBold,
         alignSelf: "center",
         textAlign: "center",
-        marginBottom: "5%",
+        marginTop: responsiveHeight(45),
     },
     text: {
         color: colors.White,
-        fontSize: 15,
+        fontSize: normalize(15),
         fontFamily: fontFamily.MontserratRegular,
         alignSelf: "center",
         textAlign: "center",
-        width: "50%",
+        marginTop: responsiveHeight(17),
+        width: responsiveWidth(188),
     },
     button: {
         backgroundColor: colors.Gold,
-        width: 285,
-        height: 57,
+        width: responsiveWidth(285),
+        height: responsiveHeight(57),
         alignSelf: "center",
         borderRadius: 20,
         justifyContent: "center",
         alignItems: "center",
-        marginTop: "20%",
+        marginTop: responsiveHeight(99),
     },
     button_text: {
         color: colors.White,
-        fontSize: 18,
+        fontSize: normalize(18),
         fontFamily: fontFamily.MontserratBold,
     },
 });

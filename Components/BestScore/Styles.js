@@ -1,89 +1,102 @@
 import { StyleSheet } from "react-native";
-import { fontFamily, colors } from "../../AppStyles";
+import { fontFamily, colors, normalize, responsiveHeight, responsiveWidth, isIOS } from "../../AppStyles";
 
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
+    scrollContainer: {
+        paddingBottom: responsiveHeight(200),
+    },
+    close:{
+        width: responsiveWidth(32),
+        height: responsiveHeight(32),
+        right: responsiveWidth(24),
+        position: 'absolute',
+    },
     image: {
         flex: 1,
     },
     header: {
+        flex: 1,
         textAlign: 'center',
         alignItems: "center",
-        marginTop: "15%",
+        marginTop: responsiveHeight(60),
+        flexDirection: 'row',
+        justifyContent: 'center',
+        paddingHorizontal: responsiveWidth(24),
     },
     title: {
         fontFamily: fontFamily.MontserratBold,
         color: colors.DarkCyan,
-        fontSize: 18,
+        fontSize: normalize(18),
         textAlign: 'center',
+        alignSelf: 'center',
     },
     ScoreBox: {
-        width: "90%",
-        height: "40%",
+        width: responsiveWidth(382),
+        height: responsiveHeight(380 + (isIOS() ? 0 : 40)),
         backgroundColor: colors.DarkCyan,
         alignSelf: "center",
-        marginTop: "20%",
+        marginTop: responsiveHeight(77),
         borderRadius: 20,
-
+        paddingBottom: responsiveHeight(44)
     },
     score: {
         color: colors.White,
-        fontSize: 100,
+        fontSize: normalize(100),
         fontFamily: fontFamily.MontserratBold,
         alignSelf: "center",
-        marginTop: "5%",
+        marginTop: responsiveHeight(48),
     },
     scoreTxt: {
         color: colors.White,
-        fontSize: 25,
+        fontSize: normalize(25),
         fontFamily: fontFamily.MontserratMedium,
         alignSelf: "center",
-        marginTop: "5%",
+        marginTop: responsiveHeight(24),
     },
     line: {
         borderBottomColor: colors.White,
         borderBottomWidth: 1,
-        width: "35%",
+        width: responsiveWidth(116),
         alignSelf: "center",
-        marginTop: "8%",
+        marginTop: responsiveHeight(32),
     },
     bestScore: {
         color: colors.Gold,
-        fontSize: 30,
+        fontSize: normalize(30),
         fontFamily: fontFamily.MontserratSemiBold,
         alignSelf: "center",
-        marginTop: "8%",
+        marginTop: responsiveHeight(30),
     },
     buttonContainer: {
-        width: "90%",
-        marginTop: "20%",
+        width: responsiveWidth(382),
+        marginTop: responsiveHeight(123),
         alignSelf: "center",
         alignItems: "center"
     },
     ask: {
         color: colors.DarkCyan,
-        fontSize: 20,
+        fontSize: normalize(20),
         fontFamily: fontFamily.MontserratBold,
-        marginTop: "5%",
-        width: "70%",
+        width: responsiveWidth(280),
         textAlign: "center",
         alignSelf: "center",
     },
     button: {
         backgroundColor: colors.DarkCyan,
-        width: 221,
-        height: 57,
+        width: responsiveWidth(221),
+        height: responsiveHeight(57),
         alignSelf: "center",
         borderRadius: 20,
         justifyContent: "center",
         alignItems: "center",
-        marginTop: "10%",
+        marginTop: responsiveHeight(25),
     },
     buttonText: {
         color: colors.White,
-        fontSize: 18,
+        fontSize: normalize(20),
         fontFamily: fontFamily.MontserratBold,
     },
 });
