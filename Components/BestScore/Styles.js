@@ -8,19 +8,30 @@ export const styles = StyleSheet.create({
     scrollContainer: {
         paddingBottom: responsiveHeight(200),
     },
+    close:{
+        width: responsiveWidth(32),
+        height: responsiveHeight(32),
+        right: responsiveWidth(24),
+        position: 'absolute',
+    },
     image: {
         flex: 1,
     },
     header: {
+        flex: 1,
         textAlign: 'center',
         alignItems: "center",
         marginTop: responsiveHeight(60),
+        flexDirection: 'row',
+        justifyContent: 'center',
+        paddingHorizontal: responsiveWidth(24),
     },
     title: {
         fontFamily: fontFamily.MontserratBold,
         color: colors.DarkCyan,
         fontSize: normalize(18),
         textAlign: 'center',
+        alignSelf: 'center',
     },
     ScoreBox: {
         width: responsiveWidth(382),

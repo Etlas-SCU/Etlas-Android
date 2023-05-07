@@ -1,6 +1,6 @@
 import { styles } from './Styles'
 import { translate } from "../../Localization";
-import { View, Text, ImageBackground, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, ImageBackground, TouchableOpacity, ScrollView, Image } from 'react-native';
 
 export default function BestScore({ navigation }) {
     return (
@@ -9,6 +9,9 @@ export default function BestScore({ navigation }) {
                 <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
                     <View style={styles.header}>
                         <Text style={styles.title}>{translate('BestScore.title')}</Text>
+                        <TouchableOpacity onPress={() => navigation.navigate({ name: 'Home' })} style={styles.close}>
+                            <Image source={require('../../assets/Profile/Arr.png')} />
+                        </TouchableOpacity>
                     </View>
                     <View style={styles.ScoreBox}>
                         <Text style={styles.score}>{translate('BestScore.score')}</Text>
@@ -18,7 +21,7 @@ export default function BestScore({ navigation }) {
                     </View>
                     <View style={styles.buttonContainer}>
                         <Text style={styles.ask}>{translate('BestScore.ask')}</Text>
-                        <TouchableOpacity style={styles.button}>
+                        <TouchableOpacity style={styles.button} onPress={() => { navigation.navigate({ name: 'KnowledgeCheck' }) }}>
                             <Text style={styles.buttonText}>{translate('BestScore.playnow')}</Text>
                         </TouchableOpacity>
                     </View>
