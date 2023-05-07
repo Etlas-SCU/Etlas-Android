@@ -1,14 +1,17 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { styles } from "./Styles";
-import { View, ScrollView, SafeAreaView, Text, TouchableOpacity, Image, TextInput } from "react-native";
+import { View, ScrollView, Text, TouchableOpacity, Image, TextInput } from "react-native";
 import { translate } from "../../Localization";
 import { colors } from "../../AppStyles";
 import MonumentsCard from "../MonumentsCard/MonumentsCard";
+import MainMenu from "../MainMenu/MainMenu";
+import { UserContext } from "../Context/Context";
 
 
 export default function ArticlesPage({ navigation }) {
 
     const [searchTerm, setSearchTerm] = useState('');
+    const { modalVisible, showModal } = useContext(UserContext);
 
     const Monument = {
         Title: "Anibus",
@@ -27,7 +30,7 @@ export default function ArticlesPage({ navigation }) {
         <View style={styles.container}>
             <ScrollView contentContainerStyle={styles.contentContainer}>
                 <View style={styles.header}>
-                    <TouchableOpacity style={styles.aboutus} onPress={() => { navigation.navigate({ name: 'AboutUs' }) }}>
+                    <TouchableOpacity style={styles.aboutus} onPress={ showModal }>
                         <Image source={require('../../assets/KnowledgeCheck/tabler_exclamation-circle.png')} />
                     </TouchableOpacity>
                     <Text style={styles.title}>{translate('Articles.title')}</Text>
@@ -35,6 +38,7 @@ export default function ArticlesPage({ navigation }) {
                         <Image source={require('../../assets/Scan/Arr.png')} />
                     </TouchableOpacity>
                 </View>
+                {modalVisible ? <MainMenu /> : null}
                 <View style={styles.inputContainer}>
                     <TextInput
                         style={styles.SearchForm}

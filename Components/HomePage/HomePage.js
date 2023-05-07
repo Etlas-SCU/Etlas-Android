@@ -65,7 +65,7 @@ export default function HomePage({ navigation }) {
                     </TouchableOpacity>
                     <Text style={styles.title}>{translate('Home.title')}</Text>
                 </View>
-                {modalVisible ? <MainMenu pageName={'Home'} /> : null}
+                {modalVisible ? <MainMenu /> : null}
                 <Image style={styles.logo} source={require('../../assets/HomePage/e.png')} />
                 <Text style={styles.etlas}>{translate('Home.etlas')}</Text>
                 <Text style={styles.desc}>{translate('Home.desc')}</Text>

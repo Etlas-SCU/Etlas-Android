@@ -34,7 +34,7 @@ export default function KnowledgeCheck({ navigation }) {
                     </TouchableOpacity>
                     <Text style={styles.title}>{translate('KnowledgeCheck.title')}</Text>
                 </View>
-                {modalVisible ? <MainMenu pageName={'KnowledgeCheck'} /> : null}
+                {modalVisible ? <MainMenu /> : null}
                 <View style={styles.cards}>
                     <Card 
                         navigation={navigation} 
