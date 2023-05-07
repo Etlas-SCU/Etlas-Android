@@ -1,6 +1,10 @@
 import { View, Image, Text, TouchableOpacity, SafeAreaView, ScrollView } from "react-native";
 import { styles } from './Styles'
 import { translate } from "../../Localization";
+import MainMenu from "../MainMenu/MainMenu";
+import { UserContext } from "../Context/Context";
+import { useState, useContext } from "react";
+
 
 function Card({ navigation, title, img, desc, score }){
     return (
@@ -18,15 +22,19 @@ function Card({ navigation, title, img, desc, score }){
 }
 
 export default function KnowledgeCheck({ navigation }) {
+
+    const { modalVisible, showModal } = useContext(UserContext);
+
     return (
-        <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
             <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
                 <View style={styles.header}>
-                    <TouchableOpacity style={styles.aboutus} onPress={() => { navigation.navigate({ name: 'AboutUs' }) }}>
+                    <TouchableOpacity style={styles.aboutus} onPress={ showModal }>
                         <Image source={require('../../assets/KnowledgeCheck/tabler_exclamation-circle.png')} />
                     </TouchableOpacity>
                     <Text style={styles.title}>{translate('KnowledgeCheck.title')}</Text>
                 </View>
+                {modalVisible ? <MainMenu pageName={'Home'} /> : null}
                 <View style={styles.cards}>
                     <Card 
                         navigation={navigation} 
@@ -51,6 +59,6 @@ export default function KnowledgeCheck({ navigation }) {
                     />
                 </View>
             </ScrollView>
-        </SafeAreaView>
+        </View>
     );
 }
