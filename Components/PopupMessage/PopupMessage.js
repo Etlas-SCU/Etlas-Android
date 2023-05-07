@@ -49,6 +49,7 @@ export default function PopupMessage({ state, message, pageName, navigation }) {
             visible={visible}
             icon={<Image source={Icons[state]} style={styles.icon} />}
             style={styles.container}
+            onRequestClose={() => toggleAlert()}
         >
             <Text style={styles.message}>{message}</Text>
             <TouchableOpacity onPress={() => toggleAlert()} style={[styles.button, { backgroundColor: Button_colors[state] }]}>

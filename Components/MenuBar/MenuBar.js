@@ -12,6 +12,7 @@ import RecognitionFailed from '../RecognitionFailed/RecognitionFailed'
 import MainMenu from "../MainMenu/MainMenu";
 import BestScore from "../BestScore/BestScore";
 
+
 export default function MenuBar({ navigation }) {
 
     const Tab = createBottomTabNavigator();

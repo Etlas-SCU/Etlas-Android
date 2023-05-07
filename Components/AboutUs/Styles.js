@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { colors, fontFamily, normalize } from "../../AppStyles";
+import { colors, fontFamily, normalize,responsiveHeight, responsiveWidth, dimensions } from "../../AppStyles";
 
 export const styles = StyleSheet.create({
     container: {
@@ -10,20 +10,20 @@ export const styles = StyleSheet.create({
     },
     logo: {
         alignSelf: "center",
-        marginTop: "20%",
+        marginTop: responsiveHeight(136),
     },
     background: {
         flex: 1,
         resizeMode: 'contain',
-        width: "100%",
-        height: "100%",
+        width: dimensions.fullWidth,
+        height: dimensions.fullHeight,
     },
     line: {
         borderBottomColor: colors.White,
         borderBottomWidth: 2,
         alignSelf: "center",
-        marginTop: "5%",
-        width: "40%",
+        marginTop: responsiveHeight(45),
+        width: responsiveWidth(175),
     },
     copyright: {
         alignSelf: "center",
@@ -32,24 +32,24 @@ export const styles = StyleSheet.create({
         fontFamily: fontFamily.PoppinsRegular,
     },
     description: {
-        marginTop: "10%",
+        marginTop: responsiveHeight(34),
         alignSelf: "center",
         textAlign: "center",
         color: colors.White,
         fontSize: normalize(18),
         fontFamily: fontFamily.MontserratRegular,
-        width: "80%"
+        width: responsiveWidth(350)
     },
     usingAppicons: {
         flexDirection: "row",
         justifyContent: "space-evenly",
-        width: "100%",
+        width: dimensions.fullWidth,
         alignSelf: "center",
-        marginTop: "-8%",
-        zIndex: 9999,
+        marginTop: responsiveHeight(-30),
+        width: responsiveWidth(338)        
     },
     findus: {
-        marginTop: "5%",
+        marginTop: responsiveHeight(13),
         alignSelf: "center",
         color: colors.White,
         fontSize: normalize(15),
@@ -58,24 +58,24 @@ export const styles = StyleSheet.create({
     close: {
         position: "absolute",
         alignSelf: 'flex-end',
-        right: 24,
-        top: 40,
+        right: responsiveWidth(24),
+        top: responsiveHeight(60),
     },
     contactus: {
         borderColor: colors.White,
-        borderWidth: 2,
+        borderWidth: responsiveWidth(2),
         borderRadius: 20,
-        width: "80%",
+        width: responsiveWidth(342),
         alignSelf: "center",
-        marginTop: "15%",
-        paddingBottom: "40%",
+        marginTop: responsiveHeight(70),
+        paddingBottom: responsiveHeight(200),
     },
     icon: {
         backgroundColor: colors.DarkCyan,
     },
     IconButton: {
         backgroundColor: colors.DarkCyan,
-        paddingHorizontal: 8,
+        paddingHorizontal: responsiveWidth(7),
         alignContent: "center",
         justifyContent: "center",
     }

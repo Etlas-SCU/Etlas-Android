@@ -7,6 +7,7 @@ import ToursCard from "../ToursCard/ToursCard";
 import MonumentsCard from "../MonumentsCard/MonumentsCard";
 import MainMenu from "../MainMenu/MainMenu";
 import { UserContext } from "../Context/Context";
+import PopupMessage from "../PopupMessage/PopupMessage";
 
 
 function Section({ navigation, title, children, pageName }){
@@ -65,6 +66,7 @@ export default function HomePage({ navigation }) {
                     </TouchableOpacity>
                     <Text style={styles.title}>{translate('Home.title')}</Text>
                 </View>
+                <PopupMessage state={'Error'} message={'Congratulaions'}/>
                 {modalVisible ? <MainMenu /> : null}
                 <Image style={styles.logo} source={require('../../assets/HomePage/e.png')} />
                 <Text style={styles.etlas}>{translate('Home.etlas')}</Text>
