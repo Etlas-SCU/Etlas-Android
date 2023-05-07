@@ -21,10 +21,10 @@ export default function ArticlesPage({ navigation }) {
     for (let i = 0; i < 20; i++)
         monumentList.push(Monument);
 
-    const monuments = monumentList.map((monument, idx) => <MonumentsCard monument={monument} key={idx} />);
+    const monuments = monumentList.map((monument, idx) => <MonumentsCard monument={monument} key={idx} isPage={true}/>);
 
     return (
-        <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
             <ScrollView contentContainerStyle={styles.contentContainer}>
                 <View style={styles.header}>
                     <TouchableOpacity style={styles.aboutus} onPress={() => { navigation.navigate({ name: 'AboutUs' }) }}>
@@ -51,6 +51,6 @@ export default function ArticlesPage({ navigation }) {
                     {monuments}
                 </View>
             </ScrollView>
-        </SafeAreaView>
+        </View>
     );
 }

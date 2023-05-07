@@ -54,7 +54,7 @@ export default function HomePage({ navigation }) {
         toursList.push(Tour), monumentList.push(Monument);
 
     const tours = toursList.map((tour, idx) => <ToursCard tour={tour} key={idx} />);
-    const monuments = monumentList.map((monument, idx) => <MonumentsCard monument={monument} key={idx} />);
+    const monuments = monumentList.map((monument, idx) => <MonumentsCard monument={monument} key={idx} isPage={false}/>);
 
     return (
         <View style={styles.container}>
