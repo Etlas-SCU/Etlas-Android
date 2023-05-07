@@ -57,7 +57,7 @@ export default function HomePage({ navigation }) {
     const monuments = monumentList.map((monument, idx) => <MonumentsCard monument={monument} key={idx} />);
 
     return (
-        <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
             <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
                 <View style={styles.header}>
                     <TouchableOpacity style={styles.aboutus} onPress={ showModal }>
@@ -89,6 +89,6 @@ export default function HomePage({ navigation }) {
                     children={monuments}
                 />
             </ScrollView>
-        </SafeAreaView>
+        </View>
     )
 }
