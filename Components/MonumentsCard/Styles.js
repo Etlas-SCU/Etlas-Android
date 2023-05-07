@@ -9,7 +9,6 @@ export const Swipper = StyleSheet.create({
         borderRadius: 20,
     },
     MonumentsCardImg: {
-        backgroundColor: colors.LightGrey,
         alignContent: "center",
         alignSelf: "center",
         marginTop: responsiveHeight(9),
@@ -66,7 +65,6 @@ export const Page = StyleSheet.create({
         borderRadius: 20,
     },
     MonumentsCardImg: {
-        backgroundColor: colors.LightGrey,
         alignContent: "center",
         alignSelf: "center",
         marginTop: responsiveHeight(10),
