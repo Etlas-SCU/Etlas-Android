@@ -5,12 +5,14 @@ import { translate } from "../../Localization";
 export default function Profile({ navigation }){
     return(
         <SafeAreaView style={styles.container}>
-            <ImageBackground source={require('../../assets/Profile/Background.png')}>
-                <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
+            <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
+                <View style={styles.upperBox}>
                     <TouchableOpacity onPress={() => navigation.goBack()}>
                         <Image source={require('../../assets/Profile/Arr.png')} style={styles.close} />
                     </TouchableOpacity>
                     <Text style={styles.title}>{translate('Profile.title')}</Text>
+                </View>
+                <View style={styles.WhiteBody}>
                     <View style={styles.body}>
                         <Image source={require('../../assets/Profile/Profile.png')} style={styles.profile} />
                         <Text style={styles.name}>{translate('Profile.name')}</Text>
@@ -21,8 +23,8 @@ export default function Profile({ navigation }){
                         <Text style={styles.field}>{translate('Profile.address')}</Text>
                         <Text style={styles.info}>{translate('Profile.user_address')}</Text>
                     </View>
-                </ScrollView>
-            </ImageBackground>
+                </View>
+            </ScrollView>
         </SafeAreaView>
     )
 }

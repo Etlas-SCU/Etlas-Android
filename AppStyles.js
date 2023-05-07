@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions } from "react-native";
+import { StyleSheet, Dimensions, PixelRatio } from "react-native";
 
 // styles in app.js
 export const styles = StyleSheet.create({
@@ -12,6 +12,15 @@ export const dimensions = {
     fullHeight: Dimensions.get('window').height,
     fullWidth: Dimensions.get('window').width
 }
+
+// normalize font size
+export const normalize = (size) => {
+    const fontScale = PixelRatio.getFontScale();
+    const getFontSize = size => size / fontScale;
+    const fontSize = getFontSize(size);
+    return Math.round(PixelRatio.roundToNearestPixel(fontSize));
+};
+  
 
 // colors used in the app
 export const colors = {

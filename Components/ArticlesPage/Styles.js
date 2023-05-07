@@ -1,4 +1,4 @@
-import { colors, fontFamily } from "../../AppStyles";
+import { colors, fontFamily, normalize } from "../../AppStyles";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
@@ -17,7 +17,7 @@ export const styles = StyleSheet.create({
     },
     title: {
         color: colors.White,
-        fontSize: 18,
+        fontSize: normalize(18),
         fontFamily: fontFamily.MontserratBold,
     },
     inputContainer: {
@@ -32,7 +32,7 @@ export const styles = StyleSheet.create({
         width: "75%",
         height: 64,
         alignSelf: "center",
-        fontSize: 18,
+        fontSize: normalize(18),
         fontFamily: fontFamily.MontserratRegular,
         paddingHorizontal: "5%",
         textAlign: "left"

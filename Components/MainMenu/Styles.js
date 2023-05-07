@@ -1,10 +1,6 @@
-import { colors, fontFamily } from "../../AppStyles";
-import { StyleSheet, Dimensions } from "react-native";
+import { colors, fontFamily, dimensions, normalize } from "../../AppStyles";
+import { StyleSheet } from "react-native";
 
-export const dimensions = {
-    fullHeight: Dimensions.get('window').height,
-    fullWidth: Dimensions.get('window').width
-}
 
 export const styles = StyleSheet.create({
     container: {
@@ -18,7 +14,8 @@ export const styles = StyleSheet.create({
     },
     background: {
         flex: 1,
-        resizeMode: 'repeat',
+        resizeMode: 'contain',
+        borderRadius: 20
     },
     close: {
         alignSelf: "flex-end",
@@ -27,7 +24,7 @@ export const styles = StyleSheet.create({
     },
     title: {
         color: colors.DarkCyan,
-        fontSize: 32,
+        fontSize: normalize(32),
         fontFamily: fontFamily.CapitalisTypOasis,
         textAlign: "center",
         marginTop: "10%",
@@ -56,14 +53,14 @@ export const styles = StyleSheet.create({
     },
     button_text: {
         color: colors.DarkCyan,
-        fontSize: 20,
+        fontSize: normalize(20),
         fontFamily: fontFamily.MontserratBold,
         textAlign: "center",
         verticalAlign: "middle"
     },
     copyright: {
         color: colors.DarkCyan,
-        fontSize: 16,
+        fontSize: normalize(16),
         fontFamily: fontFamily.PoppinsRegular,
         textAlign: "center",
         marginTop: "20%",

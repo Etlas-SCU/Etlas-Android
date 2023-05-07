@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { fontFamily, colors } from "../../AppStyles";
+import { fontFamily, colors, normalize } from "../../AppStyles";
 
 export const styles = StyleSheet.create({
     container: {
@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
     title: {
         fontFamily: fontFamily.MontserratBold,
         color: colors.DarkCyan,
-        fontSize: 18,
+        fontSize: normalize(18),
         textAlign: 'center',
     },
     ScoreBox: {
@@ -33,14 +33,14 @@ export const styles = StyleSheet.create({
     },
     score: {
         color: colors.White,
-        fontSize: 100,
+        fontSize: normalize(100),
         fontFamily: fontFamily.MontserratBold,
         alignSelf: "center",
         marginTop: "5%",
     },
     scoreTxt: {
         color: colors.White,
-        fontSize: 25,
+        fontSize: normalize(25),
         fontFamily: fontFamily.MontserratMedium,
         alignSelf: "center",
         marginTop: "5%",
@@ -54,7 +54,7 @@ export const styles = StyleSheet.create({
     },
     bestScore: {
         color: colors.Gold,
-        fontSize: 30,
+        fontSize: normalize(30),
         fontFamily: fontFamily.MontserratSemiBold,
         alignSelf: "center",
         marginTop: "8%",
@@ -67,7 +67,7 @@ export const styles = StyleSheet.create({
     },
     ask: {
         color: colors.DarkCyan,
-        fontSize: 20,
+        fontSize: normalize(20),
         fontFamily: fontFamily.MontserratBold,
         marginTop: "5%",
         width: "70%",
@@ -86,7 +86,7 @@ export const styles = StyleSheet.create({
     },
     buttonText: {
         color: colors.White,
-        fontSize: 18,
+        fontSize: normalize(20),
         fontFamily: fontFamily.MontserratBold,
     },
 });

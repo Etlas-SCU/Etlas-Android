@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useFonts } from 'expo-font';
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack'
@@ -12,6 +12,8 @@ import { init } from './Localization';
 import { Easing } from 'react-native';
 import MenuBar from './Components/MenuBar/MenuBar';
 import { UserProvider } from './Components/Context/Context';
+import { useResponsiveHeight, useResponsiveWidth, useDimensionsChange } from "react-native-responsive-dimensions";
+import { LayoutAnimation, View } from 'react-native'
 
 // import the screen
 const Stack = createStackNavigator();

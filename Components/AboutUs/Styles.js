@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { colors, fontFamily, dimensions } from "../../AppStyles";
+import { colors, fontFamily, normalize } from "../../AppStyles";
 
 export const styles = StyleSheet.create({
     container: {
@@ -28,7 +28,7 @@ export const styles = StyleSheet.create({
     copyright: {
         alignSelf: "center",
         color: colors.White,
-        fontSize: 13,
+        fontSize: normalize(13),
         fontFamily: fontFamily.PoppinsRegular,
     },
     description: {
@@ -36,7 +36,7 @@ export const styles = StyleSheet.create({
         alignSelf: "center",
         textAlign: "center",
         color: colors.White,
-        fontSize: (dimensions.fullHeight / dimensions.fullWidth) * 8,
+        fontSize: normalize(18),
         fontFamily: fontFamily.MontserratRegular,
         width: "80%"
     },
@@ -52,7 +52,7 @@ export const styles = StyleSheet.create({
         marginTop: "5%",
         alignSelf: "center",
         color: colors.White,
-        fontSize: 15,
+        fontSize: normalize(15),
         fontFamily: fontFamily.MontserratRegular,
     },
     close: {
@@ -68,7 +68,7 @@ export const styles = StyleSheet.create({
         width: "80%",
         alignSelf: "center",
         marginTop: "15%",
-        paddingBottom: "30%",
+        paddingBottom: "40%",
     },
     icon: {
         backgroundColor: colors.DarkCyan,

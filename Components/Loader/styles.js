@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { colors, fontFamily } from "../../AppStyles";
+import { colors, fontFamily, normalize } from "../../AppStyles";
 
 export const styles = StyleSheet.create({
     container: {
@@ -19,14 +19,14 @@ export const styles = StyleSheet.create({
     wait: {
         color: colors.White,
         fontFamily: fontFamily.MontserratBold,
-        fontSize: 20,
+        fontSize: normalize(20),
         marginBottom: "5%",
         fontWeight: "bold"
     },
     txt: {
         color: colors.White,
         fontFamily: fontFamily.MontserratRegular,
-        fontSize: 18,
+        fontSize: normalize(18),
         marginBottom: "15%",
         width: "80%",
         textAlign: "center"

@@ -7,7 +7,6 @@ import ToursCard from "../ToursCard/ToursCard";
 import MonumentsCard from "../MonumentsCard/MonumentsCard";
 import MainMenu from "../MainMenu/MainMenu";
 import { UserContext } from "../Context/Context";
-import { dimensions } from "../../AppStyles";
 
 
 function Section({ navigation, title, children, pageName }){

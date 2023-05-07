@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { fontFamily, colors, dimensions } from "../../AppStyles";
+import { fontFamily, colors, normalize } from "../../AppStyles";
 
 export const styles = StyleSheet.create({
     container: {
@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
     header: {
         fontFamily: fontFamily.CapitalisTypOasis,
         color: colors.Gold,
-        fontSize: 50,
+        fontSize: normalize(50),
         textAlign: 'left',
         marginTop: "20%",
         marginLeft: "5%",
@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
     desc: {
         fontFamily: fontFamily.MontserratMedium,
         color: colors.White,
-        fontSize: 20,
+        fontSize: normalize(20),
         textAlign: 'left',
         marginTop: "10%",
         marginLeft: "5%",
@@ -31,7 +31,7 @@ export const styles = StyleSheet.create({
     worry: {
         fontFamily: fontFamily.MontserratBold,
         color: colors.White,
-        fontSize: 20,
+        fontSize: normalize(20),
         textAlign: 'left',
         marginTop: "10%",
         marginLeft: "5%",
@@ -67,7 +67,7 @@ export const styles = StyleSheet.create({
     button_text: {
         fontFamily: fontFamily.MontserratBold,
         color: colors.White,
-        fontSize: 20,
+        fontSize: normalize(20),
         textAlign: 'center',
     },
     sign_in: {

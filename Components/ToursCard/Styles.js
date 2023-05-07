@@ -1,4 +1,4 @@
-import { colors, fontFamily } from "../../AppStyles";
+import { colors, fontFamily, normalize } from "../../AppStyles";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
@@ -21,14 +21,14 @@ export const styles = StyleSheet.create({
     },
     ToursCardTitle: {
         color: colors.DarkCyan,
-        fontSize: 18,
+        fontSize: normalize(18),
         fontFamily: fontFamily.MontserratBold,
         marginLeft: "5%",
         marginTop: "2%",
     },
     ToursCardDesc: {
         color: colors.DarkGrey,
-        fontSize: 12,
+        fontSize: normalize(12),
         fontFamily: fontFamily.MontserratRegular,
         marginLeft: "5%",
         marginTop: "2%",

@@ -1,4 +1,4 @@
-import { colors, fontFamily } from "../../AppStyles";
+import { colors, fontFamily, normalize } from "../../AppStyles";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
@@ -26,7 +26,7 @@ export const styles = StyleSheet.create({
     },
     message: {
         color: colors.DarkCyan,
-        fontSize: 15,
+        fontSize: normalize(15),
         marginBottom: "10%",
         fontFamily: fontFamily.MontserratSemiBold,
         width: "80%",
@@ -42,7 +42,7 @@ export const styles = StyleSheet.create({
     },
     buttonText: {
         color: colors.White,
-        fontSize: 15,
+        fontSize: normalize(15),
         fontFamily: fontFamily.MontserratSemiBold,
     },
 });

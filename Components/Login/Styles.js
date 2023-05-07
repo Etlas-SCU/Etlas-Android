@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { fontFamily, colors } from "../../AppStyles";
+import { fontFamily, colors, normalize } from "../../AppStyles";
 
 export const styles = StyleSheet.create({
     // first Page
@@ -20,45 +20,45 @@ export const styles = StyleSheet.create({
     },
     header: {
         fontFamily: fontFamily.CapitalisTypOasis,
-        fontSize: 20,
+        fontSize: normalize(20),
         color: colors.White,
-        marginTop: 80,
-        marginLeft: 24,
-        marginRight: 24,
+        marginTop: "20%",
+        marginLeft: "6%",
+        marginRight: "6%",
     },
     line: {
         borderBottomColor: colors.White,
         borderBottomWidth: StyleSheet.hairlineWidth,
-        marginTop: 13,
-        marginLeft: 24,
-        width: 80,
+        marginTop: "3%",
+        marginLeft: "6%",
+        width: "18%",
     },
     helpingText: {
         fontFamily: fontFamily.MontserratRegular,
-        fontSize: 15,
+        fontSize: normalize(15),
         color: colors.White,
-        marginTop: 16,
-        marginLeft: 24,
+        marginTop: "5%",
+        marginLeft: "6%",
     },
     inputView: {
-        marginTop: 8,
-        marginLeft: 24,
-        marginRight: 24,
+        marginTop: "3%",
+        marginLeft: "6%",
+        marginRight: "6%",
         gap: 13
     },
     stateName: {
         fontFamily: fontFamily.MontserratSemiBold,
-        fontSize: 18,
+        fontSize: normalize(18),
         color: colors.Gold,
     },
     inputForm: {
         fontFamily: fontFamily.MontserratSemiBold,
-        fontSize: 20,
+        fontSize: normalize(20),
         color: colors.Black,
         backgroundColor: colors.White,
         borderRadius: 20,
         height: 58,
-        paddingLeft: 14,
+        paddingLeft: "4%",
         textAlign: 'left'
     },
     passwordContainer: {
@@ -71,28 +71,28 @@ export const styles = StyleSheet.create({
         position: "absolute",
         alignSelf: "center",
         justifyContent: "center",
-        right: 14
+        right: "5%"
     },
     passwordContainerImage: {
         right: 5
     },
     passText: {
         fontFamily: fontFamily.MontserratSemiBold,
-        fontSize: 12,
+        fontSize: normalize(12),
         color: colors.Grey,
-        marginTop: 8,
+        marginTop: "2%",
         textAlign: 'right',
     },
     usingAppText: {
         fontFamily: fontFamily.MontserratRegular,
-        fontSize: 18,
+        fontSize: normalize(18),
         color: colors.White,
         alignSelf: "center",
-        marginTop: 60,
+        marginTop: "18%",
     },
     usingAppicons: {
         flexDirection: 'row',
-        marginTop: 20,
+        marginTop: "5%",
         justifyContent: 'space-evenly',
         width: "60%",
         alignSelf: "center"
@@ -103,31 +103,30 @@ export const styles = StyleSheet.create({
         height: 58,
         borderRadius: 20,
         alignSelf: "flex-start",
-        marginTop: 60,
-        marginLeft: 24,
+        marginTop: "18%",
+        marginLeft: "6%",
         justifyContent: "center",
         alignItems: "center"
     },
     nextText: {
         fontFamily: fontFamily.MontserratSemiBold,
-        fontSize: 18,
+        fontSize: normalize(18),
         color: colors.White,
     },
     signIn: {
         flexDirection: 'row',
-        marginLeft: 24,
-        marginTop: 20,
+        marginLeft: "6%",
+        marginTop: "5%",
         gap: 8
     },
     haveAccount: {
         fontFamily: fontFamily.MontserratSemiBold,
-        fontSize: 15,
+        fontSize: normalize(15),
         color: colors.White,
     },
     signInText: {
         fontFamily: fontFamily.MontserratSemiBold,
-        fontSize: 15,
+        fontSize: normalize(15),
         color: colors.Gold,
-    },
-
+    }
 });

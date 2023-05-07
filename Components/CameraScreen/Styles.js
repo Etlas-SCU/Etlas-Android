@@ -1,4 +1,4 @@
-import { colors, fontFamily } from '../../AppStyles'
+import { colors, fontFamily, normalize } from '../../AppStyles'
 import { StyleSheet } from 'react-native'
 
 export const styles = StyleSheet.create({
@@ -38,7 +38,7 @@ export const styles = StyleSheet.create({
     title: {
         fontFamily: fontFamily.MontserratBold,
         color: colors.White,
-        fontSize: 13,
+        fontSize: normalize(13),
         textAlign: 'center',
     },
     imageCap: {
@@ -68,7 +68,7 @@ export const styles = StyleSheet.create({
         color: colors.White,
         textAlign: 'center',
         fontFamily: fontFamily.MontserratBold,
-        fontSize: 13,
+        fontSize: normalize(13),
     },
     flash: {
         textAlign: 'center',

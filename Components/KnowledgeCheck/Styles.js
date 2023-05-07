@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { colors, fontFamily } from "../../AppStyles";
+import { colors, dimensions, fontFamily, normalize } from "../../AppStyles";
 
 export const styles = StyleSheet.create({
     container: {
@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
         backgroundColor: colors.DarkCyan,
     },
     contentContainer: {
-        paddingBottom: "80%"
+        paddingBottom: "40%"
     },
     header: {
         flexDirection: "row",
@@ -22,21 +22,21 @@ export const styles = StyleSheet.create({
     },
     title: {
         color: colors.White,
-        fontSize: 18,
+        fontSize: normalize(18),
         fontFamily: fontFamily.MontserratBold,
         textAlign: "center",
     },
     cards: {
         width: "90%",
         alignSelf: "center",
-        marginTop: "10%",
-        marginBottom: "10%",
+        marginVertical: "10%",
+        marginHorizontal: "5%",
         justifyContent: "center",
         alignItems: "center",
         flex: 1,
     },
     body: {
-        height: "30%",
+        height: dimensions.fullHeight / 4.5,
         backgroundColor: colors.Gold,
         alignSelf: "center",
         marginTop: "10%",
@@ -45,7 +45,7 @@ export const styles = StyleSheet.create({
         paddingLeft: 16,
     },
     bodyContent: {
-        width: "60%",
+        width: "65%",
         height: "100%",
         justifyContent: 'space-between',
         paddingTop: "2%",
@@ -53,22 +53,22 @@ export const styles = StyleSheet.create({
     },
     bodyTitle: {
         color: colors.White,
-        fontSize: 24,
+        fontSize: normalize(32),
         fontFamily: fontFamily.MontserratBold,
     },
     bodyText: {
         color: colors.White,
-        fontSize: 13,
-        fontFamily: fontFamily.MontserratRegular,
-        width: "90%"
+        fontSize: normalize(14),
+        fontFamily: fontFamily.MontserratLight,
+        width: "95%"
     },
     bodyScore: {
         color: colors.White,
-        fontSize: 38,
+        fontSize: normalize(48),
         fontFamily: fontFamily.MontserratBold,
     },
     bodyImage: {
-        width: "40%",
+        width: "35%",
         height: "100%",
         borderTopRightRadius: 20,
         borderBottomRightRadius: 20,

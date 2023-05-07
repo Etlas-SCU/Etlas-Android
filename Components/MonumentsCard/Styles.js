@@ -1,4 +1,4 @@
-import { colors, fontFamily } from '../../AppStyles'
+import { colors, fontFamily, normalize } from '../../AppStyles'
 import { StyleSheet } from 'react-native'
 
 export const styles = StyleSheet.create({
@@ -23,20 +23,20 @@ export const styles = StyleSheet.create({
     },
     MonumentsCardTitle: {
         color: colors.DarkCyan,
-        fontSize: 16,
+        fontSize: normalize(16),
         fontFamily: fontFamily.MontserratBold,
         width: "90%",
         marginTop: "3%"
     },
     MonumentsCardDesc: {
         color: colors.DarkGrey,
-        fontSize: 12,
+        fontSize: normalize(12),
         fontFamily: fontFamily.MontserratRegular,
         marginTop: "3%"
     },
     MonumentsCardDate: {
         color: colors.Black,
-        fontSize: 12,
+        fontSize: normalize(12),
         fontFamily: fontFamily.MontserratRegular,
         marginTop: "3%"
     },
@@ -49,7 +49,7 @@ export const styles = StyleSheet.create({
     },
     learn: {
         color: colors.LightSeaGreen,
-        fontSize: 12,
+        fontSize: normalize(12),
         fontFamily: fontFamily.MontserratRegular,
         marginTop: "2%",
         marginBottom: "5%",

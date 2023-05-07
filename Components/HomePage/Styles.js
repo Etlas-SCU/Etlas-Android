@@ -1,6 +1,6 @@
-import { colors, fontFamily, dimensions } from "../../AppStyles";
+import { colors, fontFamily, normalize } from "../../AppStyles";
 import { StyleSheet } from "react-native";
-
+    
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -22,20 +22,20 @@ export const styles = StyleSheet.create({
     },
     title: {
         color: colors.White,
-        fontSize: 18,
+        fontSize: normalize(18),
         fontFamily: fontFamily.MontserratBold,
         textAlign: "center",
     },
     etlas: {
         color: colors.Gold,
-        fontSize: 48,
+        fontSize: normalize(48),
         fontFamily: fontFamily.CapitalisTypOasis,
         textAlign: "center",
         marginTop: "15%",
     },
     desc: {
         color: colors.White,
-        fontSize: 18,
+        fontSize: normalize(18),
         fontFamily: fontFamily.MontserratSemiBold,
         textAlign: "center",
         marginTop: "10%",
@@ -53,7 +53,7 @@ export const styles = StyleSheet.create({
         height: 64,
         alignSelf: "center",
         marginTop: "10%",
-        fontSize: 18,
+        fontSize: normalize(18),
         fontFamily: fontFamily.MontserratRegular,
         paddingHorizontal: "5%",
         textAlign: "left"
@@ -67,7 +67,7 @@ export const styles = StyleSheet.create({
     },
     boxTitle: {
         color: colors.White,
-        fontSize: (dimensions.fullHeight / dimensions.fullWidth) * 8,
+        fontSize: normalize(20),
         fontFamily: fontFamily.MontserratRegular,
         textAlign: "center",
         margin: "5%"
@@ -79,7 +79,7 @@ export const styles = StyleSheet.create({
     },
     see_all_text: {
         color: colors.Gold,
-        fontSize: (dimensions.fullHeight / dimensions.fullWidth) * 6,
+        fontSize: normalize(14),
         fontFamily: fontFamily.MontserratBold,
         textAlign: "center",
     },
