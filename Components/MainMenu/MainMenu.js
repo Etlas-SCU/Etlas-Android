@@ -6,7 +6,7 @@ import { useContext } from 'react';
 import { UserContext } from '../Context/Context';
 import { useNavigation } from '@react-navigation/native';
 
-function Button ({ title, pageNav, hideModal }){
+function Button ({ title, pageNav, hideModal, pageName }){
 
     // use the navigation
     const navigation = useNavigation();
@@ -14,13 +14,13 @@ function Button ({ title, pageNav, hideModal }){
     // navigate to the page
     const ButtonNav = (pageNav) => {
         hideModal();
-        navigation.dispatch(
-            CommonActions.reset({
-                index: 0,
-                routes: [
-                    { name: pageNav },
-                ],
-            })
+        navigation.navigate(
+            { 
+                name: pageNav,
+                params: {
+                    pageName: pageName
+                }   
+            },
         );
     }
 
@@ -31,7 +31,7 @@ function Button ({ title, pageNav, hideModal }){
     )
 }
 
-export default function MainMenu({ }) {
+export default function MainMenu({ pageName }) {
 
     // use the context to get the state of the modal
     const { modalVisible, hideModal } = useContext(UserContext);
@@ -44,7 +44,7 @@ export default function MainMenu({ }) {
     ]
 
     // create the buttons
-    const buttons = buttonsVal.map((button, idx) => <Button key={idx} title={button.title} pageNav={button.pageNav} hideModal={hideModal}/> );
+    const buttons = buttonsVal.map((button, idx) => <Button key={idx} title={button.title} pageNav={button.pageNav} hideModal={hideModal} pageName={pageName}/> );
 
     return (
         <Modal 

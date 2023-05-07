@@ -26,7 +26,8 @@ export const styles = StyleSheet.create({
     },
     menuBarIcons: {
         width: responsiveWidth(35),
-        height: responsiveHeight(33),
+        height: responsiveHeight(35),
+        resizeMode: 'contain',
         alignSelf: 'center',
     },
     menuBarIconsContainer: {

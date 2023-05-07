@@ -60,12 +60,12 @@ export const Page = StyleSheet.create({
         borderRadius: 30,
         flexDirection: 'row',
         width: responsiveWidth(382),
-        height: responsiveHeight(105),
+        height: responsiveHeight(120),
         marginHorizontal: responsiveWidth(7)
     },
     ToursCardImg: {
         width: responsiveWidth(116),
-        height: responsiveHeight(105),
+        height: responsiveHeight(120),
         borderTopLeftRadius: 30,
         borderBottomLeftRadius: 30,
     },
@@ -85,7 +85,7 @@ export const Page = StyleSheet.create({
         fontSize: normalize(12),
         fontFamily: fontFamily.MontserratRegular,
         marginHorizontal: responsiveWidth(12),
-        marginTop: responsiveHeight(1),
+        marginTop: responsiveHeight(2),
     },
 
     
@@ -95,13 +95,13 @@ export const Page = StyleSheet.create({
         backgroundColor: colors.LightGrey,
         borderRadius: 20,
         width: responsiveWidth(150),
-        height: responsiveHeight(24),
-        marginTop: responsiveHeight(5),
+        height: responsiveHeight(26),
+        marginTop: responsiveHeight(6),
         alignContent: "center",
         alignItems: "center",
         justifyContent: "center",
-        padding: responsiveHeight(2),
-        marginBottom: responsiveHeight(7),
+        padding: responsiveHeight(3),
+        marginBottom: responsiveHeight(8),
         marginHorizontal: responsiveWidth(12),
     },
 });

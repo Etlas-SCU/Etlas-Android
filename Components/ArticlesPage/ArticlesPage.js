@@ -38,7 +38,7 @@ export default function ArticlesPage({ navigation }) {
                         <Image source={require('../../assets/Scan/Arr.png')} />
                     </TouchableOpacity>
                 </View>
-                {modalVisible ? <MainMenu /> : null}
+                {modalVisible ? <MainMenu pageName={'ArticlesPage'}/> : null}
                 <View style={styles.inputContainer}>
                     <TextInput
                         style={styles.SearchForm}

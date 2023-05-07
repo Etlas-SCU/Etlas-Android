@@ -38,7 +38,7 @@ export default function ToursPage({ navigation }) {
                         <Image source={require('../../assets/Scan/Arr.png')} />
                     </TouchableOpacity>
                 </View>
-                {modalVisible ? <MainMenu /> : null}
+                {modalVisible ? <MainMenu pageName={'ToursPage'}/> : null}
                 <View style={styles.inputContainer}>
                     <TextInput
                         style={styles.SearchForm}
