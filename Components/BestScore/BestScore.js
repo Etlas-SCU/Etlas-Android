@@ -1,10 +1,10 @@
 import { styles } from './Styles'
 import { translate } from "../../Localization";
-import { View, Text, ImageBackground, TouchableOpacity, ScrollView, SafeAreaView } from 'react-native';
+import { View, Text, ImageBackground, TouchableOpacity, ScrollView } from 'react-native';
 
 export default function BestScore({ navigation }) {
     return (
-        <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
             <ImageBackground source={require('../../assets/HighScore/HighScore.png')} resizeMode='cover' style={styles.image}>
                 <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
                     <View style={styles.header}>
@@ -24,6 +24,6 @@ export default function BestScore({ navigation }) {
                     </View>
                 </ScrollView>
             </ImageBackground>
-        </SafeAreaView>
+        </View>
     );
 }

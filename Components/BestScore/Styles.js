@@ -1,12 +1,12 @@
 import { StyleSheet } from "react-native";
-import { fontFamily, colors, normalize } from "../../AppStyles";
+import { fontFamily, colors, normalize, responsiveHeight, responsiveWidth, isIOS } from "../../AppStyles";
 
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
     scrollContainer: {
-        paddingBottom: "50%"
+        paddingBottom: responsiveHeight(200),
     },
     image: {
         flex: 1,
@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
     header: {
         textAlign: 'center',
         alignItems: "center",
-        marginTop: "15%",
+        marginTop: responsiveHeight(60),
     },
     title: {
         fontFamily: fontFamily.MontserratBold,
@@ -23,45 +23,45 @@ export const styles = StyleSheet.create({
         textAlign: 'center',
     },
     ScoreBox: {
-        width: "90%",
-        height: "50%",
+        width: responsiveWidth(382),
+        height: responsiveHeight(380 + (isIOS() ? 0 : 40)),
         backgroundColor: colors.DarkCyan,
         alignSelf: "center",
-        marginTop: "20%",
+        marginTop: responsiveHeight(77),
         borderRadius: 20,
-
+        paddingBottom: responsiveHeight(44)
     },
     score: {
         color: colors.White,
         fontSize: normalize(100),
         fontFamily: fontFamily.MontserratBold,
         alignSelf: "center",
-        marginTop: "5%",
+        marginTop: responsiveHeight(48),
     },
     scoreTxt: {
         color: colors.White,
         fontSize: normalize(25),
         fontFamily: fontFamily.MontserratMedium,
         alignSelf: "center",
-        marginTop: "5%",
+        marginTop: responsiveHeight(24),
     },
     line: {
         borderBottomColor: colors.White,
         borderBottomWidth: 1,
-        width: "35%",
+        width: responsiveWidth(116),
         alignSelf: "center",
-        marginTop: "8%",
+        marginTop: responsiveHeight(32),
     },
     bestScore: {
         color: colors.Gold,
         fontSize: normalize(30),
         fontFamily: fontFamily.MontserratSemiBold,
         alignSelf: "center",
-        marginTop: "8%",
+        marginTop: responsiveHeight(30),
     },
     buttonContainer: {
-        width: "90%",
-        marginTop: "10%",
+        width: responsiveWidth(382),
+        marginTop: responsiveHeight(123),
         alignSelf: "center",
         alignItems: "center"
     },
@@ -69,20 +69,19 @@ export const styles = StyleSheet.create({
         color: colors.DarkCyan,
         fontSize: normalize(20),
         fontFamily: fontFamily.MontserratBold,
-        marginTop: "5%",
-        width: "70%",
+        width: responsiveWidth(280),
         textAlign: "center",
         alignSelf: "center",
     },
     button: {
         backgroundColor: colors.DarkCyan,
-        width: 221,
-        height: 57,
+        width: responsiveWidth(221),
+        height: responsiveHeight(57),
         alignSelf: "center",
         borderRadius: 20,
         justifyContent: "center",
         alignItems: "center",
-        marginTop: "10%",
+        marginTop: responsiveHeight(25),
     },
     buttonText: {
         color: colors.White,
