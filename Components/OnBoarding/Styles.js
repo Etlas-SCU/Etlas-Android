@@ -1,10 +1,13 @@
 import { StyleSheet } from "react-native";
-import { fontFamily, colors, normalize } from "../../AppStyles";
+import { fontFamily, colors, normalize, responsiveWidth, responsiveHeight } from "../../AppStyles";
 
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: colors.DarkCyan,
+    },
+    containerScrolling: {
+        // paddingBottom: responsiveHeight(20)
     },
     text_box: {
         flexDirection: "row",
@@ -14,51 +17,54 @@ export const styles = StyleSheet.create({
         color: colors.Gold,
         fontSize: normalize(50),
         textAlign: 'left',
-        marginTop: "20%",
-        marginLeft: "5%",
+        marginTop: responsiveHeight(102),
+        marginLeft: responsiveWidth(24),
     },
     desc: {
         fontFamily: fontFamily.MontserratMedium,
         color: colors.White,
         fontSize: normalize(20),
         textAlign: 'left',
-        marginTop: "10%",
-        marginLeft: "5%",
+        marginTop: responsiveHeight(23),
+        marginLeft: responsiveWidth(24),
         flexDirection: "row",
         flexWrap: "wrap",
-        width: "60%"
+        width: responsiveWidth(284)
     },
     worry: {
         fontFamily: fontFamily.MontserratBold,
         color: colors.White,
         fontSize: normalize(20),
         textAlign: 'left',
-        marginTop: "10%",
-        marginLeft: "5%",
+        marginTop: responsiveHeight(23),
+        marginLeft: responsiveWidth(24),
         flexDirection: "row",
         flexWrap: "wrap",
-        width: "70%"
+        width: responsiveWidth(287)
     },
     logoContainer: {
         alignItems: 'flex-end',
+        justifyContent: 'flex-end',
+        position: "absolute",
+        top: responsiveHeight(391),
+        right: responsiveWidth(0),
     },
     wolf: {
         flex: 1,
         resizeMode: 'contain',
-        marginLeft: "-8%",
-        marginBottom: "-8%",
+        width: responsiveWidth(468),
+        height: responsiveHeight(624),
     },
     button_container: {
         flexDirection: "column",
         alignItems: 'center',
         alignItems: "flex-end",
-        marginRight: "10%",
-        marginTop: "5%",
-        gap: 15
+        marginRight: responsiveWidth(24),
+        gap: responsiveWidth(20)
     },
     sign_buttons: {
-        width: 181,
-        height: 57,
+        width: responsiveWidth(181),
+        height: responsiveHeight(57),
         borderRadius: 20,
         backgroundColor: colors.Gold,
         justifyContent: "center",
@@ -81,5 +87,8 @@ export const styles = StyleSheet.create({
     bottom_container: {
         flexDirection: "row",   
         justifyContent: 'space-around',
+        alignItems: 'center',
+        // marginTop: "5%",
+        maxHeight: responsiveHeight(624)
     }
 });

@@ -1,4 +1,4 @@
-import { Text, View, Image, TouchableOpacity, ScrollView, SafeAreaView } from "react-native";
+import { Text, View, Image, TouchableOpacity, ScrollView, SafeAreaView, ImageBackground } from "react-native";
 import { styles } from "./Styles";
 import { translate } from '../../Localization';
 

@@ -1,6 +1,6 @@
 import { styles } from "./Styles"
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Image, Platform, View } from 'react-native';
+import { Image, View } from 'react-native';
 import KnowledgeCheck from "../KnowledgeCheck/KnowledgeCheck";
 import AboutUs from "../AboutUs/AboutUs";
 import CameraScreen from "../CameraScreen/CameraScreen";
@@ -32,13 +32,12 @@ export default function MenuBar({ navigation }) {
                 tabBarShowLabel: false,
                 tabBarStyle: styles.menuBar,
                 tabBarIcon: ({ focused }) => {
-                    let isRightBorder = (route.name == 'Home' || route.name == 'KnowledgeCheck');
-                    let isScan = (route.name == 'Scan');
-                    let isIos = (Platform.OS == 'ios');
+                    const isRightBorder = (route.name == 'Home' || route.name == 'KnowledgeCheck');
+                    const isScan = (route.name == 'Scan');
                     return (
                         <View style={styles.barContainer}>
-                            <View>
-                                <Image source={Icons[route.name]} style={isScan ? [styles.ScanIcon, { marginTop: isIos ? "-90%" : "-105%" }] : styles.menuBarIcons} />
+                            <View style={isScan ? styles.Scan : null}>
+                                <Image source={Icons[route.name]} style={isScan ? styles.ScanIcon : styles.menuBarIcons} />
                                 {focused ? <View style={styles.line} /> : null}
                             </View>
                             {isRightBorder ? <View style={styles.rightBorder} /> : null}

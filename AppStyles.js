@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions, PixelRatio } from "react-native";
+import { StyleSheet, Dimensions, PixelRatio, Platform } from "react-native";
 
 // styles in app.js
 export const styles = StyleSheet.create({
@@ -20,7 +20,27 @@ export const normalize = (size) => {
     const fontSize = getFontSize(size);
     return Math.round(PixelRatio.roundToNearestPixel(fontSize));
 };
+
+
+// get the dimensions of the screen
+const heightMobileUI = 932;
+const widthMobileUI = 430;
+
+// get the responsive width
+export const responsiveWidth = width => {
+    return (dimensions.fullWidth * width) / widthMobileUI;
+};
   
+// get the responsive height
+export const responsiveHeight = height => {
+    return (dimensions.fullHeight * height) / heightMobileUI;
+};
+  
+
+// check if it's iphone
+export const isIOS = () => {
+    return Platform.OS === 'ios';
+};
 
 // colors used in the app
 export const colors = {

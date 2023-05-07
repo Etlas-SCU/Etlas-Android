@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { colors } from "../../AppStyles";
+import { colors, responsiveHeight, responsiveWidth, isIOS } from "../../AppStyles";
 
 
 export const styles = StyleSheet.create({
@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
         flexDirection: "row"
     },
     menuBar: {
-        height: "11%",
+        height: responsiveHeight(100 - (isIOS() ? 0 : 20)),
         backgroundColor: colors.SolidGrey,
         position: 'absolute',
         borderTopRightRadius: 20,
@@ -21,38 +21,48 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'center',
-        verticalAlign: 'center',
-        elevation: 0,
-        paddingHorizontal: "5%"
+        verticalAlign: 'middle',
+        paddingHorizontal: responsiveWidth(13),
     },
     menuBarIcons: {
-        width: 35,
-        height: 32,
+        width: responsiveWidth(35),
+        height: responsiveHeight(33),
+        alignSelf: 'center',
     },
     menuBarIconsContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        verticalAlign: 'center',
+        verticalAlign: 'middle',
+        paddingVertical: responsiveHeight(19)
     },
     rightBorder: {
         borderRightColor: colors.DarkCyan,
         borderRightWidth: StyleSheet.hairlineWidth,
-        paddingLeft: "25%"
+        paddingLeft: responsiveWidth(28.6)
     },
     Scan: {
         alignSelf: "center",
-        width: "100%",
-        height: "100%",
+        width: responsiveWidth(70),
+        height: responsiveHeight(75),
+        backgroundColor: colors.DarkCyan,
+        borderRadius: 10,
+        alignContent: "center",
+        justifyContent: "center",
+        borderColor: colors.SolidGrey,
+        borderWidth: responsiveWidth(2),
+        marginTop: isIOS() ? responsiveHeight(-50) : responsiveHeight(-80)
     },
     ScanIcon: {
-        width: 72,
-        height: 72,
+        width: responsiveWidth(48),
+        height: responsiveHeight(48),
+        alignSelf: "center",
+        resizeMode: 'contain'
     },
     line: {
         borderBottomColor: colors.DarkCyan,
-        borderBottomWidth: 2,
-        width: "100%",
-        marginTop: 8,
+        borderBottomWidth: responsiveWidth(3),
+        width: responsiveWidth(40),
+        marginTop: responsiveHeight(15),
         alignSelf: "center",
     }
 })
