@@ -61,7 +61,7 @@
         "LandmarksScore": "12/96"
     },
     "Loader": {
-        "Wait": "Please wait"
+        "Wait": "Please Wait"
     },
     "RecognitionFailed": {
         "title": "Recognition Failed",
