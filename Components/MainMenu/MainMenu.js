@@ -40,7 +40,7 @@ export default function MainMenu({ pageName }) {
     const buttonsVal = [
         { title: translate('MainMenu.aboutus'), pageNav: "AboutUs" },
         { title: translate('MainMenu.terms'), pageNav: "AboutUs" },
-        { title: translate('MainMenu.contactus'), pageNav: "AboutUs" },
+        { title: translate('MainMenu.contactus'), pageNav: "ContactUS" },
     ]
 
     // create the buttons
