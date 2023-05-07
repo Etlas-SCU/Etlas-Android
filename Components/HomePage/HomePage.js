@@ -53,7 +53,7 @@ export default function HomePage({ navigation }) {
     for (let i = 0; i < 5; i++)
         toursList.push(Tour), monumentList.push(Monument);
 
-    const tours = toursList.map((tour, idx) => <ToursCard tour={tour} key={idx} />);
+    const tours = toursList.map((tour, idx) => <ToursCard tour={tour} key={idx} isPage={false} />);
     const monuments = monumentList.map((monument, idx) => <MonumentsCard monument={monument} key={idx} isPage={false}/>);
 
     return (

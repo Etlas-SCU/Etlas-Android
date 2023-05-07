@@ -1,15 +1,18 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { styles } from "./Styles";
-import { View, ScrollView, SafeAreaView, Text, TouchableOpacity, Image, TextInput } from "react-native";
+import { View, ScrollView, Text, TouchableOpacity, Image, TextInput } from "react-native";
 import { translate } from "../../Localization";
 import { colors } from "../../AppStyles";
 import ToursCard from "../ToursCard/ToursCard";
+import MainMenu from "../MainMenu/MainMenu";
+import { UserContext } from "../Context/Context";
 
 
 export default function ToursPage({ navigation }) {
 
+    const { modalVisible, showModal } = useContext(UserContext);
     const [searchTerm, setSearchTerm] = useState('');
-
+    
     const Tour = {
         Title: "Gize tour",
         Description: "where you can visit the pyramids and ride the camels.",
@@ -21,13 +24,13 @@ export default function ToursPage({ navigation }) {
     for (let i = 0; i < 20; i++)
         toursList.push(Tour);
 
-    const tours = toursList.map((tour, idx) => <ToursCard tour={tour} key={idx} />);
+    const tours = toursList.map((tour, idx) => <ToursCard tour={tour} key={idx} isPage={true} />);
 
     return (
-        <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
             <ScrollView contentContainerStyle={styles.contentContainer}>
                 <View style={styles.header}>
-                    <TouchableOpacity style={styles.aboutus} onPress={() => { navigation.navigate({ name: 'AboutUs' }) }}>
+                    <TouchableOpacity style={styles.aboutus} onPress={ showModal }>
                         <Image source={require('../../assets/KnowledgeCheck/tabler_exclamation-circle.png')} />
                     </TouchableOpacity>
                     <Text style={styles.title}>{translate('Tours.title')}</Text>
@@ -35,6 +38,7 @@ export default function ToursPage({ navigation }) {
                         <Image source={require('../../assets/Scan/Arr.png')} />
                     </TouchableOpacity>
                 </View>
+                {modalVisible ? <MainMenu /> : null}
                 <View style={styles.inputContainer}>
                     <TextInput
                         style={styles.SearchForm}
@@ -51,6 +55,6 @@ export default function ToursPage({ navigation }) {
                     {tours}
                 </View>
             </ScrollView>
-        </SafeAreaView>
+        </View>
     );
 }

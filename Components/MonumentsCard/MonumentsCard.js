@@ -1,4 +1,4 @@
-import { Page, Swipper, styles } from "./Styles";
+import { Page, Swipper } from "./Styles";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import { translate } from "../../Localization";
 

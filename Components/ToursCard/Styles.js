@@ -1,38 +1,38 @@
-import { colors, fontFamily, normalize } from "../../AppStyles";
+import { colors, fontFamily, normalize, responsiveHeight, responsiveWidth } from "../../AppStyles";
 import { StyleSheet } from "react-native";
 
-export const styles = StyleSheet.create({
+export const Swipper = StyleSheet.create({
     ToursCard: {
         backgroundColor: colors.SolidGrey,
         borderRadius: 30,
         flexDirection: 'row',
-        width: 346,
-        marginHorizontal: 5
+        width: responsiveWidth(346),
+        height: responsiveHeight(120),
+        marginHorizontal: responsiveWidth(7)
     },
     ToursCardImg: {
-        width: "35%",
-        height: "100%",
+        width: responsiveWidth(116),
+        height: responsiveHeight(120),
         borderTopLeftRadius: 30,
         borderBottomLeftRadius: 30,
     },
     ToursCardText: {
         flexDirection: 'column',
-        width: "65%"
+        width: responsiveWidth(230)
     },
     ToursCardTitle: {
         color: colors.DarkCyan,
         fontSize: normalize(18),
         fontFamily: fontFamily.MontserratBold,
-        marginLeft: "5%",
-        marginTop: "2%",
+        marginHorizontal: responsiveWidth(12),
+        marginTop: responsiveHeight(16),
     },
     ToursCardDesc: {
         color: colors.DarkGrey,
         fontSize: normalize(12),
         fontFamily: fontFamily.MontserratRegular,
-        marginLeft: "5%",
-        marginTop: "2%",
-        width: "90%"
+        marginHorizontal: responsiveWidth(12),
+        marginTop: responsiveHeight(1),
     },
 
     
@@ -41,13 +41,67 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         backgroundColor: colors.LightGrey,
         borderRadius: 20,
-        marginTop: "3%",
+        width: responsiveWidth(150),
+        height: responsiveHeight(24),
+        marginTop: responsiveHeight(5),
         alignContent: "center",
         alignItems: "center",
         justifyContent: "center",
-        padding: "2%",
-        marginBottom: "3%",
-        width: "80%",
-        alignSelf: "center"
+        padding: responsiveHeight(2),
+        marginBottom: responsiveHeight(7),
+        marginHorizontal: responsiveWidth(12),
+        gap: responsiveWidth(3.46)
+    },
+});
+
+export const Page = StyleSheet.create({
+    ToursCard: {
+        backgroundColor: colors.SolidGrey,
+        borderRadius: 30,
+        flexDirection: 'row',
+        width: responsiveWidth(382),
+        height: responsiveHeight(105),
+        marginHorizontal: responsiveWidth(7)
+    },
+    ToursCardImg: {
+        width: responsiveWidth(116),
+        height: responsiveHeight(105),
+        borderTopLeftRadius: 30,
+        borderBottomLeftRadius: 30,
+    },
+    ToursCardText: {
+        flexDirection: 'column',
+        width: responsiveWidth(230)
+    },
+    ToursCardTitle: {
+        color: colors.DarkCyan,
+        fontSize: normalize(18),
+        fontFamily: fontFamily.MontserratBold,
+        marginHorizontal: responsiveWidth(12),
+        marginTop: responsiveHeight(16),
+    },
+    ToursCardDesc: {
+        color: colors.DarkGrey,
+        fontSize: normalize(12),
+        fontFamily: fontFamily.MontserratRegular,
+        marginHorizontal: responsiveWidth(12),
+        marginTop: responsiveHeight(1),
+    },
+
+    
+    // stars
+    stars: {
+        flexDirection: 'row',
+        backgroundColor: colors.LightGrey,
+        borderRadius: 20,
+        width: responsiveWidth(150),
+        height: responsiveHeight(24),
+        marginTop: responsiveHeight(5),
+        alignContent: "center",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: responsiveHeight(2),
+        marginBottom: responsiveHeight(7),
+        marginHorizontal: responsiveWidth(12),
     },
 });
