@@ -12,8 +12,7 @@ import { init } from './Localization';
 import { Easing } from 'react-native';
 import MenuBar from './Components/MenuBar/MenuBar';
 import { UserProvider } from './Components/Context/Context';
-import { useResponsiveHeight, useResponsiveWidth, useDimensionsChange } from "react-native-responsive-dimensions";
-import { LayoutAnimation, View } from 'react-native'
+
 
 // import the screen
 const Stack = createStackNavigator();
@@ -94,7 +93,6 @@ export default function App() {
                     },
                 }}
                 >
-                    {language !== 'None' ? null : <Stack.Screen name="languageSelection" component={LanguageSelection} />}
                     <Stack.Screen name="onBoarding" component={OnBoarding} />
                     <Stack.Screen name="firstPage" component={FirstPage} />
                     <Stack.Screen name="secondPage" component={SecondPage} />

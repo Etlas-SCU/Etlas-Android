@@ -12,9 +12,10 @@ import RecognitionFailed from '../RecognitionFailed/RecognitionFailed'
 import MainMenu from "../MainMenu/MainMenu";
 import BestScore from "../BestScore/BestScore";
 import ContactUS from "../ContactUS/ContactUS";
+import TourDetails from "../TourDetails/TourDetails";
 
 
-export default function MenuBar({ navigation }) {
+export default function MenuBar({ }) {
 
     const Tab = createBottomTabNavigator();
 
@@ -62,6 +63,7 @@ export default function MenuBar({ navigation }) {
             <Tab.Screen name="mainMenu" component={MainMenu} options={{ tabBarButton: () => null, tabBarVisible: false }} />
             <Tab.Screen name="BestScore" component={BestScore} options={{ tabBarButton: () => null, tabBarVisible: false }} />
             <Tab.Screen name="ContactUS" component={ContactUS} options={{ tabBarButton: () => null, tabBarVisible: false }} />
+            <Tab.Screen name="TourDetails" component={TourDetails} options={{ tabBarButton: () => null, tabBarVisible: false }} />
         </Tab.Navigator>
     )
 }
