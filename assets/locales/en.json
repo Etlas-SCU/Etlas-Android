@@ -117,5 +117,14 @@
         "contactus": "Contact Us",
         "terms": "Terms",
         "copyright": "© Etlas all rights reserved 2023"
+    },
+    "ContactUs": {
+        "fullname": "Full Name",
+        "email": "E-mail",
+        "message": "Message",
+        "write_message": "Write a message",
+        "subject": "Subject",
+        "subject_input": "I'd like to ask about ...",
+        "submit": "Submit"
     }
 }

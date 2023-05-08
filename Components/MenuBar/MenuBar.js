@@ -11,6 +11,7 @@ import ToursPage from "../ToursPage/ToursPage";
 import RecognitionFailed from '../RecognitionFailed/RecognitionFailed'
 import MainMenu from "../MainMenu/MainMenu";
 import BestScore from "../BestScore/BestScore";
+import ContactUS from "../ContactUS/ContactUS";
 
 
 export default function MenuBar({ navigation }) {
@@ -60,6 +61,7 @@ export default function MenuBar({ navigation }) {
             <Tab.Screen name="ToursPage" component={ToursPage} options={{ tabBarButton: () => null, tabBarVisible: false }} />
             <Tab.Screen name="mainMenu" component={MainMenu} options={{ tabBarButton: () => null, tabBarVisible: false }} />
             <Tab.Screen name="BestScore" component={BestScore} options={{ tabBarButton: () => null, tabBarVisible: false }} />
+            <Tab.Screen name="ContactUS" component={ContactUS} options={{ tabBarButton: () => null, tabBarVisible: false }} />
         </Tab.Navigator>
     )
 }
