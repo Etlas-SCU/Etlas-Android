@@ -13,6 +13,7 @@ import MainMenu from "../MainMenu/MainMenu";
 import BestScore from "../BestScore/BestScore";
 import ContactUS from "../ContactUS/ContactUS";
 import TourDetails from "../TourDetails/TourDetails";
+import Settings from "../SettingsPage/SettingsPage";
 
 
 export default function MenuBar({ }) {
@@ -54,7 +55,7 @@ export default function MenuBar({ }) {
             <Tab.Screen name="AR" component={BestScore} />
             <Tab.Screen name="Scan" component={CameraScreen} options={{ tabBarStyle: { display: 'none' } }} />
             <Tab.Screen name="KnowledgeCheck" component={KnowledgeCheck} />
-            <Tab.Screen name="Settings" component={ToursPage} />
+            <Tab.Screen name="Settings" component={Settings} />
             <Tab.Screen name="AboutUs" component={AboutUs} options={{ tabBarButton: () => null, tabBarVisible: false }} />
             <Tab.Screen name="RecognitionFailed" component={RecognitionFailed} options={{ tabBarButton: () => null, tabBarVisible: false }} />
             <Tab.Screen name="Profile" component={Profile} options={{ tabBarButton: () => null, tabBarVisible: false }} />

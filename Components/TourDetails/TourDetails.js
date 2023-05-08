@@ -9,7 +9,8 @@ export default function TourDetails({ navigation, route }) {
 
     let images_src = Array(5).fill(require('../../assets/TourPage/Tour1.png'));
     const images = images_src.map((src, idx) => (<Image source={src} style={styles.image} key={idx}/>));
- 
+    
+    // get the parameters needed
     const { Tour, screen } = route.params;
     const { Title, Rate, fullDescription } = Tour;
 
