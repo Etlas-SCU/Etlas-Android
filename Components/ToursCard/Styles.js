@@ -8,7 +8,6 @@ export const Swipper = StyleSheet.create({
         borderRadius: 30,
         flexDirection: 'row',
         width: responsiveWidth(346),
-        height: responsiveHeight(120),
         marginHorizontal: responsiveWidth(7)
     },
     ToursCardImg: {
@@ -61,12 +60,10 @@ export const Page = StyleSheet.create({
         borderRadius: 30,
         flexDirection: 'row',
         width: responsiveWidth(382),
-        height: responsiveHeight(120),
         marginHorizontal: responsiveWidth(7)
     },
     ToursCardImg: {
         width: responsiveWidth(116),
-        height: responsiveHeight(120),
         borderTopLeftRadius: 30,
         borderBottomLeftRadius: 30,
     },
