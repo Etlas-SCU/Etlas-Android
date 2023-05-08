@@ -1,5 +1,6 @@
-import { colors, fontFamily, normalize, responsiveHeight, responsiveWidth } from '../../AppStyles'
+import { colors, fontFamily, responsiveFontSize, responsiveHeight, responsiveWidth } from '../../AppStyles'
 import { StyleSheet } from 'react-native'
+
 
 export const Swipper = StyleSheet.create({
     MonumentsCard: {
@@ -22,20 +23,20 @@ export const Swipper = StyleSheet.create({
     },
     MonumentsCardTitle: {
         color: colors.DarkCyan,
-        fontSize: normalize(16),
+        fontSize: responsiveFontSize(16),
         fontFamily: fontFamily.MontserratBold,
         marginTop: responsiveHeight(6),
         width: responsiveWidth(145)
     },
     MonumentsCardDesc: {
         color: colors.DarkGrey,
-        fontSize: normalize(12),
+        fontSize: responsiveFontSize(12),
         fontFamily: fontFamily.MontserratRegular,
         marginTop: responsiveHeight(5),
     },
     MonumentsCardDate: {
         color: colors.Black,
-        fontSize: normalize(12),
+        fontSize: responsiveFontSize(12),
         fontFamily: fontFamily.MontserratRegular,
         marginTop: responsiveHeight(5),
     },
@@ -48,7 +49,7 @@ export const Swipper = StyleSheet.create({
     },
     learn: {
         color: colors.LightSeaGreen,
-        fontSize: normalize(12),
+        fontSize: responsiveFontSize(12),
         fontFamily: fontFamily.MontserratRegular,
         marginTop: responsiveHeight(3),
         marginBottom: responsiveHeight(5),
@@ -61,7 +62,6 @@ export const Page = StyleSheet.create({
     MonumentsCard: {
         width: responsiveWidth(181),
         backgroundColor: colors.SolidGrey,
-        marginHorizontal: responsiveWidth(5),
         borderRadius: 20,
     },
     MonumentsCardImg: {
@@ -78,20 +78,20 @@ export const Page = StyleSheet.create({
     },
     MonumentsCardTitle: {
         color: colors.DarkCyan,
-        fontSize: normalize(16),
+        fontSize: responsiveFontSize(16),
         fontFamily: fontFamily.MontserratBold,
         marginTop: responsiveHeight(7),
         width: responsiveWidth(165)
     },
     MonumentsCardDesc: {
         color: colors.DarkGrey,
-        fontSize: normalize(12),
+        fontSize: responsiveFontSize(12),
         fontFamily: fontFamily.MontserratRegular,
         marginTop: responsiveHeight(7.82),
     },
     MonumentsCardDate: {
         color: colors.Black,
-        fontSize: normalize(12),
+        fontSize: responsiveFontSize(12),
         fontFamily: fontFamily.MontserratRegular,
         marginTop: responsiveHeight(7.83),
     },
@@ -104,7 +104,7 @@ export const Page = StyleSheet.create({
     },
     learn: {
         color: colors.LightSeaGreen,
-        fontSize: normalize(12),
+        fontSize: responsiveFontSize(12),
         fontFamily: fontFamily.MontserratRegular,
         marginTop: responsiveHeight(4),
         marginBottom: responsiveHeight(6),

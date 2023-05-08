@@ -10,9 +10,9 @@ export default function Loader({ message }) {
 
     const { loaderVisible, hideLoader } = useContext(UserContext);
     dot_colors = Array(10).fill(colors.Gold);
-    
+
     return (
-        <Modal 
+        <Modal
             animationType="slide"
             transparent={true}
             visible={loaderVisible}

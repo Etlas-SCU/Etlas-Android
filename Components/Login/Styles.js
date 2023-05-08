@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { fontFamily, colors, normalize, responsiveHeight, responsiveWidth } from "../../AppStyles";
+import { fontFamily, colors, responsiveFontSize, responsiveHeight, responsiveWidth } from "../../AppStyles";
 
 export const styles = StyleSheet.create({
     // first Page
@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
     },
     header: {
         fontFamily: fontFamily.CapitalisTypOasis,
-        fontSize: normalize(20),
+        fontSize: responsiveFontSize(20),
         color: colors.White,
         marginTop: responsiveHeight(80),
         marginLeft: responsiveWidth(24),
@@ -35,7 +35,7 @@ export const styles = StyleSheet.create({
     },
     helpingText: {
         fontFamily: fontFamily.MontserratRegular,
-        fontSize: normalize(15),
+        fontSize: responsiveFontSize(15),
         color: colors.White,
         marginTop: responsiveHeight(17),
         marginLeft: responsiveWidth(24),
@@ -48,12 +48,12 @@ export const styles = StyleSheet.create({
     },
     stateName: {
         fontFamily: fontFamily.MontserratSemiBold,
-        fontSize: normalize(18),
+        fontSize: responsiveFontSize(18),
         color: colors.Gold,
     },
     inputForm: {
         fontFamily: fontFamily.MontserratSemiBold,
-        fontSize: normalize(20),
+        fontSize: responsiveFontSize(20),
         color: colors.Black,
         backgroundColor: colors.White,
         borderRadius: 20,
@@ -78,7 +78,7 @@ export const styles = StyleSheet.create({
     },
     passText: {
         fontFamily: fontFamily.MontserratSemiBold,
-        fontSize: normalize(12),
+        fontSize: responsiveFontSize(12),
         color: colors.Grey,
         marginTop: responsiveHeight(8),
         textAlign: 'right',
@@ -89,7 +89,7 @@ export const styles = StyleSheet.create({
     },
     usingAppText: {
         fontFamily: fontFamily.MontserratRegular,
-        fontSize: normalize(18),
+        fontSize: responsiveFontSize(18),
         color: colors.White,
         alignSelf: "center",
         marginTop: responsiveHeight(60),
@@ -114,7 +114,7 @@ export const styles = StyleSheet.create({
     },
     nextText: {
         fontFamily: fontFamily.MontserratSemiBold,
-        fontSize: normalize(18),
+        fontSize: responsiveFontSize(18),
         color: colors.White,
     },
     signIn: {
@@ -125,12 +125,12 @@ export const styles = StyleSheet.create({
     },
     haveAccount: {
         fontFamily: fontFamily.MontserratSemiBold,
-        fontSize: normalize(15),
+        fontSize: responsiveFontSize(15),
         color: colors.White,
     },
     signInText: {
         fontFamily: fontFamily.MontserratSemiBold,
-        fontSize: normalize(15),
+        fontSize: responsiveFontSize(15),
         color: colors.Gold,
     }
 });

@@ -1,21 +1,16 @@
 import React, { useState } from "react";
-import { View, Text, Image, TouchableOpacity, TextInput, ScrollView, SafeAreaView } from "react-native";
-import { useNavigation } from '@react-navigation/native';
+import { View, Text, Image, TouchableOpacity, TextInput, ScrollView } from "react-native";
 import { styles } from './Styles';
 import { colors } from "../../AppStyles";
 import { translate } from '../../Localization'
 
-export function FirstPage() {
-
-    // get the navigation
-    const navigation = useNavigation();
+export function FirstPage({ navigation }) {
 
     // get the data from input
     const [fullname, setFullName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [hidden, setHidden] = useState(false);
-
 
     return (
         <View style={styles.container}>

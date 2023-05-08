@@ -7,10 +7,9 @@ import ToursCard from "../ToursCard/ToursCard";
 import MonumentsCard from "../MonumentsCard/MonumentsCard";
 import MainMenu from "../MainMenu/MainMenu";
 import { UserContext } from "../Context/Context";
-import Loader from '../Loader/Loader'
 
 
-function Section({ navigation, title, children, pageName }){
+function Section({ navigation, title, children, pageName }) {
     return (
         <View styles={styles.Box}>
             <View style={styles.boxHeader}>
@@ -55,18 +54,18 @@ export default function HomePage({ navigation }) {
         toursList.push(Tour), monumentList.push(Monument);
 
     const tours = toursList.map((tour, idx) => <ToursCard tour={tour} key={idx} isPage={false} />);
-    const monuments = monumentList.map((monument, idx) => <MonumentsCard monument={monument} key={idx} isPage={false}/>);
+    const monuments = monumentList.map((monument, idx) => <MonumentsCard monument={monument} key={idx} isPage={false} />);
 
     return (
         <View style={styles.container}>
             <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
                 <View style={styles.header}>
-                    <TouchableOpacity style={styles.aboutus} onPress={ showModal }>
+                    <TouchableOpacity style={styles.aboutus} onPress={showModal}>
                         <Image source={require('../../assets/KnowledgeCheck/tabler_exclamation-circle.png')} />
                     </TouchableOpacity>
                     <Text style={styles.title}>{translate('Home.title')}</Text>
                 </View>
-                {modalVisible ? <MainMenu pageName={'Home'}/> : null}
+                {modalVisible ? <MainMenu pageName={'Home'} /> : null}
                 <Image style={styles.logo} source={require('../../assets/HomePage/e.png')} />
                 <Text style={styles.etlas}>{translate('Home.etlas')}</Text>
                 <Text style={styles.desc}>{translate('Home.desc')}</Text>
