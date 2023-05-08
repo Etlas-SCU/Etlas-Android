@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useFonts } from 'expo-font';
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack'
@@ -11,6 +11,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { init } from './Localization';
 import { Easing } from 'react-native';
 import MenuBar from './Components/MenuBar/MenuBar';
+import { UserProvider } from './Components/Context/Context';
+import { useResponsiveHeight, useResponsiveWidth, useDimensionsChange } from "react-native-responsive-dimensions";
+import { LayoutAnimation, View } from 'react-native'
 
 // import the screen
 const Stack = createStackNavigator();
@@ -47,9 +50,18 @@ export default function App() {
         'Montserrat-Regular': require('./assets/fonts/Montserrat-Regular.ttf'),
         'Montserrat-SemiBold': require('./assets/fonts/Montserrat-SemiBold.ttf'),
         'Montserrat-Thin': require('./assets/fonts/Montserrat-Thin.ttf'),
+        'Montserrat-Light': require('./assets/fonts/Montserrat-Light.ttf'),
+        'Montserrat-Black': require('./assets/fonts/Montserrat-Black.ttf'),
+        'Poppins-Regular': require('./assets/fonts/Poppins-Regular.ttf'),
+        'Poppins-Bold': require('./assets/fonts/Poppins-Bold.ttf'),
+        'Poppins-Medium': require('./assets/fonts/Poppins-Medium.ttf'),
+        'Poppins-SemiBold': require('./assets/fonts/Poppins-SemiBold.ttf'),
+        'Poppins-Thin': require('./assets/fonts/Poppins-Thin.ttf'),
+        'Poppins-Light': require('./assets/fonts/Poppins-Light.ttf'),
+        'Poppins-Black': require('./assets/fonts/Poppins-Black.ttf'),
     });
 
-    // // clear the storage
+    // clear the storage
     // const clearAsyncStorage = async() => {
     //     AsyncStorage.clear();
     // }    
@@ -71,24 +83,26 @@ export default function App() {
 
     // if the font loaded, return the components
     return (
-        <NavigationContainer>
-            <Stack.Navigator screenOptions={{
-                header: () => null,
-                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-                transitionSpec: {
-                    open: timingConfig,
-                    close: timingConfig,
-                },
-            }}
-            >
-                {language !== 'None' ? null : <Stack.Screen name="languageSelection" component={LanguageSelection} />}
-                <Stack.Screen name="onBoarding" component={OnBoarding} />
-                <Stack.Screen name="firstPage" component={FirstPage} />
-                <Stack.Screen name="secondPage" component={SecondPage} />
-                <Stack.Screen name="login" component={Login} />
-                <Stack.Screen name="menuBar" component={MenuBar} />
-            </Stack.Navigator>
-        </NavigationContainer>
+        <UserProvider>
+            <NavigationContainer>
+                <Stack.Navigator screenOptions={{
+                    header: () => null,
+                    cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+                    transitionSpec: {
+                        open: timingConfig,
+                        close: timingConfig,
+                    },
+                }}
+                >
+                    {language !== 'None' ? null : <Stack.Screen name="languageSelection" component={LanguageSelection} />}
+                    <Stack.Screen name="onBoarding" component={OnBoarding} />
+                    <Stack.Screen name="firstPage" component={FirstPage} />
+                    <Stack.Screen name="secondPage" component={SecondPage} />
+                    <Stack.Screen name="login" component={Login} />
+                    <Stack.Screen name="menuBar" component={MenuBar} />
+                </Stack.Navigator>
+            </NavigationContainer>
+        </UserProvider>
     );
 }
 

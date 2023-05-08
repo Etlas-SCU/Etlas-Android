@@ -1,14 +1,10 @@
 import React, { useState } from "react";
-import { View, Text, Image, TouchableOpacity, TextInput, ScrollView, SafeAreaView } from "react-native";
-import { useNavigation } from '@react-navigation/native';
+import { View, Text, Image, TouchableOpacity, TextInput, ScrollView } from "react-native";
 import { styles } from './Styles';
 import { colors } from "../../AppStyles";
 import { translate } from '../../Localization'
 
-export function FirstPage() {
-
-    // get the navigation
-    const navigation = useNavigation();
+export function FirstPage({ navigation }) {
 
     // get the data from input
     const [fullname, setFullName] = useState('');
@@ -16,10 +12,9 @@ export function FirstPage() {
     const [password, setPassword] = useState('');
     const [hidden, setHidden] = useState(false);
 
-
     return (
-        <SafeAreaView style={styles.container}>
-            <ScrollView style={styles.container}>
+        <View style={styles.container}>
+            <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
                 <View style={styles.header_container}>
                     <Text style={styles.header}>{translate('Register.title')}</Text>
                     <TouchableOpacity style={styles.header} onPress={() => navigation.goBack()}>
@@ -101,6 +96,6 @@ export function FirstPage() {
                     </TouchableOpacity>
                 </View>
             </ScrollView>
-        </SafeAreaView>
+        </View>
     );
 }

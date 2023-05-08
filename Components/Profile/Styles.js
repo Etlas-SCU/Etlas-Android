@@ -1,59 +1,75 @@
-import { colors, fontFamily } from '../../AppStyles'
+import { colors, fontFamily, responsiveFontSize, responsiveHeight, responsiveWidth, isIOS } from '../../AppStyles'
 import { StyleSheet } from 'react-native'
 
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: colors.DarkCyan,
+    },
+    upperBox: {
         backgroundColor: colors.White,
+        height: responsiveHeight(300 + (isIOS() ? 0 : 50)),
+    },
+    scrollContainer: {
+        paddingBottom: responsiveHeight(200),
     },
     close: {
-        width: 32,
-        height: 32,
-        alignSelf:'flex-end',
-        marginTop: "15%",
-        marginRight: "5%",
+        width: responsiveWidth(32),
+        height: responsiveHeight(32),
+        alignSelf: 'flex-end',
+        marginTop: responsiveHeight(55),
+        marginRight: responsiveWidth(24),
     },
     title: {
         fontFamily: fontFamily.MontserratBold,
-        fontSize: 18,
+        fontSize: responsiveFontSize(18),
         color: colors.DarkCyan,
-        alignSelf:"center"
+        alignSelf: "center"
+    },
+    WhiteBody: {
+        backgroundColor: colors.White,
     },
     body: {
         backgroundColor: colors.DarkCyan,
-        flex: 1,
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
-        marginTop: "50%",
     },
     profile: {
-        width: 200,
-        height: 200,
+        backgroundColor: colors.DarkCyan,
         alignSelf: "center",
-        borderRadius: 100,
-        marginTop: "-25%",
+        marginTop: responsiveHeight(-100),
         borderColor: colors.DarkCyan,
-        borderWidth: 8
+        borderWidth: 10,
+    },
+    profilePic: {
+        alignSelf: "center",
+        height: responsiveHeight(228.15),
+        width: responsiveWidth(228.15),
     },
     name: {
         fontFamily: fontFamily.MontserratBold,
-        fontSize: 24,
+        fontSize: responsiveFontSize(24),
         color: colors.White,
         alignSelf: "center",
-        marginTop: "5%",
+        marginTop: responsiveHeight(25.23),
     },
     field: {
         fontFamily: fontFamily.MontserratRegular,
-        fontSize: 18,
+        fontSize: responsiveFontSize(18),
         color: colors.Gold,
-        marginLeft: "5%",
-        marginTop: "5%"
     },
     info: {
         fontFamily: fontFamily.MontserratSemiBold,
-        fontSize: 20,
+        fontSize: responsiveFontSize(20),
         color: colors.White,
-        marginLeft: "5%",
-        marginTop: "2%"
+    },
+    infoBox: {
+        backgroundColor: colors.DarkCyan,
+        marginTop: responsiveHeight(44),
+        marginLeft: responsiveWidth(24),
+        gap: responsiveHeight(32)
+    },
+    Box: {
+        gap: responsiveHeight(3)
     }
 });

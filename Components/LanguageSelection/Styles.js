@@ -1,12 +1,17 @@
 import { StyleSheet } from "react-native";
-import { fontFamily, colors, fontWeight } from "../../AppStyles";
+import { fontFamily, colors, fontWeight, dimensions } from "../../AppStyles";
 
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
+    contentContainer: {
+        flex: 1,
+        paddingBottom: "35%",
+    },
     image: {
         flex: 1,
+        resizeMode: "cover",
     },
     text_box: {
         flexDirection: "row",
@@ -14,30 +19,30 @@ export const styles = StyleSheet.create({
     header: {
         fontFamily: fontFamily.CapitalisTypOasis,
         color: colors.Gold,
-        fontSize: 50,
+        fontSize: (dimensions.fullHeight / dimensions.fullWidth) * 20,
         textAlign: 'left',
-        marginTop: 102,
-        marginLeft: 24,
+        marginTop: "25%",
+        marginLeft: "5%",
     },
     desc: {
         fontFamily: fontFamily.MontserratMedium,
         color: colors.White,
-        fontSize: 20,
+        fontSize: (dimensions.fullHeight / dimensions.fullWidth) * 9,
         textAlign: 'left',
-        marginTop: 23,
-        marginLeft: 24,
+        marginTop: "10%",
+        marginLeft: "5%",
         flexDirection: "row",
         flexWrap: "wrap",
-        width: 284,
-        marginBottom: 20
+        width: "70%",
+        marginBottom: "5%"
     },
     worry: {
         fontFamily: fontFamily.MontserratBold,
         color: colors.White,
         fontSize: 20,
         textAlign: 'left',
-        marginTop: 23,
-        marginLeft: 24,
+        marginTop: "10%",
+        marginLeft: "5%",
         flexDirection: "row",
         flexWrap: "wrap",
         width: 287
@@ -60,14 +65,18 @@ export const styles = StyleSheet.create({
         justifyContent: "space-between",
         alignItems: "center",
         gap: 15,
-        paddingTop: 10
+        paddingTop: 10,
+    },
+    Swipper: {
+        width: "100%",
+        height: "30%",
     },
     buttons: {
-        width: 285,
-        height: 57,
+        width: "80%",
         borderRadius: 20,
         justifyContent: "center",
         alignItems: "center",
+        height: 57,
     },
     continue: {
         backgroundColor: colors.Gold,
@@ -86,32 +95,15 @@ export const styles = StyleSheet.create({
         fontSize: 20,
         textAlign: 'center',
     },
-    swipper: {
-        flex: 0.7,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginVertical: 30,
-    },
-    wrapper: {},
-    slide1: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    slide2: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    slide3: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    slide4: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+    swiper_container: {
+        marginBottom: "10%",
+        alignSelf: "center",
+        width: "100%",
+        justifyContent: "center",
+        alignItems: "center",
+        margin: "20%",
+        gap: 20,
+        paddingBottom: "50%"
     },
     text: {
         color: colors.White,

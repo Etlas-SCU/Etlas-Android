@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, Image, TouchableOpacity, TextInput, ScrollView, SafeAreaView } from "react-native";
-import { useNavigation } from '@react-navigation/native';
+import { View, Text, Image, TouchableOpacity, TextInput, ScrollView } from "react-native";
 import { styles } from './Styles';
 import { colors } from "../../AppStyles";
 import { translate } from '../../Localization'
@@ -14,8 +13,8 @@ export default function Login({ navigation }) {
 
 
     return (
-        <SafeAreaView style={styles.container}>
-            <ScrollView style={styles.container}>
+        <View style={styles.container}>
+            <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
                 <View style={styles.header_container}>
                     <Text style={styles.header}>{translate('Login.title')}</Text>
                     <TouchableOpacity style={styles.header} onPress={() => navigation.goBack()}>
@@ -80,6 +79,6 @@ export default function Login({ navigation }) {
                     </TouchableOpacity>
                 </View>
             </ScrollView>
-        </SafeAreaView>
+        </View>
     );
 }

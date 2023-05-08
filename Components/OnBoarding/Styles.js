@@ -1,11 +1,13 @@
 import { StyleSheet } from "react-native";
-import { fontFamily, colors, dimensions } from "../../AppStyles";
+import { fontFamily, colors, responsiveFontSize, responsiveWidth, responsiveHeight } from "../../AppStyles";
 
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: colors.DarkCyan,
-        Width: "2rem"
+    },
+    containerScrolling: {
+        // paddingBottom: responsiveHeight(20)
     },
     text_box: {
         flexDirection: "row",
@@ -13,57 +15,56 @@ export const styles = StyleSheet.create({
     header: {
         fontFamily: fontFamily.CapitalisTypOasis,
         color: colors.Gold,
-        fontSize: 50,
+        fontSize: responsiveFontSize(50),
         textAlign: 'left',
-        marginTop: 102,
-        marginLeft: 24,
+        marginTop: responsiveHeight(102),
+        marginLeft: responsiveWidth(24),
     },
     desc: {
         fontFamily: fontFamily.MontserratMedium,
         color: colors.White,
-        fontSize: 20,
+        fontSize: responsiveFontSize(20),
         textAlign: 'left',
-        marginTop: 23,
-        marginLeft: 24,
+        marginTop: responsiveHeight(23),
+        marginLeft: responsiveWidth(24),
         flexDirection: "row",
         flexWrap: "wrap",
-        width: 284
+        width: responsiveWidth(284)
     },
     worry: {
         fontFamily: fontFamily.MontserratBold,
         color: colors.White,
-        fontSize: 20,
+        fontSize: responsiveFontSize(20),
         textAlign: 'left',
-        marginTop: 23,
-        marginLeft: 24,
+        marginTop: responsiveHeight(23),
+        marginLeft: responsiveWidth(24),
         flexDirection: "row",
         flexWrap: "wrap",
-        width: 287
+        width: responsiveWidth(287)
     },
     logoContainer: {
         alignItems: 'flex-end',
+        justifyContent: 'flex-end',
+        position: "absolute",
+        top: responsiveHeight(391),
+        right: responsiveWidth(0),
     },
     wolf: {
         flex: 1,
-        width: "55%",
-        height: "65%",
         resizeMode: 'contain',
-        position: 'absolute',
-        bottom: "-15%",
-        marginLeft: "-1%",
-        marginTop: 30
+        width: responsiveWidth(468),
+        height: responsiveHeight(624),
     },
     button_container: {
         flexDirection: "column",
-        justifyContent: "space-between",
+        alignItems: 'center',
         alignItems: "flex-end",
-        marginRight: "10%",
-        marginTop: "5%",
-        gap: 15
+        marginRight: responsiveWidth(24),
+        gap: responsiveWidth(20)
     },
     sign_buttons: {
-        width: 181,
-        height: 57,
+        width: responsiveWidth(181),
+        height: responsiveHeight(57),
         borderRadius: 20,
         backgroundColor: colors.Gold,
         justifyContent: "center",
@@ -72,7 +73,7 @@ export const styles = StyleSheet.create({
     button_text: {
         fontFamily: fontFamily.MontserratBold,
         color: colors.White,
-        fontSize: 20,
+        fontSize: responsiveFontSize(20),
         textAlign: 'center',
     },
     sign_in: {
@@ -82,5 +83,12 @@ export const styles = StyleSheet.create({
         backgroundColor: 'transparent',
         borderWidth: 2,
         borderColor: colors.Gold,
+    },
+    bottom_container: {
+        flexDirection: "row",
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        // marginTop: "5%",
+        maxHeight: responsiveHeight(624)
     }
 });

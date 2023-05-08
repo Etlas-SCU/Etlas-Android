@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { View, Text, Image, TouchableOpacity, TextInput, ScrollView, SafeAreaView } from "react-native";
+import { View, Text, Image, TouchableOpacity, TextInput, ScrollView } from "react-native";
 import IntlPhoneField from 'react-native-intl-phone-field';
-import { useNavigation } from '@react-navigation/native';
 import { styles } from './Styles';
 import { colors } from "../../AppStyles";
 import { translate } from '../../Localization'
+
 
 export function SecondPage({ route, navigation }) {
 
@@ -14,8 +14,8 @@ export function SecondPage({ route, navigation }) {
     const [address, setAddress] = useState('');
 
     return (
-        <SafeAreaView style={styles.container}>
-            <ScrollView style={styles.container}>
+        <View style={styles.container}>
+            <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
                 <View style={styles.header_container}>
                     <Text style={styles.header}>{translate('Register.title')}</Text>
                     <TouchableOpacity style={styles.header} onPress={() => navigation.goBack()}>
@@ -68,6 +68,6 @@ export function SecondPage({ route, navigation }) {
                     </TouchableOpacity>
                 </View>
             </ScrollView>
-        </SafeAreaView>
+        </View>
     );
 }

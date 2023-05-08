@@ -1,4 +1,4 @@
-import { colors, fontFamily } from "../../AppStyles";
+import { colors, fontFamily, responsiveFontSize, responsiveHeight, responsiveWidth } from "../../AppStyles";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
@@ -7,34 +7,34 @@ export const styles = StyleSheet.create({
         backgroundColor: colors.DarkCyan,
     },
     contentContainer: {
-        paddingBottom: "40%"
+        paddingBottom: responsiveHeight(200)
     },
     header: {
         flexDirection: "row",
-        marginTop: "12%",
+        marginTop: responsiveHeight(60),
         justifyContent: "space-between",
-        marginHorizontal: "5%"
+        marginHorizontal: responsiveWidth(24)
     },
     title: {
         color: colors.White,
-        fontSize: 18,
+        fontSize: responsiveFontSize(18),
         fontFamily: fontFamily.MontserratBold,
     },
     inputContainer: {
         flexDirection: "row",
         justifyContent: "space-between",
-        marginHorizontal: "5%",
-        marginTop: "10%",
+        marginHorizontal: responsiveWidth(24),
+        marginTop: responsiveHeight(40),
     },
     SearchForm: {
         backgroundColor: colors.SolidGrey,
         borderRadius: 20,
-        width: "75%",
-        height: 64,
+        width: responsiveWidth(302),
+        height: responsiveHeight(64),
         alignSelf: "center",
-        fontSize: 18,
+        fontSize: responsiveFontSize(18),
         fontFamily: fontFamily.MontserratRegular,
-        paddingHorizontal: "5%",
+        paddingHorizontal: responsiveWidth(24),
         textAlign: "left"
     },
     filter: {
@@ -44,8 +44,8 @@ export const styles = StyleSheet.create({
         flexDirection: "row",
         flexWrap: "wrap",
         justifyContent: "space-between",
-        marginHorizontal: "5%",
-        marginTop: "10%",
-        rowGap: 20
+        marginHorizontal: responsiveWidth(24),
+        marginTop: responsiveHeight(27),
+        rowGap: responsiveHeight(20)
     },
 });
