@@ -1,4 +1,4 @@
-import { colors, fontFamily, normalize, responsiveHeight, responsiveWidth, isIOS } from '../../AppStyles'
+import { colors, fontFamily, responsiveFontSize, responsiveHeight, responsiveWidth, isIOS } from '../../AppStyles'
 import { StyleSheet } from 'react-native'
 
 export const styles = StyleSheet.create({
@@ -22,7 +22,7 @@ export const styles = StyleSheet.create({
     },
     title: {
         fontFamily: fontFamily.MontserratBold,
-        fontSize: normalize(18),
+        fontSize: responsiveFontSize(18),
         color: colors.DarkCyan,
         alignSelf: "center"
     },
@@ -48,19 +48,19 @@ export const styles = StyleSheet.create({
     },
     name: {
         fontFamily: fontFamily.MontserratBold,
-        fontSize: normalize(24),
+        fontSize: responsiveFontSize(24),
         color: colors.White,
         alignSelf: "center",
         marginTop: responsiveHeight(25.23),
     },
     field: {
         fontFamily: fontFamily.MontserratRegular,
-        fontSize: normalize(18),
+        fontSize: responsiveFontSize(18),
         color: colors.Gold,
     },
     info: {
         fontFamily: fontFamily.MontserratSemiBold,
-        fontSize: normalize(20),
+        fontSize: responsiveFontSize(20),
         color: colors.White,
     },
     infoBox: {

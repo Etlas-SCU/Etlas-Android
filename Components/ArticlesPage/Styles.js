@@ -1,4 +1,4 @@
-import { colors, fontFamily, normalize, responsiveHeight, responsiveWidth } from "../../AppStyles";
+import { colors, fontFamily, responsiveFontSize, responsiveHeight, responsiveWidth } from "../../AppStyles";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
@@ -17,7 +17,7 @@ export const styles = StyleSheet.create({
     },
     title: {
         color: colors.White,
-        fontSize: normalize(18),
+        fontSize: responsiveFontSize(18),
         fontFamily: fontFamily.MontserratBold,
     },
     inputContainer: {
@@ -32,7 +32,7 @@ export const styles = StyleSheet.create({
         width: responsiveWidth(302),
         height: responsiveHeight(64),
         alignSelf: "center",
-        fontSize: normalize(18),
+        fontSize: responsiveFontSize(18),
         fontFamily: fontFamily.MontserratRegular,
         paddingHorizontal: responsiveWidth(24),
         textAlign: "left"

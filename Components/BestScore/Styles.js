@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { fontFamily, colors, normalize, responsiveHeight, responsiveWidth, isIOS } from "../../AppStyles";
+import { fontFamily, colors, responsiveFontSize, responsiveHeight, responsiveWidth } from "../../AppStyles";
 
 export const styles = StyleSheet.create({
     container: {
@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
     scrollContainer: {
         paddingBottom: responsiveHeight(200),
     },
-    close:{
+    close: {
         width: responsiveWidth(32),
         height: responsiveHeight(32),
         right: responsiveWidth(24),
@@ -29,13 +29,12 @@ export const styles = StyleSheet.create({
     title: {
         fontFamily: fontFamily.MontserratBold,
         color: colors.DarkCyan,
-        fontSize: normalize(18),
+        fontSize: responsiveFontSize(18),
         textAlign: 'center',
         alignSelf: 'center',
     },
     ScoreBox: {
         width: responsiveWidth(382),
-        height: responsiveHeight(380 + (isIOS() ? 0 : 40)),
         backgroundColor: colors.DarkCyan,
         alignSelf: "center",
         marginTop: responsiveHeight(77),
@@ -44,14 +43,14 @@ export const styles = StyleSheet.create({
     },
     score: {
         color: colors.White,
-        fontSize: normalize(100),
+        fontSize: responsiveFontSize(100),
         fontFamily: fontFamily.MontserratBold,
         alignSelf: "center",
         marginTop: responsiveHeight(48),
     },
     scoreTxt: {
         color: colors.White,
-        fontSize: normalize(25),
+        fontSize: responsiveFontSize(25),
         fontFamily: fontFamily.MontserratMedium,
         alignSelf: "center",
         marginTop: responsiveHeight(24),
@@ -65,7 +64,7 @@ export const styles = StyleSheet.create({
     },
     bestScore: {
         color: colors.Gold,
-        fontSize: normalize(30),
+        fontSize: responsiveFontSize(30),
         fontFamily: fontFamily.MontserratSemiBold,
         alignSelf: "center",
         marginTop: responsiveHeight(30),
@@ -78,7 +77,7 @@ export const styles = StyleSheet.create({
     },
     ask: {
         color: colors.DarkCyan,
-        fontSize: normalize(20),
+        fontSize: responsiveFontSize(20),
         fontFamily: fontFamily.MontserratBold,
         width: responsiveWidth(280),
         textAlign: "center",
@@ -96,7 +95,7 @@ export const styles = StyleSheet.create({
     },
     buttonText: {
         color: colors.White,
-        fontSize: normalize(20),
+        fontSize: responsiveFontSize(20),
         fontFamily: fontFamily.MontserratBold,
     },
 });

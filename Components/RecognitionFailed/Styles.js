@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
-import { colors, fontFamily, normalize, responsiveHeight, responsiveWidth } from "../../AppStyles";
+import { colors, fontFamily, responsiveFontSize, responsiveHeight, responsiveWidth } from "../../AppStyles";
+
 
 export const styles = StyleSheet.create({
     container: {
@@ -24,7 +25,7 @@ export const styles = StyleSheet.create({
     },
     title: {
         color: colors.White,
-        fontSize: normalize(24),
+        fontSize: responsiveFontSize(24),
         fontFamily: fontFamily.MontserratBold,
         alignSelf: "center",
         textAlign: "center",
@@ -32,7 +33,7 @@ export const styles = StyleSheet.create({
     },
     text: {
         color: colors.White,
-        fontSize: normalize(15),
+        fontSize: responsiveFontSize(15),
         fontFamily: fontFamily.MontserratRegular,
         alignSelf: "center",
         textAlign: "center",
@@ -51,7 +52,7 @@ export const styles = StyleSheet.create({
     },
     button_text: {
         color: colors.White,
-        fontSize: normalize(18),
+        fontSize: responsiveFontSize(18),
         fontFamily: fontFamily.MontserratBold,
     },
 });

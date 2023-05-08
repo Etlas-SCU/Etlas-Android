@@ -5,6 +5,7 @@ import { FancyAlert } from 'react-native-expo-fancy-alerts';
 import { colors } from "../../AppStyles";
 import { CommonActions } from '@react-navigation/native';
 
+
 export default function PopupMessage({ state, message, pageName, navigation }) {
 
     // Use the useState hook to manage the visibility state of the alert

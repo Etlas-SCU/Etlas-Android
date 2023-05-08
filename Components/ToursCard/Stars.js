@@ -2,6 +2,7 @@ import { View } from 'react-native'
 import { FontAwesome } from '@expo/vector-icons'
 import { Page, Swipper } from './Styles';
 
+
 export default function Stars({ rate, size, color, isPage }) {
 
     const fullStars = Math.floor(rate);
@@ -9,7 +10,7 @@ export default function Stars({ rate, size, color, isPage }) {
     const emptyStars = 5 - fullStars - halfStars;
 
     return (
-        <View style={ isPage ? Page.stars : Swipper.stars }>
+        <View style={isPage ? Page.stars : Swipper.stars}>
             {[...Array(fullStars)].map((_, i) => (
                 <FontAwesome key={i} name="star" size={size} color={color} />
             ))}

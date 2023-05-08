@@ -1,13 +1,12 @@
 import { StyleSheet } from "react-native";
-import { colors, fontFamily, normalize,responsiveHeight, responsiveWidth, dimensions } from "../../AppStyles";
+import { colors, fontFamily, responsiveFontSize, responsiveHeight, responsiveWidth, dimensions } from "../../AppStyles";
 
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: colors.DarkCyan,
     },
-    contentContainer: {
-    },
+    contentContainer: {},
     logo: {
         alignSelf: "center",
         marginTop: responsiveHeight(136),
@@ -28,7 +27,7 @@ export const styles = StyleSheet.create({
     copyright: {
         alignSelf: "center",
         color: colors.White,
-        fontSize: normalize(13),
+        fontSize: responsiveFontSize(13),
         fontFamily: fontFamily.PoppinsRegular,
     },
     description: {
@@ -36,7 +35,7 @@ export const styles = StyleSheet.create({
         alignSelf: "center",
         textAlign: "center",
         color: colors.White,
-        fontSize: normalize(18),
+        fontSize: responsiveFontSize(18),
         fontFamily: fontFamily.MontserratRegular,
         width: responsiveWidth(350)
     },
@@ -46,13 +45,13 @@ export const styles = StyleSheet.create({
         width: dimensions.fullWidth,
         alignSelf: "center",
         marginTop: responsiveHeight(-30),
-        width: responsiveWidth(338)        
+        width: responsiveWidth(338)
     },
     findus: {
         marginTop: responsiveHeight(13),
         alignSelf: "center",
         color: colors.White,
-        fontSize: normalize(15),
+        fontSize: responsiveFontSize(15),
         fontFamily: fontFamily.MontserratRegular,
     },
     close: {

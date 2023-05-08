@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { fontFamily, colors, normalize, responsiveWidth, responsiveHeight } from "../../AppStyles";
+import { fontFamily, colors, responsiveFontSize, responsiveWidth, responsiveHeight } from "../../AppStyles";
 
 export const styles = StyleSheet.create({
     container: {
@@ -15,7 +15,7 @@ export const styles = StyleSheet.create({
     header: {
         fontFamily: fontFamily.CapitalisTypOasis,
         color: colors.Gold,
-        fontSize: normalize(50),
+        fontSize: responsiveFontSize(50),
         textAlign: 'left',
         marginTop: responsiveHeight(102),
         marginLeft: responsiveWidth(24),
@@ -23,7 +23,7 @@ export const styles = StyleSheet.create({
     desc: {
         fontFamily: fontFamily.MontserratMedium,
         color: colors.White,
-        fontSize: normalize(20),
+        fontSize: responsiveFontSize(20),
         textAlign: 'left',
         marginTop: responsiveHeight(23),
         marginLeft: responsiveWidth(24),
@@ -34,7 +34,7 @@ export const styles = StyleSheet.create({
     worry: {
         fontFamily: fontFamily.MontserratBold,
         color: colors.White,
-        fontSize: normalize(20),
+        fontSize: responsiveFontSize(20),
         textAlign: 'left',
         marginTop: responsiveHeight(23),
         marginLeft: responsiveWidth(24),
@@ -73,7 +73,7 @@ export const styles = StyleSheet.create({
     button_text: {
         fontFamily: fontFamily.MontserratBold,
         color: colors.White,
-        fontSize: normalize(20),
+        fontSize: responsiveFontSize(20),
         textAlign: 'center',
     },
     sign_in: {
@@ -85,7 +85,7 @@ export const styles = StyleSheet.create({
         borderColor: colors.Gold,
     },
     bottom_container: {
-        flexDirection: "row",   
+        flexDirection: "row",
         justifyContent: 'space-around',
         alignItems: 'center',
         // marginTop: "5%",

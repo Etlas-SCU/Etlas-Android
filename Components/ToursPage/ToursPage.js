@@ -12,7 +12,7 @@ export default function ToursPage({ navigation }) {
 
     const { modalVisible, showModal } = useContext(UserContext);
     const [searchTerm, setSearchTerm] = useState('');
-    
+
     const Tour = {
         Title: "Gize tour",
         Description: "where you can visit the pyramids and ride the camels.",
@@ -28,9 +28,9 @@ export default function ToursPage({ navigation }) {
 
     return (
         <View style={styles.container}>
-            <ScrollView contentContainerStyle={styles.contentContainer}>
+            <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
                 <View style={styles.header}>
-                    <TouchableOpacity style={styles.aboutus} onPress={ showModal }>
+                    <TouchableOpacity style={styles.aboutus} onPress={showModal}>
                         <Image source={require('../../assets/KnowledgeCheck/tabler_exclamation-circle.png')} />
                     </TouchableOpacity>
                     <Text style={styles.title}>{translate('Tours.title')}</Text>
@@ -38,7 +38,7 @@ export default function ToursPage({ navigation }) {
                         <Image source={require('../../assets/Scan/Arr.png')} />
                     </TouchableOpacity>
                 </View>
-                {modalVisible ? <MainMenu pageName={'ToursPage'}/> : null}
+                {modalVisible ? <MainMenu pageName={'ToursPage'} /> : null}
                 <View style={styles.inputContainer}>
                     <TextInput
                         style={styles.SearchForm}
