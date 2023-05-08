@@ -3,14 +3,24 @@ import { View, Text, Image, TouchableOpacity } from "react-native";
 import Stars from "./Stars";
 import { colors } from "../../AppStyles";
 import { responsiveHeight } from "../../AppStyles";
+import { useRoute } from '@react-navigation/native';
 
 
-export default function ToursCard({ tour, isPage }) {
+export default function ToursCard({ navigation, tour, isPage }) {
 
     const { Title, Description, Rate, Img } = tour;
+    const { name: pageName } = useRoute();
 
     return (
-        <TouchableOpacity style={isPage ? Page.ToursCard : Swipper.ToursCard}>
+        <TouchableOpacity
+            style={isPage ? Page.ToursCard : Swipper.ToursCard}
+            onPress={() => {
+                navigation.navigate('TourDetails', {
+                    Tour: tour,
+                    screen: pageName
+                })
+            }}
+        >
             <Image style={isPage ? Page.ToursCardImg : Swipper.ToursCardImg} source={Img} />
             <View style={isPage ? Page.ToursCardText : Swipper.ToursCardText}>
                 <Text style={isPage ? Page.ToursCardTitle : Swipper.ToursCardTitle} numberOfLines={1}>{Title}</Text>

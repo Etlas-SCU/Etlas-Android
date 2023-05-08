@@ -6,20 +6,20 @@ import { UserContext } from '../Context/Context';
 import { useNavigation } from '@react-navigation/native';
 
 
-function Button({ title, pageNav, hideModal, pageName }) {
+function Button ({ title, pageNav, hideModal, pageName }){
 
     // use the navigation
     const navigation = useNavigation();
-
+    
     // navigate to the page
     const ButtonNav = (pageNav) => {
         hideModal();
         navigation.navigate(
-            {
+            { 
                 name: pageNav,
                 params: {
                     pageName: pageName
-                }
+                }   
             },
         );
     }
@@ -44,10 +44,10 @@ export default function MainMenu({ pageName }) {
     ]
 
     // create the buttons
-    const buttons = buttonsVal.map((button, idx) => <Button key={idx} title={button.title} pageNav={button.pageNav} hideModal={hideModal} pageName={pageName} />);
+    const buttons = buttonsVal.map((button, idx) => <Button key={idx} title={button.title} pageNav={button.pageNav} hideModal={hideModal} pageName={pageName}/> );
 
     return (
-        <Modal
+        <Modal 
             animationType="slide"
             transparent={true}
             visible={modalVisible}
@@ -56,10 +56,10 @@ export default function MainMenu({ pageName }) {
             <View style={styles.container}>
                 <ImageBackground source={require('../../assets/MainMenu/Background.png')} style={styles.background} borderRadius={20}>
                     <TouchableOpacity onPress={() => hideModal()}>
-                        <Image source={require('../../assets/MainMenu/close.png')} style={styles.close} />
+                        <Image source={require('../../assets/MainMenu/close.png')} style={styles.close}/>
                     </TouchableOpacity>
                     <Text style={styles.title}>{translate('MainMenu.message')}</Text>
-                    <View style={styles.line} />
+                    <View style={styles.line}/>
                     <View style={styles.buttons}>
                         {buttons}
                     </View>

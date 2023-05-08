@@ -6,7 +6,8 @@
         "arabic": "العـربــيـــة",
         "spanish": "Spanish",
         "french": "French",
-        "continue": "continue"
+        "continue": "continue",
+        "choose": "Choose your language"
     },
     "OnBoarding": {
         "title": "Etlas",
@@ -126,5 +127,16 @@
         "subject": "Subject",
         "subject_input": "I'd like to ask about ...",
         "submit": "Submit"
+    },
+    "Settings": {
+        "title": "Settings",
+        "name": "Ahmed Hossam",
+        "edit": "Edit Profile",
+        "content": "Content",
+        "preferences": "Preferences",
+        "fav": "Favourites",
+        "best_score": "BestScore",
+        "language": "Language",
+        "logout": "Logout"
     }
 }
