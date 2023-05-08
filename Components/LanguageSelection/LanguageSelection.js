@@ -1,63 +1,49 @@
-import { Text, View, TouchableOpacity, ImageBackground, Image, ScrollView } from "react-native";
-import Swiper from 'react-native-swiper'
+import { Text, View, TouchableOpacity, Image, ScrollView } from "react-native";
 import { styles } from "./Styles";
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { translate } from '../../Localization'
+import { translate } from '../../Localization';
+import { useState } from "react";
 
 export default function LanguageSelection({ navigation }) {
 
-    const storeLanguageChoice = async (language) => {
-        try {
-            await AsyncStorage.setItem('language', language);
-        } catch (error) {
-            console.log(error);
-        }
-    };
+    // state for the selected language
+    const [selected, setSelected] = useState('en');
 
-    // to store the language and move to the next slides
-    const handleLanguage = () => {
-        storeLanguageChoice('English');
-        navigation.navigate('onBoarding');
+    // languages
+    const languages = {
+        "en": translate('LanguageSelection.english'),
+        "ar": translate('LanguageSelection.arabic'),
+        "fr": translate('LanguageSelection.french'),
+        "sp": translate('LanguageSelection.spanish'),
     }
+
+    // create the buttons
+    const buttons = Object.keys(languages).map((key, idx) => {
+        return (
+            <TouchableOpacity key={idx} style={styles.language} onPress={() => { setSelected(key) }} disabled={key != 'en'}>
+                <Text style={styles.languageText}>{languages[key]}</Text>
+                {key == selected ? <Image source={require('../../assets/language_selection/check.png')} style={styles.check} /> : null}
+            </TouchableOpacity>
+        )
+    });
 
     // if the font loaded, return the text
     return (
         <View style={styles.container}>
-            <ImageBackground source={require('../../assets/language_selection/Language_Selection.png')} style={styles.image}>
-                <ScrollView contentContainerStyle={styles.contentContainer}>
-                <Text style={styles.header}>{translate('LanguageSelection.title')}</Text>
-                <View style={styles.text_box}>
-                    <Text style={styles.desc}>{translate('LanguageSelection.description')}</Text>
-                </View>
-                <View style={styles.Swipper}>
-                    <ScrollView
-                        horizontal={false}
-                        showsHorizontalScrollIndicator={false}
-                        showsVerticalScrollIndicator={false}
-                        contentContainerStyle={styles.swiper_container}
-                        nestedScrollEnabled={true}
+            <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.contentContainer}>
+                <View style={styles.header}>
+                    <Text style={styles.title}>{translate('LanguageSelection.title')}</Text>
+                    <TouchableOpacity 
+                        onPress={() => { navigation.navigate({ name: 'Settings' }) }} 
+                        style={styles.close}
                     >
-                        <TouchableOpacity style={[styles.language_active, styles.buttons]}>
-                            <Text style={styles.button_text}>{translate('LanguageSelection.english')}</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={[styles.language_not_active, styles.buttons]} disabled={true}>
-                            <Text style={styles.button_text}>{translate('LanguageSelection.arabic')}</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={[styles.language_not_active, styles.buttons]} disabled={true}>
-                            <Text style={styles.button_text}>{translate('LanguageSelection.spanish')}</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={[styles.language_not_active, styles.buttons]} disabled={true}>
-                            <Text style={styles.button_text}>{translate('LanguageSelection.french')}</Text>
-                        </TouchableOpacity>
-                    </ScrollView>
-                </View>
-                <View style={styles.button_container}>
-                    <TouchableOpacity style={[styles.continue, styles.buttons]} onPress={handleLanguage}>
-                        <Text style={styles.button_text}>{translate('LanguageSelection.continue')}</Text>
+                        <Image source={require('../../assets/Profile/Arr.png')} />
                     </TouchableOpacity>
                 </View>
-                </ScrollView>
-            </ImageBackground>
+                <Text style={styles.chooseBar}>{translate('LanguageSelection.choose')}</Text>
+                <View style={styles.languages}>
+                    {buttons}
+                </View>
+            </ScrollView>
         </View>
     );
 }

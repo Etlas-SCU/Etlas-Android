@@ -47,7 +47,7 @@ export default function Settings({ navigation }) {
                     </TouchableOpacity>
                     <TouchableOpacity 
                         style={styles.lineBar}
-                        onPress={() => { navigation.navigate('BestScore') }}
+                        onPress={() => { navigation.navigate({ name: 'BestScore' }) }}
                     >
                         <Image source={require('../../assets/Settings/best_score.png')} style={styles.left}/>
                         <Text style={[styles.text, styles.middle]}>{translate('Settings.best_score')}</Text>
@@ -56,7 +56,10 @@ export default function Settings({ navigation }) {
                 </View>
                 <View style={styles.Box}>
                     <Text style={styles.Bar}>{translate('Settings.preferences')}</Text>
-                    <TouchableOpacity style={styles.lineBar}>
+                    <TouchableOpacity 
+                        style={styles.lineBar} 
+                        onPress={() => { navigation.navigate({ name:'LanguageSelection' }) }}
+                    >
                         <Image source={require('../../assets/Settings/World.png')} style={styles.left}/>
                         <Text style={[styles.text, styles.middle]}>{translate('Settings.language')}</Text>
                         <Image source={require('../../assets/Settings/arrow.png')} style={styles.right}/>
