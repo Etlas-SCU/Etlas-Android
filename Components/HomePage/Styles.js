@@ -1,6 +1,7 @@
-import { colors, fontFamily, normalize, responsiveHeight, responsiveWidth } from "../../AppStyles";
+import { colors, fontFamily, responsiveFontSize, responsiveHeight, responsiveWidth } from "../../AppStyles";
 import { StyleSheet } from "react-native";
-    
+
+
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -22,20 +23,20 @@ export const styles = StyleSheet.create({
     },
     title: {
         color: colors.White,
-        fontSize: normalize(18),
+        fontSize: responsiveFontSize(18),
         fontFamily: fontFamily.MontserratBold,
         textAlign: "center",
     },
     etlas: {
         color: colors.Gold,
-        fontSize: normalize(48),
+        fontSize: responsiveFontSize(48),
         fontFamily: fontFamily.CapitalisTypOasis,
         textAlign: "center",
         marginTop: responsiveHeight(67),
     },
     desc: {
         color: colors.White,
-        fontSize: normalize(18),
+        fontSize: responsiveFontSize(18),
         fontFamily: fontFamily.MontserratSemiBold,
         textAlign: "center",
         marginTop: responsiveHeight(33),
@@ -57,7 +58,7 @@ export const styles = StyleSheet.create({
         height: responsiveHeight(64),
         alignSelf: "center",
         marginTop: responsiveHeight(33),
-        fontSize: normalize(18),
+        fontSize: responsiveFontSize(18),
         fontFamily: fontFamily.MontserratRegular,
         paddingHorizontal: responsiveWidth(22),
         textAlign: "left"
@@ -71,7 +72,7 @@ export const styles = StyleSheet.create({
     },
     boxTitle: {
         color: colors.White,
-        fontSize: normalize(18),
+        fontSize: responsiveFontSize(18),
         fontFamily: fontFamily.MontserratRegular,
         textAlign: "center",
         margin: responsiveWidth(24)
@@ -83,7 +84,7 @@ export const styles = StyleSheet.create({
     },
     see_all_text: {
         color: colors.Gold,
-        fontSize: normalize(14),
+        fontSize: responsiveFontSize(14),
         fontFamily: fontFamily.MontserratBold,
         textAlign: "center",
     },

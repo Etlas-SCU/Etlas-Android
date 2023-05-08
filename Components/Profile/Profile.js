@@ -1,12 +1,12 @@
-import { View, Text, Image, TouchableOpacity, SafeAreaView, ScrollView, ImageBackground} from "react-native";
+import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
 import { styles } from "./Styles";
 import { translate } from "../../Localization";
 import { Avatar } from "@react-native-material/core";
 import { responsiveWidth } from "../../AppStyles";
 
 
-export default function Profile({ navigation }){
-    return(
+export default function Profile({ navigation }) {
+    return (
         <View style={styles.container}>
             <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
                 <View style={styles.upperBox}>
@@ -17,8 +17,8 @@ export default function Profile({ navigation }){
                 </View>
                 <View style={styles.WhiteBody}>
                     <View style={styles.body}>
-                        <Avatar 
-                            image={require('../../assets/Profile/Profile.png')} 
+                        <Avatar
+                            image={require('../../assets/Profile/Profile.png')}
                             size={responsiveWidth(248.15)}
                             imageStyle={styles.profilePic}
                             style={styles.profile}

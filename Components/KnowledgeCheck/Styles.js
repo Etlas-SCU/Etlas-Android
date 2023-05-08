@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
-import { colors, dimensions, fontFamily, normalize, responsiveHeight, responsiveWidth } from "../../AppStyles";
+import { colors, fontFamily, responsiveFontSize, responsiveHeight, responsiveWidth } from "../../AppStyles";
+
 
 export const styles = StyleSheet.create({
     container: {
@@ -22,7 +23,7 @@ export const styles = StyleSheet.create({
     },
     title: {
         color: colors.White,
-        fontSize: normalize(18),
+        fontSize: responsiveFontSize(18),
         fontFamily: fontFamily.MontserratBold,
         textAlign: "center",
     },
@@ -49,18 +50,18 @@ export const styles = StyleSheet.create({
     },
     bodyTitle: {
         color: colors.White,
-        fontSize: normalize(32),
+        fontSize: responsiveFontSize(32),
         fontFamily: fontFamily.MontserratBold,
     },
     bodyText: {
         color: colors.White,
-        fontSize: normalize(14),
+        fontSize: responsiveFontSize(14),
         fontFamily: fontFamily.MontserratLight,
         width: responsiveWidth(220)
     },
     bodyScore: {
         color: colors.White,
-        fontSize: normalize(48),
+        fontSize: responsiveFontSize(48),
         fontFamily: fontFamily.MontserratBold,
     },
     bodyImage: {

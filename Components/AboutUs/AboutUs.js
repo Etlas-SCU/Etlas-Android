@@ -1,5 +1,5 @@
 import { translate } from '../../Localization'
-import { View, Text, Image, ImageBackground, TouchableOpacity, ScrollView, SafeAreaView} from 'react-native';
+import { View, Text, Image, ImageBackground, TouchableOpacity, ScrollView } from 'react-native';
 import { styles } from './Styles';
 
 export default function AboutUs({ navigation, route }) {
@@ -8,7 +8,7 @@ export default function AboutUs({ navigation, route }) {
     const { pageName } = route.params;
 
     return (
-        <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
             <ImageBackground source={require('../../assets/AboutUs/AboutUs.png')} style={styles.background}>
                 <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
                     <TouchableOpacity onPress={() => { navigation.navigate({ name: pageName }) }}>
@@ -21,19 +21,19 @@ export default function AboutUs({ navigation, route }) {
                     <View style={styles.contactus}>
                         <View style={styles.usingAppicons}>
                             <TouchableOpacity style={styles.IconButton}>
-                                <Image source={require('../../assets/register/google.png')} style={styles.icon}/>
+                                <Image source={require('../../assets/register/google.png')} style={styles.icon} />
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.IconButton}>
-                                <Image source={require('../../assets/register/twitter.png')} style={styles.icon}/>
+                                <Image source={require('../../assets/register/twitter.png')} style={styles.icon} />
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.IconButton}>
-                                <Image source={require('../../assets/register/facebook.png')} style={styles.icon}/>
+                                <Image source={require('../../assets/register/facebook.png')} style={styles.icon} />
                             </TouchableOpacity>
                         </View>
                         <Text style={styles.findus}>{translate('AboutUs.findus')}</Text>
                     </View>
                 </ScrollView>
             </ImageBackground>
-        </SafeAreaView>
+        </View>
     );
 }

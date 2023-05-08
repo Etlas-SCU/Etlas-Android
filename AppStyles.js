@@ -13,8 +13,16 @@ export const dimensions = {
     fullWidth: Dimensions.get('window').width
 }
 
-// normalize font size
-export const normalize = (size) => {
+
+// get the dimensions of the screen
+export const UI_dimensions = {
+    heightMobileUI: 932,
+    widthMobileUI: 430
+}
+
+
+// get the responsive font size
+export const responsiveFontSize = size => {
     const fontScale = PixelRatio.getFontScale();
     const getFontSize = size => size / fontScale;
     const fontSize = getFontSize(size);
@@ -22,25 +30,30 @@ export const normalize = (size) => {
 };
 
 
-// get the dimensions of the screen
-const heightMobileUI = 932;
-const widthMobileUI = 430;
+// get factor Scale for width and height
+export const BaseScale = {
+    widthScale: dimensions.fullWidth / UI_dimensions.widthMobileUI,
+    heightScale: dimensions.fullHeight / UI_dimensions.heightMobileUI
+}
+
 
 // get the responsive width
 export const responsiveWidth = width => {
-    return (dimensions.fullWidth * width) / widthMobileUI;
+    return Math.round(PixelRatio.roundToNearestPixel(width * BaseScale.widthScale));
 };
   
+
 // get the responsive height
 export const responsiveHeight = height => {
-    return (dimensions.fullHeight * height) / heightMobileUI;
+    return Math.round(PixelRatio.roundToNearestPixel(height * BaseScale.heightScale));
 };
-  
+
 
 // check if it's iphone
 export const isIOS = () => {
     return Platform.OS === 'ios';
 };
+
 
 // colors used in the app
 export const colors = {
@@ -58,7 +71,14 @@ export const colors = {
     Green: '#0aa06e',
     Blue: '#0000FF',
     Yellow: '#fe9800',
+    Orange: '#ff6a00',
+    Purple: '#800080',
+    Pink: '#FFC0CB',
+    Brown: '#A52A2A',
+    DarkBlue: '#00008B',
+    DarkGreen: '#006400',
 }
+
 
 // padding used in the app
 export const padding = {
@@ -87,6 +107,7 @@ export const margin = {
     xxxxxxl: 140
 }
 
+
 // font family used in the app
 export const fontFamily = {
     CapitalisTypOasis: 'CapitalisTypOasis',
@@ -104,6 +125,7 @@ export const fontFamily = {
     PoppinsLight: 'Poppins-Light',
     PoppinsExtraLight: 'Poppins-Black', 
 }
+
 
 // font weight used in the app
 export const fontWeight = {

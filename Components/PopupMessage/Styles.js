@@ -1,5 +1,6 @@
-import { colors, fontFamily, normalize, responsiveHeight, responsiveWidth } from "../../AppStyles";
+import { colors, fontFamily, responsiveFontSize, responsiveHeight, responsiveWidth } from "../../AppStyles";
 import { StyleSheet } from "react-native";
+
 
 export const styles = StyleSheet.create({
     container: {
@@ -19,7 +20,7 @@ export const styles = StyleSheet.create({
     },
     message: {
         color: colors.DarkCyan,
-        fontSize: normalize(15),
+        fontSize: responsiveFontSize(15),
         marginBottom: responsiveHeight(24),
         fontFamily: fontFamily.MontserratSemiBold,
         width: responsiveWidth(280),
@@ -35,7 +36,7 @@ export const styles = StyleSheet.create({
     },
     buttonText: {
         color: colors.White,
-        fontSize: normalize(15),
+        fontSize: responsiveFontSize(15),
         fontFamily: fontFamily.MontserratSemiBold,
     },
 });

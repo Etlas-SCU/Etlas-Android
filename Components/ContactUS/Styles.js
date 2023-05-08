@@ -1,4 +1,4 @@
-import { colors, responsiveHeight, responsiveWidth, fontFamily, normalize } from '../../AppStyles'
+import { colors, responsiveHeight, responsiveWidth, fontFamily, responsiveFontSize } from '../../AppStyles'
 import { StyleSheet } from 'react-native'
 
 export const styles = StyleSheet.create({
@@ -34,7 +34,7 @@ export const styles = StyleSheet.create({
     },
     title: {
         color: colors.Gold,
-        fontSize: normalize(18),
+        fontSize: responsiveFontSize(18),
         fontFamily: fontFamily.MontserratSemiBold,
     },
     input: {
@@ -43,7 +43,7 @@ export const styles = StyleSheet.create({
         borderRadius: 20,
         backgroundColor: colors.DarkCyan,
         paddingLeft: responsiveWidth(24),
-        fontSize: normalize(20),
+        fontSize: responsiveFontSize(20),
         fontFamily: fontFamily.MontserratSemiBold,
     },
     input_message: {
@@ -53,7 +53,7 @@ export const styles = StyleSheet.create({
         backgroundColor: colors.DarkCyan,
         paddingLeft: responsiveWidth(24),
         paddingTop: responsiveHeight(24),
-        fontSize: normalize(20),
+        fontSize: responsiveFontSize(20),
         fontFamily: fontFamily.MontserratSemiBold,
         textAlign: 'left',
         textAlignVertical: 'top',
@@ -71,7 +71,7 @@ export const styles = StyleSheet.create({
     },
     submit: {
         color: colors.White,
-        fontSize: normalize(20),
+        fontSize: responsiveFontSize(20),
         fontFamily: fontFamily.MontserratBold,
         textAlign: "center",
         textAlignVertical: "center",

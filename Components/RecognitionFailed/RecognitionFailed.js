@@ -13,10 +13,10 @@ export default function KnowledgeCheck({ navigation }) {
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
-                <TouchableOpacity style={styles.aboutus} onPress={ showModal }>
+                <TouchableOpacity style={styles.aboutus} onPress={showModal}>
                     <Image source={require('../../assets/KnowledgeCheck/tabler_exclamation-circle.png')} />
                 </TouchableOpacity>
-                {modalVisible ? <MainMenu pageName={'RecognitionFailed'}/> : null}
+                {modalVisible ? <MainMenu pageName={'RecognitionFailed'} /> : null}
                 <View style={styles.body}>
                     <Image source={require('../../assets/RecognizedFailed/Sad.png')} style={styles.sad} />
                     <Text style={styles.title}>{translate('RecognitionFailed.title')}</Text>
