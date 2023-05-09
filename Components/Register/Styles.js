@@ -54,28 +54,31 @@ export const styles = StyleSheet.create({
     },
     inputForm: {
         fontFamily: fontFamily.MontserratSemiBold,
+        width: responsiveWidth(380),
         fontSize: responsiveFontSize(20),
         color: colors.Black,
         backgroundColor: colors.White,
         borderRadius: 20,
         height: responsiveHeight(58),
-        paddingLeft: responsiveWidth(24),
+        paddingLeft: responsiveWidth(23.5),
         textAlign: 'left'
     },
     passwordContainer: {
         flexDirection: 'row',
-        justifyContent: 'flex-end',
+        justifyContent: 'space-around',
     },
     passwordEyeButton: {
-        width: responsiveWidth(24),
-        height: responsiveHeight(24),
+        width: responsiveWidth(32),
+        height: responsiveHeight(32),
         position: "absolute",
         alignSelf: "center",
         justifyContent: "center",
-        right: responsiveWidth(13.5)
+        right: responsiveWidth(24)
     },
     passwordContainerImage: {
-        right: responsiveWidth(10)
+        width: responsiveWidth(32),
+        height: responsiveHeight(32),
+        resizeMode: 'contain'
     },
     passText: {
         fontFamily: fontFamily.MontserratSemiBold,

@@ -15,7 +15,7 @@ import TourDetails from "../TourDetails/TourDetails";
 import Settings from "../SettingsPage/SettingsPage";
 import LanguageSelection from "../LanguageSelection/LanguageSelection";
 import TermsConditions from "../TermsConditions/TermsConditions";
-import EditProfile from "../EditProfile/EditProfile";
+import { hasNotch } from "../../AppStyles";
 
 
 export default function MenuBar({ }) {

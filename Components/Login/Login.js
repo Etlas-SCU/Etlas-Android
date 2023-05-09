@@ -37,7 +37,7 @@ export default function Login({ navigation }) {
                     <Text style={styles.stateName}>{translate('Login.password')}</Text>
                     <View style={styles.passwordContainer}>
                         <TextInput
-                            style={[styles.inputForm, { flex: 1 }]}
+                            style={styles.inputForm}
                             placeholder={translate('Login.password')}
                             placeholderTextColor={colors.Grey}
                             onChangeText={(password) => setPassword(password)}

@@ -47,7 +47,7 @@ export function FirstPage({ navigation }) {
                     <Text style={styles.stateName}>{translate('Register.password')}</Text>
                     <View style={styles.passwordContainer}>
                         <TextInput
-                            style={[styles.inputForm, { flex: 1 }]}
+                            style={styles.inputForm}
                             placeholder={translate('Register.password')}
                             placeholderTextColor={colors.Grey}
                             onChangeText={(password) => setPassword(password)}
