@@ -35,7 +35,10 @@ export default function Settings({ navigation }) {
                     />
                     <Text style={styles.name}>{translate('Settings.name')}</Text>
                 </View>
-                <TouchableOpacity style={styles.buttonEdit}>
+                <TouchableOpacity 
+                    style={styles.buttonEdit}
+                    onPress={() => { navigation.navigate({ name: 'editProfile' }) }}
+                >
                     <Text style={styles.buttonText}>{translate('Settings.edit')}</Text>
                 </TouchableOpacity>
                 <View style={styles.Box}>
@@ -47,7 +50,7 @@ export default function Settings({ navigation }) {
                     </TouchableOpacity>
                     <TouchableOpacity 
                         style={styles.lineBar}
-                        onPress={() => { navigation.navigate({ name: 'BestScore' }) }}
+                        onPress={() => { navigation.navigate({ name: 'bestScore' }) }}
                     >
                         <Image source={require('../../assets/Settings/best_score.png')} style={styles.left}/>
                         <Text style={[styles.text, styles.middle]}>{translate('Settings.best_score')}</Text>

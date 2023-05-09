@@ -10,12 +10,12 @@ import ArticlesPage from "../ArticlesPage/ArticlesPage";
 import ToursPage from "../ToursPage/ToursPage";
 import RecognitionFailed from '../RecognitionFailed/RecognitionFailed'
 import MainMenu from "../MainMenu/MainMenu";
-import BestScore from "../BestScore/BestScore";
 import ContactUS from "../ContactUS/ContactUS";
 import TourDetails from "../TourDetails/TourDetails";
 import Settings from "../SettingsPage/SettingsPage";
 import LanguageSelection from "../LanguageSelection/LanguageSelection";
 import TermsConditions from "../TermsConditions/TermsConditions";
+import EditProfile from "../EditProfile/EditProfile";
 
 
 export default function MenuBar({ }) {
@@ -64,7 +64,7 @@ export default function MenuBar({ }) {
             <Tab.Screen name="ArticlesPage" component={ArticlesPage} options={{ tabBarButton: () => null, tabBarVisible: false }} />
             <Tab.Screen name="ToursPage" component={ToursPage} options={{ tabBarButton: () => null, tabBarVisible: false }} />
             <Tab.Screen name="mainMenu" component={MainMenu} options={{ tabBarButton: () => null, tabBarVisible: false }} />
-            <Tab.Screen name="BestScore" component={BestScore} options={{ tabBarButton: () => null, tabBarVisible: false }} />
+            {/* <Tab.Screen name="BestScore" component={BestScore} options={{ tabBarButton: () => null, tabBarVisible: false }} /> */}
             <Tab.Screen name="ContactUS" component={ContactUS} options={{ tabBarButton: () => null, tabBarVisible: false }} />
             <Tab.Screen name="TourDetails" component={TourDetails} options={{ tabBarButton: () => null, tabBarVisible: false }} />
             <Tab.Screen name="LanguageSelection" component={LanguageSelection} options={{ tabBarButton: () => null, tabBarVisible: false }} />

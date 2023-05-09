@@ -68,7 +68,7 @@ export const styles = StyleSheet.create({
         backgroundColor: colors.DarkCyan,
         marginTop: responsiveHeight(44),
         marginLeft: responsiveWidth(24),
-        gap: responsiveHeight(32)
+        gap: responsiveHeight(32),
     },
     Box: {
         gap: responsiveHeight(3)
