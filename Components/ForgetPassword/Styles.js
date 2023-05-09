@@ -106,5 +106,10 @@ export const styles = StyleSheet.create({
         fontSize: responsiveFontSize(15),
         color: colors.Cyan,
         textDecorationLine: 'underline'
+    },
+    FirstPageInput: {
+        marginHorizontal: responsiveWidth(24),
+        marginVertical: responsiveHeight(79),
+        gap: responsiveHeight(14)
     }
 });
