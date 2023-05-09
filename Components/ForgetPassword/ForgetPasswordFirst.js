@@ -21,7 +21,7 @@ export default function ForgotPasswordFirst({ navigation }) {
                 </View>
                 <View style={styles.line} />
                 <Text style={styles.helpingText}>{translate('forgotPassword.descriptionFirst')}</Text>
-                <View style={styles.inputContainer}>
+                <View style={styles.FirstPageInput}>
                     <Text style={styles.stateName}>{translate('forgotPassword.email')}</Text>
                     <TextInput
                         style={styles.inputForm}

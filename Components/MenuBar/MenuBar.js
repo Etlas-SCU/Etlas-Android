@@ -15,6 +15,8 @@ import ContactUS from "../ContactUS/ContactUS";
 import TourDetails from "../TourDetails/TourDetails";
 import Settings from "../SettingsPage/SettingsPage";
 import LanguageSelection from "../LanguageSelection/LanguageSelection";
+import TermsConditions from "../TermsConditions/TermsConditions";
+
 
 export default function MenuBar({ }) {
 
@@ -66,6 +68,7 @@ export default function MenuBar({ }) {
             <Tab.Screen name="ContactUS" component={ContactUS} options={{ tabBarButton: () => null, tabBarVisible: false }} />
             <Tab.Screen name="TourDetails" component={TourDetails} options={{ tabBarButton: () => null, tabBarVisible: false }} />
             <Tab.Screen name="LanguageSelection" component={LanguageSelection} options={{ tabBarButton: () => null, tabBarVisible: false }} />
+            <Tab.Screen name="TermsConditions" component={TermsConditions} options={{ tabBarButton: () => null, tabBarVisible: false }} />
         </Tab.Navigator>
     )
 }
