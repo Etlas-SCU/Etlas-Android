@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useFonts } from 'expo-font';
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack'
@@ -8,7 +8,7 @@ import { SecondPage } from './Components/Register/SecondPage'
 import Login from './Components/Login/Login'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { init } from './Localization';
-import { Easing } from 'react-native';
+import { Easing, AppRegistry } from 'react-native';
 import { UserProvider } from './Components/Context/Context';
 import MenuBar from './Components/MenuBar/MenuBar';
 import ForgotPasswordFirst from './Components/ForgetPassword/ForgetPasswordFirst';
@@ -113,3 +113,4 @@ export default function App() {
     );
 }
 
+AppRegistry.registerComponent('App', () => App);

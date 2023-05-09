@@ -1,4 +1,5 @@
 import { StyleSheet, Dimensions, PixelRatio, Platform } from "react-native";
+import * as Device from 'expo-device';
 
 // styles in app.js
 export const styles = StyleSheet.create({
@@ -52,6 +53,31 @@ export const responsiveHeight = height => {
 // check if it's iphone
 export const isIOS = () => {
     return Platform.OS === 'ios';
+};
+
+// detect IOS Version
+export const hasNotch = (version) => {
+    const modelName = Device.modelName;
+    const ex_notch = [
+        'iPhone 7',
+        'iPhone 7 Plus',
+        'iPhone 8',
+        'iPhone 8 Plus',
+        'iPhone SE',
+        'iPhone 6',
+        'iPhone 6 Plus',
+        'iPhone 6s',
+        'iPhone 6s Plus',
+        'iPhone 5',
+        'iPhone 5s',
+        'iPhone 5c',
+        'iPhone 4s',
+        'iPhone 4',
+        'iPhone 3G',
+        'iPhone 3GS',
+        'iPhone 1G',
+    ];
+    return isIOS() && !ex_notch.includes(modelName);
 };
 
 

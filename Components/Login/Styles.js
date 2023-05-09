@@ -42,8 +42,7 @@ export const styles = StyleSheet.create({
     },
     inputView: {
         marginTop: responsiveHeight(22),
-        marginLeft: responsiveWidth(24),
-        marginRight: responsiveWidth(24),
+        marginHorizontal: responsiveWidth(24),
         gap: responsiveWidth(8)
     },
     stateName: {
@@ -53,6 +52,7 @@ export const styles = StyleSheet.create({
     },
     inputForm: {
         fontFamily: fontFamily.MontserratSemiBold,
+        width: responsiveWidth(380),
         fontSize: responsiveFontSize(20),
         color: colors.Black,
         backgroundColor: colors.White,
@@ -63,18 +63,20 @@ export const styles = StyleSheet.create({
     },
     passwordContainer: {
         flexDirection: 'row',
-        justifyContent: 'flex-end',
+        justifyContent: 'space-around',
     },
     passwordEyeButton: {
-        width: responsiveWidth(24),
-        height: responsiveHeight(24),
+        width: responsiveWidth(32),
+        height: responsiveHeight(32),
         position: "absolute",
         alignSelf: "center",
         justifyContent: "center",
-        right: responsiveWidth(13.5)
+        right: responsiveWidth(24)
     },
     passwordContainerImage: {
-        right: responsiveWidth(10)
+        width: responsiveWidth(32),
+        height: responsiveHeight(32),
+        resizeMode: 'contain'
     },
     passText: {
         fontFamily: fontFamily.MontserratSemiBold,

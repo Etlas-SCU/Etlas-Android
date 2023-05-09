@@ -111,5 +111,23 @@ export const styles = StyleSheet.create({
         marginHorizontal: responsiveWidth(24),
         marginVertical: responsiveHeight(79),
         gap: responsiveHeight(14)
+    },
+    passwordContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    passwordEyeButton: {
+        width: responsiveWidth(32),
+        height: responsiveHeight(32),
+        right: responsiveWidth(24),
+        position: "absolute",
+        alignContent: 'center',
+    },
+    passwordContainerImage: {
+        width: responsiveWidth(32),
+        height: responsiveHeight(32),
+        alignSelf: 'center',
+        resizeMode: 'contain'
     }
 });

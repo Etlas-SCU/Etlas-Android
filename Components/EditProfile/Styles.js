@@ -55,6 +55,11 @@ export const styles = StyleSheet.create({
         paddingLeft: responsiveWidth(24),
         fontSize: responsiveFontSize(20),
         fontFamily: fontFamily.MontserratSemiBold,
+    },
+    editable:{
+        color: colors.White
+    },
+    uneditable:{
         color: colors.Grey
     },
     inputContainer: {
@@ -76,5 +81,23 @@ export const styles = StyleSheet.create({
         fontFamily: fontFamily.MontserratBold,
         textAlign: 'center',
         textAlignVertical: 'center'
+    },
+    inputFieldContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        verticalAlign: 'middle',
+        alignContent: 'center'
+    },
+    editIcon: {
+        width: responsiveWidth(16),
+        height: responsiveHeight(16),
+        alignSelf: 'center',
+    },
+    EditButton: {
+        position: 'absolute',
+        right: responsiveWidth(24),
+        top: responsiveHeight(20),
+        justifyContent: 'center',
+        alignItems: 'center',
     }
 });

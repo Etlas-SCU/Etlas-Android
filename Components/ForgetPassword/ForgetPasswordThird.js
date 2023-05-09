@@ -7,10 +7,13 @@ import { useState } from "react";
 
 export default function ForgotPasswordThird({ navigation }) {
 
-    // get the data from input
+    // for password
     const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+    const [hiddenPassword, setHiddenPassword] = useState(true);
 
+    // for confirm password
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [hiddenConfirmPassword, setHiddenConfirmPassword] = useState(true);
 
     return (
         <View style={styles.container}>
@@ -26,23 +29,35 @@ export default function ForgotPasswordThird({ navigation }) {
                 <View style={styles.inputView}>
                     <View style={styles.inputContainer}>
                         <Text style={styles.stateName}>{translate('forgotPassword.NewPassword')}</Text>
-                        <TextInput
-                            style={styles.inputForm}
-                            placeholder={translate('forgotPassword.NewPassword')}
-                            placeholderTextColor={colors.Grey}
-                            onChangeText={(password) => setPassword(password)}
-                            cursorColor={colors.LightSeaGreen}
-                        />
+                        <View style={styles.passwordContainer}>
+                            <TextInput
+                                style={styles.inputForm}
+                                placeholder={translate('forgotPassword.NewPassword')}
+                                placeholderTextColor={colors.Grey}
+                                onChangeText={(password) => setPassword(password)}
+                                cursorColor={colors.LightSeaGreen}
+                                secureTextEntry={hiddenPassword}
+                            />
+                            <TouchableOpacity style={styles.passwordEyeButton} onPress={() => setHiddenPassword(!hiddenPassword)}>
+                                <Image style={styles.passwordContainerImage} source={require('../../assets/register/codicon_eye.png')} />
+                            </TouchableOpacity>
+                        </View>
                     </View>
                     <View style={styles.inputContainer}>
                         <Text style={styles.stateName}>{translate('forgotPassword.ConfirmPassword')}</Text>
-                        <TextInput
-                            style={styles.inputForm}
-                            placeholder={translate('forgotPassword.ConfirmPassword')}
-                            placeholderTextColor={colors.Grey}
-                            onChangeText={(confirmPassword) => setConfirmPassword(confirmPassword)}
-                            cursorColor={colors.LightSeaGreen}
-                        />
+                        <View style={styles.passwordContainer}>
+                            <TextInput
+                                style={styles.inputForm}
+                                placeholder={translate('forgotPassword.ConfirmPassword')}
+                                placeholderTextColor={colors.Grey}
+                                onChangeText={(confirmPassword) => setConfirmPassword(confirmPassword)}
+                                cursorColor={colors.LightSeaGreen}
+                                secureTextEntry={hiddenConfirmPassword}
+                            />
+                            <TouchableOpacity style={styles.passwordEyeButton} onPress={() => setHiddenConfirmPassword(!hiddenConfirmPassword)}>
+                                <Image style={styles.passwordContainerImage} source={require('../../assets/register/codicon_eye.png')} />
+                            </TouchableOpacity>
+                        </View>
                     </View>
                 </View>
                 <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('forgotPasswordSecond')}>
