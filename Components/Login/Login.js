@@ -48,7 +48,7 @@ export default function Login({ navigation }) {
                             <Image style={styles.passwordContainerImage} source={require('../../assets/register/codicon_eye.png')} />
                         </TouchableOpacity>
                     </View>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => { navigation.navigate({ name: 'forgotPasswordFirst' }) }}>
                         <Text style={styles.passText}>{translate('Login.forgotpassword')}</Text>
                     </TouchableOpacity>
                 </View>

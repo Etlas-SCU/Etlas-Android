@@ -138,5 +138,17 @@
         "best_score": "BestScore",
         "language": "Language",
         "logout": "Logout"
+    },
+    "forgotPassword": {
+        "title": "Forgot Password",
+        "descriptionFirst": "Enter your E-mail to send a mail to re-assign a new password for your account.",
+        "descriptionSecond": "Type the OTP you received on your e-mail to continue reseting your password.",
+        "descriptionThird": "Please, enter your new password.",
+        "email": "E-mail",
+        "next": "Next",
+        "Resend": "Resend the mail again.",
+        "NewPassword": "New Password",
+        "ConfirmPassword": "Confirm Password",
+        "finish": "Finish"
     }
 }

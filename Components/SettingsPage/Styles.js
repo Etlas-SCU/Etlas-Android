@@ -39,8 +39,6 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: colors.DarkCyan,
         verticalAlign: 'middle',
-        width: responsiveWidth(128.6),
-        height: responsiveHeight(138),
     },
     profilePic: {
         resizeMode: 'contain',
@@ -48,6 +46,8 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: colors.DarkCyan,
+        width: '100%',
+        height: '100%'
     },
     name: {
         fontFamily: fontFamily.PoppinsBold,

@@ -52,7 +52,7 @@ export default function MenuBar({ }) {
             })}
         >
             <Tab.Screen name="Home" component={HomePage} />
-            <Tab.Screen name="AR" component={LanguageSelection} />
+            <Tab.Screen name="AR" component={Profile} />
             <Tab.Screen name="Scan" component={CameraScreen} options={{ tabBarStyle: { display: 'none' } }} />
             <Tab.Screen name="KnowledgeCheck" component={KnowledgeCheck} />
             <Tab.Screen name="Settings" component={Settings} />

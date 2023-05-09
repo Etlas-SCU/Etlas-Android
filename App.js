@@ -3,15 +3,17 @@ import { useFonts } from 'expo-font';
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack'
 import OnBoarding from "./Components/OnBoarding/OnBoarding";
-import LanguageSelection from './Components/LanguageSelection/LanguageSelection'
 import { FirstPage } from './Components/Register/FirstPage';
 import { SecondPage } from './Components/Register/SecondPage'
 import Login from './Components/Login/Login'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { init } from './Localization';
 import { Easing } from 'react-native';
-import MenuBar from './Components/MenuBar/MenuBar';
 import { UserProvider } from './Components/Context/Context';
+import MenuBar from './Components/MenuBar/MenuBar';
+import ForgotPasswordFirst from './Components/ForgetPassword/ForgetPasswordFirst';
+import ForgotPasswordSecond from './Components/ForgetPassword/ForgetPasswordSecond';
+import ForgotPasswordThird from './Components/ForgetPassword/ForgetPasswordThird';
 
 
 // import the screen
@@ -98,6 +100,9 @@ export default function App() {
                     <Stack.Screen name="secondPage" component={SecondPage} />
                     <Stack.Screen name="login" component={Login} />
                     <Stack.Screen name="menuBar" component={MenuBar} />
+                    <Stack.Screen name="forgotPasswordFirst" component={ForgotPasswordFirst} />
+                    <Stack.Screen name="forgotPasswordSecond" component={ForgotPasswordSecond} />
+                    <Stack.Screen name="forgotPasswordThird" component={ForgotPasswordThird} />
                 </Stack.Navigator>
             </NavigationContainer>
         </UserProvider>
