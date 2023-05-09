@@ -154,5 +154,14 @@
     "TermsConditions": {
         "title": "Terms and conditions",
         "copyright": "© Etlas all rights reserved 2023"
+    },
+    "EditProfile": {
+        "title": "Edit Information",
+        "name": "Full Name",
+        "email": "E-mail",
+        "password": "Password",
+        "phone": "Phone Number",
+        "address": "Address",
+        "save": "Save"
     }
 }

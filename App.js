@@ -14,6 +14,8 @@ import MenuBar from './Components/MenuBar/MenuBar';
 import ForgotPasswordFirst from './Components/ForgetPassword/ForgetPasswordFirst';
 import ForgotPasswordSecond from './Components/ForgetPassword/ForgetPasswordSecond';
 import ForgotPasswordThird from './Components/ForgetPassword/ForgetPasswordThird';
+import BestScore from './Components/BestScore/BestScore';
+import EditProfile from './Components/EditProfile/EditProfile';
 
 
 // import the screen
@@ -103,6 +105,8 @@ export default function App() {
                     <Stack.Screen name="forgotPasswordFirst" component={ForgotPasswordFirst} />
                     <Stack.Screen name="forgotPasswordSecond" component={ForgotPasswordSecond} />
                     <Stack.Screen name="forgotPasswordThird" component={ForgotPasswordThird} />
+                    <Stack.Screen name="bestScore" component={BestScore} />
+                    <Stack.Screen name="editProfile" component={EditProfile} />
                 </Stack.Navigator>
             </NavigationContainer>
         </UserProvider>
