@@ -3,7 +3,7 @@ import { styles } from "./Styles";
 import { View, ScrollView, Text, TouchableOpacity, Image, TextInput } from "react-native";
 import { translate } from "../../Localization";
 import { colors } from "../../AppStyles";
-import MonumentsCard from "../MonumentsCard/MonumentsCard";
+import ArticleCard from "../ArticleCard/ArticleCard";
 import { UserContext } from "../Context/Context";
 import MainMenu from "../MainMenu/MainMenu";
 import { isIOS } from "../../AppStyles";
@@ -14,18 +14,23 @@ export default function ArticlesPage({ navigation }) {
     const [searchTerm, setSearchTerm] = useState('');
     const { showModal, setScreen } = useContext(UserContext);
 
-    const Monument = {
-        Title: "Anibus",
+    const Article = {
+        Title: "Anubis",
         Description: "Know more about Anubis and his powers.",
         Date: "15 Jan 2023",
-        Img: require('../../assets/HomePage/monument.png')
+        Img: require('../../assets/HomePage/monument.png'),
+        fullDescription: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+        has been the industry's standard dummy text ever since the 1500s, when an unknown
+        printer took a galley of type and scrambled it to make a type specimen book. It has survived
+        not only five centuries, but also the leap into electronic typesetting, remaining essentially
+        unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`
     };
 
-    let monumentList = [];
+    let ArticleList = [];
     for (let i = 0; i < 20; i++)
-        monumentList.push(Monument);
+        ArticleList.push(Article);
 
-    const monuments = monumentList.map((monument, idx) => <MonumentsCard monument={monument} key={idx} isPage={true} />);
+    const Articles = ArticleList.map((article, idx) => <ArticleCard article={article} key={idx} navigation={navigation} screen={'ArticlesPage'}/>);
 
     return (
         <View style={styles.container}>
@@ -53,7 +58,7 @@ export default function ArticlesPage({ navigation }) {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.Box}>
-                    {monuments}
+                    {Articles}
                 </View>
             </ScrollView>
         </View>

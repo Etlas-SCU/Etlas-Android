@@ -5,15 +5,21 @@ import { UserContext } from "../Context/Context";
 import { useContext } from "react";
 import MainMenu from "../MainMenu/MainMenu";
 import { isIOS } from "../../AppStyles";
+import KnowledgeGame from "./KnowledgeGame/KnowledgeGame";
 
 
-function Card({ navigation, title, img, desc, score }) {
+function Card({ navigation, title, img, desc, score, pageName }) {
     return (
-        <TouchableOpacity style={styles.body}>
+        <TouchableOpacity 
+            style={styles.body}
+            onPress={() => { 
+                navigation.navigate('KnowledgeGame', { pageName: title })
+            }}
+        >
             <View style={styles.bodyContent}>
-                <Text style={styles.bodyTitle}>{title}</Text>
-                <Text style={styles.bodyText}>{desc}</Text>
-                <Text style={styles.bodyScore}>{score}</Text>
+                <Text numberOfLines={1} style={styles.bodyTitle} adjustsFontSizeToFit={true}>{title}</Text>
+                <Text numberOfLines={2} style={styles.bodyText} adjustsFontSizeToFit={true}>{desc}</Text>
+                <Text numberOfLines={1} style={styles.bodyScore} adjustsFontSizeToFit={true}>{score}</Text>
             </View>
             <View style={styles.bodyImage}>
                 <Image source={img} style={styles.image} />

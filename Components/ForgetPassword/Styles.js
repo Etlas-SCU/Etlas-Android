@@ -86,20 +86,20 @@ export const styles = StyleSheet.create({
     },
     otpInputContainer: {
         marginTop: responsiveHeight(94),
-        marginHorizontal: responsiveWidth(24),
-        width: responsiveWidth(380),    
-        height: responsiveHeight(85)
+        marginHorizontal: responsiveWidth(25),
+        height: responsiveHeight(81)
     },
     underlineStyleBase: {
-        width: responsiveWidth(50),
-        height: responsiveHeight(55),
-        borderRadius: 15,
+        width: responsiveWidth(81),
+        height: responsiveHeight(81),
+        borderRadius: 20,
         backgroundColor: colors.White,
         color: colors.Black,
-        fontSize: responsiveFontSize(20),
+        fontSize: responsiveFontSize(32),
     },
     resend: {
         marginHorizontal: responsiveWidth(24),
+        marginTop: responsiveHeight(19),
     },
     ResendText: {
         fontFamily: fontFamily.MontserratMedium,
