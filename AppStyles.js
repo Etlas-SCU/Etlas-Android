@@ -11,7 +11,8 @@ export const styles = StyleSheet.create({
 // dimesnions of the mobile
 export const dimensions = {
     fullHeight: Dimensions.get('window').height,
-    fullWidth: Dimensions.get('window').width
+    fullWidth: Dimensions.get('window').width,
+    fontScale: Dimensions.get("window").fontScale
 }
 
 
@@ -24,10 +25,7 @@ export const UI_dimensions = {
 
 // get the responsive font size
 export const responsiveFontSize = size => {
-    const fontScale = PixelRatio.getFontScale();
-    const getFontSize = size => size / fontScale;
-    const fontSize = getFontSize(size);
-    return Math.round(PixelRatio.roundToNearestPixel(fontSize));
+    return Math.floor(PixelRatio.roundToNearestPixel(size / dimensions.fontScale));
 };
 
 

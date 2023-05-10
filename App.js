@@ -16,6 +16,7 @@ import ForgotPasswordSecond from './Components/ForgetPassword/ForgetPasswordSeco
 import ForgotPasswordThird from './Components/ForgetPassword/ForgetPasswordThird';
 import BestScore from './Components/BestScore/BestScore';
 import EditProfile from './Components/EditProfile/EditProfile';
+import { StatusBar } from 'expo-status-bar';
 
 
 // import the screen
@@ -87,6 +88,11 @@ export default function App() {
     // if the font loaded, return the components
     return (
         <UserProvider>
+            <StatusBar 
+                backgroundColor={'transparent'}
+                barStyle='light-content'
+                translucent={true}
+            />
             <NavigationContainer>
                 <Stack.Navigator screenOptions={{
                     header: () => null,
@@ -95,6 +101,7 @@ export default function App() {
                         open: timingConfig,
                         close: timingConfig,
                     },
+                    headerStatusBarHeight: 0
                 }}
                 >
                     <Stack.Screen name="onBoarding" component={OnBoarding} />
