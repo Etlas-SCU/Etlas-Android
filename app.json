@@ -6,6 +6,7 @@
     "orientation": "portrait",
     "icon": "./assets/logo/Etlas-logo.png",
     "userInterfaceStyle": "dark",
+    "githubUrl": "https://github.com/Etlas-SCU/Etlas-Android",
     "splash": {
       "image": "./assets/splash/Splash.png",
       "resizeMode": "cover",
@@ -18,10 +19,20 @@
       "supportsTablet": false
     },
     "android": {
+      "androidStatusBar":{
+        "translucent": true,
+        "backgroundColor": "transparent",
+        "barStyle": "light-content"
+      },
       "adaptiveIcon": {
         "foregroundImage": "./assets/logo/Etlas-logo.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.etlas"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -33,6 +44,11 @@
           "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera."
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "2f0df44e-e5b0-4e95-9134-512e63e63018"
+      }
+    }
   }
 }
