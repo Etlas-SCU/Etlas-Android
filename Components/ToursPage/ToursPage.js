@@ -4,13 +4,14 @@ import { View, ScrollView, Text, TouchableOpacity, Image, TextInput } from "reac
 import { translate } from "../../Localization";
 import { colors } from "../../AppStyles";
 import ToursCard from "../ToursCard/ToursCard";
-import MainMenu from "../MainMenu/MainMenu";
 import { UserContext } from "../Context/Context";
+import MainMenu from "../MainMenu/MainMenu";
+import { isIOS } from "../../AppStyles";
 
 
 export default function ToursPage({ navigation }) {
 
-    const { modalVisible, showModal } = useContext(UserContext);
+    const { showModal, setScreen } = useContext(UserContext);
     const [searchTerm, setSearchTerm] = useState('');
 
     const Tour = {
@@ -32,9 +33,10 @@ export default function ToursPage({ navigation }) {
 
     return (
         <View style={styles.container}>
+            {isIOS() ? <MainMenu /> : null}
             <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
                 <View style={styles.header}>
-                    <TouchableOpacity style={styles.aboutus} onPress={showModal}>
+                    <TouchableOpacity style={styles.aboutus} onPress={() => { showModal(), setScreen('ToursPage')} }>
                         <Image source={require('../../assets/KnowledgeCheck/tabler_exclamation-circle.png')} />
                     </TouchableOpacity>
                     <Text style={styles.title}>{translate('Tours.title')}</Text>
@@ -42,7 +44,6 @@ export default function ToursPage({ navigation }) {
                         <Image source={require('../../assets/Scan/Arr.png')} />
                     </TouchableOpacity>
                 </View>
-                {modalVisible ? <MainMenu pageName={'ToursPage'} /> : null}
                 <View style={styles.inputContainer}>
                     <TextInput
                         style={styles.SearchForm}
