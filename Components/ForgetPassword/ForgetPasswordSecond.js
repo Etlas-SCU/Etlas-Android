@@ -37,7 +37,7 @@ export default function ForgotPasswordSecond({ navigation }) {
                 { popupMessageVisible ? <PopupMessage  state={'Error'} message={'Invalid OTP'} /> : null }
                 <OTPTextInput
                     ref={otpInput}
-                    inputCount={6}
+                    inputCount={4}
                     containerStyle={styles.otpInputContainer}
                     textInputStyle={styles.underlineStyleBase}
                     tintColor={colors.LightSeaGreen}

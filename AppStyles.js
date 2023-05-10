@@ -94,6 +94,7 @@ export const colors = {
     LightGrey: '#B5B5B5',
     DarkGrey: '#606060',
     Red: '#e24c4b',
+    DarkRed: '#A41350',
     Green: '#0aa06e',
     Blue: '#0000FF',
     Yellow: '#fe9800',
