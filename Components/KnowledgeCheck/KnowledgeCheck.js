@@ -1,9 +1,10 @@
 import { View, Image, Text, TouchableOpacity, ScrollView } from "react-native";
 import { styles } from './Styles'
 import { translate } from "../../Localization";
-import MainMenu from "../MainMenu/MainMenu";
 import { UserContext } from "../Context/Context";
 import { useContext } from "react";
+import MainMenu from "../MainMenu/MainMenu";
+import { isIOS } from "../../AppStyles";
 
 
 function Card({ navigation, title, img, desc, score }) {
@@ -23,18 +24,18 @@ function Card({ navigation, title, img, desc, score }) {
 
 export default function KnowledgeCheck({ navigation }) {
 
-    const { modalVisible, showModal } = useContext(UserContext);
+    const { showModal, setScreen } = useContext(UserContext);
 
     return (
         <View style={styles.container}>
+            {isIOS() ? <MainMenu /> : null}
             <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
                 <View style={styles.header}>
-                    <TouchableOpacity style={styles.aboutus} onPress={showModal}>
+                    <TouchableOpacity style={styles.aboutus} onPress={() => { showModal(), setScreen('KnowledgeCheck') }}>
                         <Image source={require('../../assets/KnowledgeCheck/tabler_exclamation-circle.png')} />
                     </TouchableOpacity>
                     <Text style={styles.title}>{translate('KnowledgeCheck.title')}</Text>
                 </View>
-                {modalVisible ? <MainMenu pageName={'KnowledgeCheck'} /> : null}
                 <View style={styles.cards}>
                     <Card
                         navigation={navigation}

@@ -4,14 +4,15 @@ import { View, ScrollView, Text, TouchableOpacity, Image, TextInput } from "reac
 import { translate } from "../../Localization";
 import { colors } from "../../AppStyles";
 import MonumentsCard from "../MonumentsCard/MonumentsCard";
-import MainMenu from "../MainMenu/MainMenu";
 import { UserContext } from "../Context/Context";
+import MainMenu from "../MainMenu/MainMenu";
+import { isIOS } from "../../AppStyles";
 
 
 export default function ArticlesPage({ navigation }) {
 
     const [searchTerm, setSearchTerm] = useState('');
-    const { modalVisible, showModal } = useContext(UserContext);
+    const { showModal, setScreen } = useContext(UserContext);
 
     const Monument = {
         Title: "Anibus",
@@ -28,9 +29,10 @@ export default function ArticlesPage({ navigation }) {
 
     return (
         <View style={styles.container}>
+            {isIOS() ? <MainMenu /> : null}
             <ScrollView contentContainerStyle={styles.contentContainer}>
                 <View style={styles.header}>
-                    <TouchableOpacity style={styles.aboutus} onPress={showModal}>
+                    <TouchableOpacity style={styles.aboutus} onPress={() => { showModal(), setScreen('ArticlesPage') }}>
                         <Image source={require('../../assets/KnowledgeCheck/tabler_exclamation-circle.png')} />
                     </TouchableOpacity>
                     <Text style={styles.title}>{translate('Articles.title')}</Text>
@@ -38,7 +40,6 @@ export default function ArticlesPage({ navigation }) {
                         <Image source={require('../../assets/Scan/Arr.png')} />
                     </TouchableOpacity>
                 </View>
-                {modalVisible ? <MainMenu pageName={'ArticlesPage'} /> : null}
                 <View style={styles.inputContainer}>
                     <TextInput
                         style={styles.SearchForm}

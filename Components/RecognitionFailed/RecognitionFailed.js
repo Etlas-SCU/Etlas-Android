@@ -4,19 +4,20 @@ import { translate } from "../../Localization";
 import { UserContext } from "../Context/Context";
 import { useContext } from "react";
 import MainMenu from "../MainMenu/MainMenu";
+import { isIOS } from "../../AppStyles";
 
 
 export default function KnowledgeCheck({ navigation }) {
 
-    const { modalVisible, showModal } = useContext(UserContext);
+    const { showModal, setScreen } = useContext(UserContext);
 
     return (
         <SafeAreaView style={styles.container}>
+            {isIOS() ? <MainMenu /> : null}
             <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
-                <TouchableOpacity style={styles.aboutus} onPress={showModal}>
+                <TouchableOpacity style={styles.aboutus} onPress={() => { showModal(), setScreen('RecognitionFailed') }}>
                     <Image source={require('../../assets/KnowledgeCheck/tabler_exclamation-circle.png')} />
                 </TouchableOpacity>
-                {modalVisible ? <MainMenu pageName={'RecognitionFailed'} /> : null}
                 <View style={styles.body}>
                     <Image source={require('../../assets/RecognizedFailed/Sad.png')} style={styles.sad} />
                     <Text style={styles.title}>{translate('RecognitionFailed.title')}</Text>

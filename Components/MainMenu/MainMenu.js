@@ -6,20 +6,22 @@ import { UserContext } from '../Context/Context';
 import { useNavigation } from '@react-navigation/native';
 
 
-function Button({ title, pageNav, hideModal, pageName }) {
+function Button ({ title, pageNav, hideModal }){
+
+    const { screen } = useContext(UserContext);
 
     // use the navigation
     const navigation = useNavigation();
-
+    
     // navigate to the page
     const ButtonNav = (pageNav) => {
         hideModal();
         navigation.navigate(
-            {
+            { 
                 name: pageNav,
                 params: {
-                    pageName: pageName
-                }
+                    pageName: screen
+                }   
             },
         );
     }
@@ -31,7 +33,7 @@ function Button({ title, pageNav, hideModal, pageName }) {
     )
 }
 
-export default function MainMenu({ pageName }) {
+export default function MainMenu({ }) {
 
     // use the context to get the state of the modal
     const { modalVisible, hideModal } = useContext(UserContext);
@@ -39,27 +41,27 @@ export default function MainMenu({ pageName }) {
     // pages to navigate for each button
     const buttonsVal = [
         { title: translate('MainMenu.aboutus'), pageNav: "AboutUs" },
-        { title: translate('MainMenu.terms'), pageNav: "AboutUs" },
+        { title: translate('MainMenu.terms'), pageNav: "TermsConditions" },
         { title: translate('MainMenu.contactus'), pageNav: "ContactUS" },
     ]
 
     // create the buttons
-    const buttons = buttonsVal.map((button, idx) => <Button key={idx} title={button.title} pageNav={button.pageNav} hideModal={hideModal} pageName={pageName} />);
+    const buttons = buttonsVal.map((button, idx) => <Button key={idx} title={button.title} pageNav={button.pageNav} hideModal={hideModal} /> );
 
     return (
-        <Modal
-            animationType="slide"
+        <Modal 
             transparent={true}
             visible={modalVisible}
             onRequestClose={() => hideModal()}
+            animationType='slide'
         >
             <View style={styles.container}>
                 <ImageBackground source={require('../../assets/MainMenu/Background.png')} style={styles.background} borderRadius={20}>
                     <TouchableOpacity onPress={() => hideModal()}>
-                        <Image source={require('../../assets/MainMenu/close.png')} style={styles.close} />
+                        <Image source={require('../../assets/MainMenu/close.png')} style={styles.close}/>
                     </TouchableOpacity>
                     <Text style={styles.title}>{translate('MainMenu.message')}</Text>
-                    <View style={styles.line} />
+                    <View style={styles.line}/>
                     <View style={styles.buttons}>
                         {buttons}
                     </View>

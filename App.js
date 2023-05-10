@@ -1,19 +1,22 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useFonts } from 'expo-font';
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack'
 import OnBoarding from "./Components/OnBoarding/OnBoarding";
-import LanguageSelection from './Components/LanguageSelection/LanguageSelection'
 import { FirstPage } from './Components/Register/FirstPage';
 import { SecondPage } from './Components/Register/SecondPage'
 import Login from './Components/Login/Login'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { init } from './Localization';
-import { Easing } from 'react-native';
-import MenuBar from './Components/MenuBar/MenuBar';
+import { Easing, AppRegistry } from 'react-native';
 import { UserProvider } from './Components/Context/Context';
-import { useResponsiveHeight, useResponsiveWidth, useDimensionsChange } from "react-native-responsive-dimensions";
-import { LayoutAnimation, View } from 'react-native'
+import MenuBar from './Components/MenuBar/MenuBar';
+import ForgotPasswordFirst from './Components/ForgetPassword/ForgetPasswordFirst';
+import ForgotPasswordSecond from './Components/ForgetPassword/ForgetPasswordSecond';
+import ForgotPasswordThird from './Components/ForgetPassword/ForgetPasswordThird';
+import BestScore from './Components/BestScore/BestScore';
+import EditProfile from './Components/EditProfile/EditProfile';
+
 
 // import the screen
 const Stack = createStackNavigator();
@@ -94,15 +97,20 @@ export default function App() {
                     },
                 }}
                 >
-                    {language !== 'None' ? null : <Stack.Screen name="languageSelection" component={LanguageSelection} />}
                     <Stack.Screen name="onBoarding" component={OnBoarding} />
                     <Stack.Screen name="firstPage" component={FirstPage} />
                     <Stack.Screen name="secondPage" component={SecondPage} />
                     <Stack.Screen name="login" component={Login} />
                     <Stack.Screen name="menuBar" component={MenuBar} />
+                    <Stack.Screen name="forgotPasswordFirst" component={ForgotPasswordFirst} />
+                    <Stack.Screen name="forgotPasswordSecond" component={ForgotPasswordSecond} />
+                    <Stack.Screen name="forgotPasswordThird" component={ForgotPasswordThird} />
+                    <Stack.Screen name="bestScore" component={BestScore} />
+                    <Stack.Screen name="editProfile" component={EditProfile} />
                 </Stack.Navigator>
             </NavigationContainer>
         </UserProvider>
     );
 }
 
+AppRegistry.registerComponent('App', () => App);

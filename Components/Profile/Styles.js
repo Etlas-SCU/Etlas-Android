@@ -43,8 +43,9 @@ export const styles = StyleSheet.create({
     },
     profilePic: {
         alignSelf: "center",
-        height: responsiveHeight(228.15),
-        width: responsiveWidth(228.15),
+        resizeMode: "contain",
+        width: '100%',
+        height: '100%',
     },
     name: {
         fontFamily: fontFamily.MontserratBold,
@@ -67,7 +68,7 @@ export const styles = StyleSheet.create({
         backgroundColor: colors.DarkCyan,
         marginTop: responsiveHeight(44),
         marginLeft: responsiveWidth(24),
-        gap: responsiveHeight(32)
+        gap: responsiveHeight(32),
     },
     Box: {
         gap: responsiveHeight(3)

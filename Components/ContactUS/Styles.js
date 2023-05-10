@@ -6,6 +6,15 @@ export const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: colors.White,
     },
+    close: {
+        width: responsiveWidth(32),
+        height: responsiveHeight(32),
+        right: responsiveWidth(24),
+        top: responsiveHeight(60),
+        position: 'absolute',
+        zIndex: 999,
+        tintColor: colors.White
+    },
     scrollContainer: {
         paddingBottom: responsiveHeight(200)
     },
@@ -15,12 +24,14 @@ export const styles = StyleSheet.create({
         borderBottomRightRadius: 30,
         width: responsiveWidth(430),
         height: responsiveHeight(288),
+        zIndex: -1
     },
     cover: {
         borderBottomLeftRadius: 30,
         borderBottomRightRadius: 30,
         width: responsiveWidth(430),
         height: responsiveHeight(288),
+        zIndex: -1
     },
     textInputContainer: {
         flex: 1,

@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { colors, responsiveHeight, responsiveWidth, isIOS } from "../../AppStyles";
+import { colors, responsiveHeight, responsiveWidth, isIOS, hasNotch } from "../../AppStyles";
 
 
 export const styles = StyleSheet.create({
@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
         flexDirection: "row"
     },
     menuBar: {
-        height: responsiveHeight(100 - (isIOS() ? 0 : 20)),
+        height: responsiveHeight(100 - (hasNotch() ? 0 : 20)),
         backgroundColor: colors.SolidGrey,
         position: 'absolute',
         borderTopRightRadius: 20,
@@ -51,7 +51,7 @@ export const styles = StyleSheet.create({
         justifyContent: "center",
         borderColor: colors.SolidGrey,
         borderWidth: responsiveWidth(2),
-        marginTop: isIOS() ? responsiveHeight(-50) : responsiveHeight(-80)
+        marginTop: (hasNotch() ? responsiveHeight(-50) : responsiveHeight(-80))
     },
     ScanIcon: {
         width: responsiveWidth(48),

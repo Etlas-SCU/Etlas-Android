@@ -6,6 +6,7 @@ const UserProvider  = ({ children }) => {
 
     // for the main menu screen
     const [ modalVisible, setModalVisible ] = useState(false);
+    const [ screen, setScreen ] = useState('Home');
     // hide the main menu
     const hideModal = () => setModalVisible(false);
     // show the main menu
@@ -18,8 +19,22 @@ const UserProvider  = ({ children }) => {
     // show the loader
     const showLoader = () => setLoaderVisible(true);
 
+    // for the popupmessages
+    const [ popupMessageVisible, setPopupMessageVisible ] = useState(false);
+    // hide the popupmessage
+    const hidePopupMessage = () => setPopupMessageVisible(false);
+    // show the popupmessage
+    const showPopupMessage = () => setPopupMessageVisible(true);
+
     return (
-        <UserContext.Provider value={{ modalVisible, hideModal, showModal, loaderVisible, hideLoader, showLoader }}>
+        <UserContext.Provider 
+            value={{ 
+                modalVisible, hideModal, showModal, 
+                loaderVisible, hideLoader, showLoader,
+                popupMessageVisible, hidePopupMessage, showPopupMessage,
+                screen, setScreen
+            }}
+        >
             {children}
         </UserContext.Provider>
     )

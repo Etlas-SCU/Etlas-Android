@@ -9,7 +9,7 @@ export default function BestScore({ navigation }) {
                 <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
                     <View style={styles.header}>
                         <Text style={styles.title}>{translate('BestScore.title')}</Text>
-                        <TouchableOpacity onPress={() => navigation.navigate({ name: 'Home' })} style={styles.close}>
+                        <TouchableOpacity onPress={() => navigation.navigate({ name: 'Settings' })} style={styles.close}>
                             <Image source={require('../../assets/Profile/Arr.png')} />
                         </TouchableOpacity>
                     </View>

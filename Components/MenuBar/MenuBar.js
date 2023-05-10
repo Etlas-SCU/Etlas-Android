@@ -10,11 +10,14 @@ import ArticlesPage from "../ArticlesPage/ArticlesPage";
 import ToursPage from "../ToursPage/ToursPage";
 import RecognitionFailed from '../RecognitionFailed/RecognitionFailed'
 import MainMenu from "../MainMenu/MainMenu";
-import BestScore from "../BestScore/BestScore";
 import ContactUS from "../ContactUS/ContactUS";
+import TourDetails from "../TourDetails/TourDetails";
+import Settings from "../SettingsPage/SettingsPage";
+import LanguageSelection from "../LanguageSelection/LanguageSelection";
+import TermsConditions from "../TermsConditions/TermsConditions";
 
 
-export default function MenuBar({ navigation }) {
+export default function MenuBar({ }) {
 
     const Tab = createBottomTabNavigator();
 
@@ -50,18 +53,20 @@ export default function MenuBar({ navigation }) {
             })}
         >
             <Tab.Screen name="Home" component={HomePage} />
-            <Tab.Screen name="AR" component={BestScore} />
+            <Tab.Screen name="AR" component={Profile} />
             <Tab.Screen name="Scan" component={CameraScreen} options={{ tabBarStyle: { display: 'none' } }} />
             <Tab.Screen name="KnowledgeCheck" component={KnowledgeCheck} />
-            <Tab.Screen name="Settings" component={ToursPage} />
+            <Tab.Screen name="Settings" component={Settings} />
             <Tab.Screen name="AboutUs" component={AboutUs} options={{ tabBarButton: () => null, tabBarVisible: false }} />
             <Tab.Screen name="RecognitionFailed" component={RecognitionFailed} options={{ tabBarButton: () => null, tabBarVisible: false }} />
             <Tab.Screen name="Profile" component={Profile} options={{ tabBarButton: () => null, tabBarVisible: false }} />
             <Tab.Screen name="ArticlesPage" component={ArticlesPage} options={{ tabBarButton: () => null, tabBarVisible: false }} />
             <Tab.Screen name="ToursPage" component={ToursPage} options={{ tabBarButton: () => null, tabBarVisible: false }} />
             <Tab.Screen name="mainMenu" component={MainMenu} options={{ tabBarButton: () => null, tabBarVisible: false }} />
-            <Tab.Screen name="BestScore" component={BestScore} options={{ tabBarButton: () => null, tabBarVisible: false }} />
             <Tab.Screen name="ContactUS" component={ContactUS} options={{ tabBarButton: () => null, tabBarVisible: false }} />
+            <Tab.Screen name="TourDetails" component={TourDetails} options={{ tabBarButton: () => null, tabBarVisible: false }} />
+            <Tab.Screen name="LanguageSelection" component={LanguageSelection} options={{ tabBarButton: () => null, tabBarVisible: false }} />
+            <Tab.Screen name="TermsConditions" component={TermsConditions} options={{ tabBarButton: () => null, tabBarVisible: false }} />
         </Tab.Navigator>
     )
 }

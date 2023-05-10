@@ -6,7 +6,8 @@
         "arabic": "العـربــيـــة",
         "spanish": "Spanish",
         "french": "French",
-        "continue": "continue"
+        "continue": "continue",
+        "choose": "Choose your language"
     },
     "OnBoarding": {
         "title": "Etlas",
@@ -126,5 +127,41 @@
         "subject": "Subject",
         "subject_input": "I'd like to ask about ...",
         "submit": "Submit"
+    },
+    "Settings": {
+        "title": "Settings",
+        "name": "Ahmed Hossam",
+        "edit": "Edit Profile",
+        "content": "Content",
+        "preferences": "Preferences",
+        "fav": "Favourites",
+        "best_score": "BestScore",
+        "language": "Language",
+        "logout": "Logout"
+    },
+    "forgotPassword": {
+        "title": "Forgot Password",
+        "descriptionFirst": "Enter your E-mail to send a mail to re-assign a new password for your account.",
+        "descriptionSecond": "Type the OTP you received on your e-mail to continue reseting your password.",
+        "descriptionThird": "Please, enter your new password.",
+        "email": "E-mail",
+        "next": "Next",
+        "Resend": "Resend the mail again.",
+        "NewPassword": "New Password",
+        "ConfirmPassword": "Confirm Password",
+        "finish": "Finish"
+    },
+    "TermsConditions": {
+        "title": "Terms and conditions",
+        "copyright": "© Etlas all rights reserved 2023"
+    },
+    "EditProfile": {
+        "title": "Edit Information",
+        "name": "Full Name",
+        "email": "E-mail",
+        "password": "Password",
+        "phone": "Phone Number",
+        "address": "Address",
+        "save": "Save"
     }
 }
