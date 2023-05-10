@@ -3,9 +3,10 @@ import { View, Text, Image, TouchableOpacity } from "react-native";
 import { translate } from "../../Localization";
 
 
-export default function MonumentsCard({ monument, isPage }) {
+export default function ArticleCard({ navigation, article, screen }) {
 
-    const { Title, Description, Date, Img } = monument;
+    const { Title, Description, Date, Img } = article;
+    const isPage = (screen != 'Home');
 
     return (
         <View style={isPage ? Page.MonumentsCard : Swipper.MonumentsCard}>
@@ -16,7 +17,13 @@ export default function MonumentsCard({ monument, isPage }) {
                 <Text style={isPage ? Page.MonumentsCardDate : Swipper.MonumentsCardDate}>{Date}</Text>
             </View>
             <View style={isPage ? Page.line : Swipper.line} />
-            <TouchableOpacity>
+            <TouchableOpacity
+                onPress={
+                    () => {
+                        navigation.navigate('ArticleDetails', { Article: article, screen: screen })
+                    }
+                }
+            >
                 <Text style={isPage ? Page.learn : Swipper.learn}>{translate('Home.learnmore')}</Text>
             </TouchableOpacity>
         </View>

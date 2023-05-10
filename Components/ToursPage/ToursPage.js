@@ -15,7 +15,7 @@ export default function ToursPage({ navigation }) {
     const [searchTerm, setSearchTerm] = useState('');
 
     const Tour = {
-        Title: "Gize tour",
+        Title: "Giza tour",
         Description: "where you can visit the pyramids and ride the camels.",
         Rate: "3.5",
         Img: require('../../assets/HomePage/tour.png'),
