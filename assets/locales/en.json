@@ -163,5 +163,10 @@
         "phone": "Phone Number",
         "address": "Address",
         "save": "Save"
+    },
+    "KnowledgeGame": {
+        "score": "Your Score",
+        "currentScore": "is your total score",
+        "playAgain": "Play Again"
     }
 }
