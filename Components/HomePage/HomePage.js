@@ -5,8 +5,8 @@ import { translate } from "../../Localization";
 import { colors } from "../../AppStyles";
 import ToursCard from "../ToursCard/ToursCard";
 import MonumentsCard from "../MonumentsCard/MonumentsCard";
-import MainMenu from "../MainMenu/MainMenu";
 import { UserContext } from "../Context/Context";
+import MainMenu from "../MainMenu/MainMenu";
 
 
 function Section({ navigation, title, children, pageName }) {
@@ -30,7 +30,7 @@ function Section({ navigation, title, children, pageName }) {
 
 export default function HomePage({ navigation }) {
 
-    const { modalVisible, showModal } = useContext(UserContext);
+    const { modalVisible, showModal, setScreen } = useContext(UserContext);
     const [searchTerm, setSearchTerm] = useState('');
 
     const Tour = {
@@ -61,14 +61,15 @@ export default function HomePage({ navigation }) {
 
     return (
         <View style={styles.container}>
+            <MainMenu/>
             <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
                 <View style={styles.header}>
-                    <TouchableOpacity style={styles.aboutus} onPress={showModal}>
+                    <TouchableOpacity style={styles.aboutus} onPress={() => { showModal(), setScreen('Home') }}>
                         <Image source={require('../../assets/KnowledgeCheck/tabler_exclamation-circle.png')} />
                     </TouchableOpacity>
                     <Text style={styles.title}>{translate('Home.title')}</Text>
                 </View>
-                {modalVisible ? <MainMenu pageName={'Home'} /> : null}
+                {/* {modalVisible ? <MainMenu /> : null} */}
                 <Image style={styles.logo} source={require('../../assets/HomePage/e.png')} />
                 <Text style={styles.etlas}>{translate('Home.etlas')}</Text>
                 <Text style={styles.desc}>{translate('Home.desc')}</Text>

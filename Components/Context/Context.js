@@ -6,6 +6,7 @@ const UserProvider  = ({ children }) => {
 
     // for the main menu screen
     const [ modalVisible, setModalVisible ] = useState(false);
+    const [ screen, setScreen ] = useState('Home');
     // hide the main menu
     const hideModal = () => setModalVisible(false);
     // show the main menu
@@ -30,7 +31,8 @@ const UserProvider  = ({ children }) => {
             value={{ 
                 modalVisible, hideModal, showModal, 
                 loaderVisible, hideLoader, showLoader,
-                popupMessageVisible, hidePopupMessage, showPopupMessage
+                popupMessageVisible, hidePopupMessage, showPopupMessage,
+                screen, setScreen
             }}
         >
             {children}
