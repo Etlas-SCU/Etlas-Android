@@ -7,12 +7,16 @@ import { Avatar } from "@react-native-material/core";
 import { responsiveHeight } from "../../AppStyles";
 import MainMenu from "../MainMenu/MainMenu";
 import { isIOS } from "../../AppStyles";
+import Backend from "../../Backend/Backend";
 
 
 export default function Settings({ navigation }) {
 
-    // user user context
+    // use user context
     const { showModal, setScreen } = useContext(UserContext);
+
+    // get User Information
+    const { img, name } = Backend.getUser();
 
     return (
         <View style={styles.container}>
@@ -30,12 +34,12 @@ export default function Settings({ navigation }) {
                 </View>
                 <View style={styles.avatarBox}>
                     <Avatar
-                        image={require('../../assets/Profile/Profile.png')}
+                        image={img}
                         imageStyle={styles.profilePic}
                         style={styles.profile}
                         size={responsiveHeight(128)}
                     />
-                    <Text style={styles.name}>{translate('Settings.name')}</Text>
+                    <Text style={styles.name}>{name}</Text>
                 </View>
                 <TouchableOpacity 
                     style={styles.buttonEdit}

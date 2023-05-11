@@ -7,6 +7,7 @@ import ArticleCard from "../ArticleCard/ArticleCard";
 import { UserContext } from "../Context/Context";
 import MainMenu from "../MainMenu/MainMenu";
 import { isIOS } from "../../AppStyles";
+import Backend from "../../Backend/Backend";
 
 
 export default function ArticlesPage({ navigation }) {
@@ -14,23 +15,11 @@ export default function ArticlesPage({ navigation }) {
     const [searchTerm, setSearchTerm] = useState('');
     const { showModal, setScreen } = useContext(UserContext);
 
-    const Article = {
-        Title: "Anubis",
-        Description: "Know more about Anubis and his powers.",
-        Date: "15 Jan 2023",
-        Img: require('../../assets/HomePage/monument.png'),
-        fullDescription: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-        has been the industry's standard dummy text ever since the 1500s, when an unknown
-        printer took a galley of type and scrambled it to make a type specimen book. It has survived
-        not only five centuries, but also the leap into electronic typesetting, remaining essentially
-        unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`
-    };
+    // get the articles from backend
+    const ArticlesList = Backend.getArticles();
 
-    let ArticleList = [];
-    for (let i = 0; i < 20; i++)
-        ArticleList.push(Article);
-
-    const Articles = ArticleList.map((article, idx) => <ArticleCard article={article} key={idx} navigation={navigation} screen={'ArticlesPage'}/>);
+    // filter the articles based on the search term
+    const Articles = ArticlesList.map((article, idx) => <ArticleCard article={article} key={idx} navigation={navigation} screen={'ArticlesPage'}/>);
 
     return (
         <View style={styles.container}>

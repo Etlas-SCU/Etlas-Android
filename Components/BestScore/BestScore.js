@@ -1,8 +1,14 @@
 import { styles } from './Styles'
 import { translate } from "../../Localization";
 import { View, Text, ImageBackground, TouchableOpacity, ScrollView, Image } from 'react-native';
+import Backend from '../../Backend/Backend';
+
 
 export default function BestScore({ navigation }) {
+
+    // get the bestScore from Backend
+    const bestScore = Backend.getBestScore();
+
     return (
         <View style={styles.container}>
             <ImageBackground source={require('../../assets/HighScore/HighScore.png')} resizeMode='cover' style={styles.image}>
@@ -14,7 +20,7 @@ export default function BestScore({ navigation }) {
                         </TouchableOpacity>
                     </View>
                     <View style={styles.ScoreBox}>
-                        <Text style={styles.score}>{translate('BestScore.score')}</Text>
+                        <Text style={styles.score}>{bestScore}</Text>
                         <Text style={styles.scoreTxt}>{translate('BestScore.text')}</Text>
                         <View style={styles.line} />
                         <Text style={styles.bestScore}>{translate('BestScore.title')}</Text>
