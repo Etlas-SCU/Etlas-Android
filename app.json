@@ -16,10 +16,11 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": false
+      "supportsTablet": false,
+      "bundleIdentifier": "com.etlas"
     },
     "android": {
-      "androidStatusBar":{
+      "androidStatusBar": {
         "translucent": true,
         "backgroundColor": "transparent",
         "barStyle": "light-content"

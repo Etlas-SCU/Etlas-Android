@@ -3,9 +3,14 @@ import { styles } from "./Styles";
 import { translate } from "../../Localization";
 import { Avatar } from "@react-native-material/core";
 import { responsiveWidth } from "../../AppStyles";
+import Backend from "../../Backend/Backend";
 
 
 export default function Profile({ navigation }) {
+
+    // get the User Information
+    const { name, img, phone, address, email } = Backend.getUser();
+
     return (
         <View style={styles.container}>
             <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
@@ -18,24 +23,24 @@ export default function Profile({ navigation }) {
                 <View style={styles.WhiteBody}>
                     <View style={styles.body}>
                         <Avatar
-                            image={require('../../assets/Profile/Profile.png')}
+                            image={img}
                             size={responsiveWidth(248.15)}
                             imageStyle={styles.profilePic}
                             style={styles.profile}
                         />
-                        <Text style={styles.name}>{translate('Profile.name')}</Text>
+                        <Text style={styles.name}>{name}</Text>
                         <View style={styles.infoBox}>
                             <View style={styles.Box}>
                                 <Text style={styles.field}>{translate('Profile.email')}</Text>
-                                <Text style={styles.info}>{translate('Profile.user_email')}</Text>
+                                <Text style={styles.info}>{email}</Text>
                             </View>
                             <View style={styles.Box}>
                                 <Text style={styles.field}>{translate('Profile.phone')}</Text>
-                                <Text style={styles.info}>{translate('Profile.user_phone')}</Text>
+                                <Text style={styles.info}>{phone}</Text>
                             </View>
                             <View style={styles.Box}>
                                 <Text style={styles.field}>{translate('Profile.address')}</Text>
-                                <Text style={styles.info}>{translate('Profile.user_address')}</Text>
+                                <Text style={styles.info}>{address}</Text>
                             </View>
                         </View>
                     </View>

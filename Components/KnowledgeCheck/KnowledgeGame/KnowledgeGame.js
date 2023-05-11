@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { styles } from './Styles';
 import { useRoute } from '@react-navigation/native';
 import { translate } from '../../../Localization';
+import Backend from '../../../Backend/Backend';
 
 
 export default function KnowledgeGame({ navigation, route }) {
@@ -10,24 +11,8 @@ export default function KnowledgeGame({ navigation, route }) {
     // get the page name
     const { pageName } = useRoute().params;
 
-    const quesions = {
-        id: 3,
-        statement: "What is this statue?",
-        label: "statue",
-        image: require('../../../assets/KnowledgeCheck/Question.png'),
-        correct_chocie: "Neith",
-        choices: [
-            { id: 1, choice_text: "Osiris" },
-            { id: 2, choice_text: "Sekhmet" },
-            { id: 3, choice_text: "Neith" },
-            { id: 4, choice_text: "Yonu" }
-        ]
-    };
-
-    let quesionsList = [];
-    for (let i = 0; i < 10; i++)
-        quesionsList.push(quesions);
-
+    // get the questions list
+    const quesionsList = Backend.getQuestions();
 
     // make states for the game
     const [currQuestionIdx, setCurrQuestionIdx] = useState(0);
@@ -125,6 +110,34 @@ export default function KnowledgeGame({ navigation, route }) {
     }
 
 
+    // get the current options
+    const getCurrentOptions = () => {
+        return quesionsList[currQuestionIdx].choices.filter(filteredFunction).map((choice, idx) => (
+            <TouchableOpacity
+                key={idx}
+                style={
+                    [
+                        styles.choice,
+                        choice.choice_text === currOptionSelected ?
+                            choice.choice_text === correctOption ? styles.correct : styles.wrong
+                            :
+                            styles.initialChoice
+
+                    ]
+                }
+                onPress={() => { validateAnswer(choice.choice_text) }}
+                disabled={isOptionsDisabled}
+            >
+                <Text style={styles.choiceText}>{choice.choice_text}</Text>
+            </TouchableOpacity>
+        ));      
+    }
+
+
+    // optionsList
+    const optionsList = getCurrentOptions();
+
+
     // if the game finished
     if (gameFinished) {
         return (
@@ -167,25 +180,7 @@ export default function KnowledgeGame({ navigation, route }) {
                 <View style={styles.quesionsBox}>
                     <Text style={styles.question}>{quesionsList[currQuestionIdx].statement}</Text>
                     <View style={styles.choices}>
-                        {quesionsList[currQuestionIdx].choices.filter(filteredFunction).map((choice, idx) => (
-                            <TouchableOpacity
-                                key={idx}
-                                style={
-                                    [
-                                        styles.choice,
-                                        choice.choice_text === currOptionSelected ?
-                                            choice.choice_text === correctOption ? styles.correct : styles.wrong
-                                            :
-                                            styles.initialChoice
-
-                                    ]
-                                }
-                                onPress={() => { validateAnswer(choice.choice_text) }}
-                                disabled={isOptionsDisabled}
-                            >
-                                <Text style={styles.choiceText}>{choice.choice_text}</Text>
-                            </TouchableOpacity>
-                        ))}
+                        {optionsList}
                     </View>
                 </View>
                 <View style={styles.bottomContainer}>
