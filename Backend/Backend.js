@@ -60,6 +60,9 @@ class Backend {
         return bestScore;
     }
 
+    static googleSingIn(Token){
+        // To Do
+    }
 }
 
 export default Backend;

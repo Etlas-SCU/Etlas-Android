@@ -4,7 +4,6 @@ import { translate } from "../../Localization";
 import { colors } from "../../AppStyles";
 import { useState } from "react";
 import Backend from "../../Backend/Backend";
-import PasteInput, { PastedFile, PasteInputRef } from "@mattermost/react-native-paste-input";
 
 
 export default function EditProfile({ navigation }) {
