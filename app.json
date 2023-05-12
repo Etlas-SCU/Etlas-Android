@@ -3,6 +3,7 @@
     "name": "Etlas",
     "slug": "Etlas",
     "version": "1.0.0",
+    "scheme": "com.etlas",
     "orientation": "portrait",
     "icon": "./assets/logo/Etlas-logo.png",
     "userInterfaceStyle": "dark",
@@ -18,11 +19,6 @@
       "bundleIdentifier": "com.etlas"
     },
     "android": {
-      "androidStatusBar": {
-        "translucent": true,
-        "backgroundColor": "transparent",
-        "barStyle": "light-content"
-      },
       "adaptiveIcon": {
         "foregroundImage": "./assets/logo/Etlas-logo.png",
         "backgroundColor": "#ffffff"
@@ -46,7 +42,6 @@
       "eas": {
         "projectId": "2f0df44e-e5b0-4e95-9134-512e63e63018"
       }
-    },
-    "scheme": [ "Etlas", "fb473951754912606" ]
+    }
   }
 }

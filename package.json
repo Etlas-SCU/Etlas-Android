@@ -22,14 +22,12 @@
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "@fortawesome/react-native-fontawesome": "^0.3.0",
     "@muhzi/react-native-user-avatar": "^1.0.7",
-    "@onefifteen-z/react-input-otp": "^1.0.5",
     "@react-native-async-storage/async-storage": "1.17.11",
     "@react-native-masked-view/masked-view": "0.2.8",
     "@react-native-material/core": "^1.3.7",
     "@react-navigation/bottom-tabs": "^6.5.7",
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/stack": "^6.3.16",
-    "@twotalltotems/react-native-otp-input": "^1.3.11",
     "expo": "^48.0.11",
     "expo-application": "~5.1.1",
     "expo-auth-session": "~4.0.3",
@@ -80,8 +78,7 @@
     "react-native-svg": "13.4.0",
     "react-native-swiper": "^1.6.0-rc.3",
     "react-native-vector-icons": "^9.2.0",
-    "react-native-web": "~0.18.10",
-    "swiper": "^9.2.4"
+    "react-native-web": "~0.18.10"
   },
   "devDependencies": {
     "@babel/core": "^7.21.3"
