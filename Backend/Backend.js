@@ -63,6 +63,10 @@ class Backend {
     static googleSingIn(Token){
         // To Do
     }
+
+    static facebookSingIn(Token){
+        // To Do
+    }
 }
 
 export default Backend;

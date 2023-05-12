@@ -5,6 +5,8 @@ import { styles } from './Styles';
 import { colors } from "../../AppStyles";
 import { translate } from '../../Localization'
 import GoogleAuth from "../Authetincations/GoogleAuth";
+import FacebookAuth from "../Authetincations/FacebookAuth";
+import TwitterAuth from "../Authetincations/TwitterAuth";
 
 
 export function SecondPage({ route, navigation }) {
@@ -49,12 +51,8 @@ export function SecondPage({ route, navigation }) {
                     <Text style={styles.usingAppText}>{translate('Register.or')} <Text style={{ fontWeight: 'bold' }}>{translate('Register.signup')}</Text> {translate('Register.using')}</Text>
                     <View style={styles.usingAppicons}>
                         <GoogleAuth />
-                        <TouchableOpacity>
-                            <Image source={require('../../assets/register/twitter.png')} />
-                        </TouchableOpacity>
-                        <TouchableOpacity>
-                            <Image source={require('../../assets/register/facebook.png')} />
-                        </TouchableOpacity>
+                        <TwitterAuth />
+                        <FacebookAuth />
                     </View>
                 </View>
                 <TouchableOpacity style={styles.nextButtonSecond}>
