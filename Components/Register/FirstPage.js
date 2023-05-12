@@ -3,6 +3,10 @@ import { View, Text, Image, TouchableOpacity, TextInput, ScrollView } from "reac
 import { styles } from './Styles';
 import { colors } from "../../AppStyles";
 import { translate } from '../../Localization'
+import GoogleAuth from "../Authetincations/GoogleAuth";
+import FacebookAuth from "../Authetincations/FacebookAuth";
+import TwitterAuth from "../Authetincations/TwitterAuth";
+
 
 export function FirstPage({ navigation }) {
 
@@ -63,15 +67,9 @@ export function FirstPage({ navigation }) {
                 <View style={styles.usingApp}>
                     <Text style={styles.usingAppText}>{translate('Register.or')} <Text style={{ fontWeight: 'bold' }}>{translate('Register.signup')}</Text> {translate('Register.using')}</Text>
                     <View style={styles.usingAppicons}>
-                        <TouchableOpacity>
-                            <Image source={require('../../assets/register/google.png')} />
-                        </TouchableOpacity>
-                        <TouchableOpacity>
-                            <Image source={require('../../assets/register/twitter.png')} />
-                        </TouchableOpacity>
-                        <TouchableOpacity>
-                            <Image source={require('../../assets/register/facebook.png')} />
-                        </TouchableOpacity>
+                        <GoogleAuth />
+                        <TwitterAuth />
+                        <FacebookAuth />
                     </View>
                 </View>
                 <TouchableOpacity
