@@ -35,7 +35,7 @@ export default function TwitterAuth(){
         if (response?.type === 'success') {
             const { authentication } = response;
             setAccessToken(authentication.accessToken);
-            Backend.facebookSingIn(accessToken);
+            Backend.twitterSignIn(accessToken);
             console.log(response.authentication.accessToken)
         }
     }, [response, accessToken]);
