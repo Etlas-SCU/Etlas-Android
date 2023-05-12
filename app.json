@@ -2,7 +2,6 @@
   "expo": {
     "name": "Etlas",
     "slug": "Etlas",
-    "scheme": "//expo-development-client/?url=https://u.expo.dev/2f0df44e-e5b0-4e95-9134-512e63e63018?channel-name=HEAD",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/logo/Etlas-logo.png",
@@ -51,6 +50,7 @@
       "eas": {
         "projectId": "2f0df44e-e5b0-4e95-9134-512e63e63018"
       }
-    }
+    },
+    "scheme": ["Etlas", "fb473951754912606"]
   }
 }

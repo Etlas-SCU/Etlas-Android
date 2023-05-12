@@ -3,7 +3,8 @@ import * as WebBrowser from 'expo-web-browser';
 import * as Google from 'expo-auth-session/providers/google';
 import { TouchableOpacity, Image } from 'react-native';
 import Backend from '../../Backend/Backend';
-
+import { GOOGLE_CLIENT_ID, GOOGLE_ANDROID_ID, GOOGLE_IOS_ID, GOOGLE_WEB_ID } from '@env'
+import { makeRedirectUri } from 'expo-auth-session';
 
 export default function GoogleAuth(){
     
@@ -11,10 +12,12 @@ export default function GoogleAuth(){
     WebBrowser.maybeCompleteAuthSession();
     const [accessToken, setAccessToken] = useState(null);
     const [request, response, promptAsync] = Google.useAuthRequest({
-        webClientId: '1088249745241-iq96p5e30qml7c710b5mjqrt9u1gboop.apps.googleusercontent.com',
-        androidClientId: 'http://1088249745241-qd26ol7bdbf2vj9241faue2rapddr5bt.apps.googleusercontent.com',
-        iosClientId: 'http://1088249745241-9erodbfc7i56dobotbjspcku0iiq3kfd.apps.googleusercontent.com',
-        expoClientId: '1088249745241-iq96p5e30qml7c710b5mjqrt9u1gboop.apps.googleusercontent.com',
+        webClientId: GOOGLE_WEB_ID,
+        androidClientId: GOOGLE_ANDROID_ID,
+        iosClientId: GOOGLE_IOS_ID,
+        expoClientId: GOOGLE_CLIENT_ID,
+        responseType: 'token',
+        scopes: ['profile', 'email'],
     }, {
         projectNameForProxy: '@7oskaa/Etlas',
     });
@@ -29,7 +32,10 @@ export default function GoogleAuth(){
 
     
     return (
-        <TouchableOpacity onPress={() => promptAsync()}>
+        <TouchableOpacity 
+            onPress={() => promptAsync()}
+            disabled={!request}    
+        >
             <Image source={require('../../assets/register/google.png')} />
         </TouchableOpacity>
     )
