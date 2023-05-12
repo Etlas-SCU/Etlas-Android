@@ -67,6 +67,10 @@ class Backend {
     static facebookSingIn(Token){
         // To Do
     }
+
+    static twitterSignIn(Token){
+        // To Do
+    }
 }
 
 export default Backend;

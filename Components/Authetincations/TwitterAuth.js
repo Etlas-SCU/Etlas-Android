@@ -3,7 +3,7 @@ import * as WebBrowser from 'expo-web-browser';
 import { makeRedirectUri, useAuthRequest } from 'expo-auth-session';
 import { TouchableOpacity, Image, Platform } from 'react-native';
 import Backend from '../../Backend/Backend';
-import { TWITTER_CLIENT_ID, TWITTER_CLIENT_SECRET, TWITTER_BEARER_TOKEN } from '@env'
+import { TWITTER_CLIENT_ID, TWITTER_CLIENT_SECRET } from '@env'
 
 
 export default function TwitterAuth(){
@@ -35,7 +35,7 @@ export default function TwitterAuth(){
         if (response?.type === 'success') {
             const { authentication } = response;
             setAccessToken(authentication.accessToken);
-            Backend.facebookSingIn(accessToken);
+            Backend.twitterSignIn(accessToken);
             console.log(response.authentication.accessToken)
         }
     }, [response, accessToken]);
