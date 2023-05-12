@@ -1,8 +1,10 @@
-import React, { useState } from "react";
 import { View, Text, Image, TouchableOpacity, TextInput, ScrollView } from "react-native";
 import { styles } from './Styles';
 import { colors } from "../../AppStyles";
 import { translate } from '../../Localization'
+import { useState } from 'react';
+import GoogleAuth from "../Authetincations/GoogleAuth";
+
 
 export default function Login({ navigation }) {
 
@@ -11,7 +13,7 @@ export default function Login({ navigation }) {
     const [password, setPassword] = useState('');
     const [hidden, setHidden] = useState(false);
 
-
+    
     return (
         <View style={styles.container}>
             <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
@@ -55,9 +57,7 @@ export default function Login({ navigation }) {
                 <View style={styles.usingApp}>
                     <Text style={styles.usingAppText}>{translate('Login.or')} <Text style={{ fontWeight: 'bold' }}>{translate('Login.signup')}</Text> {translate('Login.using')}</Text>
                     <View style={styles.usingAppicons}>
-                        <TouchableOpacity>
-                            <Image source={require('../../assets/register/google.png')} />
-                        </TouchableOpacity>
+                        <GoogleAuth />
                         <TouchableOpacity>
                             <Image source={require('../../assets/register/twitter.png')} />
                         </TouchableOpacity>
