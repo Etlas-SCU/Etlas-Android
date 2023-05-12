@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import * as WebBrowser from 'expo-web-browser';
 import { makeRedirectUri, useAuthRequest } from 'expo-auth-session';
-import { TouchableOpacity, Image } from 'react-native';
+import { TouchableOpacity, Image, Platform } from 'react-native';
 import Backend from '../../Backend/Backend';
-import { TWITTER_CLIENT_ID } from '@env'
+import { TWITTER_CLIENT_ID, TWITTER_CLIENT_SECRET, TWITTER_BEARER_TOKEN } from '@env'
 
 
 export default function TwitterAuth(){
@@ -23,23 +23,29 @@ export default function TwitterAuth(){
     const [accessToken, setAccessToken] = useState(null);
     const [request, response, promptAsync] = useAuthRequest({
         clientId: TWITTER_CLIENT_ID,
+        clientSecret: TWITTER_CLIENT_SECRET,
         redirectUri: makeRedirectUri({
             scheme: 'com.etlas',
             useProxy,
-        })
+        }),
+        usePKCE: true,
     }, discovery);
     
     useEffect(() => {
-        if (response?.type === 'success' && response.authentication) {
+        if (response?.type === 'success') {
             const { authentication } = response;
             setAccessToken(authentication.accessToken);
             Backend.facebookSingIn(accessToken);
+            console.log(response.authentication.accessToken)
         }
     }, [response, accessToken]);
 
 
     return (
-        <TouchableOpacity onPress={() => promptAsync()}>
+        <TouchableOpacity 
+            onPress={() => promptAsync({ useProxy })}
+            disabled={!request}
+        >
             <Image source={require('../../assets/register/twitter.png')} />
         </TouchableOpacity>
     )
