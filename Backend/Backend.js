@@ -60,6 +60,17 @@ class Backend {
         return bestScore;
     }
 
+    static googleSingIn(Token){
+        // To Do
+    }
+
+    static facebookSingIn(Token){
+        // To Do
+    }
+
+    static twitterSignIn(Token){
+        // To Do
+    }
 }
 
 export default Backend;
