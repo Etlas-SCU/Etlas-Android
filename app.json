@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/logo/Etlas-logo.png",
-    "userInterfaceStyle": "dark",
+    "userInterfaceStyle": "light",
     "githubUrl": "https://github.com/Etlas-SCU/Etlas-Android",
     "splash": {
       "image": "./assets/splash/Splash.png",

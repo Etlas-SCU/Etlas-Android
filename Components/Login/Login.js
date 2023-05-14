@@ -3,6 +3,9 @@ import { View, Text, Image, TouchableOpacity, TextInput, ScrollView } from "reac
 import { styles } from './Styles';
 import { colors } from "../../AppStyles";
 import { translate } from '../../Localization'
+import GoogleAuth from "../Authetincations/GoogleAuth";
+import FacebookAuth from "../Authetincations/FacebookAuth";
+import TwitterAuth from "../Authetincations/TwitterAuth";
 
 export default function Login({ navigation }) {
 
@@ -55,15 +58,9 @@ export default function Login({ navigation }) {
                 <View style={styles.usingApp}>
                     <Text style={styles.usingAppText}>{translate('Login.or')} <Text style={{ fontWeight: 'bold' }}>{translate('Login.signup')}</Text> {translate('Login.using')}</Text>
                     <View style={styles.usingAppicons}>
-                        <TouchableOpacity>
-                            <Image source={require('../../assets/register/google.png')} />
-                        </TouchableOpacity>
-                        <TouchableOpacity>
-                            <Image source={require('../../assets/register/twitter.png')} />
-                        </TouchableOpacity>
-                        <TouchableOpacity>
-                            <Image source={require('../../assets/register/facebook.png')} />
-                        </TouchableOpacity>
+                        <GoogleAuth/>
+                        <TwitterAuth/>
+                        <FacebookAuth/>
                     </View>
                 </View>
                 <TouchableOpacity
