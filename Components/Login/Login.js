@@ -2,7 +2,6 @@ import { View, Text, Image, TouchableOpacity, TextInput, ScrollView } from "reac
 import { styles } from './Styles';
 import { colors } from "../../AppStyles";
 import { translate } from '../../Localization'
-import { useState } from 'react';
 import GoogleAuth from "../Authetincations/GoogleAuth";
 import FacebookAuth from "../Authetincations/FacebookAuth";
 import TwitterAuth from "../Authetincations/TwitterAuth";
@@ -59,9 +58,9 @@ export default function Login({ navigation }) {
                 <View style={styles.usingApp}>
                     <Text style={styles.usingAppText}>{translate('Login.or')} <Text style={{ fontWeight: 'bold' }}>{translate('Login.signup')}</Text> {translate('Login.using')}</Text>
                     <View style={styles.usingAppicons}>
-                        <GoogleAuth />
-                        <TwitterAuth />
-                        <FacebookAuth />
+                        <GoogleAuth/>
+                        <TwitterAuth/>
+                        <FacebookAuth/>
                     </View>
                 </View>
                 <TouchableOpacity
