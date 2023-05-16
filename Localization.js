@@ -32,6 +32,7 @@ export const init = () => {
 
     // update layout direction
     I18nManager.forceRTL(isRTL);
+    I18nManager.allowRTL(isRTL);
 
     // set i18n-js config
     translator.translations = { [languageTag]: translationGetters[languageTag]() };

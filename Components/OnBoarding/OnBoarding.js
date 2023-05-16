@@ -15,17 +15,15 @@ export default function OnBoarding({ navigation }) {
                 <View style={styles.logoContainer}>
                     <Image style={styles.logo} source={require('../../assets/on_boarding/e.png')}></Image>
                 </View>
-                <View style={styles.bottom_container}>
-                    <Image style={styles.wolf} source={require('../../assets/on_boarding/EG_by_Onlywolfs.png')}></Image>
-                    <View style={styles.button_container}>
-                        <TouchableOpacity style={[styles.sign_buttons, styles.sign_in]} onPress={() => navigation.navigate('login')}>
-                            <Text style={styles.button_text}>{translate('OnBoarding.signin')}</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={[styles.sign_buttons, styles.sign_up]} onPress={() => navigation.navigate('firstPage')}>
-                            <Text style={styles.button_text}>{translate('OnBoarding.signup')}</Text>
-                        </TouchableOpacity>
-                    </View>
+                <View style={styles.button_container}>
+                    <TouchableOpacity style={[styles.sign_buttons, styles.sign_in]} onPress={() => navigation.navigate('login')}>
+                        <Text style={styles.button_text}>{translate('OnBoarding.signin')}</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={[styles.sign_buttons, styles.sign_up]} onPress={() => navigation.navigate('firstPage')}>
+                        <Text style={styles.button_text}>{translate('OnBoarding.signup')}</Text>
+                    </TouchableOpacity>
                 </View>
+            <Image style={styles.wolf} source={require('../../assets/on_boarding/EG_by_Onlywolfs.png')}></Image>
             </ScrollView>
         </View>
     );

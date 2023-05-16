@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { fontFamily, colors, responsiveFontSize, responsiveWidth, responsiveHeight } from "../../AppStyles";
+import { fontFamily, colors, responsiveFontSize, responsiveWidth, responsiveHeight, dimensions } from "../../AppStyles";
 
 export const styles = StyleSheet.create({
     container: {
@@ -7,6 +7,7 @@ export const styles = StyleSheet.create({
         backgroundColor: colors.DarkCyan,
     },
     containerScrolling: {
+        flexGrow: 1,
         // paddingBottom: responsiveHeight(20)
     },
     text_box: {
@@ -50,17 +51,19 @@ export const styles = StyleSheet.create({
         right: responsiveWidth(0),
     },
     wolf: {
-        flex: 1,
         resizeMode: 'contain',
         width: responsiveWidth(468),
-        height: responsiveHeight(624),
+        height: responsiveHeight(468),
+        position: 'absolute',
+        bottom: responsiveHeight(-100),
+        left: responsiveWidth(-150)
     },
     button_container: {
-        flexDirection: "column",
-        alignItems: 'center',
-        alignItems: "flex-end",
-        marginRight: responsiveWidth(24),
-        gap: responsiveWidth(20)
+        alignItems: 'flex-end',
+        justifyContent: 'flex-end',
+        marginHorizontal: responsiveWidth(24),
+        marginTop: responsiveHeight(246),
+        gap: responsiveWidth(20),
     },
     sign_buttons: {
         width: responsiveWidth(181),
@@ -88,6 +91,5 @@ export const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: 'space-around',
         alignItems: 'center',
-        maxHeight: responsiveHeight(624)
     }
 });
