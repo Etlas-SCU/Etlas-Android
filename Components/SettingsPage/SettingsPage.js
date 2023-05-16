@@ -8,6 +8,7 @@ import { responsiveHeight } from "../../AppStyles";
 import MainMenu from "../MainMenu/MainMenu";
 import { isIOS } from "../../AppStyles";
 import Backend from "../../Backend/Backend";
+import Favourites from "../Favourites/Favourites";
 
 
 export default function Settings({ navigation }) {
@@ -49,7 +50,10 @@ export default function Settings({ navigation }) {
                 </TouchableOpacity>
                 <View style={styles.Box}>
                     <Text style={styles.Bar}>{translate('Settings.content')}</Text>
-                    <TouchableOpacity style={styles.lineBar}>
+                    <TouchableOpacity 
+                        style={styles.lineBar}
+                        onPress={() => { navigation.navigate({ name: 'favourites' }) }}
+                    >
                         <Image source={require('../../assets/Settings/fav.png')} style={styles.left}/>
                         <Text style={[styles.text, styles.middle]}>{translate('Settings.fav')}</Text>
                         <Image source={require('../../assets/Settings/arrow.png')} style={styles.right}/>

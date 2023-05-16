@@ -17,7 +17,9 @@ import ForgotPasswordThird from './Components/ForgetPassword/ForgetPasswordThird
 import BestScore from './Components/BestScore/BestScore';
 import EditProfile from './Components/EditProfile/EditProfile';
 import { StatusBar } from 'expo-status-bar';
-
+import Favourites from './Components/Favourites/Favourites';
+import FavMonumentsPage from './Components/FavouritePage/FavMonumentsPage';
+import FavArticlesPage from './Components/FavouritePage/FavArticlesPage';
 
 // import the screen
 const Stack = createStackNavigator();
@@ -114,6 +116,9 @@ export default function App() {
                     <Stack.Screen name="forgotPasswordThird" component={ForgotPasswordThird} />
                     <Stack.Screen name="bestScore" component={BestScore} />
                     <Stack.Screen name="editProfile" component={EditProfile} />
+                    <Stack.Screen name="favourites" component={Favourites} />
+                    <Stack.Screen name="favMonumentsPage" component={FavMonumentsPage} />
+                    <Stack.Screen name="favArticlesPage" component={FavArticlesPage} />
                 </Stack.Navigator>
             </NavigationContainer>
         </UserProvider>
