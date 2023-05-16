@@ -12,7 +12,7 @@ function Container({ children, ConainerName, navigation, pageNav }) {
             <View style={styles.containerTitle}>
                 <Text style={styles.containerHeaderTitle}>{ConainerName}</Text>
                 <TouchableOpacity
-                    onPress={() => { navigation.navigate({ name: pageNav }) }}
+                    onPress={() => { navigation.navigate(pageNav, { screen: 'favourites' }) }}
                     style={styles.see_all}
                 >
                     <Text style={styles.see_all_text}>{translate('Favourites.see_all')}</Text>
@@ -34,8 +34,8 @@ export default function Favourites({ navigation }) {
     const MonumentsList = Backend.getFavMonuments();
 
     // mapping the cards
-    const ArticlesCards = ArticlesList.map((Article, index) => { return <FavArticleCard key={index} Article={Article} navigation={navigation} /> });
-    const MonumentsCards = MonumentsList.map((Monument, index) => { return <FavMonumentCard key={index} Monument={Monument} navigation={navigation} /> });
+    const ArticlesCards = ArticlesList.map((Article, index) => { return <FavArticleCard key={index} Article={Article} navigation={navigation} screen={'favourites'}/> });
+    const MonumentsCards = MonumentsList.map((Monument, index) => { return <FavMonumentCard key={index} Monument={Monument} navigation={navigation} screen={'favourites'}/> });
 
 
     return (

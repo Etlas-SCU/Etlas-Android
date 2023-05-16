@@ -11,7 +11,7 @@ export default function AboutUs({ navigation, route }) {
         <View style={styles.container}>
             <ImageBackground source={require('../../assets/AboutUs/AboutUs.png')} style={styles.background}>
                 <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
-                    <TouchableOpacity onPress={() => { navigation.navigate({ name: pageName }) }}>
+                    <TouchableOpacity onPress={() => { navigation.navigate(pageName) }}>
                         <Image source={require('../../assets/AboutUs/ep_close-bold.png')} style={styles.close} />
                     </TouchableOpacity>
                     <Image style={styles.logo} source={require('../../assets/AboutUs/e.png')} />

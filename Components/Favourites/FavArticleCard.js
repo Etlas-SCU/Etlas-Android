@@ -3,13 +3,13 @@ import { styles } from './Styles'
 import Backend from '../../Backend/Backend';
 
 
-export default function FavArticleCard({ navigation, Article }) {
+export default function FavArticleCard({ navigation, screen, Article }) {
 
     const { Title, Description, Date, Img, ID } = Article;
 
     return (
         <TouchableOpacity
-            onPress={() => { navigation.navigate('ArticleDetails', { Article: Article, screen: 'favourites' }) }}
+            onPress={() => { navigation.navigate('ArticleDetails', { Article: Article, screen: screen }) }}
             style={styles.card}
         >
             <View style={styles.cardContainer}>

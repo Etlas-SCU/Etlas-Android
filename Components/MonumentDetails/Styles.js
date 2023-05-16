@@ -1,4 +1,4 @@
-import { colors, dimensions, fontFamily, responsiveFontSize, responsiveHeight, responsiveWidth } from "../../AppStyles";
+import { colors, dimensions, fontFamily, isIOS, responsiveFontSize, responsiveHeight, responsiveWidth } from "../../AppStyles";
 import { StyleSheet, StatusBar } from "react-native";
 
 
@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
         backgroundColor: colors.DarkCyan,
         alignItems: 'center',
         justifyContent: 'center',
-        zIndex: -999
+        zIndex: 0
     },
     TitleConainer: {
         gap: responsiveHeight(17)
@@ -34,16 +34,17 @@ export const styles = StyleSheet.create({
     close: {
         width: responsiveWidth(32),
         height: responsiveHeight(32),
-        position: 'absolute',
         right: responsiveWidth(24),
-        top: responsiveHeight(0),
+        top: isIOS() ? responsiveHeight(60) : responsiveHeight(0),
         zIndex: 999,
+        position: 'absolute',
     },
     arrow: {
         width: responsiveWidth(32),
         height: responsiveHeight(32),
         zIndex: 999,
-        tintColor: colors.White
+        tintColor: colors.White,
+        position: 'absolute',
     },
     description: {
         fontFamily: fontFamily.MontserratMedium,

@@ -176,5 +176,8 @@
         "3D": "3D Models",
         "Models": "Models",
         "articles": "Articles"
+    },
+    "ToursPage": {
+        "sortBy": "Sort Tours By"
     }
 }

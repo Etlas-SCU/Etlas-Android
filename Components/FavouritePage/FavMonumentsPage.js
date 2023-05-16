@@ -5,11 +5,16 @@ import Backend from "../../Backend/Backend";
 import FavMonumentCard from "../Favourites/FavMonumentCard";
 
 
-export default function FavMonumentsPage({ navigation }) {
+export default function FavMonumentsPage({ navigation, route }) {
 
+    // get the last screen from route
+    const { screen } = route.params;
+
+    // get the monument list from backend
     const MonumentsList = Backend.getFavMonuments();
 
-    const Monuments = MonumentsList.map((Monument, index) => { return <FavMonumentCard key={index} Monument={Monument} navigation={navigation} /> });
+    // mapping the cards
+    const Monuments = MonumentsList.map((Monument, index) => { return <FavMonumentCard key={index} Monument={Monument} navigation={navigation} screen={screen}/> });
 
     return (
         <View style={styles.container}>
@@ -17,7 +22,7 @@ export default function FavMonumentsPage({ navigation }) {
                 <View style={styles.header}>
                     <Text style={styles.title}>{translate('Favourites.title')}</Text>
                     <TouchableOpacity
-                        onPress={() => { navigation.navigate({ name: 'favourites' }) }}
+                        onPress={() => { navigation.navigate({ name: screen }) }}
                         style={styles.close}
                     >
                         <Image source={require('../../assets/HighScore/close.png')} style={styles.arrow} />

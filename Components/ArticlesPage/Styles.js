@@ -1,4 +1,4 @@
-import { colors, fontFamily, responsiveFontSize, responsiveHeight, responsiveWidth } from "../../AppStyles";
+import { colors, fontFamily, responsiveFontSize, responsiveHeight, responsiveWidth, dimensions } from "../../AppStyles";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
@@ -48,4 +48,48 @@ export const styles = StyleSheet.create({
         marginTop: responsiveHeight(27),
         rowGap: responsiveHeight(20)
     },
+
+    // filterList
+    modalContainer: {
+        backgroundColor: colors.DarkCyan,
+        justifyContent: 'space-evenly',
+        alignItems: "center",
+        width: responsiveWidth(323),
+        height: responsiveHeight(281),
+        position: 'absolute',
+        top: (dimensions.fullHeight - responsiveHeight(281)) / 2,
+        alignSelf: "center",
+        borderRadius: 30,
+        borderColor: colors.White,
+        borderWidth: 2,
+    },
+    modal: {
+        gap: responsiveHeight(5)
+    },
+    option: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        width: responsiveWidth(323),
+        paddingHorizontal: responsiveWidth(24)
+    },
+    optionText: {
+        color: colors.White,
+        fontSize: responsiveFontSize(16),
+        fontFamily: fontFamily.MontserratRegular,
+    },
+    check: {
+        width: responsiveWidth(24),
+        height: responsiveHeight(24),
+        tintColor: colors.White
+    },
+    modaltitle: {
+        color: colors.Gold,
+        fontSize: responsiveFontSize(20),
+        fontFamily: fontFamily.MontserratBold,
+        textAlign: 'left',
+        alignSelf: 'flex-start',
+        paddingHorizontal: responsiveWidth(24),
+        marginBottom: responsiveHeight(24),
+    }
 });
