@@ -35,20 +35,21 @@ export default function Settings({ navigation }) {
     // pick image from gallery
     const pickImage = async () => {
         // No permissions request is necessary for launching the image library
-        let result = await ImagePicker.launchImageLibraryAsync({
+        const { assets, canceled } = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.Images,
             allowsEditing: true,
             aspect: [4, 3],
             quality: 1,
         });
 
-        console.log(result);
-
-        if (!result.canceled) {
-            setImage(result.assets[0].uri);
-            Backend.changeUserImage(image);
+        // if the user didn't cancel the process
+        if (!canceled) {
+            setImage(assets[0].uri);
+            Backend.changeUserImage(assets[0].uri);
         }
+
     };
+
 
     // if haven't a permission
     if (hasGelleryPermission === false) {
@@ -88,7 +89,9 @@ export default function Settings({ navigation }) {
                     <Text style={styles.buttonText}>{translate('Settings.edit')}</Text>
                 </TouchableOpacity>
                 <View style={styles.Box}>
-                    <Text style={styles.Bar}>{translate('Settings.content')}</Text>
+                    <View style={styles.Bar}>
+                        <Text style={styles.BarText}>{translate('Settings.content')}</Text>
+                    </View>
                     <TouchableOpacity 
                         style={styles.lineBar}
                         onPress={() => { navigation.navigate({ name: 'favourites' }) }}
@@ -107,7 +110,9 @@ export default function Settings({ navigation }) {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.Box}>
-                    <Text style={styles.Bar}>{translate('Settings.preferences')}</Text>
+                    <View style={styles.Bar}>
+                        <Text style={styles.BarText}>{translate('Settings.preferences')}</Text>
+                    </View>
                     <TouchableOpacity 
                         style={styles.lineBar} 
                         onPress={() => { navigation.navigate({ name:'LanguageSelection' }) }}
