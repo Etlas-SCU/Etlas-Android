@@ -34,6 +34,12 @@ export default function Settings({ navigation }) {
 
     // pick image from gallery
     const pickImage = async () => {
+        
+        // if the user doesn't have permission
+        if (hasGelleryPermission === false) {
+            showPopupMessage();
+        }
+        
         // No permissions request is necessary for launching the image library
         const { assets, canceled } = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -49,12 +55,6 @@ export default function Settings({ navigation }) {
         }
 
     };
-
-
-    // if haven't a permission
-    if (hasGelleryPermission === false) {
-        showPopupMessage();
-    }
 
     return (
         <View style={styles.container}>

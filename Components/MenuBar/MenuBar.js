@@ -18,6 +18,7 @@ import TermsConditions from "../TermsConditions/TermsConditions";
 import ArticleDetails from "../ArticleDetails/ArticleDetails";
 import KnowledgeGame from "../KnowledgeCheck/KnowledgeGame/KnowledgeGame";
 import MonumentDetails from "../MonumentDetails/MonumentDetails";
+import FavMonumentsPage from "../FavouritePage/FavMonumentsPage";
 
 
 export default function MenuBar({ }) {
@@ -56,7 +57,7 @@ export default function MenuBar({ }) {
             })}
         >
             <Tab.Screen name="Home" component={HomePage} />
-            <Tab.Screen name="AR" component={Profile} />
+            <Tab.Screen name="AR" component={FavMonumentsPage} initialParams={{ screen: 'Home' }}/>
             <Tab.Screen name="Scan" component={CameraScreen} options={{ tabBarStyle: { display: 'none' } }} />
             <Tab.Screen name="KnowledgeCheck" component={KnowledgeCheck} />
             <Tab.Screen name="Settings" component={Settings} />

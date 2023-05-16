@@ -50,41 +50,39 @@ export default function MonumentDetails({ navigation, route }) {
 
     return (
         <View style={styles.container}>
-            <View style={styles.scrollContainer}>
-                <View style={styles.UpperBox}>
-                    <Image source={Img} style={styles.image} />
-                    <TouchableOpacity 
-                        onPress={() => { navigation.navigate({ name: screen }) }}
-                        style={styles.close}  
-                    >
-                        <Image source={require('../../assets/HighScore/close.png')} style={styles.arrow}/>
-                    </TouchableOpacity>
-                    <View style={styles.TitleConainer}>
-                        <Text style={styles.title}>{Title}</Text>
-                        <Text style={styles.description}>{HistoricDate}</Text>
+            <View style={styles.UpperBox}>
+                <TouchableOpacity 
+                    onPress={() => { navigation.navigate({ name: screen }) }}
+                    style={styles.close}  
+                >
+                    <Image source={require('../../assets/HighScore/close.png')} style={styles.arrow}/>
+                </TouchableOpacity>
+                <Image source={Img} style={styles.image} />
+                <View style={styles.TitleConainer}>
+                    <Text style={styles.title}>{Title}</Text>
+                    <Text style={styles.description}>{HistoricDate}</Text>
+                </View>
+            </View>
+            <View style={styles.LowerBox}>
+                <View style={styles.line} />
+                <View style={styles.iconConainer}>
+                    <View style={styles.FavContainer}>
+                        <TouchableOpacity  onPress={() => { toggleFav() }}>
+                            <Image source={favIcon} style={styles.icon}/>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.SoundContainer}>
+                        <TouchableOpacity onPress={() => { read() }}>
+                            <Image source={sound} style={styles.icon}/>
+                        </TouchableOpacity>
                     </View>
                 </View>
-                <View style={styles.LowerBox}>
-                    <View style={styles.line} />
-                    <View style={styles.iconConainer}>
-                        <View style={styles.FavContainer}>
-                            <TouchableOpacity  onPress={() => { toggleFav() }}>
-                                <Image source={favIcon} style={styles.icon}/>
-                            </TouchableOpacity>
-                        </View>
-                        <View style={styles.SoundContainer}>
-                            <TouchableOpacity onPress={() => { read() }}>
-                                <Image source={sound} style={styles.icon}/>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                    <ScrollView
-                        contentContainerStyle={styles.scrollContainer} 
-                        showsVerticalScrollIndicator={false}
-                    >
-                        <Text style={styles.fulldescription}>{fullDescription}</Text>
-                    </ScrollView>
-                </View>
+                <ScrollView
+                    contentContainerStyle={styles.scrollContainer} 
+                    showsVerticalScrollIndicator={false}
+                >
+                    <Text style={styles.fulldescription}>{fullDescription}</Text>
+                </ScrollView>
             </View>
         </View>
     );

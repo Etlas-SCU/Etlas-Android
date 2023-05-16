@@ -3,13 +3,13 @@ import { styles } from './Styles'
 import Backend from '../../Backend/Backend';
 
 
-export default function FavMonumentCard({ navigation, Monument }) {
+export default function FavMonumentCard({ navigation, screen, Monument }) {
 
     const { Title, HistoricDate, scannedDate, Img, ID } = Monument;
 
     return (
         <TouchableOpacity
-            onPress={() => { navigation.navigate('MonumentDetails', { Monument: Monument, screen: 'favourites' }) }}
+            onPress={() => { navigation.navigate('MonumentDetails', { Monument: Monument, screen: screen }) }}
             style={styles.card}
         >
             <View style={styles.cardContainer}>

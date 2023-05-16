@@ -35,16 +35,21 @@ export default function HomePage({ navigation }) {
     const [searchTerm, setSearchTerm] = useState('');
 
     // getting the toursList and ArticlesList from Backend.js
-    const toursList = Backend.getTours();
-    const ArticlesList = Backend.getArticles();
+    const toursList = Backend.getTours().filter((Tour) => {
+        return Tour.Title.toLowerCase().includes(searchTerm.toLowerCase());
+    });
+    const ArticlesList = Backend.getArticles().filter((Article) => {
+        return Article.Title.toLowerCase().includes(searchTerm.toLowerCase());
+    });
 
     // mapping the toursList and ArticlesList to jsx elements
     const tours = toursList.map((tour, idx) => <ToursCard tour={tour} key={idx} isPage={false} navigation={navigation} />);
     const Articles = ArticlesList.map((Article, idx) => <ArticleCard article={Article} key={idx} navigation={navigation} screen={'Home'}/>);
 
+
     return (
         <View style={styles.container}>
-            <MainMenu/>
+            {modalVisible ? <MainMenu/> : null}
             <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
                 <View style={styles.header}>
                     <TouchableOpacity style={styles.aboutus} onPress={() => { showModal(), setScreen('Home') }}>
