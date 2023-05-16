@@ -4879,28 +4879,10 @@ expo-modules-core@1.2.7:
     compare-versions "^3.4.0"
     invariant "^2.2.4"
 
-expo-pwa@0.0.124:
-  version "0.0.124"
-  resolved "https://registry.yarnpkg.com/expo-pwa/-/expo-pwa-0.0.124.tgz#684e68aea6c7f95864a8cde17a57e223ed017199"
-  integrity sha512-hYvQQhxATNTivWSRc9nrd1WVYJJnBG8P/SVrJ4PPu0pmsS7ZIvWt981IXYG461y9UWnTbXdZEG4UOt0Thak1Gg==
-  dependencies:
-    "@expo/image-utils" "0.3.23"
-    chalk "^4.0.0"
-    commander "2.20.0"
-    update-check "1.5.3"
-
 expo-speech@~11.1.1:
   version "11.1.1"
   resolved "https://registry.yarnpkg.com/expo-speech/-/expo-speech-11.1.1.tgz#4370a7a5d4a6537a182c97fadc2628e933f79e45"
   integrity sha512-JiyZmmNci7vIXZA/XLZ7x64jIvT/v/TOc5Y/nTBzo6Aqc3+YnYk3VoR+QDVQzeFRR6MW72FZyOvhvlFbfGRzTQ==
-
-expo-splash-screen@~0.18.2:
-  version "0.18.2"
-  resolved "https://registry.yarnpkg.com/expo-splash-screen/-/expo-splash-screen-0.18.2.tgz#dde246204da875785ba40c7143a70013cdefdbb6"
-  integrity sha512-fsiKmyn/lbJtV6Uor6wSvl21fScOidFzmB/HHShQJJOu2TBN/vqMvhPu/r0bF5NVk8Wi64r98hiWY1EEsbW03w==
-  dependencies:
-    "@expo/configure-splash-screen" "^0.6.0"
-    "@expo/prebuild-config" "6.0.1"
 
 expo-status-bar@~1.4.4:
   version "1.4.4"
