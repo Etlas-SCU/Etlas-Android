@@ -99,6 +99,25 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
         // To Do
     }
 
+    static async getTermsConditions() {
+        try {
+            const termsUrl = 'https://api.jsonbin.io/v3/b/6462fff99d312622a35f186f';
+            const response = await fetch(termsUrl, {
+                method: 'GET',
+                headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+                },
+                redirect: 'follow'
+            });
+            const result = await response.json();
+            return result.record.TermsConditions;
+        } catch (error) {
+            console.log('error', error);
+            return null;
+        }
+    } 
+
 }
 
 export default Backend;
