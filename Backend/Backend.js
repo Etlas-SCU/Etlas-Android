@@ -95,6 +95,10 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
         // To Do
     }
 
+    static changeUserImage(Image){
+        // To Do
+    }
+
 }
 
 export default Backend;

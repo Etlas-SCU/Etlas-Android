@@ -2,26 +2,63 @@ import { styles } from "./Styles";
 import { translate } from "../../Localization";
 import { View, Text, TouchableOpacity, ScrollView, Image } from "react-native";
 import { UserContext } from "../Context/Context";
-import { useContext } from "react";
 import { Avatar } from "@react-native-material/core";
 import { responsiveHeight } from "../../AppStyles";
 import MainMenu from "../MainMenu/MainMenu";
 import { isIOS } from "../../AppStyles";
 import Backend from "../../Backend/Backend";
-import Favourites from "../Favourites/Favourites";
+import { useState, useEffect, useContext } from "react";
+import * as ImagePicker from 'expo-image-picker';
+import PopupMessage from "../PopupMessage/PopupMessage";
 
 
 export default function Settings({ navigation }) {
 
     // use user context
-    const { showModal, setScreen } = useContext(UserContext);
+    const { showModal, setScreen, showPopupMessage } = useContext(UserContext);
 
     // get User Information
     const { img, name } = Backend.getUser();
 
+    // state for the gallery permission and the stored image
+    const [image, setImage] = useState(null);
+    const [hasGelleryPermission, setHasGalleryPermission] = useState(null);
+
+    // ask for gallery permission
+    useEffect(() => {
+        (async () => {
+            const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+            setHasGalleryPermission(status === 'granted');
+        })();
+    }, []);
+
+    // pick image from gallery
+    const pickImage = async () => {
+        // No permissions request is necessary for launching the image library
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+        });
+
+        console.log(result);
+
+        if (!result.canceled) {
+            setImage(result.assets[0].uri);
+            Backend.changeUserImage(image);
+        }
+    };
+
+    // if haven't a permission
+    if (hasGelleryPermission === false) {
+        showPopupMessage();
+    }
+
     return (
         <View style={styles.container}>
             {isIOS() ? <MainMenu /> : null}
+            <PopupMessage state={'Error'} message={'No Access to Internal Storage'}/>
             <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContainer}>
                 <View style={styles.header}>
                     <TouchableOpacity onPress={() => { showModal(), setScreen('Settings') }} >
@@ -34,12 +71,14 @@ export default function Settings({ navigation }) {
                     
                 </View>
                 <View style={styles.avatarBox}>
-                    <Avatar
-                        image={img}
-                        imageStyle={styles.profilePic}
-                        style={styles.profile}
-                        size={responsiveHeight(128)}
-                    />
+                    <TouchableOpacity onPress={() => { pickImage() }}>
+                        <Avatar
+                            image={img}
+                            imageStyle={styles.profilePic}
+                            style={styles.profile}
+                            size={responsiveHeight(128)}
+                        />
+                    </TouchableOpacity>
                     <Text style={styles.name}>{name}</Text>
                 </View>
                 <TouchableOpacity 
