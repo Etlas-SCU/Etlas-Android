@@ -102,6 +102,9 @@ export const colors = {
     Brown: '#A52A2A',
     DarkBlue: '#00008B',
     DarkGreen: '#006400',
+    NavyRed: '#410000',
+    NavyYellow: '#412300',
+    NavyGreen: '#014000',
 }
 
 

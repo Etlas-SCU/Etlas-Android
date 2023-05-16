@@ -1,42 +1,35 @@
-import { colors, fontFamily, responsiveFontSize, responsiveHeight, responsiveWidth } from "../../AppStyles";
+import { colors, dimensions, fontFamily, responsiveFontSize, responsiveHeight, responsiveWidth } from "../../AppStyles";
 import { StyleSheet } from "react-native";
 
 
 export const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: colors.White,
         alignItems: 'center',
         justifyContent: 'center',
+        width: responsiveWidth(323),
+        height: responsiveHeight(281),
+        borderRadius: 30,
+        borderColor: colors.White,
+        borderWidth: 2,
+        position: 'absolute',
+        top: (dimensions.fullHeight - responsiveHeight(281)) / 2,
+        left: (dimensions.fullWidth - responsiveWidth(323)) / 2,
     },
     icon: {
-        flex: 1,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: colors.White,
-        borderRadius: 100,
-        width: '100%',
+        resizeMode: 'contain',
+        position: 'absolute',
+        bottom: responsiveHeight(0),
+        right: responsiveWidth(0),
+    },
+    title: {
+        fontFamily: fontFamily.MontserratBold,
+        fontSize: responsiveFontSize(28),
+        color: colors.White,
     },
     message: {
-        color: colors.DarkCyan,
-        fontSize: responsiveFontSize(15),
-        marginBottom: responsiveHeight(24),
-        fontFamily: fontFamily.MontserratSemiBold,
-        width: responsiveWidth(280),
-        textAlign: "center",
-    },
-    button: {
-        borderRadius: 20,
-        width: responsiveWidth(280),
-        height: responsiveHeight(40),
-        marginBottom: responsiveHeight(16),
-        alignItems: "center",
-        justifyContent: "center",
-    },
-    buttonText: {
+        fontFamily: fontFamily.MontserratRegular,
+        fontSize: responsiveFontSize(18),
         color: colors.White,
-        fontSize: responsiveFontSize(15),
-        fontFamily: fontFamily.MontserratSemiBold,
-    },
+        marginHorizontal: responsiveWidth(45)
+    }
 });

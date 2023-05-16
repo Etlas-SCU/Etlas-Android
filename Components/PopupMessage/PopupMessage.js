@@ -1,7 +1,6 @@
 import { styles } from "./Styles";
 import { useContext } from "react";
-import { TouchableOpacity, Text, Image } from "react-native";
-import { FancyAlert } from 'react-native-expo-fancy-alerts';
+import { Text, Image, Modal, View } from "react-native";
 import { colors } from "../../AppStyles";
 import { UserContext } from "../Context/Context";
 
@@ -9,12 +8,7 @@ import { UserContext } from "../Context/Context";
 export default function PopupMessage({ state, message }) {
 
     // Use the useContext hook to get the state of the popup message
-    const { popupMessageVisible, hidePopupMessage } = useContext(UserContext);
-
-    // Use the useNavigation hook to get the navigation object
-    const toggleAlert = () => {
-        hidePopupMessage();
-    };
+    const { popupMessageVisible } = useContext(UserContext);
 
     // Define the icons to be used in the alert and their corresponding image paths
     const Icons = {
@@ -24,30 +18,30 @@ export default function PopupMessage({ state, message }) {
     }
 
     // Define the colors to be used for the different types of buttons
-    const Button_colors = {
-        Accept: colors.Green,
-        Error: colors.Red,
-        Warning: colors.Yellow,
+    const bgColors = {
+        Accept: colors.NavyGreen,
+        Error: colors.NavyRed,
+        Warning: colors.NavyYellow,
     }
 
     // Define the text to be displayed on the buttons for the different types of alerts
-    const ButtonText = {
-        Accept: 'Great',
-        Error: 'Ok',
-        Warning: 'Ok'
+    const TitleText = {
+        Accept: 'Done!',
+        Error: 'Oops!',
+        Warning: 'Hmmm!'
     }
 
     return (
-        <FancyAlert
+        <Modal
+            animationType="slide"
+            transparent={true}
             visible={popupMessageVisible}
-            icon={<Image source={Icons[state]} style={styles.icon} />}
-            style={styles.container}
-            onRequestClose={() => toggleAlert()}
         >
-            <Text style={styles.message}>{message}</Text>
-            <TouchableOpacity onPress={() => toggleAlert()} style={[styles.button, { backgroundColor: Button_colors[state] }]}>
-                <Text style={styles.buttonText}>{ButtonText[state]}</Text>
-            </TouchableOpacity>
-        </FancyAlert>
+            <View style={[styles.container, { backgroundColor: bgColors[state] }]}>
+                <Image source={Icons[state]} style={styles.icon} />
+                <Text style={styles.title}>{TitleText[state]}</Text>
+                <Text style={styles.message}>{message}</Text>
+            </View>
+        </Modal>
     );
 }

@@ -34,7 +34,7 @@ export default function ForgotPasswordSecond({ navigation }) {
                 </View>
                 <View style={styles.line} />
                 <Text style={styles.helpingText}>{translate('forgotPassword.descriptionSecond')}</Text>
-                { popupMessageVisible ? <PopupMessage  state={'Error'} message={'Invalid OTP'} /> : null }
+                { popupMessageVisible ? <PopupMessage  state={'Accept'} message={'valid OTP'} /> : null }
                 <OTPTextInput
                     ref={otpInput}
                     inputCount={4}
