@@ -9,7 +9,10 @@ export default function ArticleCard({ navigation, article, screen }) {
     const isPage = (screen != 'Home');
 
     return (
-        <View style={isPage ? Page.MonumentsCard : Swipper.MonumentsCard}>
+        <TouchableOpacity
+            style={isPage ? Page.MonumentsCard : Swipper.MonumentsCard}
+            onPress={() => { navigation.navigate('ArticleDetails', { Article: article, screen: screen }) }}
+        >
             <Image style={isPage ? Page.MonumentsCardImg : Swipper.MonumentsCardImg} source={Img} borderRadius={20} />
             <View style={isPage ? Page.MonumentsCardText : Swipper.MonumentsCardText}>
                 <Text style={isPage ? Page.MonumentsCardTitle : Swipper.MonumentsCardTitle} numberOfLines={1}>{Title}</Text>
@@ -18,14 +21,10 @@ export default function ArticleCard({ navigation, article, screen }) {
             </View>
             <View style={isPage ? Page.line : Swipper.line} />
             <TouchableOpacity
-                onPress={
-                    () => {
-                        navigation.navigate('ArticleDetails', { Article: article, screen: screen })
-                    }
-                }
+                onPress={() => { navigation.navigate('ArticleDetails', { Article: article, screen: screen }) }}
             >
                 <Text style={isPage ? Page.learn : Swipper.learn}>{translate('Home.learnmore')}</Text>
             </TouchableOpacity>
-        </View>
+        </TouchableOpacity>
     )
 }

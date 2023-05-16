@@ -17,6 +17,7 @@ import LanguageSelection from "../LanguageSelection/LanguageSelection";
 import TermsConditions from "../TermsConditions/TermsConditions";
 import ArticleDetails from "../ArticleDetails/ArticleDetails";
 import KnowledgeGame from "../KnowledgeCheck/KnowledgeGame/KnowledgeGame";
+import MonumentDetails from "../MonumentDetails/MonumentDetails";
 
 
 export default function MenuBar({ }) {
@@ -71,6 +72,7 @@ export default function MenuBar({ }) {
             <Tab.Screen name="TermsConditions" component={TermsConditions} options={{ tabBarButton: () => null, tabBarVisible: false }} />
             <Tab.Screen name="ArticleDetails" component={ArticleDetails} options={{ tabBarButton: () => null, tabBarVisible: false }} />
             <Tab.Screen name="KnowledgeGame" component={KnowledgeGame} options={{ tabBarButton: () => null, tabBarVisible: false }} />
+            <Tab.Screen name="MonumentDetails" component={MonumentDetails} options={{ tabBarButton: () => null, tabBarVisible: false }} />
         </Tab.Navigator>
     )
 }

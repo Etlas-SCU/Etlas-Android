@@ -5,13 +5,10 @@ import { useState } from "react";
 
 export default function ArticleDetails({ navigation, route }) {
 
-    let images_src = Array(5).fill(require('../../assets/TourPage/Tour1.png'));
-    const images = images_src.map((src, idx) => (<Image source={src} style={styles.image} key={idx}/>));
-    
     // get the parameters needed
     const { Article, screen } = route.params;
     const { Title, Date, Img, fullDescription } = Article;
-    
+
 
     // get the icons of heart
     const fav = require('../../assets/ArticleDetails/filled.png');
@@ -27,12 +24,12 @@ export default function ArticleDetails({ navigation, route }) {
 
     return (
         <View style={styles.container}>
-            <TouchableOpacity 
+            <TouchableOpacity
                 onPress={() => { navigation.navigate(screen) }}
             >
-                <Image source={require('../../assets/Scan/Arr.png')} style={styles.back}/>
+                <Image source={require('../../assets/Scan/Arr.png')} style={styles.back} />
             </TouchableOpacity>
-            <Image source={Img} style={styles.upperBox} resizeMode='cover'/>
+            <Image source={Img} style={styles.upperBox} resizeMode='cover' />
             <View style={styles.lowerBox}>
                 <View style={styles.upperFields}>
                     <View style={styles.txts}>
@@ -42,7 +39,7 @@ export default function ArticleDetails({ navigation, route }) {
                     <View style={styles.favouriteConainer}>
                         <View style={styles.fav}>
                             <TouchableOpacity onPress={toggleFav}>
-                                <Image source={favIcon} style={styles.favIcon} resizeMode="contain"/>
+                                <Image source={favIcon} style={styles.favIcon} resizeMode="contain" />
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -50,7 +47,7 @@ export default function ArticleDetails({ navigation, route }) {
                 <ScrollView contentContainerStyle={styles.scrollView} showsVerticalScrollIndicator={false}>
                     <Text style={styles.description}>{fullDescription}</Text>
                 </ScrollView>
-            </View>          
+            </View>
         </View>
     )
 }
