@@ -24,7 +24,12 @@ const UserProvider  = ({ children }) => {
     // hide the popupmessage
     const hidePopupMessage = () => setPopupMessageVisible(false);
     // show the popupmessage
-    const showPopupMessage = () => setPopupMessageVisible(true);
+    const showPopupMessage = () => {
+        setPopupMessageVisible(true);
+        setTimeout(() => {
+            setPopupMessageVisible(false);
+        }, 2000)
+    }
 
     return (
         <UserContext.Provider 

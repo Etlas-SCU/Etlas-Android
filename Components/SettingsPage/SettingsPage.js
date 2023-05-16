@@ -2,25 +2,64 @@ import { styles } from "./Styles";
 import { translate } from "../../Localization";
 import { View, Text, TouchableOpacity, ScrollView, Image } from "react-native";
 import { UserContext } from "../Context/Context";
-import { useContext } from "react";
 import { Avatar } from "@react-native-material/core";
 import { responsiveHeight } from "../../AppStyles";
 import MainMenu from "../MainMenu/MainMenu";
 import { isIOS } from "../../AppStyles";
 import Backend from "../../Backend/Backend";
+import { useState, useEffect, useContext } from "react";
+import * as ImagePicker from 'expo-image-picker';
+import PopupMessage from "../PopupMessage/PopupMessage";
 
 
 export default function Settings({ navigation }) {
 
     // use user context
-    const { showModal, setScreen } = useContext(UserContext);
+    const { showModal, setScreen, showPopupMessage } = useContext(UserContext);
 
     // get User Information
     const { img, name } = Backend.getUser();
 
+    // state for the gallery permission and the stored image
+    const [image, setImage] = useState(null);
+    const [hasGelleryPermission, setHasGalleryPermission] = useState(null);
+
+    // ask for gallery permission
+    useEffect(() => {
+        (async () => {
+            const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+            setHasGalleryPermission(status === 'granted');
+        })();
+    }, []);
+
+    // pick image from gallery
+    const pickImage = async () => {
+        // No permissions request is necessary for launching the image library
+        const { assets, canceled } = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+        });
+
+        // if the user didn't cancel the process
+        if (!canceled) {
+            setImage(assets[0].uri);
+            Backend.changeUserImage(assets[0].uri);
+        }
+
+    };
+
+
+    // if haven't a permission
+    if (hasGelleryPermission === false) {
+        showPopupMessage();
+    }
+
     return (
         <View style={styles.container}>
             {isIOS() ? <MainMenu /> : null}
+            <PopupMessage state={'Error'} message={'No Access to Internal Storage'}/>
             <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContainer}>
                 <View style={styles.header}>
                     <TouchableOpacity onPress={() => { showModal(), setScreen('Settings') }} >
@@ -33,12 +72,14 @@ export default function Settings({ navigation }) {
                     
                 </View>
                 <View style={styles.avatarBox}>
-                    <Avatar
-                        image={img}
-                        imageStyle={styles.profilePic}
-                        style={styles.profile}
-                        size={responsiveHeight(128)}
-                    />
+                    <TouchableOpacity onPress={() => { pickImage() }}>
+                        <Avatar
+                            image={img}
+                            imageStyle={styles.profilePic}
+                            style={styles.profile}
+                            size={responsiveHeight(128)}
+                        />
+                    </TouchableOpacity>
                     <Text style={styles.name}>{name}</Text>
                 </View>
                 <TouchableOpacity 
@@ -48,8 +89,13 @@ export default function Settings({ navigation }) {
                     <Text style={styles.buttonText}>{translate('Settings.edit')}</Text>
                 </TouchableOpacity>
                 <View style={styles.Box}>
-                    <Text style={styles.Bar}>{translate('Settings.content')}</Text>
-                    <TouchableOpacity style={styles.lineBar}>
+                    <View style={styles.Bar}>
+                        <Text style={styles.BarText}>{translate('Settings.content')}</Text>
+                    </View>
+                    <TouchableOpacity 
+                        style={styles.lineBar}
+                        onPress={() => { navigation.navigate({ name: 'favourites' }) }}
+                    >
                         <Image source={require('../../assets/Settings/fav.png')} style={styles.left}/>
                         <Text style={[styles.text, styles.middle]}>{translate('Settings.fav')}</Text>
                         <Image source={require('../../assets/Settings/arrow.png')} style={styles.right}/>
@@ -64,7 +110,9 @@ export default function Settings({ navigation }) {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.Box}>
-                    <Text style={styles.Bar}>{translate('Settings.preferences')}</Text>
+                    <View style={styles.Bar}>
+                        <Text style={styles.BarText}>{translate('Settings.preferences')}</Text>
+                    </View>
                     <TouchableOpacity 
                         style={styles.lineBar} 
                         onPress={() => { navigation.navigate({ name:'LanguageSelection' }) }}

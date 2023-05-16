@@ -3,6 +3,7 @@
     "name": "Etlas",
     "slug": "Etlas",
     "version": "1.0.0",
+    "scheme": "com.etlas",
     "orientation": "portrait",
     "icon": "./assets/logo/Etlas-logo.png",
     "userInterfaceStyle": "light",
@@ -12,27 +13,17 @@
       "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": [ "**/*" ],
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.etlas"
     },
     "android": {
-      "androidStatusBar": {
-        "translucent": true,
-        "backgroundColor": "transparent",
-        "barStyle": "light-content"
-      },
       "adaptiveIcon": {
         "foregroundImage": "./assets/logo/Etlas-logo.png",
         "backgroundColor": "#ffffff"
       },
-      "permissions": [
-        "android.permission.CAMERA",
-        "android.permission.RECORD_AUDIO"
-      ],
+      "permissions": [ "android.permission.CAMERA", "android.permission.RECORD_AUDIO" ],
       "package": "com.etlas"
     },
     "web": {
@@ -42,7 +33,18 @@
       [
         "expo-camera",
         {
-          "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera."
+          "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera",
+          "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone"
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "custom photos permission",
+          "cameraPermission": "Allow $(PRODUCT_NAME) to open the camera",
+
+          "//": "Disables the microphone permission",
+          "microphonePermission": false
         }
       ]
     ],

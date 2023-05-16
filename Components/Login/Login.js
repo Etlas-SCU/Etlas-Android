@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { View, Text, Image, TouchableOpacity, TextInput, ScrollView } from "react-native";
 import { styles } from './Styles';
 import { colors } from "../../AppStyles";
@@ -6,6 +5,8 @@ import { translate } from '../../Localization'
 import GoogleAuth from "../Authetincations/GoogleAuth";
 import FacebookAuth from "../Authetincations/FacebookAuth";
 import TwitterAuth from "../Authetincations/TwitterAuth";
+import { useState } from "react";
+
 
 export default function Login({ navigation }) {
 
@@ -14,7 +15,7 @@ export default function Login({ navigation }) {
     const [password, setPassword] = useState('');
     const [hidden, setHidden] = useState(false);
 
-
+    
     return (
         <View style={styles.container}>
             <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>

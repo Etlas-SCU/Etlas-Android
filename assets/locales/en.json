@@ -168,5 +168,13 @@
         "score": "Your Score",
         "currentScore": "is your total score",
         "playAgain": "Play Again"
+    },
+    "Favourites": {
+        "title": "Favourites",
+        "search": "Search",
+        "see_all":"See all",
+        "3D": "3D Models",
+        "Models": "Models",
+        "articles": "Articles"
     }
 }

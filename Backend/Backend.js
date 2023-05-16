@@ -1,6 +1,6 @@
 class Backend {
 
-    static getTours(){
+    static getTours() {
         const Tour = {
             Title: "Giza tour",
             Description: "where you can visit the pyramids and ride the camels.",
@@ -13,8 +13,9 @@ class Backend {
         return Array(20).fill(Tour);
     }
 
-    static getArticles(){
+    static getArticles() {
         const Article = {
+            ID: 1,
             Title: "Anubis",
             Description: "Know more about Anubis and his powers.",
             Date: "15 Jan 2023",
@@ -24,7 +25,7 @@ class Backend {
         return Array(20).fill(Article);
     }
 
-    static getQuestions(){
+    static getQuestions() {
         const quesions = {
             id: 3,
             statement: "What is this statue?",
@@ -41,7 +42,7 @@ class Backend {
         return Array(20).fill(quesions);
     }
 
-    static getUser(){
+    static getUser() {
         const user = {
             id: 1,
             name: "Ahmed Hossam",
@@ -55,10 +56,67 @@ class Backend {
         return user;
     }
 
-    static getBestScore(){
+    static getBestScore() {
         const { bestScore } = this.getUser();
         return bestScore;
     }
+
+    static getFavArticles() {
+        const Article = {
+            Title: "Anubis",
+            Description: "Know more about Anubis and his powers.",
+            Date: "15 Jan 2023",
+            Img: require('../assets/HomePage/monument.png'),
+            fullDescription: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`
+        };
+        return Array(10).fill(Article);
+    }
+
+    static getFavMonuments() {
+        const Monument = {
+            ID: 1,
+            Title: "Anubis Statue",
+            HistoricDate: "200 BC | Egypt",
+            Img: require('../assets/Favourites/Anubis.png'),
+            scannedDate: 'Scanned 12 Oct 2021',
+            fullDescription: `Anubis Statue is an ancient statue that where built in the old egypt and worshiped by the people.\n
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially\n
+unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Anubis Statue is an ancient statue that where built in the old egypt and worshiped by the people.\n
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially\nunchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`
+        };
+        return Array(10).fill(Monument);
+    }
+
+    static removeFavArticle(ArticleID) {
+        // To Do
+    }
+
+    static removeFavMonument(MonumentID) {
+        // To Do
+    }
+
+    static changeUserImage(Image){
+        // To Do
+    }
+
+    static async getTermsConditions() {
+        try {
+            const termsUrl = 'https://api.jsonbin.io/v3/b/6462fff99d312622a35f186f';
+            const response = await fetch(termsUrl, {
+                method: 'GET',
+                headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+                },
+                redirect: 'follow'
+            });
+            const result = await response.json();
+            return result.record.TermsConditions;
+        } catch (error) {
+            console.log('error', error);
+            return null;
+        }
+    } 
 
 }
 

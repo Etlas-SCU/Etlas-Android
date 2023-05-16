@@ -4,12 +4,10 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-    },
-    container: {
-        flex: 1,
         backgroundColor: colors.DarkCyan,
     },
     contentContainer: {
+        flexGrow: 1,
         paddingBottom: responsiveHeight(30)
     },
     arrow: {
