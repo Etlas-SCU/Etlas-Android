@@ -20,6 +20,7 @@ export const styles = StyleSheet.create({
         backgroundColor: colors.DarkCyan,
         alignItems: 'center',
         justifyContent: 'center',
+        zIndex: -999
     },
     TitleConainer: {
         gap: responsiveHeight(17)
@@ -29,6 +30,20 @@ export const styles = StyleSheet.create({
         fontSize: responsiveFontSize(32),
         color: colors.Gold,
         textAlign: 'center',
+    },
+    close: {
+        width: responsiveWidth(32),
+        height: responsiveHeight(32),
+        position: 'absolute',
+        right: responsiveWidth(24),
+        top: responsiveHeight(0),
+        zIndex: 999,
+    },
+    arrow: {
+        width: responsiveWidth(32),
+        height: responsiveHeight(32),
+        zIndex: 999,
+        tintColor: colors.White
     },
     description: {
         fontFamily: fontFamily.MontserratMedium,
