@@ -1,6 +1,6 @@
 class Backend {
 
-    static getTours(){
+    static getTours() {
         const Tour = {
             Title: "Giza tour",
             Description: "where you can visit the pyramids and ride the camels.",
@@ -13,7 +13,7 @@ class Backend {
         return Array(20).fill(Tour);
     }
 
-    static getArticles(){
+    static getArticles() {
         const Article = {
             ID: 1,
             Title: "Anubis",
@@ -25,7 +25,7 @@ class Backend {
         return Array(20).fill(Article);
     }
 
-    static getQuestions(){
+    static getQuestions() {
         const quesions = {
             id: 3,
             statement: "What is this statue?",
@@ -42,7 +42,7 @@ class Backend {
         return Array(20).fill(quesions);
     }
 
-    static getUser(){
+    static getUser() {
         const user = {
             id: 1,
             name: "Ahmed Hossam",
@@ -56,12 +56,12 @@ class Backend {
         return user;
     }
 
-    static getBestScore(){
+    static getBestScore() {
         const { bestScore } = this.getUser();
         return bestScore;
     }
 
-    static getFavArticles(){
+    static getFavArticles() {
         const Article = {
             Title: "Anubis",
             Description: "Know more about Anubis and his powers.",
@@ -72,7 +72,7 @@ class Backend {
         return Array(10).fill(Article);
     }
 
-    static getFavMonuments(){
+    static getFavMonuments() {
         const Monument = {
             ID: 1,
             Title: "Anubis Statue",
@@ -87,11 +87,11 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
         return Array(10).fill(Monument);
     }
 
-    static removeFavArticle(ArticleID){
+    static removeFavArticle(ArticleID) {
         // To Do
     }
 
-    static removeFavMonument(MonumentID){
+    static removeFavMonument(MonumentID) {
         // To Do
     }
 
