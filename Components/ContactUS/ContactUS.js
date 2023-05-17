@@ -2,17 +2,15 @@ import { styles } from "./Styles";
 import { translate } from "../../Localization";
 import { View, Image, Text, TextInput, ScrollView, TouchableOpacity } from 'react-native'
 import { colors } from "../../AppStyles";
+import { goBack } from "../../Backend/Navigator";
 
 
-export default function ContactUS({ navigation, route }) {
-
-    // get pageName from the parameters passed to the naviagtion
-    const { pageName } = route.params;
+export default function ContactUS({ }) {
 
     return (
         <View style={styles.container}>
             <View style={styles.upperBox}>
-                <TouchableOpacity onPress={() => { navigation.navigate(pageName) }}>
+                <TouchableOpacity onPress={goBack}>
                     <Image source={require('../../assets/AboutUs/ep_close-bold.png')} style={styles.close} />
                 </TouchableOpacity>
                 <Image source={require('../../assets/ContactUs/Contact_us.png')} style={styles.cover} />

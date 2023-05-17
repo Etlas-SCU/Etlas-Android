@@ -3,27 +3,17 @@ import { styles } from './Styles'
 import { translate } from '../../Localization'
 import { useContext } from 'react';
 import { UserContext } from '../Context/Context';
-import { useNavigation } from '@react-navigation/native';
+import { goPage } from '../../Backend/Navigator';
 
 
 function Button ({ title, pageNav, hideModal }){
 
     const { screen } = useContext(UserContext);
 
-    // use the navigation
-    const navigation = useNavigation();
-    
     // navigate to the page
     const ButtonNav = (pageNav) => {
         hideModal();
-        navigation.navigate(
-            { 
-                name: pageNav,
-                params: {
-                    pageName: screen
-                }   
-            },
-        );
+        goPage(pageNav, screen);
     }
 
     return (

@@ -3,20 +3,22 @@ import { styles } from "./Styles";
 import Swiper from 'react-native-swiper'
 import { colors, responsiveWidth } from "../../AppStyles";
 import Stars from "../ToursCard/Stars";
+import { goBack, getParams } from "../../Backend/Navigator";
 
 
-export default function TourDetails({ navigation, route }) {
+export default function TourDetails({ }) {
 
     let images_src = Array(5).fill(require('../../assets/TourPage/Tour1.png'));
     const images = images_src.map((src, idx) => (<Image source={src} style={styles.image} key={idx}/>));
     
     // get the parameters needed
-    const { Tour, screen } = route.params;
+    const { Tour } = getParams();
     const { Title, Rate, fullDescription } = Tour;
+
 
     return (
         <View style={styles.container}>
-            <TouchableOpacity onPress={() => { navigation.navigate(screen) }}>
+            <TouchableOpacity onPress={goBack}>
                 <Image source={require('../../assets/Scan/Arr.png')} style={styles.back}/>
             </TouchableOpacity>
             <Swiper

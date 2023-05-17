@@ -7,12 +7,13 @@ import { translate } from '../../Localization'
 import GoogleAuth from "../Authetincations/GoogleAuth";
 import FacebookAuth from "../Authetincations/FacebookAuth";
 import TwitterAuth from "../Authetincations/TwitterAuth";
+import { getParams, goBack, goPage } from "../../Backend/Navigator";
 
 
-export function SecondPage({ route, navigation }) {
+export function SecondPage({ }) {
 
     // get the fullname, email and password from route params 
-    const { fullname, email, password } = route.params;
+    const { fullname, email, password } = getParams();
     const [phoneNumber, setPhoneNumber] = useState('');
     const [address, setAddress] = useState('');
 
@@ -21,7 +22,7 @@ export function SecondPage({ route, navigation }) {
             <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
                 <View style={styles.header_container}>
                     <Text style={styles.header}>{translate('Register.title')}</Text>
-                    <TouchableOpacity style={styles.header} onPress={() => navigation.goBack()}>
+                    <TouchableOpacity style={styles.header} onPress={goBack}>
                         <Image style={styles.arrow} source={require('../../assets/register/left-arrow.png')}></Image>
                     </TouchableOpacity>
                 </View>
@@ -60,7 +61,7 @@ export function SecondPage({ route, navigation }) {
                 </TouchableOpacity>
                 <View style={styles.signIn}>
                     <Text style={styles.haveAccount}>{translate('Register.haveaccount')} </Text>
-                    <TouchableOpacity onPress={() => navigation.navigate('login')}>
+                    <TouchableOpacity onPress={() => { goPage('login') }}>
                         <Text style={styles.signInText}>{translate('Register.signin')}</Text>
                     </TouchableOpacity>
                 </View>

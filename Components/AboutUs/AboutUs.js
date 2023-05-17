@@ -1,17 +1,15 @@
 import { translate } from '../../Localization'
 import { View, Text, Image, ImageBackground, TouchableOpacity, ScrollView } from 'react-native';
 import { styles } from './Styles';
+import { goBack } from '../../Backend/Navigator';
 
-export default function AboutUs({ navigation, route }) {
-
-    // get pageName from the parameters passed to the naviagtion
-    const { pageName } = route.params;
+export default function AboutUs({ }) {
 
     return (
         <View style={styles.container}>
             <ImageBackground source={require('../../assets/AboutUs/AboutUs.png')} style={styles.background}>
                 <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
-                    <TouchableOpacity onPress={() => { navigation.navigate(pageName) }}>
+                    <TouchableOpacity onPress={goBack}>
                         <Image source={require('../../assets/AboutUs/ep_close-bold.png')} style={styles.close} />
                     </TouchableOpacity>
                     <Image style={styles.logo} source={require('../../assets/AboutUs/e.png')} />

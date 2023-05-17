@@ -2,9 +2,10 @@ import { styles } from './Styles'
 import { translate } from "../../Localization";
 import { View, Text, ImageBackground, TouchableOpacity, ScrollView, Image } from 'react-native';
 import Backend from '../../Backend/Backend';
+import { goBack, goPage } from '../../Backend/Navigator';
 
 
-export default function BestScore({ navigation }) {
+export default function BestScore({ }) {
 
     // get the bestScore from Backend
     const bestScore = Backend.getBestScore();
@@ -15,7 +16,7 @@ export default function BestScore({ navigation }) {
                 <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
                     <View style={styles.header}>
                         <Text style={styles.title}>{translate('BestScore.title')}</Text>
-                        <TouchableOpacity onPress={() => navigation.navigate({ name: 'Settings' })} style={styles.close}>
+                        <TouchableOpacity onPress={goBack} style={styles.close}>
                             <Image source={require('../../assets/Profile/Arr.png')} />
                         </TouchableOpacity>
                     </View>
@@ -27,7 +28,7 @@ export default function BestScore({ navigation }) {
                     </View>
                     <View style={styles.buttonContainer}>
                         <Text style={styles.ask}>{translate('BestScore.ask')}</Text>
-                        <TouchableOpacity style={styles.button} onPress={() => { navigation.navigate({ name: 'KnowledgeCheck' }) }}>
+                        <TouchableOpacity style={styles.button} onPress={() => { goPage('KnowledgeCheck', 'bestScore') }}>
                             <Text style={styles.buttonText}>{translate('BestScore.playnow')}</Text>
                         </TouchableOpacity>
                     </View>

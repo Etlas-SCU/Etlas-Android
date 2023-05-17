@@ -7,8 +7,9 @@ import PopupMessage from '../PopupMessage/PopupMessage'
 import { translate } from "../../Localization";
 import { Entypo } from "@expo/vector-icons";
 import { colors } from "../../AppStyles";
+import { goBack } from "../../Backend/Navigator";
 
-export default function CameraScreen({ navigation }) {
+export default function CameraScreen({ }) {
 
     // Initialize state variables
     const [hasCameraPermission, setHasCameraPermission] = useState(null);
@@ -28,7 +29,7 @@ export default function CameraScreen({ navigation }) {
 
     // If camera permission is not granted, show an error message
     if (hasCameraPermission === false) {
-        return <PopupMessage state={'Error'} message={translate('Scan.ErroAcces')} pageName={'Home'} navigation={navigation} />
+        return <PopupMessage state={'Error'} message={translate('Scan.ErroAcces')} />
     }
 
     // Take a picture with the camera and set the image state variable to the picture URI
@@ -77,7 +78,7 @@ export default function CameraScreen({ navigation }) {
         <View style={styles.container}>
             <View style={styles.topBar}>
                 <Text style={styles.title}>{translate('Scan.title')}</Text>
-                <TouchableOpacity onPress={() => { navigation.goBack() }}>
+                <TouchableOpacity onPress={goBack}>
                     <Image source={require('../../assets/Scan/Arr.png')} />
                 </TouchableOpacity>
             </View>

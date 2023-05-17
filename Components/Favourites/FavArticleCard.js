@@ -1,15 +1,16 @@
 import { View, Image, Text, TouchableOpacity } from 'react-native'
 import { styles } from './Styles'
 import Backend from '../../Backend/Backend';
+import { goPage } from '../../Backend/Navigator';
 
 
-export default function FavArticleCard({ navigation, screen, Article }) {
+export default function FavArticleCard({ screen, Article }) {
 
     const { Title, Description, Date, Img, ID } = Article;
 
     return (
         <TouchableOpacity
-            onPress={() => { navigation.navigate('ArticleDetails', { Article: Article, screen: screen }) }}
+            onPress={() => { goPage('ArticleDetails', screen, { Article: Article }) }}
             style={styles.card}
         >
             <View style={styles.cardContainer}>
@@ -24,7 +25,7 @@ export default function FavArticleCard({ navigation, screen, Article }) {
                 <View style={styles.CardIconsConainer}>
                     <TouchableOpacity
                         style={styles.CardIcon}
-                        onPress={() => { navigation.navigate('ArticleDetails', { Article: Article, screen: 'favourites' }) }}
+                        onPress={() => { goPage('ArticleDetails', screen, { Article: Article }) }}
                     >
                         <Image source={require('../../assets/Favourites/Arrow.png')} style={styles.CardIconImg} />
                     </TouchableOpacity>

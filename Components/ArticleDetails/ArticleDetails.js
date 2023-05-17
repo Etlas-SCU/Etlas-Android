@@ -1,12 +1,13 @@
 import { View, Text, ScrollView, Image, TouchableOpacity } from "react-native";
 import { styles } from "./Styles";
 import { useState } from "react";
+import { getParams, goBack } from "../../Backend/Navigator";
 
 
-export default function ArticleDetails({ navigation, route }) {
+export default function ArticleDetails({ }) {
 
     // get the parameters needed
-    const { Article, screen } = route.params;
+    const { Article } = getParams();
     const { Title, Date, Img, fullDescription } = Article;
 
 
@@ -25,7 +26,7 @@ export default function ArticleDetails({ navigation, route }) {
     return (
         <View style={styles.container}>
             <TouchableOpacity
-                onPress={() => { navigation.navigate(screen) }}
+                onPress={goBack}
             >
                 <Image source={require('../../assets/Scan/Arr.png')} style={styles.back} />
             </TouchableOpacity>

@@ -1,9 +1,10 @@
 import { Page, Swipper } from "./Styles";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import { translate } from "../../Localization";
+import { goPage } from "../../Backend/Navigator";
 
 
-export default function ArticleCard({ navigation, article, screen }) {
+export default function ArticleCard({ article, screen }) {
 
     const { Title, Description, Date, Img } = article;
     const isPage = (screen != 'Home');
@@ -11,7 +12,7 @@ export default function ArticleCard({ navigation, article, screen }) {
     return (
         <TouchableOpacity
             style={isPage ? Page.MonumentsCard : Swipper.MonumentsCard}
-            onPress={() => { navigation.navigate('ArticleDetails', { Article: article, screen: screen }) }}
+            onPress={() => { goPage('ArticleDetails', screen, { Article: article }) }}
         >
             <Image style={isPage ? Page.MonumentsCardImg : Swipper.MonumentsCardImg} source={Img} borderRadius={20} />
             <View style={isPage ? Page.MonumentsCardText : Swipper.MonumentsCardText}>
@@ -21,7 +22,7 @@ export default function ArticleCard({ navigation, article, screen }) {
             </View>
             <View style={isPage ? Page.line : Swipper.line} />
             <TouchableOpacity
-                onPress={() => { navigation.navigate('ArticleDetails', { Article: article, screen: screen }) }}
+                onPress={() => { goPage('ArticleDetails', screen, { Article: article }) }}
             >
                 <Text style={isPage ? Page.learn : Swipper.learn}>{translate('Home.learnmore')}</Text>
             </TouchableOpacity>

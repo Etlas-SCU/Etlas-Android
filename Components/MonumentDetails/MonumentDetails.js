@@ -2,12 +2,13 @@ import { useState, useEffect } from 'react';
 import { View, ScrollView, Text, Image, TouchableOpacity } from 'react-native';
 import { styles } from './Styles';
 import * as Speech from 'expo-speech';
+import { getParams, goBack } from '../../Backend/Navigator';
 
 
-export default function MonumentDetails({ navigation, route }) {
+export default function MonumentDetails({ }) {
     
     // get the data from the route
-    const { Monument, screen } = route.params;
+    const { Monument } = getParams();
     const { Title, HistoricDate, Img, fullDescription } = Monument;
 
 
@@ -52,7 +53,7 @@ export default function MonumentDetails({ navigation, route }) {
         <View style={styles.container}>
             <View style={styles.UpperBox}>
                 <TouchableOpacity 
-                    onPress={() => { navigation.navigate({ name: screen }) }}
+                    onPress={goBack}
                     style={styles.close}  
                 >
                     <Image source={require('../../assets/HighScore/close.png')} style={styles.arrow}/>

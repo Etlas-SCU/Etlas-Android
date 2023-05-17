@@ -6,6 +6,7 @@ import Backend from "../../Backend/Backend";
 import { useEffect, useState, useContext } from "react";
 import { UserContext } from "../Context/Context";
 import Loader from "../Loader/Loader";
+import { goBack } from "../../Backend/Navigator";
 
 
 // to view the HTML text with the styles
@@ -25,8 +26,6 @@ const HTMLView = ({ htmlContent }) => {
 
 export default function TermsConditions({ navigation, route }) {
 
-    // get pageName from the parameters passed to the naviagtion
-    const { pageName } = route.params;
     [Terms, setTerms] = useState('');
     const { loaderVisible, hideLoader, showLoader } = useContext(UserContext);
 
@@ -47,7 +46,7 @@ export default function TermsConditions({ navigation, route }) {
             <View style={styles.header}>
                 <Text style={styles.title}>{translate('TermsConditions.title')}</Text>
                 <TouchableOpacity 
-                    onPress={() => { navigation.navigate({ name: pageName }) }} 
+                    onPress={goBack} 
                     style={styles.close}
                 >
                     <Image source={require('../../assets/HighScore/close.png')} style={styles.closeIcon}/>

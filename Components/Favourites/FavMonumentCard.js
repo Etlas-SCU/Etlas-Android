@@ -1,15 +1,16 @@
 import { View, Image, Text, TouchableOpacity } from 'react-native'
 import { styles } from './Styles'
 import Backend from '../../Backend/Backend';
+import { goPage } from '../../Backend/Navigator';
 
 
-export default function FavMonumentCard({ navigation, screen, Monument }) {
+export default function FavMonumentCard({ screen, Monument }) {
 
     const { Title, HistoricDate, scannedDate, Img, ID } = Monument;
 
     return (
         <TouchableOpacity
-            onPress={() => { navigation.navigate('MonumentDetails', { Monument: Monument, screen: screen }) }}
+            onPress={() => { goPage('MonumentDetails', screen, { Monument: Monument }) }}
             style={styles.card}
         >
             <View style={styles.cardContainer}>

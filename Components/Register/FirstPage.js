@@ -6,9 +6,10 @@ import { translate } from '../../Localization'
 import GoogleAuth from "../Authetincations/GoogleAuth";
 import FacebookAuth from "../Authetincations/FacebookAuth";
 import TwitterAuth from "../Authetincations/TwitterAuth";
+import { goPage, goBack } from "../../Backend/Navigator";
 
 
-export function FirstPage({ navigation }) {
+export function FirstPage({ }) {
 
     // get the data from input
     const [fullname, setFullName] = useState('');
@@ -21,7 +22,7 @@ export function FirstPage({ navigation }) {
             <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
                 <View style={styles.header_container}>
                     <Text style={styles.header}>{translate('Register.title')}</Text>
-                    <TouchableOpacity style={styles.header} onPress={() => navigation.goBack()}>
+                    <TouchableOpacity style={styles.header} onPress={goBack}>
                         <Image style={styles.arrow} source={require('../../assets/register/left-arrow.png')}></Image>
                     </TouchableOpacity>
                 </View>
@@ -75,13 +76,10 @@ export function FirstPage({ navigation }) {
                 <TouchableOpacity
                     style={styles.nextButton}
                     onPress={() => {
-                        navigation.navigate({
-                            name: 'secondPage',
-                            params: {
-                                fullname: fullname,
-                                email: email,
-                                password: password
-                            }
+                        goPage('secondPage', 'firstPage', {
+                            fullname: fullname,
+                            email: email,
+                            password: password
                         })
                     }}
                 >
@@ -89,7 +87,7 @@ export function FirstPage({ navigation }) {
                 </TouchableOpacity>
                 <View style={styles.signIn}>
                     <Text style={styles.haveAccount}>{translate('Register.haveaccount')} </Text>
-                    <TouchableOpacity onPress={() => navigation.navigate('login')}>
+                    <TouchableOpacity onPress={() => { goPage('login') }}>
                         <Text style={styles.signInText}>{translate('Register.signin')}</Text>
                     </TouchableOpacity>
                 </View>

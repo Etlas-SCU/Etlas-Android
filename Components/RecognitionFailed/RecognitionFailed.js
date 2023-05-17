@@ -5,9 +5,10 @@ import { UserContext } from "../Context/Context";
 import { useContext } from "react";
 import MainMenu from "../MainMenu/MainMenu";
 import { isIOS } from "../../AppStyles";
+import { goPage } from "../../Backend/Navigator";
 
 
-export default function KnowledgeCheck({ navigation }) {
+export default function KnowledgeCheck({ }) {
 
     const { showModal, setScreen } = useContext(UserContext);
 
@@ -22,7 +23,7 @@ export default function KnowledgeCheck({ navigation }) {
                     <Image source={require('../../assets/RecognizedFailed/Sad.png')} style={styles.sad} />
                     <Text style={styles.title}>{translate('RecognitionFailed.title')}</Text>
                     <Text style={styles.text}>{translate('RecognitionFailed.text')}</Text>
-                    <TouchableOpacity style={styles.button} onPress={() => { navigation.navigate({ name: 'Home' }) }}>
+                    <TouchableOpacity style={styles.button} onPress={() => { goPage('Home', 'RecognitionFailed') }}>
                         <Text style={styles.button_text}>{translate('RecognitionFailed.retry')}</Text>
                     </TouchableOpacity>
                 </View>

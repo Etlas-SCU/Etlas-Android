@@ -4,12 +4,13 @@ import { translate } from "../../Localization";
 import { colors } from "../../AppStyles";
 import { useState } from "react";
 import Backend from "../../Backend/Backend";
+import { goBack } from "../../Backend/Navigator";
 
 
-export default function EditProfile({ navigation }) {
+export default function EditProfile({ }) {
 
     // get the Data from Backend
-    const { name, phone, address, email, password } = Backend.getUser();
+    const { name, phone, address, email } = Backend.getUser();
 
     // for name input
     const [userName, setUserName] = useState(name);
@@ -18,10 +19,6 @@ export default function EditProfile({ navigation }) {
     // for email input
     const [userEmail, setUserEmail] = useState(email);
     const [emailEdit, setEmailEdit] = useState(false);
-
-    // for password input
-    const [userPassword, setUserPassword] = useState(password);
-    const [passwordEdit, setPasswordEdit] = useState(false);
 
     // for phone number input
     const [userPhoneNumber, setUserPhoneNumber] = useState(phone);
@@ -35,13 +32,6 @@ export default function EditProfile({ navigation }) {
     const edit = require('../../assets/EditProfile/edit.png');
     const save = require('../../assets/EditProfile/save.png');
 
-    // toggle password Edit
-    const togglePasswordEdit = () => {
-        if(!passwordEdit)
-            setUserPassword('');
-        setPasswordEdit(!passwordEdit);
-    }
-
     return (
         <View style={styles.container}>
             <ImageBackground source={require('../../assets/EditProfile/Background.png')} resizeMode="cover" style={styles.background}>
@@ -49,7 +39,7 @@ export default function EditProfile({ navigation }) {
                     <View style={styles.header}>
                         <Text style={styles.title}>{translate('EditProfile.title')}</Text>
                         <TouchableOpacity 
-                            onPress={() => { navigation.navigate({ name: 'Settings' }) }} 
+                            onPress={goBack} 
                             style={styles.close}
                         >
                             <Image source={require('../../assets/HighScore/close.png')} style={styles.closeIcon}/>
@@ -89,27 +79,6 @@ export default function EditProfile({ navigation }) {
                             </View>
                         </View>
                         <View style={styles.inputContainer}>
-                            <Text style={styles.input_title} >{translate('EditProfile.password')}</Text>
-                            <View style={styles.inputFieldContainer}>
-                                <TextInput
-                                    style={[styles.input, passwordEdit ? styles.editable : styles.uneditable]}
-                                    placeholder={translate('EditProfile.password')}
-                                    placeholderTextColor={colors.Grey}
-                                    defaultValue={userPassword}
-                                    onChangeText={(userPassword) => setUserPassword(userPassword)}
-                                    secureTextEntry={true}
-                                    editable={passwordEdit}
-                                    contextMenuHidden={true}
-                                    caretHidden={true}
-                                    autoCorrect={false}
-                                    clearTextOnFocus={true}
-                                />
-                                <TouchableOpacity onPress={togglePasswordEdit} style={styles.EditButton}>
-                                    <Image source={passwordEdit ? save : edit} style={styles.editIcon}/>
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                        <View style={styles.inputContainer}>
                             <Text style={styles.input_title} >{translate('EditProfile.phone')}</Text>
                             <View style={styles.inputFieldContainer}>
                                 <TextInput
@@ -144,7 +113,7 @@ export default function EditProfile({ navigation }) {
                     </View>
                     <TouchableOpacity 
                         style={styles.saveButton} 
-                        onPress={() => { navigation.navigate({ name: 'editProfile' }) }}
+                        onPress={() => { Backend.updateUser() }}
                     >
                         <Text style={styles.saveButtonText}>{translate('EditProfile.save')}</Text>
                     </TouchableOpacity>

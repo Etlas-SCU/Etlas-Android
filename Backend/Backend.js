@@ -116,7 +116,11 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
             console.log('error', error);
             return null;
         }
-    } 
+    }
+
+    static updateUser() {
+        // To Do
+    }
 
 }
 

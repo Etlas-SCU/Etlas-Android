@@ -5,15 +5,15 @@ import { UserContext } from "../Context/Context";
 import { useContext } from "react";
 import MainMenu from "../MainMenu/MainMenu";
 import { isIOS } from "../../AppStyles";
-import KnowledgeGame from "./KnowledgeGame/KnowledgeGame";
+import { goPage } from "../../Backend/Navigator";
 
 
-function Card({ navigation, title, img, desc, score, pageName }) {
+function Card({ title, img, desc, score }) {
     return (
         <TouchableOpacity 
             style={styles.body}
             onPress={() => { 
-                navigation.navigate('KnowledgeGame', { pageName: title })
+                goPage('KnowledgeGame', 'KnowledgeCheck', { pageName: title })
             }}
         >
             <View style={styles.bodyContent}>
@@ -28,7 +28,7 @@ function Card({ navigation, title, img, desc, score, pageName }) {
     )
 }
 
-export default function KnowledgeCheck({ navigation }) {
+export default function KnowledgeCheck({ }) {
 
     const { showModal, setScreen } = useContext(UserContext);
 
@@ -44,21 +44,18 @@ export default function KnowledgeCheck({ navigation }) {
                 </View>
                 <View style={styles.cards}>
                     <Card
-                        navigation={navigation}
                         title={translate('KnowledgeCheck.Statues')}
                         desc={translate('KnowledgeCheck.StatuesText')}
                         score={translate('KnowledgeCheck.StatuesScore')}
                         img={require('../../assets/KnowledgeCheck/Statue_1.png')}
                     />
                     <Card
-                        navigation={navigation}
                         title={translate('KnowledgeCheck.Monuments')}
                         desc={translate('KnowledgeCheck.MonumentsText')}
                         score={translate('KnowledgeCheck.MonumentsScore')}
                         img={require('../../assets/KnowledgeCheck/Statue_2.png')}
                     />
                     <Card
-                        navigation={navigation}
                         title={translate('KnowledgeCheck.Landmarks')}
                         desc={translate('KnowledgeCheck.LandmarksText')}
                         score={translate('KnowledgeCheck.LandmarksScore')}

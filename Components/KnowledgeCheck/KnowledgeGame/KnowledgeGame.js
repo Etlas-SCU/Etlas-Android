@@ -1,19 +1,19 @@
 import { View, Text, TouchableOpacity, Image, ScrollView, ImageBackground } from 'react-native';
 import { useState, useEffect } from 'react';
 import { styles } from './Styles';
-import { useRoute } from '@react-navigation/native';
 import { translate } from '../../../Localization';
 import Backend from '../../../Backend/Backend';
+import { goBack, goPage, getParams } from '../../../Backend/Navigator';
 
 
-export default function KnowledgeGame({ navigation, route }) {
-
-    // get the page name
-    const { pageName } = useRoute().params;
+export default function KnowledgeGame({ }) {
 
     // get the questions list
     const quesionsList = Backend.getQuestions();
 
+    // get the page name
+    const { pageName } = getParams();
+    
     // make states for the game
     const [currQuestionIdx, setCurrQuestionIdx] = useState(0);
     const [currOptionSelected, setCurrOptionSelected] = useState(null);
@@ -152,7 +152,7 @@ export default function KnowledgeGame({ navigation, route }) {
                     </View>
                     <TouchableOpacity 
                         style={styles.button}
-                        onPress={() => { setReInit(!reInit), navigation.navigate('KnowledgeCheck') }}
+                        onPress={() => { setReInit(!reInit), goPage('KnowledgeCheck', 'KnowledgeGame') }}
                     >
                         <Text style={styles.playAgain}>
                             {translate('KnowledgeGame.playAgain')}
@@ -169,7 +169,7 @@ export default function KnowledgeGame({ navigation, route }) {
             <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.ScrollView}>
                 <View style={styles.header}>
                     <Text style={styles.title}>{pageName}</Text>
-                    <TouchableOpacity style={styles.back} onPress={() => { navigation.navigate('KnowledgeCheck') }}>
+                    <TouchableOpacity style={styles.back} onPress={goBack}>
                         <Image source={require('../../../assets/Scan/Arr.png')} />
                     </TouchableOpacity>
                 </View>

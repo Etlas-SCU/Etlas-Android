@@ -8,9 +8,10 @@ import { UserContext } from "../Context/Context";
 import MainMenu from "../MainMenu/MainMenu";
 import { isIOS } from "../../AppStyles";
 import Backend from "../../Backend/Backend";
+import { goBack } from "../../Backend/Navigator";
 
 
-function Filter({ showFilerList, setShowFilterList, sortBy, setSortBy }){
+function Filter({ showFilerList, setShowFilterList, sortBy, setSortBy }) {
 
     const Checked = <Image source={require('../../assets/language_selection/check.png')} style={styles.check} />;
 
@@ -43,7 +44,7 @@ function Filter({ showFilerList, setShowFilterList, sortBy, setSortBy }){
             <View style={styles.modalContainer}>
                 <Text style={styles.modaltitle}>{translate('ToursPage.sortBy')}</Text>
                 <View style={styles.modal}>
-                    { options }
+                    {options}
                 </View>
             </View>
 
@@ -53,14 +54,14 @@ function Filter({ showFilerList, setShowFilterList, sortBy, setSortBy }){
 }
 
 
-export default function ArticlesPage({ navigation }) {
+export default function ArticlesPage({ }) {
 
     const [searchTerm, setSearchTerm] = useState('');
     const { showModal, setScreen } = useContext(UserContext);
     const [showFilerList, setShowFilterList] = useState(false);
     const [sortBy, setSortBy] = useState('Latest');
 
-    
+
     // get the articles from backend
     const ArticlesList = Backend.getArticles().filter((Article) => {
         return Article.Title.toLowerCase().includes(searchTerm.toLowerCase());
@@ -78,19 +79,19 @@ export default function ArticlesPage({ navigation }) {
     const filteredArticles = ArticlesList.sort(SortFunctions[sortBy]);
 
     // filter the articles based on the search term and filter option
-    const Articles = filteredArticles.map((article, idx) => <ArticleCard article={article} key={idx} navigation={navigation} screen={'ArticlesPage'}/>);
+    const Articles = filteredArticles.map((article, idx) => <ArticleCard article={article} key={idx} screen={'ArticlesPage'} />);
 
     return (
         <View style={styles.container}>
             {isIOS() ? <MainMenu /> : null}
-            {showFilerList ? <Filter showFilerList={showFilerList} setShowFilterList={setShowFilterList} sortBy={sortBy} setSortBy={setSortBy}/> : null}
+            {showFilerList ? <Filter showFilerList={showFilerList} setShowFilterList={setShowFilterList} sortBy={sortBy} setSortBy={setSortBy} /> : null}
             <ScrollView contentContainerStyle={styles.contentContainer}>
                 <View style={styles.header}>
                     <TouchableOpacity style={styles.aboutus} onPress={() => { showModal(), setScreen('ArticlesPage') }}>
                         <Image source={require('../../assets/KnowledgeCheck/tabler_exclamation-circle.png')} />
                     </TouchableOpacity>
                     <Text style={styles.title}>{translate('Articles.title')}</Text>
-                    <TouchableOpacity onPress={() => { navigation.goBack() }}>
+                    <TouchableOpacity onPress={goBack}>
                         <Image source={require('../../assets/Scan/Arr.png')} />
                     </TouchableOpacity>
                 </View>
@@ -102,7 +103,7 @@ export default function ArticlesPage({ navigation }) {
                         onChangeText={(searchTerm) => setSearchTerm(searchTerm)}
                         cursorColor={colors.DarkCyan}
                     />
-                    <TouchableOpacity 
+                    <TouchableOpacity
                         style={styles.filter}
                         onPress={() => { setShowFilterList(true) }}
                     >

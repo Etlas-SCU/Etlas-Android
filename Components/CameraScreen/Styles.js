@@ -14,6 +14,7 @@ export const styles = StyleSheet.create({
         height: dimensions.fullHeight,
         alignItems: 'center',
         borderRadius: 20,
+        resizeMode: 'contain',
     },
     button: {
         backgroundColor: colors.Cyan,
@@ -51,7 +52,7 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 20,
         resizeMode: 'contain',
-        backgroundColor: colors.Black
+        backgroundColor: colors.Black,
     },
     bottomBar: {
         height: responsiveHeight(150),

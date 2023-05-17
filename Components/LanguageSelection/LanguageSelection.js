@@ -2,8 +2,10 @@ import { Text, View, TouchableOpacity, Image, ScrollView } from "react-native";
 import { styles } from "./Styles";
 import { translate } from '../../Localization';
 import { useState } from "react";
+import { goBack } from "../../Backend/Navigator";
 
-export default function LanguageSelection({ navigation }) {
+
+export default function LanguageSelection({ }) {
 
     // state for the selected language
     const [selected, setSelected] = useState('en');
@@ -33,7 +35,7 @@ export default function LanguageSelection({ navigation }) {
                 <View style={styles.header}>
                     <Text style={styles.title}>{translate('LanguageSelection.title')}</Text>
                     <TouchableOpacity 
-                        onPress={() => { navigation.navigate({ name: 'Settings' }) }} 
+                        onPress={goBack} 
                         style={styles.close}
                     >
                         <Image source={require('../../assets/Profile/Arr.png')} />

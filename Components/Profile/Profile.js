@@ -4,9 +4,10 @@ import { translate } from "../../Localization";
 import { Avatar } from "@react-native-material/core";
 import { responsiveWidth } from "../../AppStyles";
 import Backend from "../../Backend/Backend";
+import { goBack } from "../../Backend/Navigator";
 
 
-export default function Profile({ navigation }) {
+export default function Profile({ }) {
 
     // get the User Information
     const { name, img, phone, address, email } = Backend.getUser();
@@ -15,7 +16,7 @@ export default function Profile({ navigation }) {
         <View style={styles.container}>
             <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
                 <View style={styles.upperBox}>
-                    <TouchableOpacity onPress={() => navigation.goBack()}>
+                    <TouchableOpacity onPress={goBack}>
                         <Image source={require('../../assets/Profile/Arr.png')} style={styles.close} />
                     </TouchableOpacity>
                     <Text style={styles.title}>{translate('Profile.title')}</Text>

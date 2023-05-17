@@ -8,15 +8,16 @@ import ArticleCard from "../ArticleCard/ArticleCard";
 import { UserContext } from "../Context/Context";
 import MainMenu from "../MainMenu/MainMenu";
 import Backend from "../../Backend/Backend";
+import { goPage } from "../../Backend/Navigator";
 
 
-function Section({ navigation, title, children, pageName }) {
+function Section({ title, children, pageName }) {
     return (
         <View styles={styles.Box}>
             <View style={styles.boxHeader}>
                 <Text style={styles.boxTitle}>{title}</Text>
                 <Image style={styles.new_image} source={require('../../assets/HomePage/New.png')} />
-                <TouchableOpacity style={styles.see_all} onPress={() => { navigation.navigate(pageName, { screen: 'Home' }) }}>
+                <TouchableOpacity style={styles.see_all} onPress={() => { goPage(pageName, 'Home') }}>
                     <Text style={styles.see_all_text}>{translate('Home.see_all')}</Text>
                 </TouchableOpacity>
             </View>
@@ -29,7 +30,7 @@ function Section({ navigation, title, children, pageName }) {
     )
 }
 
-export default function HomePage({ navigation }) {
+export default function HomePage({ }) {
 
     const { modalVisible, showModal, setScreen } = useContext(UserContext);
     const [searchTerm, setSearchTerm] = useState('');
@@ -43,13 +44,13 @@ export default function HomePage({ navigation }) {
     });
 
     // mapping the toursList and ArticlesList to jsx elements
-    const tours = toursList.map((tour, idx) => <ToursCard tour={tour} key={idx} isPage={false} navigation={navigation} />);
-    const Articles = ArticlesList.map((Article, idx) => <ArticleCard article={Article} key={idx} navigation={navigation} screen={'Home'}/>);
+    const tours = toursList.map((tour, idx) => <ToursCard tour={tour} key={idx} screen={'Home'} />);
+    const Articles = ArticlesList.map((Article, idx) => <ArticleCard article={Article} key={idx} screen={'Home'} />);
 
 
     return (
         <View style={styles.container}>
-            {modalVisible ? <MainMenu/> : null}
+            {modalVisible ? <MainMenu /> : null}
             <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
                 <View style={styles.header}>
                     <TouchableOpacity style={styles.aboutus} onPress={() => { showModal(), setScreen('Home') }}>
@@ -68,13 +69,11 @@ export default function HomePage({ navigation }) {
                     cursorColor={colors.DarkCyan}
                 />
                 <Section
-                    navigation={navigation}
                     title={translate('Home.tours')}
                     pageName='ToursPage'
                     children={tours}
                 />
                 <Section
-                    navigation={navigation}
                     title={translate('Home.article')}
                     pageName='ArticlesPage'
                     children={Articles}

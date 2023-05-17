@@ -1,8 +1,10 @@
 import { Text, View, Image, TouchableOpacity, ScrollView } from "react-native";
 import { styles } from "./Styles";
 import { translate } from '../../Localization';
+import { goPage } from "../../Backend/Navigator";
 
-export default function OnBoarding({ navigation }) {
+
+export default function OnBoarding({ }) {
 
     return (
         <View style={styles.container}>
@@ -16,10 +18,10 @@ export default function OnBoarding({ navigation }) {
                     <Image style={styles.logo} source={require('../../assets/on_boarding/e.png')}></Image>
                 </View>
                 <View style={styles.button_container}>
-                    <TouchableOpacity style={[styles.sign_buttons, styles.sign_in]} onPress={() => navigation.navigate('login')}>
+                    <TouchableOpacity style={[styles.sign_buttons, styles.sign_in]} onPress={() => { goPage('login', 'onBoarding') }}>
                         <Text style={styles.button_text}>{translate('OnBoarding.signin')}</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={[styles.sign_buttons, styles.sign_up]} onPress={() => navigation.navigate('firstPage')}>
+                    <TouchableOpacity style={[styles.sign_buttons, styles.sign_up]} onPress={() => { goPage('firstPage', 'onBoarding') }}>
                         <Text style={styles.button_text}>{translate('OnBoarding.signup')}</Text>
                     </TouchableOpacity>
                 </View>

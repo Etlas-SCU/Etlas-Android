@@ -7,12 +7,13 @@ import { responsiveHeight } from "../../AppStyles";
 import MainMenu from "../MainMenu/MainMenu";
 import { isIOS } from "../../AppStyles";
 import Backend from "../../Backend/Backend";
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import * as ImagePicker from 'expo-image-picker';
 import PopupMessage from "../PopupMessage/PopupMessage";
+import { goPage } from "../../Backend/Navigator";
 
 
-export default function Settings({ navigation }) {
+export default function Settings({ }) {
 
     // use user context
     const { showModal, setScreen, showPopupMessage } = useContext(UserContext);
@@ -24,17 +25,16 @@ export default function Settings({ navigation }) {
     const [image, setImage] = useState(null);
     const [hasGelleryPermission, setHasGalleryPermission] = useState(null);
 
-    // ask for gallery permission
-    useEffect(() => {
-        (async () => {
-            const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-            setHasGalleryPermission(status === 'granted');
-        })();
-    }, []);
-
     // pick image from gallery
     const pickImage = async () => {
-        
+        // ask for gallery permission
+        if(hasGelleryPermission === null){
+            (async () => {
+                const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+                setHasGalleryPermission(status === 'granted');
+            })();
+        }
+
         // if the user doesn't have permission
         if (hasGelleryPermission === false) {
             showPopupMessage();
@@ -84,7 +84,7 @@ export default function Settings({ navigation }) {
                 </View>
                 <TouchableOpacity 
                     style={styles.buttonEdit}
-                    onPress={() => { navigation.navigate({ name: 'editProfile' }) }}
+                    onPress={() => { goPage('editProfile', 'Settings') }}
                 >
                     <Text style={styles.buttonText}>{translate('Settings.edit')}</Text>
                 </TouchableOpacity>
@@ -94,7 +94,7 @@ export default function Settings({ navigation }) {
                     </View>
                     <TouchableOpacity 
                         style={styles.lineBar}
-                        onPress={() => { navigation.navigate({ name: 'favourites' }) }}
+                        onPress={() => { goPage('favourites', 'Settings') }}
                     >
                         <Image source={require('../../assets/Settings/fav.png')} style={styles.left}/>
                         <Text style={[styles.text, styles.middle]}>{translate('Settings.fav')}</Text>
@@ -102,7 +102,7 @@ export default function Settings({ navigation }) {
                     </TouchableOpacity>
                     <TouchableOpacity 
                         style={styles.lineBar}
-                        onPress={() => { navigation.navigate({ name: 'bestScore' }) }}
+                        onPress={() => { goPage('bestScore', 'Settings') }}
                     >
                         <Image source={require('../../assets/Settings/best_score.png')} style={styles.left}/>
                         <Text style={[styles.text, styles.middle]}>{translate('Settings.best_score')}</Text>
@@ -115,7 +115,7 @@ export default function Settings({ navigation }) {
                     </View>
                     <TouchableOpacity 
                         style={styles.lineBar} 
-                        onPress={() => { navigation.navigate({ name:'LanguageSelection' }) }}
+                        onPress={() => { goPage('LanguageSelection', 'Settings') }}
                     >
                         <Image source={require('../../assets/Settings/World.png')} style={styles.left}/>
                         <Text style={[styles.text, styles.middle]}>{translate('Settings.language')}</Text>

@@ -6,9 +6,10 @@ import { colors } from "../../AppStyles";
 import { useContext, useRef, useState } from "react";
 import PopupMessage from "../PopupMessage/PopupMessage";
 import { UserContext } from "../Context/Context";
+import { goBack, goPage } from "../../Backend/Navigator";
 
 
-export default function ForgotPasswordSecond({ navigation }) {
+export default function ForgotPasswordSecond({ }) {
 
     const [ OTP, setOTP ] = useState('');
     const otpInput = useRef(null);
@@ -16,7 +17,7 @@ export default function ForgotPasswordSecond({ navigation }) {
 
     const checkOtp = () => {
         if (OTP) {
-            navigation.navigate('forgotPasswordThird');
+            goPage('forgotPasswordThird', 'forgotPasswordSecond');
         } else {
             otpInput.current.clear();
             showPopupMessage();
@@ -28,7 +29,7 @@ export default function ForgotPasswordSecond({ navigation }) {
             <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
                 <View style={styles.header_container}>
                     <Text style={styles.header}>{translate('forgotPassword.title')}</Text>
-                    <TouchableOpacity style={styles.header} onPress={() => { navigation.goBack() }}>
+                    <TouchableOpacity style={styles.header} onPress={goBack}>
                         <Image style={styles.arrow} source={require('../../assets/register/left-arrow.png')}></Image>
                     </TouchableOpacity>
                 </View>

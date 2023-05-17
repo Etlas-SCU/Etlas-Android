@@ -4,15 +4,16 @@ import FavArticleCard from "./FavArticleCard";
 import FavMonumentCard from "./FavMonumentCard";
 import Backend from "../../Backend/Backend";
 import { translate } from "../../Localization";
+import { goPage } from "../../Backend/Navigator";
 
 
-function Container({ children, ConainerName, navigation, pageNav }) {
+function Container({ children, ConainerName, pageNav }) {
     return (
         <View style={styles.container}>
             <View style={styles.containerTitle}>
                 <Text style={styles.containerHeaderTitle}>{ConainerName}</Text>
                 <TouchableOpacity
-                    onPress={() => { navigation.navigate(pageNav, { screen: 'favourites' }) }}
+                    onPress={() => { goPage(pageNav, 'favourites') }}
                     style={styles.see_all}
                 >
                     <Text style={styles.see_all_text}>{translate('Favourites.see_all')}</Text>
@@ -27,15 +28,15 @@ function Container({ children, ConainerName, navigation, pageNav }) {
     )
 }
 
-export default function Favourites({ navigation }) {
+export default function Favourites({ }) {
 
     // get the lists from the backend
     const ArticlesList = Backend.getFavArticles();
     const MonumentsList = Backend.getFavMonuments();
 
     // mapping the cards
-    const ArticlesCards = ArticlesList.map((Article, index) => { return <FavArticleCard key={index} Article={Article} navigation={navigation} screen={'favourites'}/> });
-    const MonumentsCards = MonumentsList.map((Monument, index) => { return <FavMonumentCard key={index} Monument={Monument} navigation={navigation} screen={'favourites'}/> });
+    const ArticlesCards = ArticlesList.map((Article, index) => { return <FavArticleCard key={index} Article={Article} screen={'favourites'}/> });
+    const MonumentsCards = MonumentsList.map((Monument, index) => { return <FavMonumentCard key={index} Monument={Monument} screen={'favourites'}/> });
 
 
     return (
@@ -44,7 +45,7 @@ export default function Favourites({ navigation }) {
                 <View style={styles.header}>
                     <Text style={styles.title}>{translate('Favourites.title')}</Text>
                     <TouchableOpacity
-                        onPress={() => { navigation.navigate({ name: 'Settings' }) }}
+                        onPress={() => { goPage('Settings', 'favourites') }}
                         style={styles.close}
                     >
                         <Image source={require('../../assets/HighScore/close.png')} style={styles.arrow} />
@@ -54,7 +55,6 @@ export default function Favourites({ navigation }) {
                     <Container
                         ConainerName={translate('Favourites.3D')}
                         pageTitle={translate('Favourites.Models')}
-                        navigation={navigation}
                         pageNav={'favMonumentsPage'}
                     >
                         {MonumentsCards}
@@ -62,7 +62,6 @@ export default function Favourites({ navigation }) {
                     <Container
                         ConainerName={translate('Favourites.articles')}
                         pageTitle={translate('Favourites.articles')}
-                        navigation={navigation}
                         pageNav={'favArticlesPage'}
                     >
                         {ArticlesCards}

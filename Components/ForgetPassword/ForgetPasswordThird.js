@@ -3,9 +3,10 @@ import { View, Text, Image, TouchableOpacity, ScrollView, TextInput } from "reac
 import { translate } from "../../Localization";
 import { colors } from "../../AppStyles";
 import { useState } from "react";
+import { goBack, goPage } from "../../Backend/Navigator";
 
 
-export default function ForgotPasswordThird({ navigation }) {
+export default function ForgotPasswordThird({ }) {
 
     // for password
     const [password, setPassword] = useState('');
@@ -20,7 +21,7 @@ export default function ForgotPasswordThird({ navigation }) {
             <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
                 <View style={styles.header_container}>
                     <Text style={styles.header}>{translate('Register.title')}</Text>
-                    <TouchableOpacity style={styles.header} onPress={() => navigation.goBack()}>
+                    <TouchableOpacity style={styles.header} onPress={goBack}>
                         <Image style={styles.arrow} source={require('../../assets/register/left-arrow.png')}></Image>
                     </TouchableOpacity>
                 </View>
@@ -60,7 +61,10 @@ export default function ForgotPasswordThird({ navigation }) {
                         </View>
                     </View>
                 </View>
-                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('forgotPasswordSecond')}>
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => { goPage('Home', 'forgotPasswordThird') }}
+                >
                     <Text style={styles.buttonText}>{translate('forgotPassword.finish')}</Text>
                 </TouchableOpacity>
             </ScrollView>

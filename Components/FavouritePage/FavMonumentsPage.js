@@ -3,18 +3,19 @@ import { styles } from "./Styles";
 import { translate } from "../../Localization";
 import Backend from "../../Backend/Backend";
 import FavMonumentCard from "../Favourites/FavMonumentCard";
+import { goBack, getParams } from "../../Backend/Navigator";
 
 
-export default function FavMonumentsPage({ navigation, route }) {
-
-    // get the last screen from route
-    const { screen } = route.params;
+export default function FavMonumentsPage({ }) {
 
     // get the monument list from backend
     const MonumentsList = Backend.getFavMonuments();
 
+    // get the screen name from navigator
+    const { prevPage } = getParams();
+    
     // mapping the cards
-    const Monuments = MonumentsList.map((Monument, index) => { return <FavMonumentCard key={index} Monument={Monument} navigation={navigation} screen={screen}/> });
+    const Monuments = MonumentsList.map((Monument, index) => { return <FavMonumentCard key={index} Monument={Monument} screen={prevPage} /> });
 
     return (
         <View style={styles.container}>
@@ -22,7 +23,7 @@ export default function FavMonumentsPage({ navigation, route }) {
                 <View style={styles.header}>
                     <Text style={styles.title}>{translate('Favourites.title')}</Text>
                     <TouchableOpacity
-                        onPress={() => { navigation.navigate({ name: screen }) }}
+                        onPress={goBack}
                         style={styles.close}
                     >
                         <Image source={require('../../assets/HighScore/close.png')} style={styles.arrow} />

@@ -8,6 +8,7 @@ import { UserContext } from "../Context/Context";
 import MainMenu from "../MainMenu/MainMenu";
 import { isIOS } from "../../AppStyles";
 import Backend from "../../Backend/Backend";
+import { goBack } from "../../Backend/Navigator";
 
 
 function Filter({ showFilerList, setShowFilterList, sortBy, setSortBy }){
@@ -53,7 +54,7 @@ function Filter({ showFilerList, setShowFilterList, sortBy, setSortBy }){
 }
 
 
-export default function ToursPage({ navigation }) {
+export default function ToursPage({ }) {
 
     const { showModal, setScreen } = useContext(UserContext);
     const [searchTerm, setSearchTerm] = useState('');
@@ -77,7 +78,7 @@ export default function ToursPage({ navigation }) {
     const filteredTours = toursList.sort(SortFunctions[sortBy]);
 
     // filter the tours based on the search term
-    const tours = filteredTours.map((tour, idx) => <ToursCard tour={tour} key={idx} isPage={true} navigation={navigation} />);
+    const tours = filteredTours.map((tour, idx) => <ToursCard tour={tour} key={idx} screen={'ToursPage'}/>);
 
     return (
         <View style={styles.container}>
@@ -85,11 +86,11 @@ export default function ToursPage({ navigation }) {
             {showFilerList ? <Filter showFilerList={showFilerList} setShowFilterList={setShowFilterList} sortBy={sortBy} setSortBy={setSortBy}/> : null}
             <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
                 <View style={styles.header}>
-                    <TouchableOpacity style={styles.aboutus} onPress={() => { showModal(), setScreen('ToursPage')} }>
+                    <TouchableOpacity style={styles.aboutus} onPress={() => { setScreen('ToursPage'), showModal() } }>
                         <Image source={require('../../assets/KnowledgeCheck/tabler_exclamation-circle.png')} />
                     </TouchableOpacity>
                     <Text style={styles.title}>{translate('Tours.title')}</Text>
-                    <TouchableOpacity onPress={() => { navigation.goBack() }}>
+                    <TouchableOpacity onPress={goBack}>
                         <Image source={require('../../assets/Scan/Arr.png')} />
                     </TouchableOpacity>
                 </View>

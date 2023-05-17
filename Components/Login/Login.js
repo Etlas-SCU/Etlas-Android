@@ -6,9 +6,10 @@ import GoogleAuth from "../Authetincations/GoogleAuth";
 import FacebookAuth from "../Authetincations/FacebookAuth";
 import TwitterAuth from "../Authetincations/TwitterAuth";
 import { useState } from "react";
+import { goBack, goPage } from "../../Backend/Navigator";
 
 
-export default function Login({ navigation }) {
+export default function Login({ }) {
 
     // get the data from input
     const [email, setEmail] = useState('');
@@ -21,7 +22,7 @@ export default function Login({ navigation }) {
             <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
                 <View style={styles.header_container}>
                     <Text style={styles.header}>{translate('Login.title')}</Text>
-                    <TouchableOpacity style={styles.header} onPress={() => navigation.goBack()}>
+                    <TouchableOpacity style={styles.header} onPress={goBack}>
                         <Image style={styles.arrow} source={require('../../assets/register/left-arrow.png')}></Image>
                     </TouchableOpacity>
                 </View>
@@ -66,13 +67,13 @@ export default function Login({ navigation }) {
                 </View>
                 <TouchableOpacity
                     style={styles.nextButton}
-                    onPress={() => { navigation.navigate({ name: 'menuBar' }) }}
+                    onPress={() => { goPage('menuBar', 'login') }}
                 >
                     <Text style={styles.nextText}>{translate('Login.signin')}</Text>
                 </TouchableOpacity>
                 <View style={styles.signIn}>
                     <Text style={styles.haveAccount}>{translate('Login.haveaccount')} </Text>
-                    <TouchableOpacity onPress={() => { navigation.navigate({ name: 'firstPage' }) }}>
+                    <TouchableOpacity onPress={() => { goPage('firstPage') }}>
                         <Text style={styles.signInText}>{translate('Login.signup')}</Text>
                     </TouchableOpacity>
                 </View>

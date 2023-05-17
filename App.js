@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useFonts } from 'expo-font';
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack'
@@ -20,6 +20,8 @@ import { StatusBar } from 'expo-status-bar';
 import Favourites from './Components/Favourites/Favourites';
 import FavMonumentsPage from './Components/FavouritePage/FavMonumentsPage';
 import FavArticlesPage from './Components/FavouritePage/FavArticlesPage';
+import { setNavigationRef } from './Backend/Navigator';
+
 
 // import the screen
 const Stack = createStackNavigator();
@@ -95,7 +97,11 @@ export default function App() {
                 barStyle='light-content'
                 translucent={true}
             />
-            <NavigationContainer>
+            <NavigationContainer
+                ref={navigationRef => {
+                    setNavigationRef(navigationRef);
+                }}
+            >
                 <Stack.Navigator screenOptions={{
                     header: () => null,
                     cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
