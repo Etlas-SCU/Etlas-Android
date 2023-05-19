@@ -11,7 +11,7 @@ import { goBack, goPage } from "../../Backend/Navigator";
 
 export default function ForgotPasswordSecond({ }) {
 
-    const [ OTP, setOTP ] = useState('');
+    const [OTP, setOTP] = useState('');
     const otpInput = useRef(null);
     const { popupMessageVisible, showPopupMessage } = useContext(UserContext);
 
@@ -29,13 +29,13 @@ export default function ForgotPasswordSecond({ }) {
             <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
                 <View style={styles.header_container}>
                     <Text style={styles.header}>{translate('forgotPassword.title')}</Text>
-                    <TouchableOpacity style={styles.header} onPress={goBack}>
-                        <Image style={styles.arrow} source={require('../../assets/register/left-arrow.png')}></Image>
+                    <TouchableOpacity style={styles.backContainer} onPress={goBack}>
+                        <Image style={styles.back} source={require('../../assets/register/left-arrow.png')} />
                     </TouchableOpacity>
                 </View>
                 <View style={styles.line} />
                 <Text style={styles.helpingText}>{translate('forgotPassword.descriptionSecond')}</Text>
-                { popupMessageVisible ? <PopupMessage  state={'Error'} message={'Invalid OTP'} /> : null }
+                {popupMessageVisible ? <PopupMessage state={'Error'} message={'Invalid OTP'} /> : null}
                 <OTPTextInput
                     ref={otpInput}
                     inputCount={4}
@@ -48,8 +48,8 @@ export default function ForgotPasswordSecond({ }) {
                 <TouchableOpacity style={styles.resend}>
                     <Text style={styles.ResendText}>{translate('forgotPassword.Resend')}</Text>
                 </TouchableOpacity>
-                <TouchableOpacity 
-                    style={styles.button} 
+                <TouchableOpacity
+                    style={styles.button}
                     onPress={() => checkOtp()}
                 >
                     <Text style={styles.buttonText}>{translate('forgotPassword.next')}</Text>

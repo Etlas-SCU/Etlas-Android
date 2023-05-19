@@ -18,7 +18,10 @@ export default function TourDetails({ }) {
 
     return (
         <View style={styles.container}>
-            <TouchableOpacity onPress={goBack}>
+            <TouchableOpacity 
+                onPress={goBack}
+                style={styles.backContainer}
+            >
                 <Image source={require('../../assets/Scan/Arr.png')} style={styles.back}/>
             </TouchableOpacity>
             <Swiper

@@ -22,8 +22,8 @@ export function SecondPage({ }) {
             <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
                 <View style={styles.header_container}>
                     <Text style={styles.header}>{translate('Register.title')}</Text>
-                    <TouchableOpacity style={styles.header} onPress={goBack}>
-                        <Image style={styles.arrow} source={require('../../assets/register/left-arrow.png')}></Image>
+                    <TouchableOpacity style={styles.backContainer} onPress={goBack}>
+                        <Image style={styles.back} source={require('../../assets/register/left-arrow.png')} />
                     </TouchableOpacity>
                 </View>
                 <View style={styles.line} />

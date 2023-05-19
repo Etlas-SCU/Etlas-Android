@@ -21,7 +21,7 @@ export default function FavMonumentsPage({ }) {
         <View style={styles.container}>
             <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
                 <View style={styles.header}>
-                    <Text style={styles.title}>{translate('Favourites.title')}</Text>
+                    <Text style={styles.title}>{translate('Favourites.Models')}</Text>
                     <TouchableOpacity
                         onPress={goBack}
                         style={styles.close}

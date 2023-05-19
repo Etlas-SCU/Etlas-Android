@@ -9,7 +9,10 @@ export default function AboutUs({ }) {
         <View style={styles.container}>
             <ImageBackground source={require('../../assets/AboutUs/AboutUs.png')} style={styles.background}>
                 <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
-                    <TouchableOpacity onPress={goBack}>
+                    <TouchableOpacity 
+                        onPress={goBack}
+                        style={styles.closeContainer}
+                    >
                         <Image source={require('../../assets/AboutUs/ep_close-bold.png')} style={styles.close} />
                     </TouchableOpacity>
                     <Image style={styles.logo} source={require('../../assets/AboutUs/e.png')} />

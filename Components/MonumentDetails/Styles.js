@@ -97,6 +97,11 @@ export const styles = StyleSheet.create({
         height: responsiveHeight(35),
         resizeMode: 'contain',
     },
+    speechIcon: {
+        width: responsiveWidth(48),
+        height: responsiveHeight(48),
+        resizeMode: 'contain',
+    },
     descriptionContainer: {
         width: dimensions.fullWidth,
         marginTop: responsiveHeight(28),
@@ -108,6 +113,7 @@ export const styles = StyleSheet.create({
         marginHorizontal: responsiveWidth(24),
     },
     scrollContainer: {
+        paddingTop: responsiveHeight(24),
         paddingBottom: responsiveHeight(200)
     },
 });

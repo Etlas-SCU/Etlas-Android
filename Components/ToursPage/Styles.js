@@ -21,6 +21,15 @@ export const styles = StyleSheet.create({
         fontSize: responsiveFontSize(18),
         fontFamily: fontFamily.MontserratBold,
     },
+    closeContainer: {
+        width: responsiveWidth(32),
+        height: responsiveHeight(32),
+    },
+    close: {
+        width: responsiveWidth(32),
+        height: responsiveHeight(32),
+        tintColor: colors.White,
+    },
     inputContainer: {
         flexDirection: "row",
         justifyContent: "space-between",

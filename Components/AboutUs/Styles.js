@@ -55,10 +55,16 @@ export const styles = StyleSheet.create({
         fontFamily: fontFamily.MontserratRegular,
     },
     close: {
+        width: responsiveWidth(32),
+        height: responsiveHeight(32),
+    },
+    closeContainer: {
         position: "absolute",
         alignSelf: 'flex-end',
         right: responsiveWidth(24),
         top: responsiveHeight(60),
+        width: responsiveWidth(32),
+        height: responsiveHeight(32),
     },
     contactus: {
         borderColor: colors.White,

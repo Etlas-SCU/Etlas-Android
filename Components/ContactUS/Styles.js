@@ -9,11 +9,16 @@ export const styles = StyleSheet.create({
     close: {
         width: responsiveWidth(32),
         height: responsiveHeight(32),
+    },
+    closeContainer: {
+        position: "absolute",
+        alignSelf: 'flex-end',
         right: responsiveWidth(24),
         top: responsiveHeight(60),
-        position: 'absolute',
-        zIndex: 999,
-        tintColor: colors.White
+        width: responsiveWidth(32),
+        height: responsiveHeight(32),
+        tintColor: colors.White,
+        zIndex: 1
     },
     scrollContainer: {
         paddingBottom: responsiveHeight(200)

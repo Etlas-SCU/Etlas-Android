@@ -6,13 +6,19 @@ export const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: colors.White,
     },
+    backContainer: {
+        position: "absolute",
+        alignSelf: 'flex-end',
+        right: responsiveWidth(24),
+        top: responsiveHeight(60),
+        width: responsiveWidth(32),
+        height: responsiveHeight(32),
+        zIndex: 999
+    },
     back: {
         width: responsiveWidth(32),
         height: responsiveHeight(32),
         tintColor: colors.DarkCyan,
-        position: 'absolute',
-        top: responsiveHeight(60),
-        right: responsiveWidth(24),
     },
     ScrollContainer: {
         paddingBottom: responsiveHeight(200)
@@ -28,7 +34,7 @@ export const styles = StyleSheet.create({
         flex: 1,
         height: responsiveHeight(469),
         width: dimensions.fullWidth,
-        zIndex: -1,
+        zIndex: -999,
         borderBottomRightRadius: 30,
         borderBottomLeftRadius: 30,
     },

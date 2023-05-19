@@ -90,8 +90,11 @@ export default function ToursPage({ }) {
                         <Image source={require('../../assets/KnowledgeCheck/tabler_exclamation-circle.png')} />
                     </TouchableOpacity>
                     <Text style={styles.title}>{translate('Tours.title')}</Text>
-                    <TouchableOpacity onPress={goBack}>
-                        <Image source={require('../../assets/Scan/Arr.png')} />
+                    <TouchableOpacity 
+                        onPress={goBack}
+                        style={styles.closeContainer}
+                    >
+                        <Image source={require('../../assets/Scan/Arr.png')} style={styles.close}/>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.inputContainer}>

@@ -169,8 +169,11 @@ export default function KnowledgeGame({ }) {
             <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.ScrollView}>
                 <View style={styles.header}>
                     <Text style={styles.title}>{pageName}</Text>
-                    <TouchableOpacity style={styles.back} onPress={goBack}>
-                        <Image source={require('../../../assets/Scan/Arr.png')} />
+                    <TouchableOpacity 
+                        style={styles.backContainer} 
+                        onPress={goBack}
+                    >
+                        <Image source={require('../../../assets/Scan/Arr.png')} style={styles.back}/>
                     </TouchableOpacity>
                 </View>
                 <Image

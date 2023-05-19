@@ -21,12 +21,16 @@ export const styles = StyleSheet.create({
         fontSize: responsiveFontSize(18),
         color: colors.White,
     },
+    backContainer: {
+        width: responsiveWidth(32),
+        height: responsiveHeight(32),
+        position: 'absolute',
+        right: responsiveWidth(0),
+    },
     back: {
         width: responsiveWidth(32),
         height: responsiveHeight(32),
         tintColor: colors.White,
-        position: 'absolute',
-        right: responsiveWidth(0)
     },
     image: {
         width: responsiveWidth(381),

@@ -36,9 +36,9 @@ export default function LanguageSelection({ }) {
                     <Text style={styles.title}>{translate('LanguageSelection.title')}</Text>
                     <TouchableOpacity 
                         onPress={goBack} 
-                        style={styles.close}
+                        style={styles.closeContainer}
                     >
-                        <Image source={require('../../assets/Profile/Arr.png')} />
+                        <Image source={require('../../assets/Profile/Arr.png')} style={styles.close}/>
                     </TouchableOpacity>
                 </View>
                 <Text style={styles.chooseBar}>{translate('LanguageSelection.choose')}</Text>

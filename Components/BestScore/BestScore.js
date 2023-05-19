@@ -16,8 +16,11 @@ export default function BestScore({ }) {
                 <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
                     <View style={styles.header}>
                         <Text style={styles.title}>{translate('BestScore.title')}</Text>
-                        <TouchableOpacity onPress={goBack} style={styles.close}>
-                            <Image source={require('../../assets/Profile/Arr.png')} />
+                        <TouchableOpacity 
+                            onPress={goBack} 
+                            style={styles.closeContainer}
+                        >
+                            <Image source={require('../../assets/Profile/Arr.png')} style={styles.close}/>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.ScoreBox}>

@@ -10,7 +10,10 @@ export default function ContactUS({ }) {
     return (
         <View style={styles.container}>
             <View style={styles.upperBox}>
-                <TouchableOpacity onPress={goBack}>
+                <TouchableOpacity 
+                    style={styles.closeContainer}
+                    onPress={goBack}
+                >
                     <Image source={require('../../assets/AboutUs/ep_close-bold.png')} style={styles.close} />
                 </TouchableOpacity>
                 <Image source={require('../../assets/ContactUs/Contact_us.png')} style={styles.cover} />
