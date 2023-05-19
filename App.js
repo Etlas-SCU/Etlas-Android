@@ -123,9 +123,6 @@ export default function App() {
                     <Stack.Screen name="forgotPasswordThird" component={ForgotPasswordThird} />
                     <Stack.Screen name="bestScore" component={BestScore} />
                     <Stack.Screen name="editProfile" component={EditProfile} />
-                    <Stack.Screen name="favourites" component={Favourites} />
-                    <Stack.Screen name="favMonumentsPage" component={FavMonumentsPage} />
-                    <Stack.Screen name="favArticlesPage" component={FavArticlesPage} />
                 </Stack.Navigator>
             </NavigationContainer>
         </UserProvider>

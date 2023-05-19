@@ -56,7 +56,8 @@ export const styles = StyleSheet.create({
         height: responsiveHeight(468),
         position: 'absolute',
         bottom: responsiveHeight(-100),
-        left: responsiveWidth(-150)
+        left: responsiveWidth(-150),
+        zIndex: -9999
     },
     button_container: {
         alignItems: 'flex-end',
@@ -64,6 +65,7 @@ export const styles = StyleSheet.create({
         marginHorizontal: responsiveWidth(24),
         marginTop: responsiveHeight(246),
         gap: responsiveWidth(20),
+        zIndex: 9999,
     },
     sign_buttons: {
         width: responsiveWidth(181),

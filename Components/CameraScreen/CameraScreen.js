@@ -10,6 +10,7 @@ import { colors } from "../../AppStyles";
 import { goBack } from "../../Backend/Navigator";
 import { useIsFocused } from '@react-navigation/native';
 import { setStatusBarStyle } from "expo-status-bar";
+import { dimensions } from "../../AppStyles";
 
 
 export default function CameraScreen({ }) {
@@ -83,6 +84,12 @@ export default function CameraScreen({ }) {
             setType(Camera.Constants.Type.back);
     }
 
+    // adjust ratio for the camera
+    const { width } = dimensions;
+    const xFixed = width;
+    const yFixed = width * 16 / 9;
+
+
 
     return (
         <View style={styles.container}>
@@ -99,6 +106,7 @@ export default function CameraScreen({ }) {
                         type={type}
                         flashMode={flash ? Camera.Constants.FlashMode.torch : Camera.Constants.FlashMode.off}
                         ref={cameraRef}
+                        ratio={{ x: xFixed, y: yFixed }}
                     />
                     :
                     <Image

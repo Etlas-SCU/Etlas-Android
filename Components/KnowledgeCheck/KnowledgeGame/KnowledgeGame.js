@@ -25,6 +25,7 @@ export default function KnowledgeGame({ }) {
     const [gameFinished, setGameFinished] = useState(false);
     const [reInit, setReInit] = useState(false);
     const [filterdOptions, setFilterdOptions] = useState([]);
+    const [isBackEnabled, setIsBackEnabled] = useState(true);
 
 
     // to re initial all states if the component called again
@@ -36,12 +37,14 @@ export default function KnowledgeGame({ }) {
         setScore(0);
         setHint(2);
         setGameFinished(false);
-        setFilterdOptions([]);        
+        setFilterdOptions([]);
+        setIsBackEnabled(true);     
     }, [reInit, pageName]);
 
 
     // validate the answer
     const validateAnswer = (selectedOption) => {
+        setIsBackEnabled(false);
         const currQuestion = quesionsList[currQuestionIdx];
         const correctOption = currQuestion.correct_chocie;
         setCurrOptionSelected(selectedOption);
@@ -51,6 +54,7 @@ export default function KnowledgeGame({ }) {
             setTimeout(() => {
                 setScore(score + 1);
                 nextQuestion();
+                setIsBackEnabled(true);
             }, 1500);
         }
         else {
@@ -177,6 +181,7 @@ export default function KnowledgeGame({ }) {
                     <TouchableOpacity 
                         style={styles.backContainer} 
                         onPress={goBack}
+                        disabled={!isBackEnabled}
                     >
                         <Image source={require('../../../assets/Scan/Arr.png')} style={styles.back}/>
                     </TouchableOpacity>

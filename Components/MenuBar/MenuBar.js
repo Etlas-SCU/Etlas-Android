@@ -19,8 +19,8 @@ import ArticleDetails from "../ArticleDetails/ArticleDetails";
 import KnowledgeGame from "../KnowledgeCheck/KnowledgeGame/KnowledgeGame";
 import MonumentDetails from "../MonumentDetails/MonumentDetails";
 import FavMonumentsPage from "../FavouritePage/FavMonumentsPage";
-import { getDarkPages } from "../../Backend/Navigator";
-import { setStatusBarStyle } from "expo-status-bar";
+import FavArticlesPage from "../FavouritePage/FavArticlesPage";
+import Favourites from "../Favourites/Favourites";
 
 
 export default function MenuBar({ }) {
@@ -36,12 +36,15 @@ export default function MenuBar({ }) {
     }
 
     return (
-        <Tab.Navigator style={styles.container}
-            initialRouteName="Home"
+        <Tab.Navigator 
+            style={styles.container}
+            initialRouteName={'Home'}
+            backBehavior={'history'}
             screenOptions={({ route }) => ({
                 headerShown: false,
                 tabBarShowLabel: false,
                 tabBarStyle: styles.menuBar,
+                lazy: true,
                 tabBarIcon: ({ focused }) => {
                     // for menu bar border
                     const isRightBorder = (route.name == 'Home' || route.name == 'KnowledgeCheck');
@@ -79,7 +82,10 @@ export default function MenuBar({ }) {
             <Tab.Screen name="TermsConditions" component={TermsConditions} options={{ tabBarButton: () => null, tabBarVisible: false }} />
             <Tab.Screen name="ArticleDetails" component={ArticleDetails} options={{ tabBarButton: () => null, tabBarVisible: false }} />
             <Tab.Screen name="KnowledgeGame" component={KnowledgeGame} options={{ tabBarButton: () => null, tabBarVisible: false }} />
-            <Tab.Screen name="MonumentDetails" component={MonumentDetails} options={{ tabBarButton: () => null, tabBarVisible: false }} />
+            <Tab.Screen name="MonumentDetails" component={MonumentDetails} options={{ tabBarButton: () => null, tabBarVisible: false }}/>
+            <Tab.Screen name="favMonumentsPage" component={FavMonumentsPage} options={{ tabBarButton: () => null, tabBarVisible: false }}/>
+            <Tab.Screen name="favArticlesPage" component={FavArticlesPage} options={{ tabBarButton: () => null, tabBarVisible: false }}/>
+            <Tab.Screen name="favourites" component={Favourites} options={{ tabBarButton: () => null, tabBarVisible: false }}/>
         </Tab.Navigator>
     )
 }

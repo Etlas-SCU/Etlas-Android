@@ -4,7 +4,7 @@ import FavArticleCard from "./FavArticleCard";
 import FavMonumentCard from "./FavMonumentCard";
 import Backend from "../../Backend/Backend";
 import { translate } from "../../Localization";
-import { goPage } from "../../Backend/Navigator";
+import { goBack, goPage } from "../../Backend/Navigator";
 
 
 function Container({ children, ConainerName, pageNav }) {
@@ -45,7 +45,7 @@ export default function Favourites({ }) {
                 <View style={styles.header}>
                     <Text style={styles.title}>{translate('Favourites.title')}</Text>
                     <TouchableOpacity
-                        onPress={() => { goPage('Settings', 'favourites') }}
+                        onPress={goBack}
                         style={styles.close}
                     >
                         <Image source={require('../../assets/HighScore/close.png')} style={styles.arrow} />

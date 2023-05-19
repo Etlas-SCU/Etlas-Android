@@ -1,14 +1,17 @@
 import { View, Text, ScrollView, Image, TouchableOpacity } from "react-native";
 import { styles } from "./Styles";
 import { useState } from "react";
-import { goBack, getLastRouteName } from "../../Backend/Navigator";
+import { goBack, getCurrentScreenParam } from "../../Backend/Navigator";
 import Backend from "../../Backend/Backend";
 
 
 export default function ArticleDetails({ }) {
 
+    // get the previous page
+    const { prevPage } = getCurrentScreenParam();
+
     // get the parameters needed
-    const Article = (getLastRouteName() !== 'favourites' ? Backend.getArticle() : Backend.getFavArticle());
+    const Article = (prevPage !== 'favourites' ? Backend.getArticle() : Backend.getFavArticle());
     const { Title, Date, Img, fullDescription } = Article;
 
 

@@ -1,8 +1,7 @@
-import { CommonActions } from "@react-navigation/native";
+import { CommonActions, useNavigationState, getFocusedRouteNameFromRoute } from "@react-navigation/native";
 import { setStatusBarStyle } from "expo-status-bar";
 import Backend from "./Backend";
 let navigationRef;
-let statusBarRef;
 
 export const getDarkPages = () => {
     const darkStatusBarPages = [
@@ -22,14 +21,9 @@ export function setNavigationRef(ref) {
     navigationRef = ref;
 }
 
-// set the status bar reference
-export function setStatusBarRef(ref) {
-    statusBarRef = ref
-}
 
-
-// Navigate to the next page
-export function goPage(nextPage, prevPage, params) {
+// set variables
+function setBackendVariables(params){
     // set the article
     if(params?.Article)
         Backend.setArticle(params.Article);
@@ -49,6 +43,12 @@ export function goPage(nextPage, prevPage, params) {
     // set the favourite monument
     if(params?.favMonument)
         Backend.setFavMonument(params.favMonument);
+}
+
+// Navigate to the next page
+export function goPage(nextPage, prevPage, params) {
+    // set the backend variables
+    setBackendVariables(params);
 
     // navigate to the next page
     navigationRef?.dispatch(
@@ -67,23 +67,7 @@ export function goPage(nextPage, prevPage, params) {
 
 // Go back to the previous page
 export function goBack(){
-    const currentRoute = navigationRef?.getCurrentRoute();
-    const prevPage = currentRoute?.params?.prevPage;
-    if(prevPage) {
-        if (getDarkPages().includes(prevPage))
-            setStatusBarStyle('dark');
-        else
-            setStatusBarStyle('light');
-        navigationRef?.dispatch(CommonActions.navigate(prevPage));
-    }
-    else {
-        navigationRef?.dispatch(CommonActions.goBack());
-        const pageName = navigationRef?.getCurrentRoute()?.name;
-        if (getDarkPages().includes(pageName))
-            setStatusBarRef('dark');
-        else
-            setStatusBarRef('light');
-    }
+    navigationRef?.dispatch(CommonActions.goBack(null));
 }
 
 // Get the params of the current page
@@ -98,9 +82,22 @@ export function getCurrentRouteName() {
     return currentRoute?.name;
 }
 
-// Get the name of the last page
-export function getLastRouteName() {
-    const currentRoute = navigationRef?.getCurrentRoute();
-    const prevPage = currentRoute?.params?.prevPage;
-    return prevPage;
+// Get the name of the last page of Stack
+export function getLastStackRouteName() {
+    const lastRoute = navigationRef?.getState();
+    return lastRoute?.routes[lastRoute?.routes.length - 1]?.name;
 }
+
+// Get the name of the last page of Tab
+export function getLastTabRouteName() {
+    const lastRoute = navigationRef?.getState();
+    return lastRoute?.routes[lastRoute?.routes.length - 1]?.state?.routes[0]?.name;
+}
+
+// Get the parameter of the current screen
+export function getCurrentScreenParam() {
+    const currentRoute = navigationRef?.getCurrentRoute();
+    console.log(currentRoute?.params);
+    return currentRoute?.params;
+}
+  
