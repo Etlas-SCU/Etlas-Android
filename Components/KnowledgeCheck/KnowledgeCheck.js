@@ -6,6 +6,8 @@ import { useContext } from "react";
 import MainMenu from "../MainMenu/MainMenu";
 import { isIOS } from "../../AppStyles";
 import { goPage } from "../../Backend/Navigator";
+import { useIsFocused } from "@react-navigation/native";
+import { setStatusBarStyle } from "expo-status-bar";
 
 
 function Card({ title, img, desc, score }) {
@@ -29,6 +31,13 @@ function Card({ title, img, desc, score }) {
 }
 
 export default function KnowledgeCheck({ }) {
+
+    // check if the currenpage is focused
+    const isFocused = useIsFocused();
+    
+    if(isFocused){
+        setStatusBarStyle('light');
+    }
 
     const { showModal, setScreen } = useContext(UserContext);
 

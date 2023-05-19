@@ -6,16 +6,16 @@ import { responsiveHeight } from "../../AppStyles";
 import { goPage } from "../../Backend/Navigator";
 
 
-export default function ToursCard({ tour, screen }) {
+export default function ToursCard({ Tour, screen }) {
 
-    const { Title, Description, Rate, Img } = tour;
+    const { Title, Description, Rate, Img } = Tour;
     const isPage = (screen != 'Home');
     
     return (
         <TouchableOpacity
             style={isPage ? Page.ToursCard : Swipper.ToursCard}
             onPress={() => {
-                goPage('TourDetails', screen, { Tour: tour })
+                goPage('TourDetails', screen, { Tour: Tour })
             }}
         >
             <Image style={isPage ? Page.ToursCardImg : Swipper.ToursCardImg} source={Img} />

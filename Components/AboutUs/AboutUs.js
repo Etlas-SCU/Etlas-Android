@@ -3,13 +3,14 @@ import { View, Text, Image, ImageBackground, TouchableOpacity, ScrollView } from
 import { styles } from './Styles';
 import { goBack } from '../../Backend/Navigator';
 
+
 export default function AboutUs({ }) {
 
     return (
         <View style={styles.container}>
             <ImageBackground source={require('../../assets/AboutUs/AboutUs.png')} style={styles.background}>
                 <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
-                    <TouchableOpacity 
+                    <TouchableOpacity
                         onPress={goBack}
                         style={styles.closeContainer}
                     >

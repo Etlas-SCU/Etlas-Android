@@ -11,9 +11,18 @@ import { useState, useContext } from "react";
 import * as ImagePicker from 'expo-image-picker';
 import PopupMessage from "../PopupMessage/PopupMessage";
 import { goPage } from "../../Backend/Navigator";
+import { useIsFocused } from "@react-navigation/native";
+import { setStatusBarStyle } from "expo-status-bar";
 
 
 export default function Settings({ }) {
+
+    // check if the currenpage is focused
+    const isFocused = useIsFocused();
+    
+    if(isFocused){
+        setStatusBarStyle('dark');
+    }
 
     // use user context
     const { showModal, setScreen, showPopupMessage } = useContext(UserContext);

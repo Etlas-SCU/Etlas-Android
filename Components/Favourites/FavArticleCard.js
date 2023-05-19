@@ -4,13 +4,13 @@ import Backend from '../../Backend/Backend';
 import { goPage } from '../../Backend/Navigator';
 
 
-export default function FavArticleCard({ screen, Article }) {
+export default function FavArticleCard({ screen, favArticle }) {
 
-    const { Title, Description, Date, Img, ID } = Article;
+    const { Title, Description, Date, Img, ID } = favArticle;
 
     return (
         <TouchableOpacity
-            onPress={() => { goPage('ArticleDetails', screen, { Article: Article }) }}
+            onPress={() => { goPage('ArticleDetails', screen, { favArticle: favArticle }) }}
             style={styles.card}
         >
             <View style={styles.cardContainer}>
@@ -25,7 +25,7 @@ export default function FavArticleCard({ screen, Article }) {
                 <View style={styles.CardIconsConainer}>
                     <TouchableOpacity
                         style={styles.CardIcon}
-                        onPress={() => { goPage('ArticleDetails', screen, { Article: Article }) }}
+                        onPress={() => { goPage('ArticleDetails', screen, { favArticle: favArticle }) }}
                     >
                         <Image source={require('../../assets/Favourites/Arrow.png')} style={styles.CardIconImg} />
                     </TouchableOpacity>

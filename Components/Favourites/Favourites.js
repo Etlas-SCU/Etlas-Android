@@ -31,11 +31,11 @@ function Container({ children, ConainerName, pageNav }) {
 export default function Favourites({ }) {
 
     // get the lists from the backend
-    const ArticlesList = Backend.getFavArticles();
+    const favArticlesList = Backend.getFavArticles();
     const MonumentsList = Backend.getFavMonuments();
 
     // mapping the cards
-    const ArticlesCards = ArticlesList.map((Article, index) => { return <FavArticleCard key={index} Article={Article} screen={'favourites'}/> });
+    const favArticlesCards = favArticlesList.map((favArticle, index) => { return <FavArticleCard key={index} favArticle={favArticle} screen={'favourites'}/> });
     const MonumentsCards = MonumentsList.map((Monument, index) => { return <FavMonumentCard key={index} Monument={Monument} screen={'favourites'}/> });
 
 
@@ -64,7 +64,7 @@ export default function Favourites({ }) {
                         pageTitle={translate('Favourites.articles')}
                         pageNav={'favArticlesPage'}
                     >
-                        {ArticlesCards}
+                        {favArticlesCards}
                     </Container>
                 </View>
             </ScrollView>

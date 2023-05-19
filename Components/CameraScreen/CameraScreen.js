@@ -8,8 +8,18 @@ import { translate } from "../../Localization";
 import { Entypo } from "@expo/vector-icons";
 import { colors } from "../../AppStyles";
 import { goBack } from "../../Backend/Navigator";
+import { useIsFocused } from '@react-navigation/native';
+import { setStatusBarStyle } from "expo-status-bar";
+
 
 export default function CameraScreen({ }) {
+
+    // check if the currenpage is focused
+    const isFocused = useIsFocused();
+    
+    if(isFocused){
+        setStatusBarStyle('dark');
+    }
 
     // Initialize state variables
     const [hasCameraPermission, setHasCameraPermission] = useState(null);

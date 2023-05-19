@@ -78,7 +78,7 @@ export default function ToursPage({ }) {
     const filteredTours = toursList.sort(SortFunctions[sortBy]);
 
     // filter the tours based on the search term
-    const tours = filteredTours.map((tour, idx) => <ToursCard tour={tour} key={idx} screen={'ToursPage'}/>);
+    const Tours = filteredTours.map((Tour, idx) => <ToursCard Tour={Tour} key={idx} screen={'ToursPage'}/>);
 
     return (
         <View style={styles.container}>
@@ -113,7 +113,7 @@ export default function ToursPage({ }) {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.Box}>
-                    {tours}
+                    {Tours}
                 </View>
             </ScrollView>
         </View>

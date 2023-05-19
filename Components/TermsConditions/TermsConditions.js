@@ -24,7 +24,7 @@ const HTMLView = ({ htmlContent }) => {
 };
 
 
-export default function TermsConditions({ navigation, route }) {
+export default function TermsConditions({ }) {
 
     [Terms, setTerms] = useState('');
     const { loaderVisible, hideLoader, showLoader } = useContext(UserContext);

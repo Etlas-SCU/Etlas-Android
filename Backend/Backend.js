@@ -1,5 +1,54 @@
 class Backend {
 
+    // store variables
+    constructor(){
+        this.Article = {};
+        this.Monument = {};
+        this.Tour = {};
+        this.favArticle = {};
+        this.favMonument = {};
+    }
+
+    static getArticle(){
+        return this.Article;
+    }
+
+    static getMonument(){
+        return this.Monument;
+    }
+
+    static getTour(){
+        return this.Tour;
+    }
+
+    static getFavArticle(){
+        return this.favArticle;
+    }
+
+    static getFavMonument(){
+        return this.favMonument;
+    }
+
+    static setArticle(Article){
+        this.Article = Article;
+    }
+
+    static setMonument(Monument){
+        this.Monument = Monument;
+    }
+
+    static setTour(Tour){
+        this.Tour = Tour;
+    }
+
+    static setFavArticle(favArticle){
+        this.favArticle = favArticle;
+    }
+
+    static setFavMonument(favMonument){
+        this.favMonument = favMonument;
+    }
+
     static getTours() {
         const Tour = {
             Title: "Giza tour",
@@ -79,7 +128,7 @@ class Backend {
             HistoricDate: "200 BC | Egypt",
             Img: require('../assets/Favourites/Anubis.png'),
             scannedDate: 'Scanned 12 Oct 2021',
-            fullDescription: `Anubis Statue is an ancient statue that where built in the old egypt and worshiped by the people.\n`
+            fullDescription: `Anubis Statue is an ancient statue that where built in the old egypt and worshiped by the people.\n Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially\n unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Anubis Statue is an ancient statue that where built in the old egypt and worshiped by the people.\n Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially\nunchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`
         };
         return Array(10).fill(Monument);
     }

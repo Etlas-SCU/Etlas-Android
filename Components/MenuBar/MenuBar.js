@@ -19,6 +19,8 @@ import ArticleDetails from "../ArticleDetails/ArticleDetails";
 import KnowledgeGame from "../KnowledgeCheck/KnowledgeGame/KnowledgeGame";
 import MonumentDetails from "../MonumentDetails/MonumentDetails";
 import FavMonumentsPage from "../FavouritePage/FavMonumentsPage";
+import { getDarkPages } from "../../Backend/Navigator";
+import { setStatusBarStyle } from "expo-status-bar";
 
 
 export default function MenuBar({ }) {
@@ -41,8 +43,12 @@ export default function MenuBar({ }) {
                 tabBarShowLabel: false,
                 tabBarStyle: styles.menuBar,
                 tabBarIcon: ({ focused }) => {
+                    // for menu bar border
                     const isRightBorder = (route.name == 'Home' || route.name == 'KnowledgeCheck');
+                    
+                    // for scan icon
                     const isScan = (route.name == 'Scan');
+                    
                     return (
                         <View style={styles.barContainer}>
                             <View style={isScan ? styles.Scan : null}>
@@ -57,7 +63,7 @@ export default function MenuBar({ }) {
             })}
         >
             <Tab.Screen name="Home" component={HomePage} />
-            <Tab.Screen name="AR" component={FavMonumentsPage} initialParams={{ screen: 'Home' }}/>
+            <Tab.Screen name="AR" component={FavMonumentsPage} initialParams={{ prevPage: 'Home' }}/>
             <Tab.Screen name="Scan" component={CameraScreen} options={{ tabBarStyle: { display: 'none' } }} />
             <Tab.Screen name="KnowledgeCheck" component={KnowledgeCheck} />
             <Tab.Screen name="Settings" component={Settings} />

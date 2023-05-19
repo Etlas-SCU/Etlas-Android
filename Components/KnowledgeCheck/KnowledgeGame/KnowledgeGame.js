@@ -4,6 +4,7 @@ import { styles } from './Styles';
 import { translate } from '../../../Localization';
 import Backend from '../../../Backend/Backend';
 import { goBack, goPage, getParams } from '../../../Backend/Navigator';
+import { setStatusBarStyle } from 'expo-status-bar';
 
 
 export default function KnowledgeGame({ }) {
@@ -140,6 +141,10 @@ export default function KnowledgeGame({ }) {
 
     // if the game finished
     if (gameFinished) {
+        
+        // set the status bar style
+        setStatusBarStyle('dark');
+        
         return (
             <View style={styles.gameFinishConainer}>
                 <ImageBackground 

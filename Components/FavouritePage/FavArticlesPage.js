@@ -9,13 +9,13 @@ import { goBack, getParams } from "../../Backend/Navigator";
 export default function FavArticlesPage({ }) {
 
     // get the article list
-    const ArticlesList = Backend.getFavArticles();
+    const favArticlesList = Backend.getFavArticles();
 
     // get the screen name from navigator
     const { prevPage } = getParams();
 
     // mapping the cards
-    const Articles = ArticlesList.map((Article, index) => { return <FavArticleCard key={index} Article={Article} screen={prevPage}/> });
+    const favArticles = favArticlesList.map((favArticle, index) => { return <FavArticleCard key={index} favArticle={favArticle} screen={prevPage}/> });
 
     return (
         <View style={styles.container}>
@@ -30,7 +30,7 @@ export default function FavArticlesPage({ }) {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.childrenContainer}>
-                    {Articles}
+                    {favArticles}
                 </View>
             </ScrollView>
         </View>

@@ -1,13 +1,14 @@
 import { View, Text, ScrollView, Image, TouchableOpacity } from "react-native";
 import { styles } from "./Styles";
 import { useState } from "react";
-import { getParams, goBack } from "../../Backend/Navigator";
+import { goBack, getLastRouteName } from "../../Backend/Navigator";
+import Backend from "../../Backend/Backend";
 
 
 export default function ArticleDetails({ }) {
 
     // get the parameters needed
-    const { Article } = getParams();
+    const Article = (getLastRouteName() !== 'favourites' ? Backend.getArticle() : Backend.getFavArticle());
     const { Title, Date, Img, fullDescription } = Article;
 
 

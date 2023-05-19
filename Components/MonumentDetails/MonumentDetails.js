@@ -2,15 +2,17 @@ import { useState, useEffect, useContext } from 'react';
 import { View, ScrollView, Text, Image, TouchableOpacity } from 'react-native';
 import { styles } from './Styles';
 import * as Speech from 'expo-speech';
-import { getParams, goBack } from '../../Backend/Navigator';
+import { goBack } from '../../Backend/Navigator';
 import Loader from '../Loader/Loader';
 import { UserContext } from '../Context/Context';
+import { isIOS } from '../../AppStyles';
+import Backend from '../../Backend/Backend';
 
 
 export default function MonumentDetails({ }) {
-    
+
     // get the data from the route
-    const { Monument } = getParams();
+    const Monument = Backend.getMonument();
     const { Title, HistoricDate, Img, fullDescription } = Monument;
     const { loaderVisible, showLoader, hideLoader } = useContext(UserContext);
     const [speechState, setSpeechState] = useState('end');
@@ -24,6 +26,7 @@ export default function MonumentDetails({ }) {
     const sound = require('../../assets/ArticleDetails/sound.png');
     const pause = require('../../assets/ArticleDetails/pause.png');
     const resume = require('../../assets/ArticleDetails/resume.png');
+    const stop = require('../../assets/ArticleDetails/stop.png');
 
     // get the icons of heart
     const [favIcon, setFavIcon] = useState(notFav);
@@ -52,7 +55,7 @@ export default function MonumentDetails({ }) {
             });
         }
         getVoices();
-    }, []);
+    }, [Monument]);
 
     // read the description
     const Read = async () => {
@@ -84,18 +87,30 @@ export default function MonumentDetails({ }) {
 
     // control the speech
     const speechControl = () => {
-        if(speechState == 'end'){
-            Read();
-            setSpeechState('play');
-            setSpeechIcon(pause);
-        }else if(speechState == 'play'){
-            Pause();
-            setSpeechState('pause');
-            setSpeechIcon(resume);
-        }else if(speechState == 'pause'){
-            Resume();
-            setSpeechState('play');
-            setSpeechIcon(pause);
+        if(isIOS()) {
+            if(speechState === 'end'){
+                Read();
+                setSpeechState('play');
+                setSpeechIcon(pause);
+            }else if(speechState === 'play'){
+                Pause();
+                setSpeechState('pause');
+                setSpeechIcon(resume);
+            }else if(speechState === 'pause'){
+                Resume();
+                setSpeechState('play');
+                setSpeechIcon(pause);
+            }
+        }else {
+            if(speechState === 'end'){
+                Read();
+                setSpeechState('play');
+                setSpeechIcon(stop);
+            }else if(speechState === 'play'){
+                Stop();
+                setSpeechState('end');
+                setSpeechIcon(sound);
+            }
         }
     }
 

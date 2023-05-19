@@ -4,15 +4,24 @@ import { translate } from "../../Localization";
 import Backend from "../../Backend/Backend";
 import FavMonumentCard from "../Favourites/FavMonumentCard";
 import { goBack, getParams } from "../../Backend/Navigator";
+import { useIsFocused } from '@react-navigation/native';
+import { setStatusBarStyle } from "expo-status-bar";
 
 
 export default function FavMonumentsPage({ }) {
+
+    // check if the currenpage is focused
+    const isFocused = useIsFocused();
+    
+    if(isFocused){
+        setStatusBarStyle('dark');
+    }
 
     // get the monument list from backend
     const MonumentsList = Backend.getFavMonuments();
 
     // get the screen name from navigator
-    const { prevPage } = getParams();
+    const { prevPage } = getParams()? getParams() : { prevPage: 'Home' };
     
     // mapping the cards
     const Monuments = MonumentsList.map((Monument, index) => { return <FavMonumentCard key={index} Monument={Monument} screen={prevPage} /> });

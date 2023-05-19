@@ -3,7 +3,8 @@ import { styles } from "./Styles";
 import Swiper from 'react-native-swiper'
 import { colors, responsiveWidth } from "../../AppStyles";
 import Stars from "../ToursCard/Stars";
-import { goBack, getParams } from "../../Backend/Navigator";
+import { goBack } from "../../Backend/Navigator";
+import Backend from "../../Backend/Backend";
 
 
 export default function TourDetails({ }) {
@@ -12,7 +13,7 @@ export default function TourDetails({ }) {
     const images = images_src.map((src, idx) => (<Image source={src} style={styles.image} key={idx}/>));
     
     // get the parameters needed
-    const { Tour } = getParams();
+    const Tour = Backend.getTour();
     const { Title, Rate, fullDescription } = Tour;
 
 

@@ -9,6 +9,8 @@ import { UserContext } from "../Context/Context";
 import MainMenu from "../MainMenu/MainMenu";
 import Backend from "../../Backend/Backend";
 import { goPage } from "../../Backend/Navigator";
+import { useIsFocused } from "@react-navigation/native"; 
+import { setStatusBarStyle } from "expo-status-bar";
 
 
 function Section({ title, children, pageName }) {
@@ -32,11 +34,19 @@ function Section({ title, children, pageName }) {
 
 export default function HomePage({ }) {
 
+    // check if the currenpage is focused
+    const isFocused = useIsFocused();
+
+    if(isFocused){
+        setStatusBarStyle('light');
+    }
+
+
     const { modalVisible, showModal, setScreen } = useContext(UserContext);
     const [searchTerm, setSearchTerm] = useState('');
 
     // getting the toursList and ArticlesList from Backend.js
-    const toursList = Backend.getTours().filter((Tour) => {
+    const ToursList = Backend.getTours().filter((Tour) => {
         return Tour.Title.toLowerCase().includes(searchTerm.toLowerCase());
     });
     const ArticlesList = Backend.getArticles().filter((Article) => {
@@ -44,7 +54,7 @@ export default function HomePage({ }) {
     });
 
     // mapping the toursList and ArticlesList to jsx elements
-    const tours = toursList.map((tour, idx) => <ToursCard tour={tour} key={idx} screen={'Home'} />);
+    const Tours = ToursList.map((Tour, idx) => <ToursCard Tour={Tour} key={idx} screen={'Home'} />);
     const Articles = ArticlesList.map((Article, idx) => <ArticleCard article={Article} key={idx} screen={'Home'} />);
 
 
@@ -71,7 +81,7 @@ export default function HomePage({ }) {
                 <Section
                     title={translate('Home.tours')}
                     pageName='ToursPage'
-                    children={tours}
+                    children={Tours}
                 />
                 <Section
                     title={translate('Home.article')}
