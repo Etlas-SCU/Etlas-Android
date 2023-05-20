@@ -32,6 +32,7 @@ export default function CameraScreen({ }) {
     const [cameraHeight, setCameraHeight] = useState(dimensions.fullHeight);
     const [type, setType] = useState(Camera.Constants.Type.back);
     const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
+    const [mirrorStyle, setmirrorStyle] = useState({});
     const cameraRef = useRef(null);
 
 
@@ -93,10 +94,14 @@ export default function CameraScreen({ }) {
 
     // Toggle the camera
     const CameraClick = () => {
-        if (type == Camera.Constants.Type.back)
+        if (type == Camera.Constants.Type.back){
             setType(Camera.Constants.Type.front);
-        else
+            setmirrorStyle({ transform: [{ scaleX: -1 }] });
+        }
+        else {
             setType(Camera.Constants.Type.back);
+            setmirrorStyle({});
+        }
     }
 
     return (
@@ -121,7 +126,7 @@ export default function CameraScreen({ }) {
                     :
                     <Image
                         source={{ uri: image }}
-                        style={styles.imageCap}
+                        style={[styles.imageCap, mirrorStyle]}
                         width={cameraWidth}
                         height={cameraHeight}
                     />

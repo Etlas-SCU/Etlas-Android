@@ -63,7 +63,6 @@ export const styles = StyleSheet.create({
         borderRadius: 20,
         resizeMode: 'stretch',
         backgroundColor: colors.Black,
-        transform: [{ scaleX: -1 }],
     },
     bottomBar: {
         height: responsiveHeight(150),
