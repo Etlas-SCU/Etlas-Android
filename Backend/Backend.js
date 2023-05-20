@@ -145,6 +145,10 @@ class Backend {
         // To Do
     }
 
+    static async logout(){
+        // To Do
+    }
+
     static async getTermsConditions() {
         try {
             const termsUrl = 'https://api.jsonbin.io/v3/b/6462fff99d312622a35f186f';

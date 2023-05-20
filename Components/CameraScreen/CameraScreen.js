@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { View, TouchableOpacity, Text, Image } from "react-native";
 import { styles } from "./Styles";
 import { Camera } from "expo-camera";
@@ -6,28 +6,34 @@ import * as MediaLibrary from "expo-media-library";
 import PopupMessage from '../PopupMessage/PopupMessage'
 import { translate } from "../../Localization";
 import { Entypo } from "@expo/vector-icons";
-import { colors } from "../../AppStyles";
+import { colors, dimensions } from "../../AppStyles";
 import { goBack } from "../../Backend/Navigator";
 import { useIsFocused } from '@react-navigation/native';
 import { setStatusBarStyle } from "expo-status-bar";
-import { dimensions } from "../../AppStyles";
+import { UserContext } from "../Context/Context";
 
 
 export default function CameraScreen({ }) {
 
+    // use user context
+    const { popupMessageVisible, showPopupMessage } = useContext(UserContext);
+
     // check if the currenpage is focused
     const isFocused = useIsFocused();
-    
-    if(isFocused){
-        setStatusBarStyle('dark');
+
+    if (isFocused) {
+        setStatusBarStyle('light');
     }
 
     // Initialize state variables
     const [hasCameraPermission, setHasCameraPermission] = useState(null);
     const [image, setImage] = useState(null);
+    const [cameraWidth, setCameraWidth] = useState(dimensions.fullWidth);
+    const [cameraHeight, setCameraHeight] = useState(dimensions.fullHeight);
     const [type, setType] = useState(Camera.Constants.Type.back);
     const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
     const cameraRef = useRef(null);
+
 
     // Request camera and media library permissions on component mount
     useEffect(() => {
@@ -40,15 +46,24 @@ export default function CameraScreen({ }) {
 
     // If camera permission is not granted, show an error message
     if (hasCameraPermission === false) {
-        return <PopupMessage state={'Error'} message={translate('Scan.ErroAcces')} />
+        showPopupMessage();
+        goBack();
     }
 
     // Take a picture with the camera and set the image state variable to the picture URI
     const takePicture = async () => {
         if (cameraRef) {
             try {
-                const data = await cameraRef.current.takePictureAsync();
+                const options = {
+                    quality: 1,
+                    base64: true,
+                    skipProcessing: false,
+                    isImageMirror: true,
+                }
+                const data = await cameraRef.current.takePictureAsync(options);
                 setImage(data.uri);
+                setCameraHeight(data.height);
+                setCameraWidth(data.width);
             } catch (e) {
                 console.log(e);
             }
@@ -84,9 +99,9 @@ export default function CameraScreen({ }) {
             setType(Camera.Constants.Type.back);
     }
 
-
     return (
         <View style={styles.container}>
+            {popupMessageVisible ? <PopupMessage state={'Error'} message={translate('Scan.ErroAcces')} /> : null}
             <View style={styles.topBar}>
                 <Text style={styles.title}>{translate('Scan.title')}</Text>
                 <TouchableOpacity onPress={goBack}>
@@ -100,12 +115,15 @@ export default function CameraScreen({ }) {
                         type={type}
                         flashMode={flash ? Camera.Constants.FlashMode.torch : Camera.Constants.FlashMode.off}
                         ref={cameraRef}
-                        ratio={'16:9'}
+                        shouldRasterizeIOS={true}
+                        useCamera2Api={true}
                     />
                     :
                     <Image
                         source={{ uri: image }}
                         style={styles.imageCap}
+                        width={cameraWidth}
+                        height={cameraHeight}
                     />
             }
             {

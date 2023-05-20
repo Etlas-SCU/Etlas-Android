@@ -1,4 +1,4 @@
-import { CommonActions, useNavigationState, getFocusedRouteNameFromRoute } from "@react-navigation/native";
+import { CommonActions } from "@react-navigation/native";
 import { setStatusBarStyle } from "expo-status-bar";
 import Backend from "./Backend";
 let navigationRef;

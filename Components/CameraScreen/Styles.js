@@ -15,6 +15,9 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    containerCamera: {
+        flex: 1,
+    },
     camera: {
         flex: 1,
         width: '100%',
@@ -58,8 +61,9 @@ export const styles = StyleSheet.create({
         height: '100%',
         alignItems: 'center',
         borderRadius: 20,
-        resizeMode: 'contain',
+        resizeMode: 'stretch',
         backgroundColor: colors.Black,
+        transform: [{ scaleX: -1 }],
     },
     bottomBar: {
         height: responsiveHeight(150),
