@@ -97,7 +97,6 @@ export function getLastTabRouteName() {
 // Get the parameter of the current screen
 export function getCurrentScreenParam() {
     const currentRoute = navigationRef?.getCurrentRoute();
-    console.log(currentRoute?.params);
     return currentRoute?.params;
 }
   

@@ -84,12 +84,6 @@ export default function CameraScreen({ }) {
             setType(Camera.Constants.Type.back);
     }
 
-    // adjust ratio for the camera
-    const { width } = dimensions;
-    const xFixed = width;
-    const yFixed = width * 16 / 9;
-
-
 
     return (
         <View style={styles.container}>
@@ -106,7 +100,7 @@ export default function CameraScreen({ }) {
                         type={type}
                         flashMode={flash ? Camera.Constants.FlashMode.torch : Camera.Constants.FlashMode.off}
                         ref={cameraRef}
-                        ratio={{ x: xFixed, y: yFixed }}
+                        ratio={'16:9'}
                     />
                     :
                     <Image

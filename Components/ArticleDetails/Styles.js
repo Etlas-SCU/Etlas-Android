@@ -6,14 +6,18 @@ export const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: colors.White,
     },
-    back: {
+    backContainer: {
         width: responsiveWidth(32),
         height: responsiveHeight(32),
         right: responsiveWidth(24),
         top: responsiveHeight(60),
         position: 'absolute',
-        tintColor: colors.SolidGrey,
         zIndex: 999
+    },
+    back: {
+        width: responsiveWidth(32),
+        height: responsiveHeight(32),
+        tintColor: colors.SolidGrey,
     },
     upperBox: {
         width: dimensions.fullWidth,

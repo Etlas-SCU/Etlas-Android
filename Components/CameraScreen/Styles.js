@@ -1,6 +1,13 @@
 import { colors, fontFamily, responsiveFontSize, responsiveHeight, responsiveWidth, dimensions } from '../../AppStyles'
 import { StyleSheet } from 'react-native'
 
+
+export const CameraDimensions = {
+    width: dimensions.fullWidth,
+    height: dimensions.fullWidth * 16 / 9,
+};
+
+
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -10,8 +17,8 @@ export const styles = StyleSheet.create({
     },
     camera: {
         flex: 1,
-        width: dimensions.fullWidth,
-        height: dimensions.fullHeight,
+        width: CameraDimensions.width,
+        height: CameraDimensions.height,
         alignItems: 'center',
         borderRadius: 20,
         resizeMode: 'contain',
@@ -47,8 +54,8 @@ export const styles = StyleSheet.create({
     },
     imageCap: {
         flex: 1,
-        width: dimensions.fullWidth,
-        height: dimensions.fullHeight,
+        width: CameraDimensions.width,
+        height: CameraDimensions.height,
         alignItems: 'center',
         borderRadius: 20,
         resizeMode: 'contain',

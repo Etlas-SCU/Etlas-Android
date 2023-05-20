@@ -30,6 +30,7 @@ export default function ArticleDetails({ }) {
     return (
         <View style={styles.container}>
             <TouchableOpacity
+                style={styles.backContainer}
                 onPress={goBack}
             >
                 <Image source={require('../../assets/Scan/Arr.png')} style={styles.back} />
