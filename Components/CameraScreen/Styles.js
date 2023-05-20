@@ -17,8 +17,8 @@ export const styles = StyleSheet.create({
     },
     camera: {
         flex: 1,
-        width: CameraDimensions.width,
-        height: CameraDimensions.height,
+        width: '100%',
+        height: '100%',
         alignItems: 'center',
         borderRadius: 20,
         resizeMode: 'contain',
@@ -54,8 +54,8 @@ export const styles = StyleSheet.create({
     },
     imageCap: {
         flex: 1,
-        width: CameraDimensions.width,
-        height: CameraDimensions.height,
+        width: '100%',
+        height: '100%',
         alignItems: 'center',
         borderRadius: 20,
         resizeMode: 'contain',
