@@ -172,7 +172,7 @@ class Backend {
         // To Do
     }
 
-    static async facebookSignIn() {
+    static async facebookSingIn() {
         // To Do
     }
 

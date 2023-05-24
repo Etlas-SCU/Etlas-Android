@@ -3,7 +3,8 @@
     "name": "Etlas",
     "slug": "Etlas",
     "version": "1.0.0",
-    "scheme": "com.etlas",
+    "scheme": ["com.etlas", "fb473951754912606"],
+    "facebookScheme": "fb473951754912606",
     "orientation": "portrait",
     "icon": "./assets/logo/Etlas-logo.png",
     "userInterfaceStyle": "light",
@@ -13,7 +14,9 @@
       "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [ "**/*" ],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.etlas"
@@ -23,7 +26,9 @@
         "foregroundImage": "./assets/logo/Etlas-logo.png",
         "backgroundColor": "#ffffff"
       },
-      "permissions": [ "android.permission.CAMERA", "android.permission.RECORD_AUDIO" ],
+      "permissions": [
+        "android.permission.CAMERA"
+      ],
       "package": "com.etlas"
     },
     "web": {
@@ -42,7 +47,6 @@
         {
           "photosPermission": "custom photos permission",
           "cameraPermission": "Allow $(PRODUCT_NAME) to open the camera",
-
           "//": "Disables the microphone permission",
           "microphonePermission": false
         }
@@ -52,6 +56,12 @@
       "eas": {
         "projectId": "2f0df44e-e5b0-4e95-9134-512e63e63018"
       }
+    },
+    "runtimeVersion": {
+      "policy": "sdkVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/2f0df44e-e5b0-4e95-9134-512e63e63018"
     }
   }
 }

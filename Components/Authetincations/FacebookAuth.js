@@ -1,43 +1,37 @@
 import { TouchableOpacity, Image } from 'react-native'
 import { useState, useEffect } from 'react';
 import Backend from '../../Backend/Backend';
-import * as AuthSession from 'expo-auth-session';
+import * as Facebook from 'expo-auth-session/providers/facebook';
+import * as WebBrowser from 'expo-web-browser';
 
 
 export default function FacebookAuth() {
 
-    const redirectUri = AuthSession.makeRedirectUri({ useProxy: true });
+    // to open the web browser
+    useEffect(() => {
+        WebBrowser.maybeCompleteAuthSession();
+    }, []);
 
+
+    // to store the access token
     const [accessToken, setAccessToken] = useState(null);
+   //  to get access token
+    const [request, response, promptAsync] = Facebook.useAuthRequest({
+        clientId: process.env.FACEBOOK_APP_ID,
+    });
 
-
-    //  to get access token
-    const handleLogin = async () => {
-        try {
-            const result = await AuthSession.startAsync({
-                authUrl:
-                    `https://www.facebook.com/v13.0/dialog/oauth?client_id=${process.env.FACEBOOK_APP_ID}&redirect_uri=${encodeURIComponent(
-                        redirectUri
-                    )}&response_type=token&scope=email`,
-            });
-
-            if (result.type === 'success') {
-                const { access_token } = result.params;
-
-                // You can now use the access token to make API calls or authenticate with your server
-                console.log('Facebook access token:', access_token);
-                setAccessToken(access_token);
-            }
-        } catch (error) {
-            console.log('Facebook login error:', error);
-            alert(e);
+    // to get the access token
+    useEffect(() => {
+        if (response?.type === 'success' && response.authentication) {
+            const { authentication } = response;
+            setAccessToken(authentication.accessToken);
         }
-    };
+    }, [response]);
 
     // to login with facebook by access token
     useEffect(() => {
         if (accessToken) {
-            Backend.facebookSignIn(accessToken);
+            Backend.facebookSingIn(accessToken);
             alert(accessToken);
         }
     }, [accessToken]);
@@ -45,7 +39,7 @@ export default function FacebookAuth() {
     // handle the press on the facebook button
     const handlePress = async () => {
         try {
-            await handleLogin();
+            await promptAsync();
         }catch(e){
             alert(e);
         }
@@ -54,6 +48,7 @@ export default function FacebookAuth() {
     return (
         <TouchableOpacity
             onPress={handlePress}
+            disabled={!request}
         >
             <Image source={require('../../assets/register/facebook.png')} />
         </TouchableOpacity>
