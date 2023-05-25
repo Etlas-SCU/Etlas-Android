@@ -176,9 +176,6 @@ class Backend {
         // To Do
     }
 
-    static async twitterSignIn() {
-        // To Do
-    }
 
     static async googleSignIn() {
         // To Do
