@@ -5,10 +5,10 @@ import { colors } from "../../AppStyles";
 import { UserContext } from "../Context/Context";
 
 
-export default function PopupMessage({ state, message }) {
+export default function PopupMessage({ }) {
 
     // Use the useContext hook to get the state of the popup message
-    const { popupMessageVisible } = useContext(UserContext);
+    const { popupMessageVisible, messageState, message } = useContext(UserContext);
 
     // Define the icons to be used in the alert and their corresponding image paths
     const Icons = {
@@ -37,9 +37,9 @@ export default function PopupMessage({ state, message }) {
             transparent={true}
             visible={popupMessageVisible}
         >
-            <View style={[styles.container, { backgroundColor: bgColors[state] }]}>
-                <Image source={Icons[state]} style={styles.icon} />
-                <Text style={styles.title}>{TitleText[state]}</Text>
+            <View style={[styles.container, { backgroundColor: bgColors[messageState] }]}>
+                <Image source={Icons[messageState]} style={styles.icon} />
+                <Text style={styles.title}>{TitleText[messageState]}</Text>
                 <Text style={styles.message}>{message}</Text>
             </View>
         </Modal>

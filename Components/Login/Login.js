@@ -4,7 +4,6 @@ import { colors } from "../../AppStyles";
 import { translate } from '../../Localization'
 import GoogleAuth from "../Authetincations/GoogleAuth";
 import FacebookAuth from "../Authetincations/FacebookAuth";
-import TwitterAuth from "../Authetincations/TwitterAuth";
 import { useState } from "react";
 import { goBack, goPage } from "../../Backend/Navigator";
 
@@ -61,7 +60,6 @@ export default function Login({ }) {
                     <Text style={styles.usingAppText}>{translate('Login.or')} <Text style={{ fontWeight: 'bold' }}>{translate('Login.signup')}</Text> {translate('Login.using')}</Text>
                     <View style={styles.usingAppicons}>
                         <GoogleAuth/>
-                        <TwitterAuth/>
                         <FacebookAuth/>
                     </View>
                 </View>

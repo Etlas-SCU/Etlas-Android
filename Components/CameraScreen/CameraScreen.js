@@ -47,7 +47,7 @@ export default function CameraScreen({ }) {
 
     // If camera permission is not granted, show an error message
     if (hasCameraPermission === false) {
-        showPopupMessage();
+        showPopupMessage('Error', translate('Scan.ErrorAcces'));
         goBack();
     }
 
@@ -76,10 +76,10 @@ export default function CameraScreen({ }) {
         if (image) {
             try {
                 await MediaLibrary.createAssetAsync(image);
-                alert(translate('Scan.saved'));
+                showPopupMessage('Accept', translate('Scan.saved'));
                 setImage(null);
             } catch (e) {
-                console.log(e);
+                showPopupMessage('Error', translate('Scan.ErrorSave'));
             }
         }
     }
@@ -106,7 +106,7 @@ export default function CameraScreen({ }) {
 
     return (
         <View style={styles.container}>
-            {popupMessageVisible ? <PopupMessage state={'Error'} message={translate('Scan.ErroAcces')} /> : null}
+            {popupMessageVisible ? <PopupMessage /> : null}
             <View style={styles.topBar}>
                 <Text style={styles.title}>{translate('Scan.title')}</Text>
                 <TouchableOpacity onPress={goBack}>

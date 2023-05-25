@@ -81,7 +81,8 @@
         "retake": "Re-Take",
         "save": "Save",
         "saved": "Picture has been saved 🎉",
-        "ErroAcces": "Can't Access the camera of Media Library"
+        "ErrorAcces": "Can't Access the camera of Media Library",
+        "ErrorSave": "Can't Save the picture"
     },
     "Profile": {
         "title": "Profile",
@@ -153,7 +154,8 @@
     },
     "TermsConditions": {
         "title": "Terms and conditions",
-        "copyright": "© Etlas all rights reserved 2023"
+        "copyright": "© Etlas all rights reserved 2023",
+        "getTerms": "while getting Terms and Conditions"
     },
     "EditProfile": {
         "title": "Edit Information",

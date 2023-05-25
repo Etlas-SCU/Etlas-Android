@@ -5,7 +5,6 @@ import { colors } from "../../AppStyles";
 import { translate } from '../../Localization'
 import GoogleAuth from "../Authetincations/GoogleAuth";
 import FacebookAuth from "../Authetincations/FacebookAuth";
-import TwitterAuth from "../Authetincations/TwitterAuth";
 import { goPage, goBack } from "../../Backend/Navigator";
 
 
@@ -69,7 +68,6 @@ export function FirstPage({ }) {
                     <Text style={styles.usingAppText}>{translate('Register.or')} <Text style={{ fontWeight: 'bold' }}>{translate('Register.signup')}</Text> {translate('Register.using')}</Text>
                     <View style={styles.usingAppicons}>
                         <GoogleAuth />
-                        <TwitterAuth />
                         <FacebookAuth />
                     </View>
                 </View>

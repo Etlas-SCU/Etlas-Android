@@ -26,12 +26,12 @@ const HTMLView = ({ htmlContent }) => {
 
 export default function TermsConditions({ }) {
 
-    [Terms, setTerms] = useState('');
+    const [Terms, setTerms] = useState('');
     const { loaderVisible, hideLoader, showLoader } = useContext(UserContext);
 
     // use the context to get the state of the modal
     useEffect(() => {
-        showLoader();
+        showLoader(translate('TermsConditions.getTerms'));
         async function fetchData() {
             const response = await Backend.getTermsConditions();
             setTerms(response);
@@ -42,7 +42,7 @@ export default function TermsConditions({ }) {
 
     return (
         <View style={styles.container}>
-            { loaderVisible ? <Loader message={'Please Wait while get Terms and Conditions'}/> : null }
+            { loaderVisible ? <Loader /> : null }
             <View style={styles.header}>
                 <Text style={styles.title}>{translate('TermsConditions.title')}</Text>
                 <TouchableOpacity 

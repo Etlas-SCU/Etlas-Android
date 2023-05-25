@@ -20,7 +20,7 @@ export default function ForgotPasswordSecond({ }) {
             goPage('forgotPasswordThird', 'forgotPasswordSecond');
         } else {
             otpInput.current.clear();
-            showPopupMessage();
+            showPopupMessage('Error', 'Invalid OTP');
         }
     }
 
@@ -35,7 +35,7 @@ export default function ForgotPasswordSecond({ }) {
                 </View>
                 <View style={styles.line} />
                 <Text style={styles.helpingText}>{translate('forgotPassword.descriptionSecond')}</Text>
-                {popupMessageVisible ? <PopupMessage state={'Error'} message={'Invalid OTP'} /> : null}
+                {popupMessageVisible ? <PopupMessage /> : null}
                 <OTPTextInput
                     ref={otpInput}
                     inputCount={4}

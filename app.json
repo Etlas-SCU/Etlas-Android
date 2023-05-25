@@ -4,7 +4,6 @@
     "slug": "Etlas",
     "version": "1.0.0",
     "scheme": ["com.etlas", "fb473951754912606"],
-    "facebookScheme": "fb473951754912606",
     "orientation": "portrait",
     "icon": "./assets/logo/Etlas-logo.png",
     "userInterfaceStyle": "light",
@@ -55,6 +54,10 @@
     "extra": {
       "eas": {
         "projectId": "2f0df44e-e5b0-4e95-9134-512e63e63018"
+      },
+      "expoConfig": {
+        "currentFullName": "@7oskaa/Etlas",
+        "originalFullName": "@7oskaa/Etlas"
       }
     },
     "runtimeVersion": {

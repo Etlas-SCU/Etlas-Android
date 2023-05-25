@@ -22,13 +22,13 @@ export default function AboutUs({ }) {
                     <Text style={styles.description}>{translate('AboutUs.description')}</Text>
                     <View style={styles.contactus}>
                         <View style={styles.usingAppicons}>
-                            <TouchableOpacity style={styles.IconButton}>
+                            <TouchableOpacity activeOpacity={0.8} style={styles.IconButton}>
                                 <Image source={require('../../assets/register/google.png')} style={styles.icon} />
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.IconButton}>
+                            <TouchableOpacity activeOpacity={0.8} style={styles.IconButton}>
                                 <Image source={require('../../assets/register/twitter.png')} style={styles.icon} />
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.IconButton}>
+                            <TouchableOpacity activeOpacity={0.8} style={styles.IconButton}>
                                 <Image source={require('../../assets/register/facebook.png')} style={styles.icon} />
                             </TouchableOpacity>
                         </View>

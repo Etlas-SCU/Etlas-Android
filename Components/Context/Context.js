@@ -14,20 +14,28 @@ const UserProvider  = ({ children }) => {
     
     // for the loader
     const [ loaderVisible, setLoaderVisible ] = useState(false);
+    const [ loaderMessage, setLoaderMessage ] = useState('');
     // hide the loader
-    const hideLoader = () => setLoaderVisible(false);
+    const hideLoader = () => { setLoaderVisible(false), setLoaderMessage('') };
     // show the loader
-    const showLoader = () => setLoaderVisible(true);
+    const showLoader = (message) => { setLoaderVisible(true), setLoaderMessage(message) };
 
     // for the popupmessages
+    const [ messageState, setMessageState ] = useState(null);
+    const [ message, setMessage ] = useState('');
     const [ popupMessageVisible, setPopupMessageVisible ] = useState(false);
     // hide the popupmessage
     const hidePopupMessage = () => setPopupMessageVisible(false);
+
     // show the popupmessage
-    const showPopupMessage = () => {
+    const showPopupMessage = (state, message) => {
+        setMessageState(state);
+        setMessage(message);
         setPopupMessageVisible(true);
         setTimeout(() => {
             setPopupMessageVisible(false);
+            setMessage('');
+            setMessageState(null);
         }, 2000)
     }
 
@@ -35,8 +43,8 @@ const UserProvider  = ({ children }) => {
         <UserContext.Provider 
             value={{ 
                 modalVisible, hideModal, showModal, 
-                loaderVisible, hideLoader, showLoader,
-                popupMessageVisible, hidePopupMessage, showPopupMessage,
+                loaderVisible, loaderMessage, hideLoader, showLoader,
+                popupMessageVisible, messageState, message, hidePopupMessage, showPopupMessage,
                 screen, setScreen
             }}
         >
