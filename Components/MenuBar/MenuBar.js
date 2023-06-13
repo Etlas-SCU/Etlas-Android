@@ -1,6 +1,6 @@
 import { styles } from "./Styles"
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Image, View } from 'react-native';
+import { Image, View, Keyboard } from 'react-native';
 import KnowledgeCheck from "../KnowledgeCheck/KnowledgeCheck";
 import AboutUs from "../AboutUs/AboutUs";
 import CameraScreen from "../CameraScreen/CameraScreen";
@@ -21,6 +21,7 @@ import MonumentDetails from "../MonumentDetails/MonumentDetails";
 import FavMonumentsPage from "../FavouritePage/FavMonumentsPage";
 import FavArticlesPage from "../FavouritePage/FavArticlesPage";
 import Favourites from "../Favourites/Favourites";
+import { useState } from "react";
 
 
 export default function MenuBar({ }) {
@@ -35,6 +36,21 @@ export default function MenuBar({ }) {
         Settings: require('../../assets/MenuBar/Settings.png')
     }
 
+
+    // to hide tab bar when keyboard is opened
+    const [isKeyboardShown, setIsKeybaordShown] = useState(false);
+
+    // when keyboard showed
+    Keyboard.addListener('keyboardDidShow', () => {
+        setIsKeybaordShown(true);
+    });
+
+    // when keyboard hidden
+    Keyboard.addListener('keyboardDidHide', () => {
+        setIsKeybaordShown(false);
+    });
+
+
     return (
         <Tab.Navigator 
             style={styles.container}
@@ -43,7 +59,7 @@ export default function MenuBar({ }) {
             screenOptions={({ route }) => ({
                 headerShown: false,
                 tabBarShowLabel: false,
-                tabBarStyle: styles.menuBar,
+                tabBarStyle: [styles.menuBar, isKeyboardShown ? styles.keyboardView : null],
                 lazy: true,
                 tabBarIcon: ({ focused }) => {
                     // for menu bar border
@@ -66,7 +82,14 @@ export default function MenuBar({ }) {
             })}
         >
             <Tab.Screen name="Home" component={HomePage} />
-            <Tab.Screen name="AR" component={FavMonumentsPage} initialParams={{ prevPage: 'Home' }}/>
+            <Tab.Screen name="AR" component={FavMonumentsPage} initialParams={{ prevPage: 'Home' }} 
+                listeners={{
+                    tabPress: e => {
+                        // Prevent default action
+                        e.preventDefault(); 
+                    }
+                }}
+            />
             <Tab.Screen name="Scan" component={CameraScreen} options={{ tabBarStyle: { display: 'none' } }} />
             <Tab.Screen name="KnowledgeCheck" component={KnowledgeCheck} />
             <Tab.Screen name="Settings" component={Settings} />

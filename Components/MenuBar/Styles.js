@@ -65,5 +65,8 @@ export const styles = StyleSheet.create({
         width: responsiveWidth(40),
         marginTop: responsiveHeight(15),
         alignSelf: "center",
+    },
+    keyboardView: {
+        bottom: responsiveHeight(-100)
     }
 })
