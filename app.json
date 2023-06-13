@@ -3,7 +3,10 @@
     "name": "Etlas",
     "slug": "Etlas",
     "version": "1.0.0",
-    "scheme": ["com.etlas", "fb473951754912606"],
+    "scheme": [
+      "com.etlas",
+      "fb473951754912606"
+    ],
     "orientation": "portrait",
     "icon": "./assets/logo/Etlas-logo.png",
     "userInterfaceStyle": "light",
@@ -49,7 +52,8 @@
           "//": "Disables the microphone permission",
           "microphonePermission": false
         }
-      ]
+      ],
+      "expo-localization"
     ],
     "extra": {
       "eas": {
