@@ -11,7 +11,8 @@ export const getDarkPages = () => {
         'favMonumentsPage',
         'favArticlesPage',
         'Settings',
-        'TermsConditions'
+        'TermsConditions',
+        'LanguageSelection'
     ];
     return darkStatusBarPages;
 }
