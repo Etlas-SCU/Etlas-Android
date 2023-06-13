@@ -3,6 +3,7 @@ import { styles } from "./Styles";
 import { translate } from '../../Localization';
 import { useState } from "react";
 import { goBack } from "../../Backend/Navigator";
+import { changeLanguage } from "../../Localization";
 
 
 export default function LanguageSelection({ }) {
@@ -18,10 +19,39 @@ export default function LanguageSelection({ }) {
         "sp": translate('LanguageSelection.spanish'),
     }
 
+
+    // languageCode and  textDirection
+    const languageSettings = {
+        "en": {
+            languageCode: 'en',
+            textDirection: 'ltr'
+        },
+        "ar": {
+            languageCode: 'ar',
+            textDirection: 'rtl'
+        },
+        "fr": {
+            languageCode: 'fr',
+            textDirection: 'ltr'
+        },
+        "sp": {
+            languageCode: 'sp',
+            textDirection: 'ltr'
+        },
+    }
+
+
+    // change the language and set the selecte one
+    const change = (key) => {
+        changeLanguage(languageSettings[key].languageCode, languageSettings[key].textDirection);
+        setSelected(key);
+    }
+    
+
     // create the buttons
     const buttons = Object.keys(languages).map((key, idx) => {
         return (
-            <TouchableOpacity key={idx} style={styles.language} onPress={() => { setSelected(key) }} disabled={key != 'en'}>
+            <TouchableOpacity key={idx} style={styles.language} onPress={() => { change(key) }} disabled={key != 'en'}>
                 <Text style={styles.languageText}>{languages[key]}</Text>
                 {key == selected ? <Image source={require('../../assets/language_selection/check.png')} style={styles.check} /> : null}
             </TouchableOpacity>

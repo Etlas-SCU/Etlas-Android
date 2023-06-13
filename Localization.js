@@ -5,13 +5,7 @@ import { getLocales } from 'expo-localization';
 
 
 // make object
-const translator = new I18n();
-
-// to ge the tranlation
-const translationGetters = {
-    // lazy requires (metro bundler does not support symlinks)
-    en: () => require('./assets/locales/en.json'), 
-};
+export const translator = new I18n();
 
 
 // translate is helper function to get the word with the current language
@@ -23,18 +17,54 @@ export const translate = memoize(
     (key, config) => (config ? key + JSON.stringify(config) : key),
 );
 
+
+// to ge the tranlation
+const translationGetters = {
+    // lazy requires (metro bundler does not support symlinks)
+    en: () => require('./assets/locales/en.json'), 
+};
+
+
+// set the default language if the default language of the device isn't exist
+const fallback = {
+    languageCode: 'en',
+    textDirection: 'ltr'
+};
+
+
+// check if the text direction is RTL
+const isRTL = (textDirection) => {
+    return textDirection === 'rtl';
+};
+
+
 // set the language
 export const init = () => {
-    // set the default language if the default language of the device isn't exist
-    const fallback = { languageCode: 'en', textDirection: 'ltr' };
-
-    // check if the text direction is RTL
-    const isRTL = (textDirection) => {
-        return textDirection === 'rtl';
-    };
 
     // default language
     let { languageCode, textDirection } = getLocales()[0] || fallback;
+
+    // set the default language
+    changeLanguage(languageCode, textDirection);
+};
+
+
+// get the current language
+export const getLanguage = () => {
+    return translator.locale;
+}
+
+
+// get the current text direction
+export const getTextDirection = () => {
+    return I18nManager.isRTL ? 'rtl' : 'ltr';
+}
+
+
+// change the current language
+export const changeLanguage = (languageCode, textDirection) => {
+    // set the default language if the default language of the device isn't exist
+    const fallback = { languageCode: 'en', textDirection: 'ltr' };
 
     // check if the language exist
     if(!translationGetters[languageCode]){
@@ -56,4 +86,4 @@ export const init = () => {
         [languageCode]: translationGetters[languageCode](),
     };
     translator.locale = languageCode;
-};
+}
