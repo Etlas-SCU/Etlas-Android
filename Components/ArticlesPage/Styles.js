@@ -7,7 +7,16 @@ export const styles = StyleSheet.create({
         backgroundColor: colors.DarkCyan,
     },
     contentContainer: {
-        paddingBottom: responsiveHeight(200)
+        paddingBottom: responsiveHeight(200),
+        marginHorizontal: responsiveWidth(24),
+        rowGap: responsiveHeight(20),
+        paddingTop: responsiveHeight(10),
+        alignItems: "center",
+        justifyContent: 'center',
+        columnGap: responsiveWidth(20)
+    },
+    Gap: {
+        gap: responsiveWidth(20)
     },
     header: {
         flexDirection: "row",
@@ -41,12 +50,7 @@ export const styles = StyleSheet.create({
         alignSelf: "center",
     },
     Box: {
-        flexDirection: "row",
-        flexWrap: "wrap",
-        justifyContent: "space-between",
-        marginHorizontal: responsiveWidth(24),
-        marginTop: responsiveHeight(27),
-        rowGap: responsiveHeight(20)
+        marginTop: responsiveHeight(15),
     },
 
     // filterList

@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { styles } from "./Styles";
-import { View, ScrollView, Text, TouchableOpacity, Image, TextInput, Modal } from "react-native";
+import { View, ScrollView, Text, TouchableOpacity, Image, TextInput, Modal, FlatList } from "react-native";
 import { translate } from "../../Localization";
 import { colors } from "../../AppStyles";
 import ToursCard from "../ToursCard/ToursCard";
@@ -84,38 +84,47 @@ export default function ToursPage({ }) {
         <View style={styles.container}>
             {isIOS() ? <MainMenu /> : null}
             {showFilerList ? <Filter showFilerList={showFilerList} setShowFilterList={setShowFilterList} sortBy={sortBy} setSortBy={setSortBy}/> : null}
-            <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
-                <View style={styles.header}>
-                    <TouchableOpacity style={styles.aboutus} onPress={() => { setScreen('ToursPage'), showModal() } }>
-                        <Image source={require('../../assets/KnowledgeCheck/tabler_exclamation-circle.png')} />
-                    </TouchableOpacity>
-                    <Text style={styles.title}>{translate('Tours.title')}</Text>
-                    <TouchableOpacity 
-                        onPress={goBack}
-                        style={styles.closeContainer}
-                    >
-                        <Image source={require('../../assets/Scan/Arr.png')} style={styles.close}/>
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.inputContainer}>
-                    <TextInput
-                        style={styles.SearchForm}
-                        placeholder={translate('Articles.search')}
-                        placeholderTextColor={colors.Grey}
-                        onChangeText={(searchTerm) => setSearchTerm(searchTerm)}
-                        cursorColor={colors.DarkCyan}
-                    />
-                    <TouchableOpacity 
-                        style={styles.filter}
-                        onPress={() => { setShowFilterList(true) }}
-                    >
-                        <Image source={require('../../assets/ArticlesPage/Filter.png')} />
-                    </TouchableOpacity>
-                </View>
+            <View style={styles.header}>
+                <TouchableOpacity style={styles.aboutus} onPress={() => { setScreen('ToursPage'), showModal() } }>
+                    <Image source={require('../../assets/KnowledgeCheck/tabler_exclamation-circle.png')} />
+                </TouchableOpacity>
+                <Text style={styles.title}>{translate('Tours.title')}</Text>
+                <TouchableOpacity 
+                    onPress={goBack}
+                    style={styles.closeContainer}
+                >
+                    <Image source={require('../../assets/Scan/Arr.png')} style={styles.close}/>
+                </TouchableOpacity>
+            </View>
+            <View style={styles.inputContainer}>
+                <TextInput
+                    style={styles.SearchForm}
+                    placeholder={translate('Articles.search')}
+                    placeholderTextColor={colors.Grey}
+                    onChangeText={(searchTerm) => setSearchTerm(searchTerm)}
+                    cursorColor={colors.DarkCyan}
+                />
+                <TouchableOpacity 
+                    style={styles.filter}
+                    onPress={() => { setShowFilterList(true) }}
+                >
+                    <Image source={require('../../assets/ArticlesPage/Filter.png')} />
+                </TouchableOpacity>
+            </View>
+            <FlatList
+                data={Tours}
+                renderItem={({ item }) => item}
+                keyExtractor={(item, index) => index.toString()}
+                showsVerticalScrollIndicator={false}
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={styles.contentContainer}
+                style={styles.Box}
+            />
+            {/* <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
                 <View style={styles.Box}>
                     {Tours}
                 </View>
-            </ScrollView>
+            </ScrollView> */}
         </View>
     );
 }

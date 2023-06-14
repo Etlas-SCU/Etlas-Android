@@ -7,7 +7,10 @@ export const styles = StyleSheet.create({
         flex: 1,
     },
     scrollContainer: {
-        paddingBottom: responsiveHeight(200)
+        flex: 1
+    },
+    contentContainer: {
+        gap: responsiveHeight(14),
     },
     header: {
         flexDirection: 'row',
@@ -32,10 +35,12 @@ export const styles = StyleSheet.create({
         height: responsiveHeight(32),
     },
     containersContainer: {
-        flexDirection: 'column',
+        flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: responsiveHeight(76),
+        marginTop: responsiveHeight(50),
+        paddingBottom: responsiveHeight(20),
+        maxHeight: responsiveHeight(750)
     },
     ArticlesScrollView: {
         marginVertical: responsiveHeight(17),

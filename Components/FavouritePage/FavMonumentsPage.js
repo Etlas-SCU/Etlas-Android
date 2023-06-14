@@ -1,4 +1,4 @@
-import { ScrollView, View, Text, TouchableOpacity, Image } from "react-native";
+import { ScrollView, View, Text, TouchableOpacity, Image, FlatList } from "react-native";
 import { styles } from "./Styles";
 import { translate } from "../../Localization";
 import Backend from "../../Backend/Backend";
@@ -28,20 +28,25 @@ export default function FavMonumentsPage({ }) {
 
     return (
         <View style={styles.container}>
-            <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
-                <View style={styles.header}>
-                    <Text style={styles.title}>{translate('Favourites.Models')}</Text>
-                    <TouchableOpacity
-                        onPress={goBack}
-                        style={styles.close}
-                    >
-                        <Image source={require('../../assets/HighScore/close.png')} style={styles.arrow} />
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.childrenContainer}>
-                    {Monuments}
-                </View>
-            </ScrollView>
+            <View style={styles.header}>
+                <Text style={styles.title}>{translate('Favourites.Models')}</Text>
+                <TouchableOpacity
+                    onPress={goBack}
+                    style={styles.close}
+                >
+                    <Image source={require('../../assets/HighScore/close.png')} style={styles.arrow} />
+                </TouchableOpacity>
+            </View>
+            <FlatList
+                data={Monuments}
+                showsHorizontalScrollIndicator={false}
+                renderItem={({ item }) => item}
+                keyExtractor={(_, index) => index.toString()}
+                initialNumToRender={10}
+                contentContainerStyle={styles.contentContainer}
+                nestedScrollEnabled={true}
+                showsVerticalScrollIndicator={false}
+            />
         </View>
     )
 }
