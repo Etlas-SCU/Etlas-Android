@@ -1,4 +1,4 @@
-import { colors, dimensions, fontFamily, responsiveFontSize, responsiveHeight, responsiveWidth } from "../../AppStyles";
+import { colors, dimensions, fontFamily, padding, responsiveFontSize, responsiveHeight, responsiveWidth } from "../../AppStyles";
 import { StyleSheet } from "react-native";
 
 
@@ -8,7 +8,13 @@ export const styles = StyleSheet.create({
         backgroundColor: colors.DarkCyan,
     },
     contentContainer: {
-        paddingBottom: responsiveHeight(200)
+        paddingBottom: responsiveHeight(200),
+        paddingTop: responsiveHeight(20),
+        alignContent: "center",
+        alignItems: "center",
+        marginHorizontal: responsiveWidth(24),
+        justifyContent: 'center',
+        gap: responsiveHeight(20)
     },
     header: {
         flexDirection: "row",
@@ -57,9 +63,7 @@ export const styles = StyleSheet.create({
         justifyContent: "center",
     },
     Box: {
-        marginTop: responsiveHeight(27),
-        alignItems: "center",
-        gap: responsiveHeight(20)
+        marginTop: responsiveHeight(20)
     },
 
     // filterList

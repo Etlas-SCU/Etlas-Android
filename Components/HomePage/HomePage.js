@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { View, Text, Image, TextInput, TouchableOpacity, ScrollView, SafeAreaView } from "react-native";
+import { View, Text, Image, TextInput, TouchableOpacity, ScrollView, SafeAreaView, FlatList } from "react-native";
 import { styles } from "./Styles";
 import { translate } from "../../Localization";
 import { colors } from "../../AppStyles";
@@ -23,11 +23,15 @@ function Section({ title, children, pageName }) {
                     <Text style={styles.see_all_text}>{translate('Home.see_all')}</Text>
                 </TouchableOpacity>
             </View>
-            <SafeAreaView style={styles.swipper} >
-                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} nestedScrollEnabled={true}>
-                    {children}
-                </ScrollView>
-            </SafeAreaView>
+            <FlatList
+                data={children}
+                horizontal={true}
+                showsHorizontalScrollIndicator={false}
+                renderItem={({ item }) => item}
+                keyExtractor={(_, index) => index.toString()}
+                style={styles.swipper}
+                initialNumToRender={5}
+            />
         </View>
     )
 }
