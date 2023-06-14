@@ -15,6 +15,7 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: responsiveHeight(60),
         marginHorizontal: responsiveWidth(24),
+        marginBottom: responsiveHeight(20)
     },
     title: {
         fontFamily: fontFamily.MontserratBold,
@@ -31,9 +32,10 @@ export const styles = StyleSheet.create({
         width: responsiveWidth(32),
         height: responsiveHeight(32),
     },
-    childrenContainer: {
-        marginTop: responsiveHeight(60),
+    contentContainer: {
+        marginTop: responsiveHeight(40),
         marginHorizontal: responsiveWidth(24),
-        gap: responsiveHeight(18)
+        gap: responsiveHeight(18),
+        paddingBottom: responsiveHeight(200)
     }
 });

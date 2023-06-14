@@ -126,6 +126,8 @@ export default function ArticlesPage({ }) {
                 numColumns={numColumns}
                 horizontal={false}
                 initialNumToRender={10}
+                showsHorizontalScrollIndicator={false}
+                showsVerticalScrollIndicator={false}
             />
         </View>
     );

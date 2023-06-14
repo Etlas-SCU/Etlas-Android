@@ -116,6 +116,7 @@ export default function ToursPage({ }) {
                 renderItem={({ item }) => item}
                 keyExtractor={(item, index) => index.toString()}
                 showsVerticalScrollIndicator={false}
+                showsHorizontalScrollIndicator={false}
                 contentContainerStyle={styles.contentContainer}
                 style={styles.Box}
             />
