@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { View, Text, Image, TextInput, TouchableOpacity, ScrollView, SafeAreaView, FlatList } from "react-native";
+import { View, Text, Image, TextInput, TouchableOpacity, ScrollView, FlatList } from "react-native";
 import { styles } from "./Styles";
 import { translate } from "../../Localization";
 import { colors } from "../../AppStyles";

@@ -2,51 +2,7 @@ class Backend {
 
     // store variables
     constructor(){
-        this.Article = {};
-        this.Monument = {};
-        this.Tour = {};
-        this.favArticle = {};
-        this.favMonument = {};
-    }
-
-    static getArticle(){
-        return this.Article;
-    }
-
-    static getMonument(){
-        return this.Monument;
-    }
-
-    static getTour(){
-        return this.Tour;
-    }
-
-    static getFavArticle(){
-        return this.favArticle;
-    }
-
-    static getFavMonument(){
-        return this.favMonument;
-    }
-
-    static setArticle(Article){
-        this.Article = Article;
-    }
-
-    static setMonument(Monument){
-        this.Monument = Monument;
-    }
-
-    static setTour(Tour){
-        this.Tour = Tour;
-    }
-
-    static setFavArticle(favArticle){
-        this.favArticle = favArticle;
-    }
-
-    static setFavMonument(favMonument){
-        this.favMonument = favMonument;
+        this.HOST_URL = process.env.HOST_URL;    
     }
 
     static getTours() {
@@ -155,10 +111,10 @@ class Backend {
             const response = await fetch(termsUrl, {
                 method: 'GET',
                 headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
                 },
-                redirect: 'follow'
+                redirect: 'follow',
             });
             const result = await response.json();
             return result.record.TermsConditions;
