@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, useContext } from "react";
 import { View, Text, Image, TouchableOpacity, TextInput, ScrollView } from "react-native";
 import { styles } from './Styles';
 import { colors } from "../../AppStyles";
@@ -6,7 +6,8 @@ import { translate } from '../../Localization'
 import GoogleAuth from "../Authetincations/GoogleAuth";
 import FacebookAuth from "../Authetincations/FacebookAuth";
 import { goPage, goBack } from "../../Backend/Navigator";
-
+import { UserContext } from "../Context/Context";
+import PopupMessage from "../PopupMessage/PopupMessage";
 
 export function FirstPage({ }) {
 
@@ -15,9 +16,30 @@ export function FirstPage({ }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [hidden, setHidden] = useState(false);
+    const {showPopupMessage, popupMessageVisible} = useContext(UserContext);
+
+
+    // check the inputs
+    const checkInputs = () => {
+        if(!fullname.length || !email.length || !password.length){
+            showPopupMessage('Error', translate('messages.fillAllFieldsReg'));
+            return;
+        }
+        if(!email.includes('@')){
+            showPopupMessage('Error', translate('messages.invalidEmail'));
+            return;
+        }
+        goPage('secondPage', 'firstPage', {
+            fullname: fullname,
+            email: email,
+            password: password
+        })
+    };
+
 
     return (
         <View style={styles.container}>
+            {popupMessageVisible ? <PopupMessage /> : null}
             <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
                 <View style={styles.header_container}>
                     <Text style={styles.header}>{translate('Register.title')}</Text>
@@ -73,13 +95,7 @@ export function FirstPage({ }) {
                 </View>
                 <TouchableOpacity
                     style={styles.nextButton}
-                    onPress={() => {
-                        goPage('secondPage', 'firstPage', {
-                            fullname: fullname,
-                            email: email,
-                            password: password
-                        })
-                    }}
+                    onPress={() => {checkInputs()}}
                 >
                     <Text style={styles.nextText}>{translate('Register.next')}</Text>
                 </TouchableOpacity>

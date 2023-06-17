@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, useContext } from "react";
 import { View, Text, Image, TouchableOpacity, TextInput, ScrollView } from "react-native";
 import IntlPhoneField from 'react-native-intl-phone-field';
 import { styles } from './Styles';
@@ -7,6 +7,10 @@ import { translate } from '../../Localization'
 import GoogleAuth from "../Authetincations/GoogleAuth";
 import FacebookAuth from "../Authetincations/FacebookAuth";
 import { getParams, goBack, goPage } from "../../Backend/Navigator";
+import Loader from "../Loader/Loader";
+import PopupMessage from "../PopupMessage/PopupMessage";
+import Backend from "../../Backend/Backend";
+import { UserContext } from "../Context/Context";
 
 
 export function SecondPage({ }) {
@@ -15,6 +19,31 @@ export function SecondPage({ }) {
     const { fullname, email, password } = getParams();
     const [phoneNumber, setPhoneNumber] = useState('');
     const [address, setAddress] = useState('');
+    const { showLoader, hideLoader, loaderVisible } = useContext(UserContext);
+    const { showPopupMessage, popupMessageVisible } = useContext(UserContext);
+
+    // register
+    const handle_register = () => {
+        if (!phoneNumber.length || !address.length) {
+            showPopupMessage('Error', translate('messages.fillAllFields'));
+            return;
+        }
+        async function register_fetch() {
+            showLoader(translate('messages.registering'));
+            const response = await Backend.register(fullname, email, password, phoneNumber, address);
+            if (response) {
+                if (response.detail)
+                    showPopupMessage('Error', response.detail);
+                else {
+                    
+                }
+            }
+            hideLoader();
+        }
+        register_fetch();
+    };
+                    
+
 
     return (
         <View style={styles.container}>
@@ -54,7 +83,10 @@ export function SecondPage({ }) {
                         <FacebookAuth />
                     </View>
                 </View>
-                <TouchableOpacity style={styles.nextButtonSecond}>
+                <TouchableOpacity 
+                    style={styles.nextButtonSecond}
+                    onPress={() => { handle_register() }}
+                >
                     <Text style={styles.nextText}>{translate('Register.signup')}</Text>
                 </TouchableOpacity>
                 <View style={styles.signIn}>

@@ -1,10 +1,5 @@
 class Backend {
 
-    // store variables
-    constructor(){
-        this.HOST_URL = process.env.HOST_URL;    
-    }
-
     static getTours() {
         const Tour = {
             Title: "Giza tour",
@@ -97,12 +92,57 @@ class Backend {
         // To Do
     }
 
-    static changeUserImage(Image){
+    static changeUserImage(Image) {
         // To Do
     }
 
-    static async logout(){
+    static async login(email, password) {
+        console.log(email, password);
+        try {
+            const loginUrl = `${process.env.HOST_URL}auth/login/`;
+            const response = await fetch(loginUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    "email": email,
+                    "password": password
+                }),
+                redirect: 'follow',
+            });
+            const result = await response.json();
+            return result;
+        } catch (error) {
+            console.log('error', error);
+            return null;
+        }
+    }
+
+    static async logout() {
         // To Do
+    }
+
+    static async refresh_the_token(refreshToken) {
+        try {
+            const regreshUrl = `${process.env.HOST_URL}auth/token/refresh/`;
+            const response = await fetch(regreshUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    "refresh": refreshToken
+                })
+            });
+            const tokens = await response.json();
+            return tokens;
+        } catch (error) {
+            console.log('Error refreshing token:', error);
+            return null;
+        }
     }
 
     static async getTermsConditions() {

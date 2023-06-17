@@ -4,8 +4,13 @@ import { colors } from "../../AppStyles";
 import { translate } from '../../Localization'
 import GoogleAuth from "../Authetincations/GoogleAuth";
 import FacebookAuth from "../Authetincations/FacebookAuth";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { goBack, goPage } from "../../Backend/Navigator";
+import Backend from "../../Backend/Backend";
+import { UserContext } from "../Context/Context";
+import Loader from "../Loader/Loader";
+import PopupMessage from "../PopupMessage/PopupMessage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 export default function Login({ }) {
@@ -14,10 +19,88 @@ export default function Login({ }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [hidden, setHidden] = useState(false);
+    const {showLoader, hideLoader, loaderVisible} = useContext(UserContext);
+    const {showPopupMessage, popupMessageVisible} = useContext(UserContext);
 
-    
+
+    // check password
+    const checkPassword = () => {
+        // check how strong of password
+        if(password.length < 8){
+            showPopupMessage('Error', translate('messages.passwordLength'));
+            return;
+        }
+        if(password.length > 20){
+            showPopupMessage('Error', translate('messages.passwordLength'));
+            return;
+        }
+        if(!password.match(/[a-z]/g)){
+            showPopupMessage('Error', translate('messages.passwordLowercase'));
+            return;
+        }
+        if(!password.match(/[A-Z]/g)){
+            showPopupMessage('Error', translate('messages.passwordUppercase'));
+            return;
+        }
+        if(!password.match(/[0-9]/g)){
+            showPopupMessage('Error', translate('messages.passwordNumber'));
+            return;
+        }
+        if(!password.match(/[^a-zA-Z\d]/g)){
+            showPopupMessage('Error', translate('messages.passwordSpecial'));
+            return;
+        }
+    };
+
+    // login
+    const handle_login = () => {
+        if(!password.length || !email.length){
+            showPopupMessage('Error', translate('messages.fillAllFieldsReg'));
+            return;
+        }
+        // check if it's valid email
+        if(!email.includes('@') || !email.includes('.com')){
+            showPopupMessage('Error', translate('messages.invalidEmail'));
+            return;
+        }
+        // check password
+        checkPassword();
+        async function login_fetch() {
+            showLoader(translate('messages.loggingIn'));
+            const response = await Backend.login(email, password);
+            if(response){
+                if(response.detail)
+                    showPopupMessage('Error', response.detail);
+                else {
+                    // store user data to use
+                    const user = {
+                        id: response.id,
+                        email: response.email,
+                        full_name: response.full_name,
+                        address: response.address,
+                        phone_number: response.phone_number,
+                        image_url: response.image_url,
+                    };
+                    await AsyncStorage.setItem('user', JSON.stringify(user));
+                    
+                    // store token to use
+                    const { access:accessToken, refresh:refreshToken } = response.tokens;
+                    await AsyncStorage.setItem('accessToken', accessToken);
+                    await AsyncStorage.setItem('refreshToken', refreshToken);
+                    // go to home page
+                    goPage('menuBar');
+                }
+                hideLoader();
+            }
+        }
+        login_fetch();
+    };
+
+
     return (
         <View style={styles.container}>
+            {popupMessageVisible ? <PopupMessage/> : null}
+            {loaderVisible ? <Loader/> : null}
             <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
                 <View style={styles.header_container}>
                     <Text style={styles.header}>{translate('Login.title')}</Text>
@@ -65,7 +148,7 @@ export default function Login({ }) {
                 </View>
                 <TouchableOpacity
                     style={styles.nextButton}
-                    onPress={() => { goPage('menuBar', 'login') }}
+                    onPress={() => { handle_login() }}
                 >
                     <Text style={styles.nextText}>{translate('Login.signin')}</Text>
                 </TouchableOpacity>

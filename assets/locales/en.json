@@ -1,4 +1,19 @@
 {
+    "messages":{
+        "fillAllFields": "Please Fill Email and Password",
+        "loggingIn": "While loggin in",
+        "invalidEmail": "Invalid Email",
+        "fillAllFieldsReg": "Please Fill all needed information",
+        "passwordLength": "Password length should be between 8 and 20 characters",
+        "passwordNotMatch": "Passwords doesn't match",
+        "registering": "While registering",
+        "emailExist": "Email already exists",
+        "emailNotExist": "Email doesn't exist",
+        "passwordLowercase": "Password should contains atleast lowercase letter",
+        "passwordUppercase": "Password should contains atleast uppercase letter",
+        "passwordNumber": "Password should contains atleast one digit",
+        "passwordSpecial": "Password should contains atleast one symbol"
+    },
     "LanguageSelection": {
         "title": "Language Selection",
         "description": "Please, choose your preferred language that you want to be set on the application, it can also be changed anytime.",
