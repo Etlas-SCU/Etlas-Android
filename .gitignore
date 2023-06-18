@@ -148,3 +148,6 @@ package-lock.json
 
 # env file
 .env
+
+# eslint
+.eslintrc
