@@ -1,7 +1,7 @@
 import { colors } from "../../AppStyles";
 
 
-export class Accept { 
+export class Success { 
     constructor() {
         this.icon = require('../../assets/PopupMessage/Accept.png');
         this.title = 'Done!';

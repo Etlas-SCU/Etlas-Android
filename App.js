@@ -4,6 +4,7 @@ import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/
 import OnBoarding from "./Components/OnBoarding/OnBoarding";
 import { FirstPage } from './Components/Register/FirstPage';
 import { SecondPage } from './Components/Register/SecondPage'
+import EmailVerification from './Components/Register/EmailVerification/EmailVerification';
 import Login from './Components/Login/Login'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { init } from './Localization';
@@ -101,16 +102,16 @@ export default function App() {
                 const refreshToken = await AsyncStorage.getItem('refreshToken');
 
                 // if the access token is null, return
-                const res = await Backend.refresh_the_token(refreshToken);
+                const { status, data } = await Backend.refresh_the_token(refreshToken);
 
                 // if the response is not null, set the access token
-                if (res && res.access && res.refresh) {
-                    await AsyncStorage.setItem('accessToken', res.access);
-                    await AsyncStorage.setItem('refreshToken', res.refresh);
-                    setAccessToken(res.access);
-                    setRefreshToken(res.refresh);
+                if (status === 200) {
+                    await AsyncStorage.setItem('accessToken', data.access);
+                    await AsyncStorage.setItem('refreshToken', data.refresh);
+                    setAccessToken(data.access);
+                    setRefreshToken(data.refresh);
                 } else {
-                    console.log(res);
+                    console.log(data);
                 }
             } catch (e) {
                 console.log('Error refereshing:', e);
@@ -170,6 +171,7 @@ export default function App() {
                     <Stack.Screen name="menuBar" component={MenuBar} />
                     <Stack.Screen name="bestScore" component={BestScore} />
                     <Stack.Screen name="editProfile" component={EditProfile} />
+                    <Stack.Screen name="emailVerification" component={EmailVerification} />
                 </Stack.Navigator>
             </NavigationContainer>
         </UserProvider>

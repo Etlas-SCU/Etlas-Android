@@ -2,7 +2,7 @@ import { styles } from "./Styles";
 import { useContext } from "react";
 import { Text, Image, Modal, View } from "react-native";
 import { UserContext } from "../Context/Context";
-import { Warning, Accept, Error } from "./PopUpState";
+import { Warning, Success, Error } from "./PopUpState";
 
 
 export default function PopupMessage({ }) {
@@ -14,9 +14,9 @@ export default function PopupMessage({ }) {
     if(!messageState)
         return null;
 
-    // Create an instance of the Accept, Error and Warning classes
+    // Create an instance of the Success, Error and Warning classes
     const states = {
-        Accept: new Accept(),
+        Success: new Success(),
         Error: new Error(),
         Warning: new Warning()
     };
@@ -26,7 +26,7 @@ export default function PopupMessage({ }) {
 
     return (
         <Modal
-            animationType="slide"
+            animationType="fade"
             transparent={true}
             visible={popupMessageVisible}
         >

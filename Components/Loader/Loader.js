@@ -13,7 +13,7 @@ export default function Loader({ }) {
 
     return (
         <Modal
-            animationType="slide"
+            animationType="fade"
             transparent={true}
             visible={loaderVisible}
             onRequestClose={() => hideLoader}

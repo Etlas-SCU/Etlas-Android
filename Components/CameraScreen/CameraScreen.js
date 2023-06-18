@@ -76,7 +76,7 @@ export default function CameraScreen({ }) {
         if (image) {
             try {
                 await MediaLibrary.createAssetAsync(image);
-                showPopupMessage('Accept', translate('Scan.saved'));
+                showPopupMessage('Success', translate('Scan.saved'));
                 setImage(null);
             } catch (e) {
                 showPopupMessage('Error', translate('Scan.ErrorSave'));

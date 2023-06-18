@@ -11,6 +11,7 @@ import Loader from "../Loader/Loader";
 import PopupMessage from "../PopupMessage/PopupMessage";
 import Backend from "../../Backend/Backend";
 import { UserContext } from "../Context/Context";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 export function SecondPage({ }) {
@@ -24,29 +25,41 @@ export function SecondPage({ }) {
 
     // register
     const handle_register = () => {
-        if (!phoneNumber.length || !address.length) {
-            showPopupMessage('Error', translate('messages.fillAllFields'));
-            return;
-        }
         async function register_fetch() {
             showLoader(translate('messages.registering'));
-            const response = await Backend.register(fullname, email, password, phoneNumber, address);
-            if (response) {
-                if (response.detail)
-                    showPopupMessage('Error', response.detail);
-                else {
-                    
-                }
-            }
+            const { status, data } = await Backend.register(fullname, email, password, phoneNumber, address);
             hideLoader();
+            console.log(status, data);
+            if (status !== 201){
+                if(data.email)
+                    showPopupMessage('Error', data.email);
+            }
+            else {
+                // store user data to use
+                const user = {
+                    id: data.id,
+                    email: data.email,
+                    full_name: data.full_name,
+                    address: data.address,
+                    phone_number: data.phone_number,
+                    image_url: data.image_url,
+                };
+                await AsyncStorage.setItem('user', JSON.stringify(user));
+
+                showPopupMessage('Success', translate('messages.emailSent'));
+                // store token to use
+                goPage('emailVerification', 'secondPage', {
+                    email: email,
+                });
+            }
         }
         register_fetch();
     };
-                    
-
 
     return (
         <View style={styles.container}>
+            {loaderVisible ? <Loader /> : null}
+            {popupMessageVisible ? <PopupMessage /> : null}
             <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
                 <View style={styles.header_container}>
                     <Text style={styles.header}>{translate('Register.title')}</Text>
@@ -83,7 +96,7 @@ export function SecondPage({ }) {
                         <FacebookAuth />
                     </View>
                 </View>
-                <TouchableOpacity 
+                <TouchableOpacity
                     style={styles.nextButtonSecond}
                     onPress={() => { handle_register() }}
                 >

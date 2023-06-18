@@ -19,53 +19,67 @@ export default function Login({ }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [hidden, setHidden] = useState(false);
-    const {showLoader, hideLoader, loaderVisible} = useContext(UserContext);
-    const {showPopupMessage, popupMessageVisible} = useContext(UserContext);
+    const { showLoader, hideLoader, loaderVisible } = useContext(UserContext);
+    const { showPopupMessage, popupMessageVisible } = useContext(UserContext);
 
 
-    const isValidEmail = (email) => {
-        //  email regex check
-        const emailRegex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
-        return emailRegex.test(email);
-    };
+    // check passowrd
+    const checkPassword = async (password) => {
+        const { state, message } = await Backend.checkPassword(password);
+        if (!state) {
+            showPopupMessage('Error', message);
+            return false;
+        }
+        return true;
+    }
+
+    // check email
+    const checkEmail = async (email) => {
+        const { state, message } = await Backend.checkEmail(email);
+        if (!state) {
+            showPopupMessage('Error', message);
+            return false;
+        }
+        return true;
+    }
 
     // login
-    const handle_login = () => {
-        if(!password.length || !email.length){
-            showPopupMessage('Error', translate('messages.fillAllFieldsReg'));
+    const handle_login = async () => {
+        // check email  
+        const checkemail = await checkEmail(email).then((response) => { return response });
+        if (checkemail === false)
             return;
-        }
-        // check if it's valid email
-        if(!isValidEmail(email)){
-            showPopupMessage('Error', translate('messages.invalidEmail'));
+
+        // check password
+        const checkpass = await checkPassword(password).then((response) => { return response });
+        if (checkpass === false)
             return;
-        }
+
+        // login
         async function login_fetch() {
             showLoader(translate('messages.loggingIn'));
-            const response = await Backend.login(email, password);
-            if(response){
-                if(response.detail)
-                    showPopupMessage('Error', response.detail);
-                else {
-                    // store user data to use
-                    const user = {
-                        id: response.id,
-                        email: response.email,
-                        full_name: response.full_name,
-                        address: response.address,
-                        phone_number: response.phone_number,
-                        image_url: response.image_url,
-                    };
-                    await AsyncStorage.setItem('user', JSON.stringify(user));
-                    
-                    // store token to use
-                    const { access:accessToken, refresh:refreshToken } = response.tokens;
-                    await AsyncStorage.setItem('accessToken', accessToken);
-                    await AsyncStorage.setItem('refreshToken', refreshToken);
-                    // go to home page
-                    goPageResetStack('menuBar');
-                }
-                hideLoader();
+            const { status, data } = await Backend.login(email, password);
+            hideLoader();
+            if (status !== 200) 
+                showPopupMessage('Error', data.detail);
+            else {
+                // store user data to use
+                const user = {
+                    id: data.id,
+                    email: data.email,
+                    full_name: data.full_name,
+                    address: data.address,
+                    phone_number: data.phone_number,
+                    image_url: data.image_url,
+                };
+                await AsyncStorage.setItem('user', JSON.stringify(user));
+
+                // store token to use
+                const { access: accessToken, refresh: refreshToken } = data.tokens;
+                await AsyncStorage.setItem('accessToken', accessToken);
+                await AsyncStorage.setItem('refreshToken', refreshToken);
+                // go to home page
+                goPageResetStack('menuBar');
             }
         }
         login_fetch();
@@ -74,8 +88,8 @@ export default function Login({ }) {
 
     return (
         <View style={styles.container}>
-            {popupMessageVisible ? <PopupMessage/> : null}
-            {loaderVisible ? <Loader/> : null}
+            {popupMessageVisible ? <PopupMessage /> : null}
+            {loaderVisible ? <Loader /> : null}
             <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
                 <View style={styles.header_container}>
                     <Text style={styles.header}>{translate('Login.title')}</Text>
@@ -117,8 +131,8 @@ export default function Login({ }) {
                 <View style={styles.usingApp}>
                     <Text style={styles.usingAppText}>{translate('Login.or')} <Text style={{ fontWeight: 'bold' }}>{translate('Login.signup')}</Text> {translate('Login.using')}</Text>
                     <View style={styles.usingAppicons}>
-                        <GoogleAuth/>
-                        <FacebookAuth/>
+                        <GoogleAuth />
+                        <FacebookAuth />
                     </View>
                 </View>
                 <TouchableOpacity

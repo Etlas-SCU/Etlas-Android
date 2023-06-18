@@ -12,7 +12,18 @@
         "passwordLowercase": "Password should contains atleast lowercase letter",
         "passwordUppercase": "Password should contains atleast uppercase letter",
         "passwordNumber": "Password should contains atleast one digit",
-        "passwordSpecial": "Password should contains atleast one symbol"
+        "passwordSpecial": "Password should contains atleast one symbol",
+        "passwordSpace": "Password shouldn't contains spaces",
+        "passwordNotValid": "Password is not valid",
+        "fullNameRequired": "Full Name is Required to fill",
+        "fullNameLength": "Full Name shouldn't exceed 50 characters",
+        "invalidOTP": "Invalid OTP",
+        "verifying": "While checking OTP",
+        "emailSent": "Theres is email sent to you with the OTP to verifying"
+    },
+    "emailConfirmation": {
+        "title": "Email Confirmation",
+        "description": "Type the OTP you received on your e-mail to continue confirm your email"
     },
     "LanguageSelection": {
         "title": "Language Selection",

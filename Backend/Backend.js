@@ -1,9 +1,13 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { translate } from '../Localization';
+
+
 class Backend {
 
     static HOST_URL = process.env.HOST_URL;
 
     // store variables
-    constructor(){
+    constructor () {
         this.Article = {};
         this.Monument = {};
         this.Tour = {};
@@ -12,44 +16,94 @@ class Backend {
         // this.HOST_URL = process.env.HOST_URL;
     }
 
-    static getArticle(){
+    static getArticle() {
         return this.Article;
     }
 
-    static getMonument(){
+    static getMonument() {
         return this.Monument;
     }
 
-    static getTour(){
+    static getTour() {
         return this.Tour;
     }
 
-    static getFavArticle(){
+    static getFavArticle() {
         return this.favArticle;
     }
 
-    static getFavMonument(){
+    static getFavMonument() {
         return this.favMonument;
     }
 
-    static setArticle(Article){
+    static setArticle(Article) {
         this.Article = Article;
     }
 
-    static setMonument(Monument){
+    static setMonument(Monument) {
         this.Monument = Monument;
     }
 
-    static setTour(Tour){
+    static setTour(Tour) {
         this.Tour = Tour;
     }
 
-    static setFavArticle(favArticle){
+    static setFavArticle(favArticle) {
         this.favArticle = favArticle;
     }
 
-    static setFavMonument(favMonument){
+    static setFavMonument(favMonument) {
         this.favMonument = favMonument;
+    }
+
+    static async getToken() {
+        return await AsyncStorage.getItem('accessToken').then((accessToken) => {
+            if (accessToken !== null)
+                return accessToken;
+            else
+                return null;
+        });
+    }
+
+    static async POST(url, body) {
+        let status = null;
+        return await fetch(this.HOST_URL + url, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'token': await this.getToken()
+            },
+            body: JSON.stringify(body),
+        }).then(response => {
+            status = response.status;
+            return response.json();
+        }).then(data => {
+            return {
+                status: status,
+                data: data
+            }
+        });
+    }
+
+    static async GET(url) {
+        let status = null;
+        return await fetch(this.HOST_URL + url, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'token': await this.getToken()
+            },
+        }).then(response => {
+            status = response.status;
+            return response.json();
+        }).then(data => {
+            return {
+                status: status,
+                data: data
+            }
+        })
     }
 
     static getTours() {
@@ -150,21 +204,42 @@ class Backend {
 
     static async login(email, password) {
         try {
-            const loginUrl = `${this.HOST_URL}auth/login/`;
-            const response = await fetch(loginUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify({
-                    "email": email,
-                    "password": password
-                }),
-                redirect: 'follow',
+            const loginUrl = 'auth/login/';
+            const body = {
+                email: email,
+                password: password
+            };
+            return await this.POST(loginUrl, body).then(response => {
+                const { status, data } = response;
+                return {
+                    status: status,
+                    data: data
+                }
             });
-            const result = await response.json();
-            return result;
+        } catch (error) {
+            console.log('error', error);
+            return null;
+        }
+    }
+
+    static async register(full_name, email, password, phone_number, address) {
+        try {
+            const registerUrl = 'auth/register/';
+            const body = {
+                email: email,
+                full_name: full_name,
+                password: password,
+                confirm_password: password,
+                address: address,
+                phone_number: phone_number
+            };
+            return await this.POST(registerUrl, body).then(response => {
+                const { status, data } = response;
+                return {
+                    status: status,
+                    data: data
+                }
+            });
         } catch (error) {
             console.log('error', error);
             return null;
@@ -177,21 +252,38 @@ class Backend {
 
     static async refresh_the_token(refreshToken) {
         try {
-            const regreshUrl = `${this.HOST_URL}auth/token/refresh/`;
-            const response = await fetch(regreshUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify({
-                    "refresh": refreshToken
-                })
+            const regreshUrl = 'auth/token/refresh/';
+            const body = {
+                refresh: refreshToken
+            };
+            return await this.POST(regreshUrl, body).then(response => {
+                const { status, data } = response;
+                return {
+                    status: status,
+                    data: data
+                }
             });
-            const tokens = await response.json();
-            return tokens;
         } catch (error) {
             console.log('Error refreshing token:', error);
+            return null;
+        }
+    }
+
+    static async emailVerify(otp){
+        try {
+            const verifyUrl = 'auth/email-verify/';
+            const body = {
+                otp: otp
+            };
+            return await this.POST(verifyUrl, body).then(response => {
+                const { status, data } = response;
+                return {
+                    status: status,
+                    data: data
+                }
+            });
+        } catch (error) {
+            console.log('Error verifying OTP:', error);
             return null;
         }
     }
@@ -226,6 +318,45 @@ class Backend {
 
     static async googleSignIn() {
         // To Do
+    }
+
+    static async checkPassword(password) {
+        if (password.length < 8)
+            return { state: false, message: translate('messages.passwordLength') };
+        if (password.length > 20)
+            return { state: false, message: translate('messages.passwordLength') };
+        if (!password.match(/[a-z]/g))
+            return { state: false, message: translate('messages.passwordLowercase') };
+        if (!password.match(/[A-Z]/g))
+            return { state: false, message: translate('messages.passwordUppercase') };
+        if (!password.match(/[0-9]/g))
+            return { state: false, message: translate('messages.passwordNumber') };
+        if (!password.match(/[^a-zA-Z\d]/g))
+            return { state: false, message: translate('messages.passwordSpecial') };
+        if (password.match(/\s/g))
+            return { state: false, message: translate('messages.passwordSpace') };
+        return { state: true, message: '' };
+    }
+
+    static async checkEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email))
+            return { state: false, message: translate('messages.invalidEmail') };
+        return { state: true, message: '' };
+    }
+
+    static async checkFullName(full_name) {
+        if (full_name.length == 0)
+            return { state: false, message: translate('messages.fullNameRequired') };
+        if (full_name.length > 50)
+            return { state: false, message: translate('messages.fullNameLength') };
+        return { state: true, message: '' };
+    }
+
+    static async checkOTP(otp){
+        if (otp.length !== 4)
+            return { state: false, message: translate('messages.invalidOTP') };
+        return { state: true, message: '' };
     }
 
 }

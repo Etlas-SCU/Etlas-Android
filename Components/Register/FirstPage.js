@@ -8,6 +8,8 @@ import FacebookAuth from "../Authetincations/FacebookAuth";
 import { goPage, goBack } from "../../Backend/Navigator";
 import { UserContext } from "../Context/Context";
 import PopupMessage from "../PopupMessage/PopupMessage";
+import Backend from "../../Backend/Backend";
+
 
 export function FirstPage({ }) {
 
@@ -18,52 +20,52 @@ export function FirstPage({ }) {
     const [hidden, setHidden] = useState(false);
     const {showPopupMessage, popupMessageVisible} = useContext(UserContext);
 
+    // check passowrd
+    const checkPassword = async (password) => {
+        const { state, message } = await Backend.checkPassword(password);
+        if(state === false){
+            showPopupMessage('Error', message);
+            return false;
+        }
+        return true;
+    }
 
-    // check password
-    const checkPassword = () => {
-        // check how strong of password
-        if(password.length < 8){
-            showPopupMessage('Error', translate('messages.passwordLength'));
-            return;
+    // check email
+    const checkEmail = async (email) => {
+        const { state, message } = await Backend.checkEmail(email);
+        if(state === false){
+            showPopupMessage('Error', message);
+            return false;
         }
-        if(password.length > 20){
-            showPopupMessage('Error', translate('messages.passwordLength'));
-            return;
-        }
-        if(!password.match(/[a-z]/g)){
-            showPopupMessage('Error', translate('messages.passwordLowercase'));
-            return;
-        }
-        if(!password.match(/[A-Z]/g)){
-            showPopupMessage('Error', translate('messages.passwordUppercase'));
-            return;
-        }
-        if(!password.match(/[0-9]/g)){
-            showPopupMessage('Error', translate('messages.passwordNumber'));
-            return;
-        }
-        if(!password.match(/[^a-zA-Z\d]/g)){
-            showPopupMessage('Error', translate('messages.passwordSpecial'));
-            return;
-        }
-    };
+        return true;
+    }
+
+    // check fullname
+    const checkFullName = async (fullname) => {
+        const { state, message } = await Backend.checkFullName(fullname);
+        if(state === false){
+            showPopupMessage('Error', message);
+            return false;
+        }   
+        return true;
+    }
 
     // check the inputs
-    const checkInputs = () => {
-        // check if all fields are filled
-        if(!fullname.length || !email.length || !password.length){
-            showPopupMessage('Error', translate('messages.fillAllFieldsReg'));
-            return;
-        }
+    const checkInputs = async () => {
+        // check the fullname
+        const checkfullname = await checkFullName(fullname).then((response) => { return response });
+        if(checkfullname === false)
+            return false;
 
-        // check if it's valid email
-        if(!email.includes('@')){
-            showPopupMessage('Error', translate('messages.invalidEmail'));
-            return;
-        }
+        // check the email
+        const checkemail = await checkEmail(email).then((response) => { return response });
+        if(checkemail === false)
+            return false;
 
-        // check password
-        checkPassword();
+        // check the password
+        const checkpass = await checkPassword(password).then((response) => { return response });
+        if(checkpass === false)
+            return false;
 
         // go to next page
         goPage('secondPage', 'firstPage', {
