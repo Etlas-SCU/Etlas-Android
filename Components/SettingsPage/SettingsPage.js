@@ -75,7 +75,7 @@ export default function Settings({ }) {
                         <Image source={require('../../assets/KnowledgeCheck/tabler_exclamation-circle.png')} style={styles.circle}/>
                     </TouchableOpacity>
                     <Text style={styles.title}>{translate('Settings.title')}</Text>
-                    <TouchableOpacity onPress={Backend.logout} >
+                    <TouchableOpacity onPress={() => {Backend.logout()}} >
                         <Image source={require('../../assets/Settings/logout.png')}/>
                     </TouchableOpacity>
                     

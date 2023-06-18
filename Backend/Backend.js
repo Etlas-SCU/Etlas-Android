@@ -1,5 +1,57 @@
 class Backend {
 
+    static HOST_URL = process.env.HOST_URL;
+
+    // store variables
+    constructor(){
+        this.Article = {};
+        this.Monument = {};
+        this.Tour = {};
+        this.favArticle = {};
+        this.favMonument = {};
+        // this.HOST_URL = process.env.HOST_URL;
+    }
+
+    static getArticle(){
+        return this.Article;
+    }
+
+    static getMonument(){
+        return this.Monument;
+    }
+
+    static getTour(){
+        return this.Tour;
+    }
+
+    static getFavArticle(){
+        return this.favArticle;
+    }
+
+    static getFavMonument(){
+        return this.favMonument;
+    }
+
+    static setArticle(Article){
+        this.Article = Article;
+    }
+
+    static setMonument(Monument){
+        this.Monument = Monument;
+    }
+
+    static setTour(Tour){
+        this.Tour = Tour;
+    }
+
+    static setFavArticle(favArticle){
+        this.favArticle = favArticle;
+    }
+
+    static setFavMonument(favMonument){
+        this.favMonument = favMonument;
+    }
+
     static getTours() {
         const Tour = {
             Title: "Giza tour",
@@ -97,9 +149,8 @@ class Backend {
     }
 
     static async login(email, password) {
-        console.log(email, password);
         try {
-            const loginUrl = `${process.env.HOST_URL}auth/login/`;
+            const loginUrl = `${this.HOST_URL}auth/login/`;
             const response = await fetch(loginUrl, {
                 method: 'POST',
                 headers: {
@@ -126,7 +177,7 @@ class Backend {
 
     static async refresh_the_token(refreshToken) {
         try {
-            const regreshUrl = `${process.env.HOST_URL}auth/token/refresh/`;
+            const regreshUrl = `${this.HOST_URL}auth/token/refresh/`;
             const response = await fetch(regreshUrl, {
                 method: 'POST',
                 headers: {

@@ -19,16 +19,53 @@ export function FirstPage({ }) {
     const {showPopupMessage, popupMessageVisible} = useContext(UserContext);
 
 
+    // check password
+    const checkPassword = () => {
+        // check how strong of password
+        if(password.length < 8){
+            showPopupMessage('Error', translate('messages.passwordLength'));
+            return;
+        }
+        if(password.length > 20){
+            showPopupMessage('Error', translate('messages.passwordLength'));
+            return;
+        }
+        if(!password.match(/[a-z]/g)){
+            showPopupMessage('Error', translate('messages.passwordLowercase'));
+            return;
+        }
+        if(!password.match(/[A-Z]/g)){
+            showPopupMessage('Error', translate('messages.passwordUppercase'));
+            return;
+        }
+        if(!password.match(/[0-9]/g)){
+            showPopupMessage('Error', translate('messages.passwordNumber'));
+            return;
+        }
+        if(!password.match(/[^a-zA-Z\d]/g)){
+            showPopupMessage('Error', translate('messages.passwordSpecial'));
+            return;
+        }
+    };
+
     // check the inputs
     const checkInputs = () => {
+        // check if all fields are filled
         if(!fullname.length || !email.length || !password.length){
             showPopupMessage('Error', translate('messages.fillAllFieldsReg'));
             return;
         }
+
+        // check if it's valid email
         if(!email.includes('@')){
             showPopupMessage('Error', translate('messages.invalidEmail'));
             return;
         }
+
+        // check password
+        checkPassword();
+
+        // go to next page
         goPage('secondPage', 'firstPage', {
             fullname: fullname,
             email: email,

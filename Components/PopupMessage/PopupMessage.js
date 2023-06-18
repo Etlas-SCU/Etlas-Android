@@ -1,8 +1,8 @@
 import { styles } from "./Styles";
 import { useContext } from "react";
 import { Text, Image, Modal, View } from "react-native";
-import { colors } from "../../AppStyles";
 import { UserContext } from "../Context/Context";
+import { Warning, Accept, Error } from "./PopUpState";
 
 
 export default function PopupMessage({ }) {
@@ -10,26 +10,19 @@ export default function PopupMessage({ }) {
     // Use the useContext hook to get the state of the popup message
     const { popupMessageVisible, messageState, message } = useContext(UserContext);
 
-    // Define the icons to be used in the alert and their corresponding image paths
-    const Icons = {
-        Accept: require('../../assets/PopupMessage/Accept.png'),
-        Error: require('../../assets/PopupMessage/Error.png'),
-        Warning: require('../../assets/PopupMessage/Warning.png'),
-    }
+    // if not needed in current time
+    if(!messageState)
+        return null;
 
-    // Define the colors to be used for the different types of buttons
-    const bgColors = {
-        Accept: colors.NavyGreen,
-        Error: colors.NavyRed,
-        Warning: colors.NavyYellow,
-    }
+    // Create an instance of the Accept, Error and Warning classes
+    const states = {
+        Accept: new Accept(),
+        Error: new Error(),
+        Warning: new Warning()
+    };
 
-    // Define the text to be displayed on the buttons for the different types of alerts
-    const TitleText = {
-        Accept: 'Done!',
-        Error: 'Oops!',
-        Warning: 'Hmmm!'
-    }
+    // Get the icon, title and background color of the popup message
+    const popUpState = states[messageState];
 
     return (
         <Modal
@@ -37,9 +30,9 @@ export default function PopupMessage({ }) {
             transparent={true}
             visible={popupMessageVisible}
         >
-            <View style={[styles.container, { backgroundColor: bgColors[messageState] }]}>
-                <Image source={Icons[messageState]} style={styles.icon} />
-                <Text style={styles.title}>{TitleText[messageState]}</Text>
+            <View style={[styles.container, { backgroundColor: popUpState.backgroundColor }]}>
+                <Image source={popUpState.icon} style={styles.icon} />
+                <Text style={styles.title}>{popUpState.title}</Text>
                 <Text style={styles.message}>{message}</Text>
             </View>
         </Modal>

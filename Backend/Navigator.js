@@ -105,4 +105,26 @@ export function getCurrentScreenParam() {
     const currentRoute = navigationRef?.getCurrentRoute();
     return currentRoute?.params;
 }
-  
+
+
+// Go to page and reset stack
+export function goPageResetStack(nextPage, params) {
+    // set the backend variables
+    setBackendVariables(params);
+
+    // navigate to the next page
+    navigationRef?.dispatch(
+        CommonActions.reset({
+            index: 0,
+            routes: [
+                { name: nextPage, params: params },
+            ],
+        })
+    );
+
+    // set status bar color
+    if (getDarkPages().includes(nextPage))
+        setStatusBarStyle('dark');
+    else
+        setStatusBarStyle('light');
+}

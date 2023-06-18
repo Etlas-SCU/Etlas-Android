@@ -33,7 +33,7 @@ const UserProvider  = ({ children }) => {
         setMessage(message);
         setPopupMessageVisible(true);
         setTimeout(() => {
-            setPopupMessageVisible(false);
+            hidePopupMessage();
             setMessage('');
             setMessageState(null);
         }, 2000)

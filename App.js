@@ -99,7 +99,7 @@ export default function App() {
             try {
                 // get the access token first
                 const refreshToken = await AsyncStorage.getItem('refreshToken');
-        
+
                 // if the access token is null, return
                 const res = await Backend.refresh_the_token(refreshToken);
 

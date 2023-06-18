@@ -5,7 +5,7 @@ import { translate } from '../../Localization'
 import GoogleAuth from "../Authetincations/GoogleAuth";
 import FacebookAuth from "../Authetincations/FacebookAuth";
 import { useState, useContext } from "react";
-import { goBack, goPage } from "../../Backend/Navigator";
+import { goBack, goPage, goPageResetStack } from "../../Backend/Navigator";
 import Backend from "../../Backend/Backend";
 import { UserContext } from "../Context/Context";
 import Loader from "../Loader/Loader";
@@ -23,33 +23,10 @@ export default function Login({ }) {
     const {showPopupMessage, popupMessageVisible} = useContext(UserContext);
 
 
-    // check password
-    const checkPassword = () => {
-        // check how strong of password
-        if(password.length < 8){
-            showPopupMessage('Error', translate('messages.passwordLength'));
-            return;
-        }
-        if(password.length > 20){
-            showPopupMessage('Error', translate('messages.passwordLength'));
-            return;
-        }
-        if(!password.match(/[a-z]/g)){
-            showPopupMessage('Error', translate('messages.passwordLowercase'));
-            return;
-        }
-        if(!password.match(/[A-Z]/g)){
-            showPopupMessage('Error', translate('messages.passwordUppercase'));
-            return;
-        }
-        if(!password.match(/[0-9]/g)){
-            showPopupMessage('Error', translate('messages.passwordNumber'));
-            return;
-        }
-        if(!password.match(/[^a-zA-Z\d]/g)){
-            showPopupMessage('Error', translate('messages.passwordSpecial'));
-            return;
-        }
+    const isValidEmail = (email) => {
+        //  email regex check
+        const emailRegex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+        return emailRegex.test(email);
     };
 
     // login
@@ -59,12 +36,10 @@ export default function Login({ }) {
             return;
         }
         // check if it's valid email
-        if(!email.includes('@') || !email.includes('.com')){
+        if(!isValidEmail(email)){
             showPopupMessage('Error', translate('messages.invalidEmail'));
             return;
         }
-        // check password
-        checkPassword();
         async function login_fetch() {
             showLoader(translate('messages.loggingIn'));
             const response = await Backend.login(email, password);
@@ -88,7 +63,7 @@ export default function Login({ }) {
                     await AsyncStorage.setItem('accessToken', accessToken);
                     await AsyncStorage.setItem('refreshToken', refreshToken);
                     // go to home page
-                    goPage('menuBar');
+                    goPageResetStack('menuBar');
                 }
                 hideLoader();
             }
