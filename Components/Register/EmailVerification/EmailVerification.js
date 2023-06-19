@@ -62,10 +62,8 @@ export default function ForgotPasswordSecond({ }) {
     const resendOTP = async () => {
         const { status, data } = await Backend.refereshOTP(email);
         if (status !== 200) {
-            if(data.error)
-                showPopupMessage('Error', data.error);
-            else if(data.email)
-                showPopupMessage('Error', data.email);
+            const errorMessage = await Backend.getErrorMessage(data).then(response => response);
+            showPopupMessage('Error', errorMessage);
             return;
         }
         showPopupMessage('Success', data.success);

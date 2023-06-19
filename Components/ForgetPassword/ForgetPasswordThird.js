@@ -2,8 +2,12 @@ import { styles } from "./Styles";
 import { View, Text, Image, TouchableOpacity, ScrollView, TextInput } from "react-native";
 import { translate } from "../../Localization";
 import { colors } from "../../AppStyles";
-import { useState } from "react";
-import { goBack, goPage } from "../../Backend/Navigator";
+import { useState, useContext } from "react";
+import { goBack, goPageResetStack, getParams } from "../../Backend/Navigator";
+import Backend from "../../Backend/Backend";
+import Loader from "../Loader/Loader";
+import PopupMessage from "../PopupMessage/PopupMessage";
+import { UserContext } from "../Context/Context";
 
 
 export default function ForgotPasswordThird({ }) {
@@ -16,8 +20,74 @@ export default function ForgotPasswordThird({ }) {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [hiddenConfirmPassword, setHiddenConfirmPassword] = useState(true);
 
+    // get requirments from parameters
+    const { uidb64, token } = getParams();
+
+    // loader
+    const { showLoader, hideLoader, loaderVisible } = useContext(UserContext);
+
+    // popup message
+    const { showPopupMessage, popupMessageVisible } = useContext(UserContext);
+
+
+    // check password
+    const checkPassword = async (password) => {
+        const { state, message } = await Backend.checkPassword(password);
+        if (!state) {
+            showPopupMessage('Error', message);
+            return false;
+        }   
+        return true;
+    }
+
+    // check confirm password
+    const checkConfirmPassword = async (confirmPassword, password) => {
+        const { state, message } = await Backend.checkConfirmPassword(password, confirmPassword);
+        if (!state) {
+            showPopupMessage('Error', message);
+            return false;
+        }
+        return true;
+    }
+
+    // handle error message
+    const handleSubmit = async () => {
+        // check password
+        const checkpass = await checkPassword(password).then((response) => { return response });
+        if (checkpass === false)
+            return;
+
+        // check confirm password
+        const checkconfirmpass = await checkConfirmPassword(confirmPassword, password).then((response) => { return response });
+        if (checkconfirmpass === false)
+            return;
+
+        // show loader
+        showLoader(translate('messages.ChangingPassword'));
+
+        // send request to backend
+        const { status, data } = await Backend.passwordResetConfirm(password, confirmPassword, token, uidb64);
+        
+        // hide loader
+        hideLoader();
+
+        if(status !== 200){
+            const errorMessage = await Backend.getErrorMessage(data).then(response => response);
+            showPopupMessage('Error', errorMessage);
+            return;
+        }
+
+        // show success message
+        showPopupMessage('Success', data.message);
+
+        // go to login page
+        goPageResetStack('login');
+    }
+
     return (
         <View style={styles.container}>
+            {loaderVisible ? <Loader /> : null}
+            {popupMessageVisible ? <PopupMessage /> : null}
             <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
                 <View style={styles.header_container}>
                     <Text style={styles.header}>{translate('forgotPassword.title')}</Text>
@@ -63,7 +133,7 @@ export default function ForgotPasswordThird({ }) {
                 </View>
                 <TouchableOpacity
                     style={styles.button}
-                    onPress={() => { goPage('Home', 'forgotPasswordThird') }}
+                    onPress={() => { handleSubmit() }}
                 >
                     <Text style={styles.buttonText}>{translate('forgotPassword.finish')}</Text>
                 </TouchableOpacity>
