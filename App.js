@@ -140,7 +140,7 @@ export default function App() {
         return null
 
     // clear async storage
-    AsyncStorage.clear();
+    // AsyncStorage.clear();
 
     // if the font loaded, return the components
     return (

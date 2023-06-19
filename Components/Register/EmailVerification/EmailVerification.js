@@ -43,7 +43,8 @@ export default function ForgotPasswordSecond({ }) {
             const { status, data } = await Backend.emailVerify(otp);
             hideLoader();
             if (status !== 200) {
-                showPopupMessage('Error', data.error);
+                const errorMessage = await Backend.getErrorMessage(data).then(response => response);
+                showPopupMessage('Error', errorMessage);
                 otpInput.current.clear();
                 return;
             }

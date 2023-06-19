@@ -31,8 +31,8 @@ export function SecondPage({ }) {
             hideLoader();
             console.log(status, data);
             if (status !== 201){
-                if(data.email)
-                    showPopupMessage('Error', data.email);
+                const errorMessage = await Backend.getErrorMessage(data).then(response => response);
+                showPopupMessage('Error', errorMessage);
             }
             else {
                 // store user data to use

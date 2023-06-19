@@ -43,6 +43,12 @@ export default function Login({ }) {
         return true;
     }
 
+    // handle error message
+    const handleErrorMessage = (error) => {
+
+    }
+
+
     // login
     const handle_login = async () => {
         // check email  
@@ -60,8 +66,11 @@ export default function Login({ }) {
             showLoader(translate('messages.loggingIn'));
             const { status, data } = await Backend.login(email, password);
             hideLoader();
-            if (status !== 200) 
-                showPopupMessage('Error', data.detail);
+            
+            if (status !== 200) {
+                const errorMessage = await Backend.getErrorMessage(data).then(response => response);
+                showPopupMessage('Error', errorMessage);
+            }
             else {
                 // store user data to use
                 const user = {
