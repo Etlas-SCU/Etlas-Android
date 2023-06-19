@@ -65,45 +65,79 @@ class Backend {
         });
     }
 
-    static async POST(url, body) {
-        let status = null;
-        return await fetch(this.HOST_URL + url, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'token': await this.getToken()
-            },
-            body: JSON.stringify(body),
-        }).then(response => {
-            status = response.status;
-            return response.json();
-        }).then(data => {
-            return {
-                status: status,
-                data: data
-            }
+    static async getRefreshToken() {
+        return await AsyncStorage.getItem('refreshToken').then((refreshToken) => {
+            if (refreshToken !== null)
+                return refreshToken;
+            else
+                return null;
         });
     }
 
-    static async GET(url) {
-        let status = null;
-        return await fetch(this.HOST_URL + url, {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'token': await this.getToken()
-            },
-        }).then(response => {
+    static async POST(url, body) {
+        try {
+            let status = null;
+            const token = await this.getToken();
+
+            const response = await fetch(this.HOST_URL + url, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': token ? `Bearer ${token}` : null,
+                },
+                body: JSON.stringify(body),
+            });
+
+            // status for response
             status = response.status;
-            return response.json();
-        }).then(data => {
+
+            let data = null;
+            if (response.status !== 204) {
+                data = await response.json();
+            }
+
             return {
                 status: status,
                 data: data
+            };
+        } catch (error) {
+            console.log('POST error', error);
+            return null;
+        }
+    }
+
+    static async GET(url) {
+        try {
+            let status = null;
+            const token = await this.getToken();
+
+            const response = await fetch(this.HOST_URL + url, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': token ? `Bearer ${token}` : null,
+                },
+                body: JSON.stringify(body),
+            });
+
+            // status for response
+            status = response.status;
+
+            let data = null;
+            if (response.status !== 204) {
+                data = await response.json();
             }
-        })
+
+            return {
+                status: status,
+                data: data
+            };
+        } catch (error) {
+            console.log('POST error', error);
+            return null;
+        }
     }
 
     static getTours() {
@@ -202,6 +236,21 @@ class Backend {
         // To Do
     }
 
+    static async getErrorMessage(response) {
+        if (response.messages) {
+            return response.messages[0].message;
+        }
+        else if (response.message) {
+            return response.message;
+        }
+        else if (response.detail) {
+            return response.detail;
+        } else {
+            for (const [_, value] of Object.entries(response))
+                return value;
+        }
+    }
+
     static async login(email, password) {
         try {
             const loginUrl = 'auth/login/';
@@ -209,13 +258,7 @@ class Backend {
                 email: email,
                 password: password
             };
-            return await this.POST(loginUrl, body).then(response => {
-                const { status, data } = response;
-                return {
-                    status: status,
-                    data: data
-                }
-            });
+            return await this.POST(loginUrl, body).then(response => response);
         } catch (error) {
             console.log('error', error);
             return null;
@@ -233,13 +276,7 @@ class Backend {
                 address: address,
                 phone_number: phone_number
             };
-            return await this.POST(registerUrl, body).then(response => {
-                const { status, data } = response;
-                return {
-                    status: status,
-                    data: data
-                }
-            });
+            return await this.POST(registerUrl, body).then(response => response);
         } catch (error) {
             console.log('error', error);
             return null;
@@ -247,10 +284,21 @@ class Backend {
     }
 
     static async logout() {
-        // To Do
+        try {
+            const logoutUrl = 'auth/logout/';
+            const refreshToken = await this.getRefreshToken().then(response => response);
+            const body = {
+                refresh: refreshToken
+            };
+            return await this.POST(logoutUrl, body).then(response => response);
+        } catch (error) {
+            console.log('error logout', error);
+            return null;
+        }
     }
 
-    static async refresh_the_token(refreshToken) {
+    static async refresh_the_token() {
+        const refreshToken = await this.getRefreshToken().then(response => { return response });
         try {
             const regreshUrl = 'auth/token/refresh/';
             const body = {
@@ -269,7 +317,7 @@ class Backend {
         }
     }
 
-    static async emailVerify(otp){
+    static async emailVerify(otp) {
         try {
             const verifyUrl = 'auth/email-verify/';
             const body = {
@@ -284,6 +332,19 @@ class Backend {
             });
         } catch (error) {
             console.log('Error verifying OTP:', error);
+            return null;
+        }
+    }
+
+    static async refereshOTP(email) {
+        try {
+            const refreshOTPUrl = 'auth/request-verify-otp/';
+            const body = {
+                email: email
+            };
+            return await this.POST(refreshOTPUrl, body).then(response => response);
+        } catch (error) {
+            console.log('Error refreshing OTP:', error);
             return null;
         }
     }
@@ -353,7 +414,7 @@ class Backend {
         return { state: true, message: '' };
     }
 
-    static async checkOTP(otp){
+    static async checkOTP(otp) {
         if (otp.length !== 4)
             return { state: false, message: translate('messages.invalidOTP') };
         return { state: true, message: '' };

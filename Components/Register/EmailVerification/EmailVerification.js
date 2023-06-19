@@ -56,6 +56,20 @@ export default function ForgotPasswordSecond({ }) {
         verify_with_otp(otp);
     }
 
+
+    // referesh the OTP
+    const resendOTP = async () => {
+        const { status, data } = await Backend.refereshOTP(email);
+        if (status !== 200) {
+            if(data.error)
+                showPopupMessage('Error', data.error);
+            else if(data.email)
+                showPopupMessage('Error', data.email);
+            return;
+        }
+        showPopupMessage('Success', data.success);
+    }
+
     return (
         <View style={styles.container}>
             {loaderVisible ? <Loader /> : null}
@@ -78,7 +92,10 @@ export default function ForgotPasswordSecond({ }) {
                     offTintColor={colors.SolidGrey}
                     handleTextChange={(OTP) => setOTP(OTP)}
                 />
-                <TouchableOpacity style={styles.resend}>
+                <TouchableOpacity 
+                    style={styles.resend}
+                    onPress={() => resendOTP(email)}   
+                >
                     <Text style={styles.ResendText}>{translate('forgotPassword.Resend')}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity

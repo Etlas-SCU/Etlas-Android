@@ -99,10 +99,16 @@ export default function App() {
         const refresh_the_token = async () => {
             try {
                 // get the access token first
-                const refreshToken = await AsyncStorage.getItem('refreshToken');
+                const refreshToken = await AsyncStorage.getItem('refreshToken').then(response => {
+                    return response;
+                });
 
                 // if the access token is null, return
-                const { status, data } = await Backend.refresh_the_token(refreshToken);
+                if(!refreshToken)
+                    return;
+
+                // if the access token is null, return
+                const { status, data } = await Backend.refresh_the_token(refreshToken).then(response => response);
 
                 // if the response is not null, set the access token
                 if (status === 200) {
@@ -110,6 +116,7 @@ export default function App() {
                     await AsyncStorage.setItem('refreshToken', data.refresh);
                     setAccessToken(data.access);
                     setRefreshToken(data.refresh);
+                    console.log(data.refresh);
                 } else {
                     console.log(data);
                 }
@@ -133,7 +140,7 @@ export default function App() {
         return null
 
     // clear async storage
-    // AsyncStorage.clear();
+    AsyncStorage.clear();
 
     // if the font loaded, return the components
     return (
