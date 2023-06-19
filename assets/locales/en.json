@@ -1,12 +1,12 @@
 {
     "messages":{
         "fillAllFields": "Please Fill Email and Password",
-        "loggingIn": "While loggin in",
+        "loggingIn": "Just a moment, we're logging you in",
         "invalidEmail": "Invalid Email",
         "fillAllFieldsReg": "Please Fill all needed information",
         "passwordLength": "Password length should be between 8 and 20 characters",
         "passwordNotMatch": "Passwords doesn't match",
-        "registering": "While registering",
+        "registering": "Just a moment, we're registering you",
         "emailExist": "Email already exists",
         "emailNotExist": "Email doesn't exist",
         "passwordLowercase": "Password should contains atleast lowercase letter",

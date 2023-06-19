@@ -10,7 +10,7 @@ import Backend from "../../Backend/Backend";
 import { useState, useContext } from "react";
 import * as ImagePicker from 'expo-image-picker';
 import PopupMessage from "../PopupMessage/PopupMessage";
-import { goPage } from "../../Backend/Navigator";
+import { goPage, goPageResetStack } from "../../Backend/Navigator";
 import { useIsFocused } from "@react-navigation/native";
 import { setStatusBarStyle } from "expo-status-bar";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -76,7 +76,7 @@ export default function Settings({ }) {
         }
 
         // goto login page
-        goPage('login');
+        goPageResetStack('login');
         
         // remove the token from the storage
         try {
