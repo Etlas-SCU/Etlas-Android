@@ -65,6 +65,10 @@ export default function App() {
 
     const getAccessToken = async () => {
         try {
+            // refresh the token before getting it
+            await refresh_the_token();
+
+            // get the access token and refresh token from the local storage
             const access = await AsyncStorage.getItem('accessToken').then((accessToken) => {
                 if (accessToken !== null) {
                     return accessToken;
@@ -93,35 +97,36 @@ export default function App() {
     }, []);
 
 
+    // Function to refresh token
+    const refresh_the_token = async () => {
+        try {
+            // get the access token first
+            const refreshToken = await AsyncStorage.getItem('refreshToken').then(response => response);
+
+            // if the access token is null, return
+            if (!refreshToken)
+                return;
+
+            // if the access token is null, return
+            const { statusCode, data } = await Backend.refresh_the_token(refreshToken).then(response => response);
+
+            // if the response is not null, set the access token
+            if (Backend.isSuccessfulRequest(statusCode)) {
+                await AsyncStorage.setItem('accessToken', data.access);
+                await AsyncStorage.setItem('refreshToken', data.refresh);
+                setAccessToken(data.access);
+                setRefreshToken(data.refresh);
+                console.log(data.refresh);
+            } else {
+                console.log(data);
+            }
+        } catch (e) {
+            console.log('Error refereshing:', e);
+        }
+    };
+
     // get referesh token
     useEffect(() => {
-        // Function to refresh token
-        const refresh_the_token = async () => {
-            try {
-                // get the access token first
-                const refreshToken = await AsyncStorage.getItem('refreshToken').then(response => response);
-
-                // if the access token is null, return
-                if (!refreshToken)
-                    return;
-
-                // if the access token is null, return
-                const { statusCode, data } = await Backend.refresh_the_token(refreshToken).then(response => response);
-
-                // if the response is not null, set the access token
-                if (Backend.isSuccessfulRequest(statusCode)) {
-                    await AsyncStorage.setItem('accessToken', data.access);
-                    await AsyncStorage.setItem('refreshToken', data.refresh);
-                    setAccessToken(data.access);
-                    setRefreshToken(data.refresh);
-                    console.log(data.refresh);
-                } else {
-                    console.log(data);
-                }
-            } catch (e) {
-                console.log('Error refereshing:', e);
-            }
-        };
 
         // Refresh token every 4 minutes (240,000 milliseconds)
         const refreshInterval = setInterval(refresh_the_token, 240000);

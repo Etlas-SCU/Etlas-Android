@@ -25,7 +25,15 @@
         "ChangingPassword": "While validate the new password",
         "bestScore": "While getting your best Score",
         "notFound": "Not Found",
-        "getScore": "While getting your scores"
+        "getScore": "While getting your scores",
+        "getuserData": "While getting your Information",
+        "storageError": "No Access to Internal Storage",
+        "updateUserSuccess": "The Information has been updates successfully",
+        "updateUser": "While updating your information",
+        "alreadyExist": "This email is already registered",
+        "facebookSign": "Logging in with facebook",
+        "googleSign": "Logging in with google",
+        "somethingWrong": "Something went wrong, please try again later."
     },
     "emailConfirmation": {
         "title": "Email Confirmation",

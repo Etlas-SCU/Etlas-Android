@@ -93,7 +93,7 @@ class Backend {
             status = response.status;
 
             // 404 handle
-            if(response.status === 404){
+            if (response.status === 404) {
                 return {
                     statusCode: status,
                     data: {
@@ -138,7 +138,7 @@ class Backend {
             status = response.status;
 
             // 404 handle
-            if(response.status === 404){
+            if (response.status === 404) {
                 return {
                     statusCode: status,
                     data: {
@@ -184,7 +184,7 @@ class Backend {
             status = response.status;
 
             // 404 handle
-            if(response.status === 404){
+            if (response.status === 404) {
                 return {
                     statusCode: status,
                     data: {
@@ -213,6 +213,10 @@ class Backend {
 
     static isSuccessfulRequest(code) {
         return code >= 200 && code < 300;
+    }
+
+    static isTokenExp(code){
+        return code === 400;
     }
 
     static getTours() {
@@ -257,20 +261,6 @@ class Backend {
         return Array(20).fill(quesions);
     }
 
-    static getUser() {
-        const user = {
-            id: 1,
-            name: "Ahmed Hossam",
-            email: "ahmed.7oSkaa@gmail.com",
-            password: "123456789",
-            img: require('../assets/Profile/Profile.png'),
-            bestScore: 374,
-            address: "Port Said, EG",
-            phone: "01208822340",
-        };
-        return user;
-    }
-
     static getFavArticles() {
         const Article = {
             Title: "Anubis",
@@ -308,8 +298,8 @@ class Backend {
 
     static async getErrorMessage(response) {
         // if response is null
-        if(!response)
-            return 'Something went wrong, please try again later.';
+        if (!response)
+            return translate('messages.somethingWrong');
 
         if (response?.messages) {
             return response.messages[0].message;
@@ -331,6 +321,38 @@ class Backend {
             return await this.GET(url).then(response => response);
         } catch (error) {
             console.log('Error Get Best Score:', error);
+            return {
+                statusCode: 500,
+                data: error
+            }
+        }
+    }
+
+    static async getUserData() {
+        try {
+            const url = 'users/';
+            return await this.GET(url).then(response => response);
+        } catch (error) {
+            console.log('Error Get User:', error);
+            return {
+                statusCode: 500,
+                data: error
+            }
+        }
+    }
+
+    static async updateUser(full_name, email, address, phone_number) {
+        try {
+            const url = 'users/';
+            const body = {
+                full_name: full_name,
+                email: email,
+                address: address,
+                phone_number: phone_number
+            }
+            return await this.PATCH(url, body).then(response => response);
+        } catch (error) {
+            console.log('Error Update User:', error);
             return {
                 statusCode: 500,
                 data: error
@@ -364,7 +386,7 @@ class Backend {
         }
     }
 
-    static async getStatueScore(){
+    static async getStatueScore() {
         try {
             const url = 'users/best-score-statues/';
             return await this.GET(url).then(response => response);
@@ -376,7 +398,7 @@ class Backend {
             }
         }
     }
-    
+
     static async login(email, password) {
         try {
             const loginUrl = 'auth/login/';
@@ -555,17 +577,35 @@ class Backend {
         }
     }
 
-    static updateUser() {
-        // To Do
+    static async googleSignIn(auth_token) {
+        try {
+            const googleUrl = 'social-auth/google/';
+            const body = {
+                auth_token: auth_token,
+                front_end: "android"
+            }
+            return await this.POST(googleUrl, body).then(response => response);
+        } catch (error) {
+            return {
+                statusCode: 500,
+                data: error
+            }
+        }
     }
 
-    static async facebookSignIn() {
-        // To Do
-    }
-
-
-    static async googleSignIn() {
-        // To Do
+    static async facebookSignIn(auth_token) {
+        try {
+            const facebookUrl = 'social-auth/facebook/';
+            const body = {
+                auth_token: auth_token,
+            }
+            return await this.POST(facebookUrl, body).then(response => response);
+        } catch (error) {
+            return {
+                statusCode: 500,
+                data: error
+            }
+        }
     }
 
     static async checkPassword(password) {

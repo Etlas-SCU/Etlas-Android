@@ -7,16 +7,20 @@ import { responsiveHeight } from "../../AppStyles";
 import MainMenu from "../MainMenu/MainMenu";
 import { isIOS } from "../../AppStyles";
 import Backend from "../../Backend/Backend";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import * as ImagePicker from 'expo-image-picker';
-import PopupMessage from "../PopupMessage/PopupMessage";
 import { goPage, goPageResetStack } from "../../Backend/Navigator";
 import { useIsFocused } from "@react-navigation/native";
 import { setStatusBarStyle } from "expo-status-bar";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import PopupMessage from "../PopupMessage/PopupMessage";
+import Loader from "../Loader/Loader";
 
 
 export default function Settings({ }) {
+
+    // default avatar
+    const defaultAvatar = require('../../assets/EditProfile/Avatar.png');
 
     // check if the currenpage is focused
     const isFocused = useIsFocused();
@@ -26,10 +30,11 @@ export default function Settings({ }) {
     }
 
     // use user context
-    const { showModal, setScreen, showPopupMessage } = useContext(UserContext);
+    const { showModal, setScreen } = useContext(UserContext);
 
-    // get User Information
-    const { img, name } = Backend.getUser();
+    // get popup states and loader
+    const { popupMessageVisible, showPopupMessage } = useContext(UserContext);
+    const { loaderVisible, showLoader, hideLoader } = useContext(UserContext);
 
     // state for the gallery permission and the stored image
     const [image, setImage] = useState(null);
@@ -47,7 +52,7 @@ export default function Settings({ }) {
 
         // if the user doesn't have permission
         if (hasGelleryPermission === false) {
-            showPopupMessage();
+            showPopupMessage('Error', translate('messages.storageError'));
         }
 
         // No permissions request is necessary for launching the image library
@@ -65,6 +70,26 @@ export default function Settings({ }) {
         }
 
     };
+
+    // state for information
+    const [name, setName] = useState('');
+    const [profileImage, setProfileImage] = useState(defaultAvatar);
+
+    // get information
+    const getUserData = async () => {
+        showLoader(translate('messages.getuserData'));
+        const { statusCode, data } = await Backend.getUserData().then(response => response);
+        hideLoader();
+
+        if (!Backend.isSuccessfulRequest(statusCode)) {
+            const errorMessage = await Backend.getErrorMessage(data).then(response => response);
+            showPopupMessage('Error', errorMessage);
+            return;
+        }
+        setName(data.full_name);
+        if (data.image_url)
+            setProfileImage(data.image_url);
+    }
 
     // handle logout
     const handle_logout = async () => {
@@ -87,10 +112,16 @@ export default function Settings({ }) {
         }
     }
 
+    // get user data when the page is focused
+    useEffect(() => {
+        getUserData();
+    }, []);
+
     return (
         <View style={styles.container}>
             {isIOS() ? <MainMenu /> : null}
-            <PopupMessage state={'Error'} message={'No Access to Internal Storage'} />
+            {popupMessageVisible ? <PopupMessage/> : null}
+            {loaderVisible ? <Loader /> : null}
             <View style={styles.header}>
                 <TouchableOpacity onPress={() => { showModal(), setScreen('Settings') }} >
                     <Image source={require('../../assets/KnowledgeCheck/tabler_exclamation-circle.png')} style={styles.circle} />
@@ -104,7 +135,7 @@ export default function Settings({ }) {
             <View style={styles.avatarBox}>
                 <TouchableOpacity onPress={() => { pickImage() }}>
                     <Avatar
-                        image={img}
+                        image={profileImage}
                         imageStyle={styles.profilePic}
                         style={styles.profile}
                         size={responsiveHeight(128)}
