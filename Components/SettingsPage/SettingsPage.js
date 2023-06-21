@@ -74,6 +74,7 @@ export default function Settings({ }) {
     // state for information
     const [name, setName] = useState('');
     const [profileImage, setProfileImage] = useState(defaultAvatar);
+    const [pressed, setPressed] = useState(false);
 
     // get information
     const getUserData = async () => {
@@ -93,7 +94,9 @@ export default function Settings({ }) {
 
     // handle logout
     const handle_logout = async () => {
+        setPressed(true);
         const { statusCode, data } = await Backend.logout().then(response => response).then(data => data);
+        setPressed(false);
         if (!Backend.isSuccessfulRequest(statusCode)) {
             const errorMessage = await Backend.getErrorMessage(data).then(response => response);
             showPopupMessage('Error', errorMessage);
@@ -127,7 +130,10 @@ export default function Settings({ }) {
                     <Image source={require('../../assets/KnowledgeCheck/tabler_exclamation-circle.png')} style={styles.circle} />
                 </TouchableOpacity>
                 <Text style={styles.title}>{translate('Settings.title')}</Text>
-                <TouchableOpacity onPress={() => { handle_logout() }} >
+                <TouchableOpacity 
+                    onPress={() => { handle_logout() }} 
+                    disabled={pressed}
+                >
                     <Image source={require('../../assets/Settings/logout.png')} />
                 </TouchableOpacity>
 

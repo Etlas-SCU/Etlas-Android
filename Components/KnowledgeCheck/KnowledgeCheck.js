@@ -50,9 +50,9 @@ export default function KnowledgeCheck({ }) {
     const { loaderVisible, showLoader, hideLoader } = useContext(UserContext);
 
     // states for scores
-    const [landmarkScore, setLandmarkScore] = useState(0);
-    const [monumentScore, setMonumentScore] = useState(0);
-    const [statueScore, setStatueScore] = useState(0);
+    const [landmarkScore, setLandmarkScore] = useState('0/0');
+    const [monumentScore, setMonumentScore] = useState('0/0');
+    const [statueScore, setStatueScore] = useState('0/0');
 
     // get monument score
     const getMonumentScore = async () => {
