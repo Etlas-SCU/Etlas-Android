@@ -27,10 +27,9 @@ export function SecondPage({ }) {
     const handle_register = () => {
         async function register_fetch() {
             showLoader(translate('messages.registering'));
-            const { status, data } = await Backend.register(fullname, email, password, phoneNumber, address);
+            const { statusCode, data } = await Backend.register(fullname, email, password, phoneNumber, address);
             hideLoader();
-            console.log(status, data);
-            if (status !== 201){
+            if (!Backend.isSuccessfulRequest(statusCode)) {
                 const errorMessage = await Backend.getErrorMessage(data).then(response => response);
                 showPopupMessage('Error', errorMessage);
             }

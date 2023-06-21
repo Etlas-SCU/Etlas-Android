@@ -38,16 +38,17 @@ export default function ForgotPasswordFirst({ }) {
 
         // verify with otp
         showLoader(translate('messages.sendingOTP'));
-        const { status, data } = await Backend.passwordReset(email);
+        const { statusCode, data } = await Backend.passwordReset(email);
         hideLoader();
 
-        if (status !== 200) {
+        if (!Backend.isSuccessfulRequest(statusCode)) {
             const errorMessage = await Backend.getErrorMessage(data).then(response => response);
             showPopupMessage('Error', errorMessage);
             return;
         }
-        else if(data && data.success) {
+        else if (data && data.success) {
             showPopupMessage('Success', data.success);
+
             // go next
             goPage('forgotPasswordSecond', 'forgotPasswordFirst', { email: email });
             return;
@@ -57,6 +58,7 @@ export default function ForgotPasswordFirst({ }) {
     return (
         <View style={styles.container}>
             {popupMessageVisible ? <PopupMessage /> : null}
+            {loaderVisible ? <Loader /> : null}
             <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
                 <View style={styles.header_container}>
                     <Text style={styles.header}>{translate('forgotPassword.title')}</Text>

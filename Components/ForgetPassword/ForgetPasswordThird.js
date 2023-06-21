@@ -36,7 +36,7 @@ export default function ForgotPasswordThird({ }) {
         if (!state) {
             showPopupMessage('Error', message);
             return false;
-        }   
+        }
         return true;
     }
 
@@ -66,12 +66,12 @@ export default function ForgotPasswordThird({ }) {
         showLoader(translate('messages.ChangingPassword'));
 
         // send request to backend
-        const { status, data } = await Backend.passwordResetConfirm(password, confirmPassword, token, uidb64);
-        
+        const { statusCode, data } = await Backend.passwordResetConfirm(password, confirmPassword, token, uidb64);
+
         // hide loader
         hideLoader();
 
-        if(status !== 200){
+        if (!Backend.isSuccessfulRequest(statusCode)) {
             const errorMessage = await Backend.getErrorMessage(data).then(response => response);
             showPopupMessage('Error', errorMessage);
             return;

@@ -68,8 +68,8 @@ export default function Settings({ }) {
 
     // handle logout
     const handle_logout = async () => {
-        const { status, data } = await Backend.logout().then(response => response).then(data => data);
-        if (status !== 204) {
+        const { statusCode, data } = await Backend.logout().then(response => response).then(data => data);
+        if (!Backend.isSuccessfulRequest(statusCode)) {
             const errorMessage = await Backend.getErrorMessage(data).then(response => response);
             showPopupMessage('Error', errorMessage);
             return;
@@ -77,7 +77,7 @@ export default function Settings({ }) {
 
         // goto login page
         goPageResetStack('login');
-        
+
         // remove the token from the storage
         try {
             await AsyncStorage.removeItem('accessToken');

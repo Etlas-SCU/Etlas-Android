@@ -43,12 +43,6 @@ export default function Login({ }) {
         return true;
     }
 
-    // handle error message
-    const handleErrorMessage = (error) => {
-
-    }
-
-
     // login
     const handle_login = async () => {
         // check email  
@@ -64,10 +58,10 @@ export default function Login({ }) {
         // login
         async function login_fetch() {
             showLoader(translate('messages.loggingIn'));
-            const { status, data } = await Backend.login(email, password);
+            const { statusCode, data } = await Backend.login(email, password);
             hideLoader();
-            
-            if (status !== 200) {
+
+            if (!Backend.isSuccessfulRequest(statusCode)) {
                 const errorMessage = await Backend.getErrorMessage(data).then(response => response);
                 showPopupMessage('Error', errorMessage);
             }
@@ -87,6 +81,7 @@ export default function Login({ }) {
                 const { access: accessToken, refresh: refreshToken } = data.tokens;
                 await AsyncStorage.setItem('accessToken', accessToken);
                 await AsyncStorage.setItem('refreshToken', refreshToken);
+
                 // go to home page
                 goPageResetStack('menuBar');
             }

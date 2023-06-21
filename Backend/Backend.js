@@ -92,18 +92,31 @@ class Backend {
             // status for response
             status = response.status;
 
+            // 404 handle
+            if(response.status === 404){
+                return {
+                    statusCode: status,
+                    data: {
+                        message: translate('messages.notFound')
+                    }
+                };
+            }
+
             let data = null;
             if (response.status !== 204) {
                 data = await response.json();
             }
 
             return {
-                status: status,
+                statusCode: status,
                 data: data
             };
         } catch (error) {
             console.log('POST error', error);
-            return null;
+            return {
+                statusCode: 500,
+                data: error
+            }
         }
     }
 
@@ -119,11 +132,20 @@ class Backend {
                     'Content-Type': 'application/json',
                     'Authorization': token ? `Bearer ${token}` : null,
                 },
-                body: JSON.stringify(body),
             });
 
             // status for response
             status = response.status;
+
+            // 404 handle
+            if(response.status === 404){
+                return {
+                    statusCode: status,
+                    data: {
+                        message: translate('messages.notFound')
+                    }
+                };
+            }
 
             let data = null;
             if (response.status !== 204) {
@@ -131,12 +153,15 @@ class Backend {
             }
 
             return {
-                status: status,
+                statusCode: status,
                 data: data
             };
         } catch (error) {
-            console.log('POST error', error);
-            return null;
+            console.log('Path error', error);
+            return {
+                statusCode: 500,
+                data: error
+            }
         }
     }
 
@@ -158,19 +183,36 @@ class Backend {
             // status for response
             status = response.status;
 
+            // 404 handle
+            if(response.status === 404){
+                return {
+                    statusCode: status,
+                    data: {
+                        message: translate('messages.notFound')
+                    }
+                };
+            }
+
             let data = null;
             if (response.status !== 204) {
                 data = await response.json();
             }
 
             return {
-                status: status,
+                statusCode: status,
                 data: data
             };
         } catch (error) {
             console.log('POST error', error);
-            return null;
+            return {
+                statusCode: 500,
+                data: error
+            }
         }
+    }
+
+    static isSuccessfulRequest(code) {
+        return code >= 200 && code < 300;
     }
 
     static getTours() {
@@ -229,11 +271,6 @@ class Backend {
         return user;
     }
 
-    static getBestScore() {
-        const { bestScore } = this.getUser();
-        return bestScore;
-    }
-
     static getFavArticles() {
         const Article = {
             Title: "Anubis",
@@ -270,17 +307,34 @@ class Backend {
     }
 
     static async getErrorMessage(response) {
-        if (response.messages) {
+        // if response is null
+        if(!response)
+            return 'Something went wrong, please try again later.';
+
+        if (response?.messages) {
             return response.messages[0].message;
         }
-        else if (response.message) {
+        else if (response?.message) {
             return response.message;
         }
-        else if (response.detail) {
+        else if (response?.detail) {
             return response.detail;
         } else {
             for (const [_, value] of Object.entries(response))
                 return value;
+        }
+    }
+
+    static async getBestScore() {
+        try {
+            const url = 'users/total-best-score/';
+            return await this.GET(url).then(response => response);
+        } catch (error) {
+            console.log('Error Get Best Score:', error);
+            return {
+                statusCode: 500,
+                data: error
+            }
         }
     }
 
@@ -293,8 +347,11 @@ class Backend {
             };
             return await this.POST(loginUrl, body).then(response => response);
         } catch (error) {
-            console.log('error', error);
-            return null;
+            console.log('Error Login:', error);
+            return {
+                statusCode: 500,
+                data: error
+            }
         }
     }
 
@@ -311,8 +368,11 @@ class Backend {
             };
             return await this.POST(registerUrl, body).then(response => response);
         } catch (error) {
-            console.log('error', error);
-            return null;
+            console.log('Error Register:', error);
+            return {
+                statusCode: 500,
+                data: error
+            }
         }
     }
 
@@ -326,7 +386,10 @@ class Backend {
             return await this.POST(logoutUrl, body).then(response => response);
         } catch (error) {
             console.log('error logout', error);
-            return null;
+            return {
+                statusCode: 500,
+                data: error
+            }
         }
     }
 
@@ -340,7 +403,10 @@ class Backend {
             return await this.POST(regreshUrl, body).then(response => response);
         } catch (error) {
             console.log('Error refreshing token:', error);
-            return null;
+            return {
+                statusCode: 500,
+                data: error
+            }
         }
     }
 
@@ -353,7 +419,10 @@ class Backend {
             return await this.POST(verifyUrl, body).then(response => response);
         } catch (error) {
             console.log('Error verifying OTP:', error);
-            return null;
+            return {
+                statusCode: 500,
+                data: error
+            }
         }
     }
 
@@ -366,7 +435,10 @@ class Backend {
             return await this.POST(refreshOTPUrl, body).then(response => response);
         } catch (error) {
             console.log('Error refreshing OTP:', error);
-            return null;
+            return {
+                statusCode: 500,
+                data: error
+            }
         }
     }
 
@@ -379,7 +451,10 @@ class Backend {
             return await this.POST(resetUrl, body).then(response => response);
         } catch (error) {
             console.log('Error resetting password:', error);
-            return null;
+            return {
+                statusCode: 500,
+                data: error
+            }
         }
     }
 
@@ -395,7 +470,10 @@ class Backend {
             return await this.PATCH(resetUrl, body).then(response => response);
         } catch (error) {
             console.log('Error resetting password:', error);
-            return null;
+            return {
+                statusCode: 500,
+                data: error
+            }
         }
     }
 
@@ -409,7 +487,10 @@ class Backend {
             return await this.POST(verifyUrl, body).then(response => response);
         } catch (error) {
             console.log('Error verifying OTP:', error);
-            return null;
+            return {
+                statusCode: 500,
+                data: error
+            }
         }
     }
 
@@ -428,7 +509,10 @@ class Backend {
             return result.record.TermsConditions;
         } catch (error) {
             console.log('Error Terms and Conditions:', error);
-            return null;
+            return {
+                statusCode: 500,
+                data: error
+            }
         }
     }
 

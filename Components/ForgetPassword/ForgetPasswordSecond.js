@@ -30,11 +30,11 @@ export default function ForgotPasswordSecond({ }) {
         }
     }
 
-    
+
     // referesh the OTP
     const resendOTP = async (email) => {
-        const { status, data } = await Backend.refereshOTP(email);
-        if (status !== 200) {
+        const { statusCode, data } = await Backend.refereshOTP(email);
+        if (!Backend.isSuccessfulRequest(statusCode)) {
             const errorMessage = await Backend.getErrorMessage(data).then(response => response);
             showPopupMessage('Error', errorMessage);
             return;
@@ -53,15 +53,15 @@ export default function ForgotPasswordSecond({ }) {
 
             // verify with otp
             showLoader(translate('messages.verifying'));
-            const { status, data } = await Backend.passwordVerify(otp);
+            const { statusCode, data } = await Backend.passwordVerify(otp);
             hideLoader();
-            if (status !== 200) {
+            if (!Backend.isSuccessfulRequest(statusCode)) {
                 const errorMessage = await Backend.getErrorMessage(data).then(response => response);
                 showPopupMessage('Error', errorMessage);
                 otpInput.current.clear();
                 return;
             }
-            else if(data && data.success) {
+            else if (data && data.success) {
                 const { uidb64, token, success } = data;
                 showPopupMessage('Success', success);
                 goPage('forgotPasswordThird', 'forgotPasswordSecond', {
@@ -97,7 +97,7 @@ export default function ForgotPasswordSecond({ }) {
                     offTintColor={colors.SolidGrey}
                     handleTextChange={(OTP) => setOTP(OTP)}
                 />
-                <TouchableOpacity 
+                <TouchableOpacity
                     style={styles.resend}
                     onPress={() => resendOTP(email)}
                 >

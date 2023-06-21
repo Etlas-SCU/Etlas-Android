@@ -18,12 +18,12 @@ export function FirstPage({ }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [hidden, setHidden] = useState(false);
-    const {showPopupMessage, popupMessageVisible} = useContext(UserContext);
+    const { showPopupMessage, popupMessageVisible } = useContext(UserContext);
 
     // check passowrd
     const checkPassword = async (password) => {
         const { state, message } = await Backend.checkPassword(password);
-        if(state === false){
+        if (state === false) {
             showPopupMessage('Error', message);
             return false;
         }
@@ -33,7 +33,7 @@ export function FirstPage({ }) {
     // check email
     const checkEmail = async (email) => {
         const { state, message } = await Backend.checkEmail(email);
-        if(state === false){
+        if (state === false) {
             showPopupMessage('Error', message);
             return false;
         }
@@ -43,10 +43,10 @@ export function FirstPage({ }) {
     // check fullname
     const checkFullName = async (fullname) => {
         const { state, message } = await Backend.checkFullName(fullname);
-        if(state === false){
+        if (state === false) {
             showPopupMessage('Error', message);
             return false;
-        }   
+        }
         return true;
     }
 
@@ -54,17 +54,17 @@ export function FirstPage({ }) {
     const checkInputs = async () => {
         // check the fullname
         const checkfullname = await checkFullName(fullname).then((response) => { return response });
-        if(checkfullname === false)
+        if (checkfullname === false)
             return false;
 
         // check the email
         const checkemail = await checkEmail(email).then((response) => { return response });
-        if(checkemail === false)
+        if (checkemail === false)
             return false;
 
         // check the password
         const checkpass = await checkPassword(password).then((response) => { return response });
-        if(checkpass === false)
+        if (checkpass === false)
             return false;
 
         // go to next page
@@ -134,7 +134,7 @@ export function FirstPage({ }) {
                 </View>
                 <TouchableOpacity
                     style={styles.nextButton}
-                    onPress={() => {checkInputs()}}
+                    onPress={() => { checkInputs() }}
                 >
                     <Text style={styles.nextText}>{translate('Register.next')}</Text>
                 </TouchableOpacity>

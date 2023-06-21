@@ -22,7 +22,9 @@
         "emailSent": "Theres is email sent to you with the OTP to verifying",
         "sendingOTP": "While sending email for you",
         "passwordMatch": "Confirm password should be the same with the password",
-        "ChangingPassword": "While validate the new password"
+        "ChangingPassword": "While validate the new password",
+        "bestScore": "While getting your best Score",
+        "notFound": "Not Found"
     },
     "emailConfirmation": {
         "title": "Email Confirmation",
