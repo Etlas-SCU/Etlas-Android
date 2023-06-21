@@ -15,7 +15,7 @@ export default function ForgotPasswordFirst({ }) {
     // get the data from input
     const [email, setEmail] = useState('');
 
-    // get popup states
+    // get popup states and loader
     const { showPopupMessage, popupMessageVisible } = useContext(UserContext);
     const { loaderVisible, showLoader, hideLoader } = useContext(UserContext);
 

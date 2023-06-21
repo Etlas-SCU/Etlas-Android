@@ -24,7 +24,8 @@
         "passwordMatch": "Confirm password should be the same with the password",
         "ChangingPassword": "While validate the new password",
         "bestScore": "While getting your best Score",
-        "notFound": "Not Found"
+        "notFound": "Not Found",
+        "getScore": "While getting your scores"
     },
     "emailConfirmation": {
         "title": "Email Confirmation",

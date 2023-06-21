@@ -338,6 +338,45 @@ class Backend {
         }
     }
 
+    static async getMonumentScore() {
+        try {
+            const url = 'users/best-score-monuments/';
+            return await this.GET(url).then(response => response);
+        } catch (error) {
+            console.log('Error Get monuments Score:', error);
+            return {
+                statusCode: 500,
+                data: error
+            }
+        }
+    }
+
+    static async getLandmarkScore() {
+        try {
+            const url = 'users/best-score-landmarks/';
+            return await this.GET(url).then(response => response);
+        } catch (error) {
+            console.log('Error Get landmarks Score:', error);
+            return {
+                statusCode: 500,
+                data: error
+            }
+        }
+    }
+
+    static async getStatueScore(){
+        try {
+            const url = 'users/best-score-statues/';
+            return await this.GET(url).then(response => response);
+        } catch (error) {
+            console.log('Error Get statues Score:', error);
+            return {
+                statusCode: 500,
+                data: error
+            }
+        }
+    }
+    
     static async login(email, password) {
         try {
             const loginUrl = 'auth/login/';

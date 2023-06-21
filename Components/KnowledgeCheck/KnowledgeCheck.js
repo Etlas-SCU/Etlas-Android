@@ -2,19 +2,22 @@ import { View, Image, Text, TouchableOpacity, ScrollView } from "react-native";
 import { styles } from './Styles'
 import { translate } from "../../Localization";
 import { UserContext } from "../Context/Context";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import MainMenu from "../MainMenu/MainMenu";
 import { isIOS } from "../../AppStyles";
 import { goPage } from "../../Backend/Navigator";
 import { useIsFocused } from "@react-navigation/native";
 import { setStatusBarStyle } from "expo-status-bar";
+import PopupMessage from "../PopupMessage/PopupMessage";
+import Loader from "../Loader/Loader";
+import Backend from "../../Backend/Backend";
 
 
 function Card({ title, img, desc, score }) {
     return (
-        <TouchableOpacity 
+        <TouchableOpacity
             style={styles.body}
-            onPress={() => { 
+            onPress={() => {
                 goPage('KnowledgeGame', 'KnowledgeCheck', { pageName: title })
             }}
         >
@@ -34,15 +37,89 @@ export default function KnowledgeCheck({ }) {
 
     // check if the currenpage is focused
     const isFocused = useIsFocused();
-    
-    if(isFocused){
+
+    if (isFocused) {
         setStatusBarStyle('light');
     }
 
+    // main menu
     const { showModal, setScreen } = useContext(UserContext);
+
+    // get popup states and loader
+    const { showPopupMessage, popupMessageVisible } = useContext(UserContext);
+    const { loaderVisible, showLoader, hideLoader } = useContext(UserContext);
+
+    // states for scores
+    const [landmarkScore, setLandmarkScore] = useState(0);
+    const [monumentScore, setMonumentScore] = useState(0);
+    const [statueScore, setStatueScore] = useState(0);
+
+    // get monument score
+    const getMonumentScore = async () => {
+        try {
+            const { statusCode, data } = await Backend.getMonumentScore();
+            if (!Backend.isSuccessfulRequest(statusCode)) {
+                hideLoader();
+                const errorMessage = await Backend.getErrorMessage(data).then(response => response);
+                showPopupMessage('Error', errorMessage);
+                return false;
+            }
+            setMonumentScore(data.best_score_monuments);
+            return true;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    // get landmark score
+    const getLandmarkScore = async () => {
+        try {
+            const { statusCode, data } = await Backend.getLandmarkScore();
+            if (!Backend.isSuccessfulRequest(statusCode)) {
+                hideLoader();
+                const errorMessage = await Backend.getErrorMessage(data).then(response => response);
+                showPopupMessage('Error', errorMessage);
+                return false;
+            }
+            setLandmarkScore(data.best_score_landmarks);
+            return true;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    // get statue score
+    const getStatueScore = async () => {
+        try {
+            const { statusCode, data } = await Backend.getStatueScore();
+            if (!Backend.isSuccessfulRequest(statusCode)) {
+                hideLoader();
+                const errorMessage = await Backend.getErrorMessage(data).then(response => response);
+                showPopupMessage('Error', errorMessage);
+                return false;
+            }
+            setStatueScore(data.best_score_statues);
+            return true;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
+    // get scores
+    useEffect(() => {
+        showLoader(translate('messages.getScore'));
+        getMonumentScore();
+        getLandmarkScore();
+        getStatueScore();
+        hideLoader();
+    }, []);
+
 
     return (
         <View style={styles.container}>
+            {loaderVisible ? <Loader /> : null}
+            {popupMessageVisible ? <PopupMessage /> : null}
             {isIOS() ? <MainMenu /> : null}
             <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
                 <View style={styles.header}>
@@ -55,19 +132,19 @@ export default function KnowledgeCheck({ }) {
                     <Card
                         title={translate('KnowledgeCheck.Statues')}
                         desc={translate('KnowledgeCheck.StatuesText')}
-                        score={translate('KnowledgeCheck.StatuesScore')}
+                        score={statueScore}
                         img={require('../../assets/KnowledgeCheck/Statue_1.png')}
                     />
                     <Card
                         title={translate('KnowledgeCheck.Monuments')}
                         desc={translate('KnowledgeCheck.MonumentsText')}
-                        score={translate('KnowledgeCheck.MonumentsScore')}
+                        score={monumentScore}
                         img={require('../../assets/KnowledgeCheck/Statue_2.png')}
                     />
                     <Card
                         title={translate('KnowledgeCheck.Landmarks')}
                         desc={translate('KnowledgeCheck.LandmarksText')}
-                        score={translate('KnowledgeCheck.LandmarksScore')}
+                        score={landmarkScore}
                         img={require('../../assets/KnowledgeCheck/Statue_3.png')}
                     />
                 </View>

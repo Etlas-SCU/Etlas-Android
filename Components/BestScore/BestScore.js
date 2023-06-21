@@ -12,7 +12,7 @@ import PopupMessage from '../PopupMessage/PopupMessage';
 export default function BestScore({ }) {
 
     // get the bestScore from Backend
-    const [bestScore, setBestScore] = useState();
+    const [bestScore, setBestScore] = useState(0);
 
     // get the loader states
     const { showLoader, hideLoader, loaderVisible } = useContext(UserContext);
@@ -32,7 +32,7 @@ export default function BestScore({ }) {
                 return false;
             }
             setBestScore(data.total_best_score);
-        } catch(error){
+        } catch (error) {
             console.log(error);
         }
     }
@@ -50,11 +50,11 @@ export default function BestScore({ }) {
                 <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
                     <View style={styles.header}>
                         <Text style={styles.title}>{translate('BestScore.title')}</Text>
-                        <TouchableOpacity 
-                            onPress={goBack} 
+                        <TouchableOpacity
+                            onPress={goBack}
                             style={styles.closeContainer}
                         >
-                            <Image source={require('../../assets/Profile/Arr.png')} style={styles.close}/>
+                            <Image source={require('../../assets/Profile/Arr.png')} style={styles.close} />
                         </TouchableOpacity>
                     </View>
                     <View style={styles.ScoreBox}>
