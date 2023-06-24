@@ -13,7 +13,7 @@ class Backend {
         this.Tour = {};
         this.favArticle = {};
         this.favMonument = {};
-        // this.HOST_URL = process.env.HOST_URL;
+        this.lastGame = null;
     }
 
     static getArticle() {
@@ -34,6 +34,14 @@ class Backend {
 
     static getFavMonument() {
         return this.favMonument;
+    }
+
+    static getLastGame() {
+        return this.lastGame;
+    }
+
+    static setLastGame(lastGame) {
+        this.lastGame = lastGame;
     }
 
     static setArticle(Article) {
@@ -113,6 +121,52 @@ class Backend {
             };
         } catch (error) {
             console.log('POST error', error);
+            return {
+                statusCode: 500,
+                data: error
+            }
+        }
+    }
+
+    static async PUT(url, body) {
+        try {
+            let status = null;
+            const token = await this.getToken();
+
+            const response = await fetch(this.HOST_URL + url, {
+                method: 'PUT',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': token ? `Bearer ${token}` : null,
+                },
+                body: JSON.stringify(body),
+            });
+
+            // status for response
+            status = response.status;
+
+            // 404 handle
+            if (response.status === 404) {
+                return {
+                    statusCode: status,
+                    data: {
+                        message: translate('messages.notFound')
+                    }
+                };
+            }
+
+            let data = null;
+            if (response.status !== 204) {
+                data = await response.json();
+            }
+
+            return {
+                statusCode: status,
+                data: data
+            };
+        } catch (error) {
+            console.log('PUT error', error);
             return {
                 statusCode: 500,
                 data: error
@@ -215,7 +269,7 @@ class Backend {
         return code >= 200 && code < 300;
     }
 
-    static isTokenExp(code){
+    static isTokenExp(code) {
         return code === 400;
     }
 
@@ -538,7 +592,6 @@ class Backend {
         }
     }
 
-
     static async passwordVerify(otp) {
         try {
             const verifyUrl = 'auth/password-reset-otp/';
@@ -600,6 +653,51 @@ class Backend {
                 auth_token: auth_token,
             }
             return await this.POST(facebookUrl, body).then(response => response);
+        } catch (error) {
+            return {
+                statusCode: 500,
+                data: error
+            }
+        }
+    }
+
+    static async updateLandmarksScore(new_score) {
+        try {
+            const facebookUrl = 'users/best-score-landmarks/';
+            const body = {
+                new_score: new_score,
+            }
+            return await this.PUT(facebookUrl, body).then(response => response);
+        } catch (error) {
+            return {
+                statusCode: 500,
+                data: error
+            }
+        }
+    }
+
+    static async updateMonumentsScore(new_score) {
+        try {
+            const facebookUrl = 'users/best-score-monuments/';
+            const body = {
+                new_score: new_score,
+            }
+            return await this.PUT(facebookUrl, body).then(response => response);
+        } catch (error) {
+            return {
+                statusCode: 500,
+                data: error
+            }
+        }
+    }
+
+    static async updateStatuesScore(new_score) {
+        try {
+            const facebookUrl = 'users/best-score-statues/';
+            const body = {
+                new_score: new_score,
+            }
+            return await this.PUT(facebookUrl, body).then(response => response);
         } catch (error) {
             return {
                 statusCode: 500,

@@ -1,8 +1,8 @@
-import { View, Image, Text, TouchableOpacity, ScrollView } from "react-native";
+import { View, Image, Text, TouchableOpacity, ScrollView, RefreshControl } from "react-native";
 import { styles } from './Styles'
 import { translate } from "../../Localization";
 import { UserContext } from "../Context/Context";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useCallback } from "react";
 import MainMenu from "../MainMenu/MainMenu";
 import { isIOS } from "../../AppStyles";
 import { goPage } from "../../Backend/Navigator";
@@ -18,7 +18,7 @@ function Card({ title, img, desc, score }) {
         <TouchableOpacity
             style={styles.body}
             onPress={() => {
-                goPage('KnowledgeGame', 'KnowledgeCheck', { pageName: title })
+                goPage('KnowledgeGame', 'KnowledgeCheck', { lastGame: title })
             }}
         >
             <View style={styles.bodyContent}>
@@ -54,6 +54,16 @@ export default function KnowledgeCheck({ }) {
     const [monumentScore, setMonumentScore] = useState('0/0');
     const [statueScore, setStatueScore] = useState('0/0');
 
+    // refresh control
+    const [refreshing, setRefreshing] = useState(false);
+    
+    // on refresh
+    const onRefresh = useCallback(async () => {
+        setRefreshing(true);
+        await loadScores();
+        setRefreshing(false);
+    }, []);
+    
     // get monument score
     const getMonumentScore = async () => {
         try {
@@ -106,13 +116,18 @@ export default function KnowledgeCheck({ }) {
     }
 
 
+    // loading Scores
+    const loadScores = async () => {
+        showLoader(translate('messages.getScore'));
+        await getMonumentScore();
+        await getLandmarkScore();
+        await getStatueScore();
+        hideLoader();
+    };
+
     // get scores
     useEffect(() => {
-        showLoader(translate('messages.getScore'));
-        getMonumentScore();
-        getLandmarkScore();
-        getStatueScore();
-        hideLoader();
+        loadScores();
     }, []);
 
 
@@ -121,7 +136,13 @@ export default function KnowledgeCheck({ }) {
             {loaderVisible ? <Loader /> : null}
             {popupMessageVisible ? <PopupMessage /> : null}
             {isIOS() ? <MainMenu /> : null}
-            <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
+            <ScrollView 
+                contentContainerStyle={styles.contentContainer} 
+                showsVerticalScrollIndicator={false}
+                refreshControl={
+                    <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+                }
+            >
                 <View style={styles.header}>
                     <TouchableOpacity style={styles.aboutus} onPress={() => { showModal(), setScreen('KnowledgeCheck') }}>
                         <Image source={require('../../assets/KnowledgeCheck/tabler_exclamation-circle.png')} />
