@@ -61,6 +61,9 @@ export const styles = StyleSheet.create({
         paddingLeft: responsiveWidth(24),
         fontSize: responsiveFontSize(20),
         fontFamily: fontFamily.MontserratSemiBold,
+        textAlign: 'left',
+        textAlignVertical: 'center',
+        color: colors.White
     },
     input_message: {
         width: responsiveWidth(380),

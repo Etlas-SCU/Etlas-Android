@@ -107,7 +107,6 @@ export default function KnowledgeGame({ }) {
         }
     }
 
-
     // update the score after the game finished
     useEffect(() => {
         // update the score
