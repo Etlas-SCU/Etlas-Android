@@ -16,6 +16,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import PopupMessage from "../PopupMessage/PopupMessage";
 import Loader from "../Loader/Loader";
 import { UserDataContext } from "../Context/DataContext";
+import { manipulateAsync } from 'expo-image-manipulator';
 
 
 export default function Settings({ }) {
@@ -38,11 +39,43 @@ export default function Settings({ }) {
     const { loaderVisible, showLoader, hideLoader } = useContext(UserContext);
 
     // state for the gallery permission and the stored image
-    const [image, setImage] = useState(null);
     const [hasGelleryPermission, setHasGalleryPermission] = useState(null);
 
     // get user from async storage
     const { userData, updateUserData, removeUserData } = useContext(UserDataContext);
+
+    // Function to compress the selected image
+    const compressImage = async (imageUri) => {
+        const compressedImage = await manipulateAsync(
+            imageUri,
+            [{ resize: { width: 200, height: 200 } }],
+            { compress: 0.8, format: 'jpeg' }
+        );
+        return compressedImage.uri;
+    };
+
+
+    // update profile picture
+    const updateProfilePicture = async (image_uri) => {
+        // send request to the backend
+        const { statusCode, data } = await Backend.changeUserImage(image_uri).then(response => response).then(data => data);
+
+        // hide loader
+        hideLoader();
+
+        // if the request was not successful
+        if (!Backend.isSuccessfulRequest(statusCode)) {
+            const errorMessage = await Backend.getErrorMessage(data).then(response => response);
+            showPopupMessage('Error', errorMessage);
+            return;
+        }
+
+        // update user data
+        updateUserData({ image_url: image_uri });
+
+        // show success message
+        showPopupMessage('Success', translate('messages.profilePictureUpdated'));
+    }
 
     // pick image from gallery
     const pickImage = async () => {
@@ -57,20 +90,29 @@ export default function Settings({ }) {
         // if the user doesn't have permission
         if (hasGelleryPermission === false) {
             showPopupMessage('Error', translate('messages.storageError'));
+            return;
         }
 
         // No permissions request is necessary for launching the image library
         const { assets, canceled } = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.Images,
             allowsEditing: true,
-            aspect: [4, 3],
+            aspect: [4, 4],
             quality: 1,
+            base64: true,
+            allowsMultipleSelection: false,
         });
 
         // if the user didn't cancel the process
         if (!canceled) {
-            setImage(assets[0].uri);
-            Backend.changeUserImage(assets[0].uri);
+            // show loader
+            showLoader(translate('messages.upload_pic'));
+
+            // compress the image
+            const compressedImage = await compressImage(assets[0].uri);
+
+            // update the profile picture
+            updateProfilePicture(compressedImage);
         }
 
     };

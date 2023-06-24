@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { translate } from '../Localization';
+import axios from 'axios';
 
 
 class Backend {
@@ -114,6 +115,46 @@ class Backend {
             if (response.status !== 204) {
                 data = await response.json();
             }
+
+            return {
+                statusCode: status,
+                data: data
+            };
+        } catch (error) {
+            console.log('POST error', error);
+            return {
+                statusCode: 500,
+                data: error
+            }
+        }
+    }
+
+    static async POST_PIC(url, body) {
+        try {
+            let status = null;
+            const token = await this.getToken();
+
+            const response = await axios.post(this.HOST_URL + url, body, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': token ? `Bearer ${token}` : null,
+                },
+            });
+
+            // status for response
+            status = response.status;
+
+            // 404 handle
+            if (response.status === 404) {
+                return {
+                    statusCode: status,
+                    data: {
+                        message: translate('messages.notFound')
+                    }
+                };
+            }
+
+            let data = null;
 
             return {
                 statusCode: status,
@@ -347,25 +388,25 @@ class Backend {
     }
 
     static changeUserImage(Image) {
-        // To Do
-    }
+        try {
+            const url = 'users/profile-image/';
+            const formData = new FormData();
 
-    static async getErrorMessage(response) {
-        // if response is null
-        if (!response)
-            return translate('messages.somethingWrong');
+            // Append the image to the form data
+            const imageFileName = Image.split('/').pop();
+            formData.append('image', {
+                uri: Image,
+                name: imageFileName,
+                type: 'image/jpeg', // Replace with the appropriate MIME type of your image
+            });
 
-        if (response?.messages) {
-            return response.messages[0].message;
-        }
-        else if (response?.message) {
-            return response.message;
-        }
-        else if (response?.detail) {
-            return response.detail;
-        } else {
-            for (const [_, value] of Object.entries(response))
-                return value;
+            return this.POST_PIC(url, formData).then(response => response);
+        } catch (error) {
+            console.log('Error Change Image:', error);
+            return {
+                statusCode: 500,
+                data: error
+            }
         }
     }
 
@@ -703,6 +744,25 @@ class Backend {
                 statusCode: 500,
                 data: error
             }
+        }
+    }
+
+    static async getErrorMessage(response) {
+        // if response is null
+        if (!response)
+            return translate('messages.somethingWrong');
+
+        if (response?.messages) {
+            return response.messages[0].message;
+        }
+        else if (response?.message) {
+            return response.message;
+        }
+        else if (response?.detail) {
+            return response.detail;
+        } else {
+            for (const [_, value] of Object.entries(response))
+                return value;
         }
     }
 

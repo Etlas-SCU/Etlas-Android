@@ -16,7 +16,7 @@ import ForgotPasswordThird from './Components/ForgetPassword/ForgetPasswordThird
 import BestScore from './Components/BestScore/BestScore';
 import EditProfile from './Components/EditProfile/EditProfile';
 import { StatusBar } from 'expo-status-bar';
-import { setNavigationRef } from './Backend/Navigator';
+import { goPage, setNavigationRef } from './Backend/Navigator';
 import { useEffect, useState } from 'react';
 import Backend from './Backend/Backend';
 import { UserProvider } from './Components/Context/Context';
@@ -119,7 +119,11 @@ export default function App() {
                 setRefreshToken(data.refresh);
                 console.log(data.refresh);
             } else {
-                console.log(data);
+                await AsyncStorage.removeItem('accessToken');
+                await AsyncStorage.removeItem('refreshToken');
+                setAccessToken(null);
+                setRefreshToken(null);
+                goPage('login');
             }
         } catch (e) {
             console.log('Error refereshing:', e);

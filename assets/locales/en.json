@@ -33,7 +33,9 @@
         "alreadyExist": "This email is already registered",
         "facebookSign": "Logging in with facebook",
         "googleSign": "Logging in with google",
-        "somethingWrong": "Something went wrong, please try again later."
+        "somethingWrong": "Something went wrong, please try again later.",
+        "upload_pic": "While uploading your picture",
+        "profilePictureUpdated": "Your Image has been changed successfully"
     },
     "emailConfirmation": {
         "title": "Email Confirmation",
