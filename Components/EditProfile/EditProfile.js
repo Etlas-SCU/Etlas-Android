@@ -2,12 +2,13 @@ import { styles } from "./Styles";
 import { View, Text, Image, TouchableOpacity, ScrollView, ImageBackground, TextInput } from "react-native";
 import { translate } from "../../Localization";
 import { colors } from "../../AppStyles";
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import Backend from "../../Backend/Backend";
 import { goBack } from "../../Backend/Navigator";
 import { UserContext } from "../Context/Context";
 import Loader from "../Loader/Loader";
 import PopupMessage from "../PopupMessage/PopupMessage";
+import { UserDataContext } from "../Context/DataContext";
 
 
 export default function EditProfile({ }) {
@@ -18,45 +19,24 @@ export default function EditProfile({ }) {
     // popup message
     const { showPopupMessage, popupMessageVisible } = useContext(UserContext);
 
+    // update userData
+    const { updateUserData, userData } = useContext(UserDataContext);
+
     // for name input
-    const [userName, setUserName] = useState();
+    const [userName, setUserName] = useState(userData.full_name);
     const [nameEdit, setNameEdit] = useState(false);
 
     // for email input
-    const [userEmail, setUserEmail] = useState();
+    const [userEmail, setUserEmail] = useState(userData.email);
     const [emailEdit, setEmailEdit] = useState(false);
 
     // for phone number input
-    const [userPhoneNumber, setUserPhoneNumber] = useState();
+    const [userPhoneNumber, setUserPhoneNumber] = useState(userData.phone_number);
     const [phoneNumberEdit, setPhoneNumberEdit] = useState(false);
 
     // for address input
-    const [userAddress, setUserAddress] = useState();
+    const [userAddress, setUserAddress] = useState(userData.address);
     const [addressEdit, setAddressEdit] = useState(false);
-
-    // get the user data from Backend
-    const getUserData = async () => {
-        try {
-            showLoader(translate('messages.getuserData'));
-            const { statusCode, data } = await Backend.getUserData();
-            hideLoader();
-
-            if (!Backend.isSuccessfulRequest(statusCode)) {
-                const errorMessage = await Backend.getErrorMessage(data).then(response => response);
-                showPopupMessage('Error', errorMessage);
-                return false;
-            }
-            const { full_name, email, phone_number, address } = data;
-            setUserName(full_name);
-            setUserEmail(email);
-            setUserPhoneNumber(phone_number);
-            setUserAddress(address);
-            console.log(data);
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
 
     const updateUser = async () => {
         try {
@@ -69,16 +49,13 @@ export default function EditProfile({ }) {
                 showPopupMessage('Error', errorMessage);
                 return false;
             }
+
             showPopupMessage('Success', translate('messages.updateUserSuccess'));
+            goBack();
         } catch (error) {
             console.log(error);
         }
     }
-
-    // get the user data from Backend
-    useEffect(() => {
-        getUserData();
-    }, []);
 
     // for editable icons
     const edit = require('../../assets/EditProfile/edit.png');

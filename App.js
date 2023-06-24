@@ -9,7 +9,6 @@ import Login from './Components/Login/Login'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { init } from './Localization';
 import { Easing, AppRegistry } from 'react-native';
-import { UserProvider } from './Components/Context/Context';
 import MenuBar from './Components/MenuBar/MenuBar';
 import ForgotPasswordFirst from './Components/ForgetPassword/ForgetPasswordFirst';
 import ForgotPasswordSecond from './Components/ForgetPassword/ForgetPasswordSecond';
@@ -20,6 +19,8 @@ import { StatusBar } from 'expo-status-bar';
 import { setNavigationRef } from './Backend/Navigator';
 import { useEffect, useState } from 'react';
 import Backend from './Backend/Backend';
+import { UserProvider } from './Components/Context/Context';
+import { UserDataProvider } from './Components/Context/DataContext';
 
 
 // import the screen
@@ -148,42 +149,44 @@ export default function App() {
     // if the font loaded, return the components
     return (
         <UserProvider>
-            <StatusBar
-                backgroundColor={'transparent'}
-                barStyle='light-content'
-                style='light'
-                translucent={true}
-            />
-            <NavigationContainer
-                ref={navigationRef => {
-                    setNavigationRef(navigationRef);
-                }}
-            >
-                <Stack.Navigator
-                    screenOptions={{
-                        header: () => null,
-                        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-                        transitionSpec: {
-                            open: timingConfig,
-                            close: timingConfig,
-                        },
-                        headerStatusBarHeight: 0,
+            <UserDataProvider>
+                <StatusBar
+                    backgroundColor={'transparent'}
+                    barStyle='light-content'
+                    style='light'
+                    translucent={true}
+                />
+                <NavigationContainer
+                    ref={navigationRef => {
+                        setNavigationRef(navigationRef);
                     }}
-                    initialRouteName={accessToken && refreshToken ? "menuBar" : "onBoarding"}
                 >
-                    <Stack.Screen name="onBoarding" component={OnBoarding} />
-                    <Stack.Screen name="firstPage" component={FirstPage} />
-                    <Stack.Screen name="secondPage" component={SecondPage} />
-                    <Stack.Screen name="login" component={Login} />
-                    <Stack.Screen name="forgotPasswordFirst" component={ForgotPasswordFirst} />
-                    <Stack.Screen name="forgotPasswordSecond" component={ForgotPasswordSecond} />
-                    <Stack.Screen name="forgotPasswordThird" component={ForgotPasswordThird} />
-                    <Stack.Screen name="menuBar" component={MenuBar} />
-                    <Stack.Screen name="bestScore" component={BestScore} />
-                    <Stack.Screen name="editProfile" component={EditProfile} />
-                    <Stack.Screen name="emailVerification" component={EmailVerification} />
-                </Stack.Navigator>
-            </NavigationContainer>
+                    <Stack.Navigator
+                        screenOptions={{
+                            header: () => null,
+                            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+                            transitionSpec: {
+                                open: timingConfig,
+                                close: timingConfig,
+                            },
+                            headerStatusBarHeight: 0,
+                        }}
+                        initialRouteName={accessToken && refreshToken ? "menuBar" : "onBoarding"}
+                    >
+                        <Stack.Screen name="onBoarding" component={OnBoarding} />
+                        <Stack.Screen name="firstPage" component={FirstPage} />
+                        <Stack.Screen name="secondPage" component={SecondPage} />
+                        <Stack.Screen name="login" component={Login} />
+                        <Stack.Screen name="forgotPasswordFirst" component={ForgotPasswordFirst} />
+                        <Stack.Screen name="forgotPasswordSecond" component={ForgotPasswordSecond} />
+                        <Stack.Screen name="forgotPasswordThird" component={ForgotPasswordThird} />
+                        <Stack.Screen name="menuBar" component={MenuBar} />
+                        <Stack.Screen name="bestScore" component={BestScore} />
+                        <Stack.Screen name="editProfile" component={EditProfile} />
+                        <Stack.Screen name="emailVerification" component={EmailVerification} />
+                    </Stack.Navigator>
+                </NavigationContainer>
+            </UserDataProvider>
         </UserProvider>
     );
 }

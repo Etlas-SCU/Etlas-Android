@@ -7,6 +7,7 @@ import { goBack, goPage } from '../../../Backend/Navigator';
 import { setStatusBarStyle } from 'expo-status-bar';
 import PopupMessage from '../../PopupMessage/PopupMessage';
 import { UserContext } from '../../Context/Context';
+import { UserDataContext } from '../../Context/DataContext';
 
 
 export default function KnowledgeGame({ }) {
@@ -32,6 +33,9 @@ export default function KnowledgeGame({ }) {
 
     // get popup states
     const { showPopupMessage, popupMessageVisible } = useContext(UserContext);
+
+    // get update function
+    const { updateScore } = useContext(UserDataContext);
 
     // to re initial all states if the component called again
     useEffect(() => {
@@ -79,6 +83,7 @@ export default function KnowledgeGame({ }) {
         if (!Backend.isSuccessfulRequest(statusCode)) {
             const errorMessage = await Backend.getErrorMessage(data).then(response => response);
             showPopupMessage('Error', errorMessage);
+            updateScore(score, 'Monuments');
         }
     }
 
@@ -88,6 +93,7 @@ export default function KnowledgeGame({ }) {
         if (!Backend.isSuccessfulRequest(statusCode)) {
             const errorMessage = await Backend.getErrorMessage(data).then(response => response);
             showPopupMessage('Error', errorMessage);
+            updateScore(score, 'Landmarks');
         }
     }
 
@@ -97,6 +103,7 @@ export default function KnowledgeGame({ }) {
         if (!Backend.isSuccessfulRequest(statusCode)) {
             const errorMessage = await Backend.getErrorMessage(data).then(response => response);
             showPopupMessage('Error', errorMessage);
+            updateScore(score, 'Statues');
         }
     }
 

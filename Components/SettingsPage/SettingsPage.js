@@ -7,7 +7,7 @@ import { responsiveHeight } from "../../AppStyles";
 import MainMenu from "../MainMenu/MainMenu";
 import { isIOS } from "../../AppStyles";
 import Backend from "../../Backend/Backend";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import * as ImagePicker from 'expo-image-picker';
 import { goPage, goPageResetStack } from "../../Backend/Navigator";
 import { useIsFocused } from "@react-navigation/native";
@@ -15,6 +15,7 @@ import { setStatusBarStyle } from "expo-status-bar";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import PopupMessage from "../PopupMessage/PopupMessage";
 import Loader from "../Loader/Loader";
+import { UserDataContext } from "../Context/DataContext";
 
 
 export default function Settings({ }) {
@@ -39,6 +40,9 @@ export default function Settings({ }) {
     // state for the gallery permission and the stored image
     const [image, setImage] = useState(null);
     const [hasGelleryPermission, setHasGalleryPermission] = useState(null);
+
+    // get user from async storage
+    const { userData, updateUserData, removeUserData } = useContext(UserDataContext);
 
     // pick image from gallery
     const pickImage = async () => {
@@ -72,25 +76,7 @@ export default function Settings({ }) {
     };
 
     // state for information
-    const [name, setName] = useState('');
-    const [profileImage, setProfileImage] = useState(defaultAvatar);
     const [pressed, setPressed] = useState(false);
-
-    // get information
-    const getUserData = async () => {
-        showLoader(translate('messages.getuserData'));
-        const { statusCode, data } = await Backend.getUserData().then(response => response);
-        hideLoader();
-
-        if (!Backend.isSuccessfulRequest(statusCode)) {
-            const errorMessage = await Backend.getErrorMessage(data).then(response => response);
-            showPopupMessage('Error', errorMessage);
-            return;
-        }
-        setName(data.full_name);
-        if (data.image_url)
-            setProfileImage(data.image_url);
-    }
 
     // handle logout
     const handle_logout = async () => {
@@ -110,28 +96,27 @@ export default function Settings({ }) {
         try {
             await AsyncStorage.removeItem('accessToken');
             await AsyncStorage.removeItem('refreshToken');
+            await removeUserData();
         } catch (e) {
             console.log(e);
         }
     }
 
-    // get user data when the page is focused
-    useEffect(() => {
-        getUserData();
-    }, []);
+    const name = userData.full_name;
+    const profileImage = userData.image_url ? { uri: userData.image_url } : defaultAvatar;
 
     return (
         <View style={styles.container}>
             {isIOS() ? <MainMenu /> : null}
-            {popupMessageVisible ? <PopupMessage/> : null}
+            {popupMessageVisible ? <PopupMessage /> : null}
             {loaderVisible ? <Loader /> : null}
             <View style={styles.header}>
                 <TouchableOpacity onPress={() => { showModal(), setScreen('Settings') }} >
                     <Image source={require('../../assets/KnowledgeCheck/tabler_exclamation-circle.png')} style={styles.circle} />
                 </TouchableOpacity>
                 <Text style={styles.title}>{translate('Settings.title')}</Text>
-                <TouchableOpacity 
-                    onPress={() => { handle_logout() }} 
+                <TouchableOpacity
+                    onPress={() => { handle_logout() }}
                     disabled={pressed}
                 >
                     <Image source={require('../../assets/Settings/logout.png')} />
