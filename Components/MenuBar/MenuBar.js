@@ -21,6 +21,8 @@ import MonumentDetails from "../MonumentDetails/MonumentDetails";
 import FavMonumentsPage from "../FavouritePage/FavMonumentsPage";
 import FavArticlesPage from "../FavouritePage/FavArticlesPage";
 import Favourites from "../Favourites/Favourites";
+import BestScore from '../BestScore/BestScore';
+import EditProfile from '../EditProfile/EditProfile';
 import { useState } from "react";
 
 
@@ -52,7 +54,7 @@ export default function MenuBar({ }) {
 
 
     return (
-        <Tab.Navigator 
+        <Tab.Navigator
             style={styles.container}
             initialRouteName={'Home'}
             backBehavior={'history'}
@@ -64,10 +66,10 @@ export default function MenuBar({ }) {
                 tabBarIcon: ({ focused }) => {
                     // for menu bar border
                     const isRightBorder = (route.name == 'Home' || route.name == 'KnowledgeCheck');
-                    
+
                     // for scan icon
                     const isScan = (route.name == 'Scan');
-                    
+
                     return (
                         <View style={styles.barContainer}>
                             <View style={isScan ? styles.Scan : null}>
@@ -82,11 +84,11 @@ export default function MenuBar({ }) {
             })}
         >
             <Tab.Screen name="Home" component={HomePage} />
-            <Tab.Screen name="AR" component={FavMonumentsPage} initialParams={{ prevPage: 'Home' }} 
+            <Tab.Screen name="AR" component={FavMonumentsPage} initialParams={{ prevPage: 'Home' }}
                 listeners={{
                     tabPress: e => {
                         // Prevent default action
-                        e.preventDefault(); 
+                        e.preventDefault();
                     }
                 }}
             />
@@ -101,14 +103,16 @@ export default function MenuBar({ }) {
             <Tab.Screen name="mainMenu" component={MainMenu} options={{ tabBarButton: () => null, tabBarVisible: false }} />
             <Tab.Screen name="ContactUS" component={ContactUS} options={{ tabBarButton: () => null, tabBarVisible: false }} />
             <Tab.Screen name="TourDetails" component={TourDetails} options={{ tabBarButton: () => null, tabBarVisible: false }} />
-            <Tab.Screen name="LanguageSelection" component={LanguageSelection} options={{ tabBarButton: () => null, tabBarVisible: false }} />
             <Tab.Screen name="TermsConditions" component={TermsConditions} options={{ tabBarButton: () => null, tabBarVisible: false }} />
             <Tab.Screen name="ArticleDetails" component={ArticleDetails} options={{ tabBarButton: () => null, tabBarVisible: false }} />
             <Tab.Screen name="KnowledgeGame" component={KnowledgeGame} options={{ tabBarButton: () => null, tabBarVisible: false }} />
-            <Tab.Screen name="MonumentDetails" component={MonumentDetails} options={{ tabBarButton: () => null, tabBarVisible: false }}/>
-            <Tab.Screen name="favMonumentsPage" component={FavMonumentsPage} options={{ tabBarButton: () => null, tabBarVisible: false }}/>
-            <Tab.Screen name="favArticlesPage" component={FavArticlesPage} options={{ tabBarButton: () => null, tabBarVisible: false }}/>
-            <Tab.Screen name="favourites" component={Favourites} options={{ tabBarButton: () => null, tabBarVisible: false }}/>
+            <Tab.Screen name="MonumentDetails" component={MonumentDetails} options={{ tabBarButton: () => null, tabBarVisible: false }} />
+            <Tab.Screen name="LanguageSelection" component={LanguageSelection} options={{ tabBarButton: () => null, tabBarVisible: false }} />
+            <Tab.Screen name="favMonumentsPage" component={FavMonumentsPage} options={{ tabBarButton: () => null, tabBarVisible: false, tabBarStyle: { display: 'none' } }} />
+            <Tab.Screen name="favArticlesPage" component={FavArticlesPage} options={{ tabBarButton: () => null, tabBarVisible: false, tabBarStyle: { display: 'none' } }} />
+            <Tab.Screen name="favourites" component={Favourites} options={{ tabBarButton: () => null, tabBarVisible: false, tabBarStyle: { display: 'none' } }} />
+            <Tab.Screen name="bestScore" component={BestScore} options={{ tabBarButton: () => null, tabBarVisible: false, tabBarStyle: { display: 'none' } }} />
+            <Tab.Screen name="editProfile" component={EditProfile} options={{ tabBarButton: () => null, tabBarVisible: false, tabBarStyle: { display: 'none' } }} />
         </Tab.Navigator>
     )
 }
