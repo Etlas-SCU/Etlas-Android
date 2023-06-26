@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect, memo } from "react";
-import { View, Text, Image, TextInput, TouchableOpacity, ScrollView, FlatList } from "react-native";
+import { View, Text, Image, TextInput, TouchableOpacity, ScrollView, FlatList, RefreshControl } from "react-native";
 import { styles } from "./Styles";
 import { translate } from "../../Localization";
 import { colors } from "../../AppStyles";
@@ -50,6 +50,8 @@ const Section = memo(({ title, List, pageName, isArticle }) => {
 });
 
 export default function HomePage({ }) {
+    // Refreshing state
+    const [refreshing, setRefreshing] = useState(false);
 
     // check if the currenpage is focused
     const isFocused = useIsFocused();
@@ -118,6 +120,14 @@ export default function HomePage({ }) {
         getStatuesScore();
     }
 
+    // refresh the page
+    const onRefresh = () => {
+        setRefreshing(true);
+        getUserData();
+        getScore();
+        setRefreshing(false);
+    }
+
     useEffect(() => {
         getUserData();
         getScore();
@@ -135,7 +145,11 @@ export default function HomePage({ }) {
     return (
         <View style={styles.container}>
             {modalVisible ? <MainMenu /> : null}
-            <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
+            <ScrollView
+                contentContainerStyle={styles.contentContainer}
+                showsVerticalScrollIndicator={false}
+                refreshControl={<RefreshControl colors={[styles.refreshColor]} refreshing={refreshing} onRefresh={onRefresh}/>}
+            >
                 <View style={styles.header}>
                     <TouchableOpacity style={styles.aboutus} onPress={() => { showModal(), setScreen('Home') }}>
                         <Image source={require('../../assets/KnowledgeCheck/tabler_exclamation-circle.png')} />

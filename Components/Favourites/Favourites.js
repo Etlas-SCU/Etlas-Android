@@ -1,10 +1,12 @@
-import { View, Text, TouchableOpacity, Image, ScrollView, FlatList } from "react-native";
+import { View, Text, TouchableOpacity, Image, FlatList } from "react-native";
 import { styles } from "./Styles";
 import FavArticleCard from "./FavArticleCard";
 import FavMonumentCard from "./FavMonumentCard";
 import Backend from "../../Backend/Backend";
 import { translate } from "../../Localization";
 import { goBack, goPage } from "../../Backend/Navigator";
+import { LinearGradient } from 'expo-linear-gradient';
+import { colors } from "../../AppStyles";
 
 
 function Container({ List, ConainerName, pageNav, isArticle }) {
@@ -19,28 +21,35 @@ function Container({ List, ConainerName, pageNav, isArticle }) {
     }
 
     return (
-        <View style={styles.container}>
-            <View style={styles.containerTitle}>
-                <Text style={styles.containerHeaderTitle}>{ConainerName}</Text>
-                <TouchableOpacity
-                    onPress={() => { goPage(pageNav, 'favourites') }}
-                    style={styles.see_all}
-                >
-                    <Text style={styles.see_all_text}>{translate('Favourites.see_all')}</Text>
-                </TouchableOpacity>
-            </View>
-            <View style={ConainerName !== 'Articles' ? styles.MonumentsScrollView : styles.ArticlesScrollView}>
-                <FlatList
-                    data={List}
-                    showsHorizontalScrollIndicator={false}
-                    renderItem={renderItem}
-                    keyExtractor={(_, index) => index.toString()}
-                    initialNumToRender={5}
-                    contentContainerStyle={styles.contentContainer}
-                    nestedScrollEnabled={true}
-                    showsVerticalScrollIndicator={false}
-                />
-            </View>
+        <View style={[styles.containerScroll, styles.shadowProp]}>
+            <LinearGradient
+                style={styles.gradient}
+                colors={styles.gradientColors}
+                start={styles.startOff}
+                end={styles.endOff}
+            >
+                <View style={styles.containerTitle}>
+                    <Text style={styles.containerHeaderTitle}>{ConainerName}</Text>
+                    <TouchableOpacity
+                        onPress={() => { goPage(pageNav, 'favourites') }}
+                        style={styles.see_all}
+                    >
+                        <Text style={styles.see_all_text}>{translate('Favourites.see_all')}</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={ConainerName !== 'Articles' ? styles.MonumentsScrollView : styles.ArticlesScrollView}>
+                    <FlatList
+                        data={List}
+                        showsHorizontalScrollIndicator={false}
+                        renderItem={renderItem}
+                        keyExtractor={(_, index) => index.toString()}
+                        initialNumToRender={5}
+                        contentContainerStyle={styles.contentContainer}
+                        nestedScrollEnabled={true}
+                        showsVerticalScrollIndicator={false}
+                    />
+                </View>
+            </LinearGradient>
         </View>
     )
 }

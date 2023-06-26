@@ -24,29 +24,29 @@ export function setNavigationRef(ref) {
 
 
 // set variables
-function setBackendVariables(params){
+function setBackendVariables(params) {
     // set the article
-    if(params?.Article)
+    if (params?.Article)
         Backend.setArticle(params.Article);
 
     // set the tour
-    if(params?.Tour)
+    if (params?.Tour)
         Backend.setTour(params.Tour);
 
     // set the monument
-    if(params?.Monument)
+    if (params?.Monument)
         Backend.setMonument(params.Monument);
 
     // set the favourite monument
-    if(params?.favArticle)
+    if (params?.favArticle)
         Backend.setFavArticle(params.favArticle);
 
     // set the favourite monument
-    if(params?.favMonument)
+    if (params?.favMonument)
         Backend.setFavMonument(params.favMonument);
 
     // set the last game
-    if(params?.lastGame){
+    if (params?.lastGame) {
         Backend.setLastGame(params.lastGame);
     }
 }
@@ -58,10 +58,10 @@ export function goPage(nextPage, prevPage, params) {
 
     // navigate to the next page
     navigationRef?.dispatch(
-      CommonActions.navigate(nextPage, {
-        prevPage: prevPage,
-        ...params,
-      })
+        CommonActions.navigate(nextPage, {
+            prevPage: prevPage,
+            ...params,
+        })
     );
 
     // set status bar color
@@ -72,13 +72,17 @@ export function goPage(nextPage, prevPage, params) {
 }
 
 // Go back to the previous page
-export function goBack(){
-    navigationRef?.dispatch(CommonActions.goBack(null));
-    const currentPage = getCurrentRouteName();
-    if (getDarkPages().includes(currentPage))
-        setStatusBarStyle('dark');
-    else
-        setStatusBarStyle('light');
+export function goBack() {
+    try {
+        navigationRef?.dispatch(CommonActions.goBack(null));
+        const currentPage = getCurrentRouteName();
+        if (getDarkPages().includes(currentPage))
+            setStatusBarStyle('dark');
+        else
+            setStatusBarStyle('light');
+    } catch (error) {
+        console.log('GoBack error:', error);
+    }
 }
 
 // Get the params of the current page

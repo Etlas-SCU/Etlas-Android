@@ -195,7 +195,8 @@
         "ConfirmPassword": "Confirm Password",
         "finish": "Finish",
         "description": "Enter your old password and make new password",
-        "save": "Save"
+        "save": "Save",
+        "changePassword": "Change Password"
     },
     "TermsConditions": {
         "title": "Terms and conditions",

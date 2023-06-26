@@ -105,7 +105,7 @@ export default function EditPassword({ }) {
             {loaderVisible ? <Loader /> : null}
             {popupMessageVisible ? <PopupMessage /> : null}
             <View style={styles.header_container}>
-                <Text style={styles.header}>{translate('forgotPassword.title')}</Text>
+                <Text style={styles.header}>{translate('forgotPassword.changePassword')}</Text>
                 <TouchableOpacity style={styles.backContainer} onPress={goBack}>
                     <Image style={styles.back} source={require('../../assets/register/left-arrow.png')} />
                 </TouchableOpacity>
