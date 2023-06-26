@@ -65,23 +65,7 @@ class Backend {
         this.favMonument = favMonument;
     }
 
-    static async getToken() {
-        return await AsyncStorage.getItem('accessToken').then((accessToken) => {
-            if (accessToken !== null)
-                return accessToken;
-            else
-                return null;
-        });
-    }
-
-    static async getRefreshToken() {
-        return await AsyncStorage.getItem('refreshToken').then((refreshToken) => {
-            if (refreshToken !== null)
-                return refreshToken;
-            else
-                return null;
-        });
-    }
+    // requests
 
     static async POST(url, body) {
         try {
@@ -237,12 +221,41 @@ class Backend {
         }
     }
 
-    static isSuccessfulRequest(code) {
-        return code >= 200 && code < 300;
+    // tokens
+
+    static async getToken() {
+        return await AsyncStorage.getItem('accessToken').then((accessToken) => {
+            if (accessToken !== null)
+                return accessToken;
+            else
+                return null;
+        });
     }
 
-    static isTokenExp(code) {
-        return code === 400;
+    static async getRefreshToken() {
+        return await AsyncStorage.getItem('refreshToken').then((refreshToken) => {
+            if (refreshToken !== null)
+                return refreshToken;
+            else
+                return null;
+        });
+    }
+
+    static async refresh_the_token() {
+        const refreshToken = await this.getRefreshToken().then(response => { return response });
+        try {
+            const regreshUrl = 'auth/token/refresh/';
+            const body = {
+                refresh: refreshToken
+            };
+            return await this.POST(regreshUrl, body).then(response => response);
+        } catch (error) {
+            console.log('Error refreshing token:', error);
+            return {
+                statusCode: 500,
+                data: error
+            }
+        }
     }
 
     static getTours() {
@@ -257,7 +270,7 @@ class Backend {
             Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`,
         };
         let tours = [];
-        for(let i = 0; i < 10; i++){
+        for (let i = 0; i < 10; i++) {
             let curr_tour = Tour;
             curr_tour.id = i;
             tours.push(curr_tour);
@@ -275,7 +288,7 @@ class Backend {
             fullDescription: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`
         };
         var articles = Array(10).fill(Article);
-        for(let i = 0; i < 10; i++){
+        for (let i = 0; i < 10; i++) {
             articles[i].id = i;
         }
         return articles;
@@ -296,10 +309,10 @@ class Backend {
             ]
         };
         var questions = Array(10).fill(quesion);
-        for(let i = 0; i < 10; i++){    
-            questions[i].id = i;    
+        for (let i = 0; i < 10; i++) {
+            questions[i].id = i;
         }
-        return questions; 
+        return questions;
     }
 
     static getFavArticles() {
@@ -311,7 +324,7 @@ class Backend {
             fullDescription: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`
         };
         var articles = Array(10).fill(Article);
-        for(let i = 0; i < 10; i++){
+        for (let i = 0; i < 10; i++) {
             articles[i].id = i;
         }
         return articles;
@@ -327,7 +340,7 @@ class Backend {
             fullDescription: `Anubis Statue is an ancient statue that where built in the old egypt and worshiped by the people.\n Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially\n unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Anubis Statue is an ancient statue that where built in the old egypt and worshiped by the people.\n Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially\nunchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`
         };
         var monuments = Array(10).fill(Monument);
-        for(let i = 0; i < 10; i++){
+        for (let i = 0; i < 10; i++) {
             monuments[i].id = i;
         }
         return monuments;
@@ -340,6 +353,8 @@ class Backend {
     static removeFavMonument(MonumentID) {
         // To Do
     }
+
+    // user info and updates
 
     static changeUserImage(Image) {
         try {
@@ -357,19 +372,6 @@ class Backend {
             return this.POST_PIC(url, formData).then(response => response);
         } catch (error) {
             console.log('Error Change Image:', error);
-            return {
-                statusCode: 500,
-                data: error
-            }
-        }
-    }
-
-    static async getBestScore() {
-        try {
-            const url = 'users/total-best-score/';
-            return await this.GET(url).then(response => response);
-        } catch (error) {
-            console.log('Error Get Best Score:', error);
             return {
                 statusCode: 500,
                 data: error
@@ -409,44 +411,7 @@ class Backend {
         }
     }
 
-    static async getMonumentScore() {
-        try {
-            const url = 'users/best-score-monuments/';
-            return await this.GET(url).then(response => response);
-        } catch (error) {
-            console.log('Error Get monuments Score:', error);
-            return {
-                statusCode: 500,
-                data: error
-            }
-        }
-    }
-
-    static async getLandmarkScore() {
-        try {
-            const url = 'users/best-score-landmarks/';
-            return await this.GET(url).then(response => response);
-        } catch (error) {
-            console.log('Error Get landmarks Score:', error);
-            return {
-                statusCode: 500,
-                data: error
-            }
-        }
-    }
-
-    static async getStatueScore() {
-        try {
-            const url = 'users/best-score-statues/';
-            return await this.GET(url).then(response => response);
-        } catch (error) {
-            console.log('Error Get statues Score:', error);
-            return {
-                statusCode: 500,
-                data: error
-            }
-        }
-    }
+    // auth
 
     static async login(email, password) {
         try {
@@ -503,23 +468,6 @@ class Backend {
         }
     }
 
-    static async refresh_the_token() {
-        const refreshToken = await this.getRefreshToken().then(response => { return response });
-        try {
-            const regreshUrl = 'auth/token/refresh/';
-            const body = {
-                refresh: refreshToken
-            };
-            return await this.POST(regreshUrl, body).then(response => response);
-        } catch (error) {
-            console.log('Error refreshing token:', error);
-            return {
-                statusCode: 500,
-                data: error
-            }
-        }
-    }
-
     static async emailVerify(otp) {
         try {
             const verifyUrl = 'auth/email-verify/';
@@ -536,6 +484,8 @@ class Backend {
         }
     }
 
+    // update otp
+
     static async refereshOTP(email) {
         try {
             const refreshOTPUrl = 'auth/request-verify-otp/';
@@ -551,6 +501,8 @@ class Backend {
             }
         }
     }
+
+    // deal with password
 
     static async passwordReset(email) {
         try {
@@ -603,7 +555,7 @@ class Backend {
         }
     }
 
-    static async passowrdChange(old_password, new_password, confirm_new_password){
+    static async passowrdChange(old_password, new_password, confirm_new_password) {
         try {
             const changePasswordUrl = 'users/change-password/';
             const body = {
@@ -621,27 +573,7 @@ class Backend {
         }
     }
 
-    static async getTermsConditions() {
-        try {
-            const termsUrl = 'https://api.jsonbin.io/v3/b/6462fff99d312622a35f186f';
-            const response = await fetch(termsUrl, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                redirect: 'follow',
-            });
-            const result = await response.json();
-            return result.record.TermsConditions;
-        } catch (error) {
-            console.log('Error Terms and Conditions:', error);
-            return {
-                statusCode: 500,
-                data: error
-            }
-        }
-    }
+    // social auth
 
     static async googleSignIn(auth_token) {
         try {
@@ -673,6 +605,63 @@ class Backend {
             }
         }
     }
+
+    // get scores of knowlodge checks
+
+    static async getBestScore() {
+        try {
+            const url = 'users/total-best-score/';
+            return await this.GET(url).then(response => response);
+        } catch (error) {
+            console.log('Error Get Best Score:', error);
+            return {
+                statusCode: 500,
+                data: error
+            }
+        }
+    }
+
+    static async getMonumentScore() {
+        try {
+            const url = 'users/best-score-monuments/';
+            return await this.GET(url).then(response => response);
+        } catch (error) {
+            console.log('Error Get monuments Score:', error);
+            return {
+                statusCode: 500,
+                data: error
+            }
+        }
+    }
+
+    static async getLandmarkScore() {
+        try {
+            const url = 'users/best-score-landmarks/';
+            return await this.GET(url).then(response => response);
+        } catch (error) {
+            console.log('Error Get landmarks Score:', error);
+            return {
+                statusCode: 500,
+                data: error
+            }
+        }
+    }
+
+    static async getStatueScore() {
+        try {
+            const url = 'users/best-score-statues/';
+            return await this.GET(url).then(response => response);
+        } catch (error) {
+            console.log('Error Get statues Score:', error);
+            return {
+                statusCode: 500,
+                data: error
+            }
+        }
+    }
+
+
+    // update scores of knowlodge checks
 
     static async updateLandmarksScore(new_score) {
         try {
@@ -717,6 +706,40 @@ class Backend {
                 data: error
             }
         }
+    }
+
+    // terms and conditions
+
+    static async getTermsConditions() {
+        try {
+            const termsUrl = 'https://api.jsonbin.io/v3/b/6462fff99d312622a35f186f';
+            const response = await fetch(termsUrl, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                redirect: 'follow',
+            });
+            const result = await response.json();
+            return result.record.TermsConditions;
+        } catch (error) {
+            console.log('Error Terms and Conditions:', error);
+            return {
+                statusCode: 500,
+                data: error
+            }
+        }
+    }
+
+    // Handle checks
+
+    static isSuccessfulRequest(code) {
+        return code >= 200 && code < 300;
+    }
+
+    static isTokenExp(code) {
+        return code === 400;
     }
 
     static async getErrorMessage(response) {
