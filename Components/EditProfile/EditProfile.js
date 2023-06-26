@@ -4,7 +4,7 @@ import { translate } from "../../Localization";
 import { colors } from "../../AppStyles";
 import { useState, useContext } from "react";
 import Backend from "../../Backend/Backend";
-import { goBack } from "../../Backend/Navigator";
+import { goBack, goPage } from "../../Backend/Navigator";
 import { UserContext } from "../Context/Context";
 import Loader from "../Loader/Loader";
 import PopupMessage from "../PopupMessage/PopupMessage";
@@ -141,6 +141,11 @@ export default function EditProfile({ }) {
                                 </TouchableOpacity>
                             </View>
                         </View>
+                        <TouchableOpacity
+                            onPress={() => { goPage('editPassword') }}
+                        >
+                            <Text style={styles.changePassword}>{translate('EditProfile.changePassword')}</Text>
+                        </TouchableOpacity>
                     </View>
                     <TouchableOpacity
                         style={styles.saveButton}

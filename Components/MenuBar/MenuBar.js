@@ -23,6 +23,7 @@ import FavArticlesPage from "../FavouritePage/FavArticlesPage";
 import Favourites from "../Favourites/Favourites";
 import BestScore from '../BestScore/BestScore';
 import EditProfile from '../EditProfile/EditProfile';
+import EditPassword from "../EditPassword/EditPassword";
 import { useState } from "react";
 
 
@@ -113,6 +114,7 @@ export default function MenuBar({ }) {
             <Tab.Screen name="favourites" component={Favourites} options={{ tabBarButton: () => null, tabBarVisible: false, tabBarStyle: { display: 'none' } }} />
             <Tab.Screen name="bestScore" component={BestScore} options={{ tabBarButton: () => null, tabBarVisible: false, tabBarStyle: { display: 'none' } }} />
             <Tab.Screen name="editProfile" component={EditProfile} options={{ tabBarButton: () => null, tabBarVisible: false, tabBarStyle: { display: 'none' } }} />
+            <Tab.Screen name="editPassword" component={EditPassword} options={{ tabBarButton: () => null, tabBarVisible: false, tabBarStyle: { display: 'none' } }} />
         </Tab.Navigator>
     )
 }

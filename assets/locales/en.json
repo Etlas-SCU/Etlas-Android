@@ -191,8 +191,11 @@
         "next": "Next",
         "Resend": "Resend the mail again.",
         "NewPassword": "New Password",
+        "OldPassword": "Old Password",
         "ConfirmPassword": "Confirm Password",
-        "finish": "Finish"
+        "finish": "Finish",
+        "description": "Enter your old password and make new password",
+        "save": "Save"
     },
     "TermsConditions": {
         "title": "Terms and conditions",
@@ -206,7 +209,8 @@
         "password": "Password",
         "phone": "Phone Number",
         "address": "Address",
-        "save": "Save"
+        "save": "Save",
+        "changePassword": "Want to change password?"
     },
     "KnowledgeGame": {
         "score": "Your Score",

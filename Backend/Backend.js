@@ -85,41 +85,26 @@ class Backend {
 
     static async POST(url, body) {
         try {
-            let status = null;
             const token = await this.getToken();
 
-            const response = await fetch(this.HOST_URL + url, {
-                method: 'POST',
+            return await axios.post(this.HOST_URL + url, body, {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                     'Authorization': token ? `Bearer ${token}` : null,
                 },
-                body: JSON.stringify(body),
-            });
-
-            // status for response
-            status = response.status;
-
-            // 404 handle
-            if (response.status === 404) {
+            }).then(response => {
                 return {
-                    statusCode: status,
-                    data: {
-                        message: translate('messages.notFound')
-                    }
-                };
-            }
-
-            let data = null;
-            if (response.status !== 204) {
-                data = await response.json();
-            }
-
-            return {
-                statusCode: status,
-                data: data
-            };
+                    statusCode: response.status,
+                    data: response.data
+                }
+            }).catch(error => {
+                error = error.response;
+                return {
+                    statusCode: error.status,
+                    data: error.data
+                }
+            });
         } catch (error) {
             console.log('POST error', error);
             return {
@@ -131,35 +116,25 @@ class Backend {
 
     static async POST_PIC(url, body) {
         try {
-            let status = null;
             const token = await this.getToken();
 
-            const response = await axios.post(this.HOST_URL + url, body, {
+            return await axios.post(this.HOST_URL + url, body, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'Authorization': token ? `Bearer ${token}` : null,
                 },
-            });
-
-            // status for response
-            status = response.status;
-
-            // 404 handle
-            if (response.status === 404) {
+            }).then(response => {
                 return {
-                    statusCode: status,
-                    data: {
-                        message: translate('messages.notFound')
-                    }
-                };
-            }
-
-            let data = null;
-
-            return {
-                statusCode: status,
-                data: data
-            };
+                    statusCode: response.status,
+                    data: response.data
+                }
+            }).catch(error => {
+                error = error.response;
+                return {
+                    statusCode: error.status,
+                    data: error.data
+                }
+            });
         } catch (error) {
             console.log('POST error', error);
             return {
@@ -171,41 +146,26 @@ class Backend {
 
     static async PUT(url, body) {
         try {
-            let status = null;
             const token = await this.getToken();
 
-            const response = await fetch(this.HOST_URL + url, {
-                method: 'PUT',
+            return await axios.put(this.HOST_URL + url, body, {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                     'Authorization': token ? `Bearer ${token}` : null,
                 },
-                body: JSON.stringify(body),
-            });
-
-            // status for response
-            status = response.status;
-
-            // 404 handle
-            if (response.status === 404) {
+            }).then(response => {
                 return {
-                    statusCode: status,
-                    data: {
-                        message: translate('messages.notFound')
-                    }
-                };
-            }
-
-            let data = null;
-            if (response.status !== 204) {
-                data = await response.json();
-            }
-
-            return {
-                statusCode: status,
-                data: data
-            };
+                    statusCode: response.status,
+                    data: response.data
+                }
+            }).catch((error) => {
+                error = error.response;
+                return {
+                    statusCode: error.status,
+                    data: error.data
+                }
+            });
         } catch (error) {
             console.log('PUT error', error);
             return {
@@ -217,42 +177,28 @@ class Backend {
 
     static async GET(url) {
         try {
-            let status = null;
             const token = await this.getToken();
 
-            const response = await fetch(this.HOST_URL + url, {
-                method: 'GET',
+            return await axios.get(this.HOST_URL + url, {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                     'Authorization': token ? `Bearer ${token}` : null,
                 },
-            });
-
-            // status for response
-            status = response.status;
-
-            // 404 handle
-            if (response.status === 404) {
+            }).then(response => {
                 return {
-                    statusCode: status,
-                    data: {
-                        message: translate('messages.notFound')
-                    }
-                };
-            }
-
-            let data = null;
-            if (response.status !== 204) {
-                data = await response.json();
-            }
-
-            return {
-                statusCode: status,
-                data: data
-            };
+                    statusCode: response.status,
+                    data: response.data
+                }
+            }).catch(error => {
+                error = error.response;
+                return {
+                    statusCode: error.status,
+                    data: error.data
+                }
+            });
         } catch (error) {
-            console.log('Path error', error);
+            console.log('GET error', error);
             return {
                 statusCode: 500,
                 data: error
@@ -262,43 +208,28 @@ class Backend {
 
     static async PATCH(url, body) {
         try {
-            let status = null;
             const token = await this.getToken();
-
-            const response = await fetch(this.HOST_URL + url, {
-                method: 'PATCH',
+            
+            return await axios.patch(this.HOST_URL + url, body, {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                     'Authorization': token ? `Bearer ${token}` : null,
                 },
-                body: JSON.stringify(body),
-            });
-
-            // status for response
-            status = response.status;
-
-            // 404 handle
-            if (response.status === 404) {
+            }).then(response => {
                 return {
-                    statusCode: status,
-                    data: {
-                        message: translate('messages.notFound')
-                    }
-                };
-            }
-
-            let data = null;
-            if (response.status !== 204) {
-                data = await response.json();
-            }
-
-            return {
-                statusCode: status,
-                data: data
-            };
+                    statusCode: response.status,
+                    data: response.data
+                }
+            }).then(error => {
+                error = error.response;
+                return {
+                    statusCode: error.status,
+                    data: error.data
+                }
+            });
         } catch (error) {
-            console.log('POST error', error);
+            console.log('PATCH error', error);
             return {
                 statusCode: 500,
                 data: error
@@ -642,6 +573,24 @@ class Backend {
             return await this.POST(verifyUrl, body).then(response => response);
         } catch (error) {
             console.log('Error verifying OTP:', error);
+            return {
+                statusCode: 500,
+                data: error
+            }
+        }
+    }
+
+    static async passowrdChange(old_password, new_password, confirm_new_password){
+        try {
+            const changePasswordUrl = 'users/change-password/';
+            const body = {
+                old_password: old_password,
+                new_password: new_password,
+                confirm_new_password: confirm_new_password
+            };
+            return await this.PUT(changePasswordUrl, body).then(response => response);
+        } catch (error) {
+            console.log('Error changing password:', error);
             return {
                 statusCode: 500,
                 data: error
