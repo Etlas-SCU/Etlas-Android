@@ -4,13 +4,14 @@ import Stars from "./Stars";
 import { colors } from "../../AppStyles";
 import { responsiveHeight } from "../../AppStyles";
 import { goPage } from "../../Backend/Navigator";
+import { memo } from "react";
 
 
-export default function ToursCard({ Tour, screen }) {
+function ToursCard({ Tour, screen }) {
 
     const { Title, Description, Rate, Img } = Tour;
     const isPage = (screen != 'Home');
-    
+
     return (
         <TouchableOpacity
             style={isPage ? Page.ToursCard : Swipper.ToursCard}
@@ -27,3 +28,6 @@ export default function ToursCard({ Tour, screen }) {
         </TouchableOpacity>
     )
 }
+
+
+export default memo(ToursCard);

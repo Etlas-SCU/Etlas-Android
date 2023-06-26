@@ -11,7 +11,7 @@ import Backend from "../../Backend/Backend";
 import { goBack } from "../../Backend/Navigator";
 
 
-function Filter({ showFilerList, setShowFilterList, sortBy, setSortBy }){
+function Filter({ showFilerList, setShowFilterList, sortBy, setSortBy }) {
 
     const Checked = <Image source={require('../../assets/language_selection/check.png')} style={styles.check} />;
 
@@ -44,10 +44,9 @@ function Filter({ showFilerList, setShowFilterList, sortBy, setSortBy }){
             <View style={styles.modalContainer}>
                 <Text style={styles.modaltitle}>{translate('ToursPage.sortBy')}</Text>
                 <View style={styles.modal}>
-                    { options }
+                    {options}
                 </View>
             </View>
-
         </Modal>
     )
 
@@ -77,23 +76,25 @@ export default function ToursPage({ }) {
     // filtered tours
     const filteredTours = toursList.sort(SortFunctions[sortBy]);
 
-    // filter the tours based on the search term
-    const Tours = filteredTours.map((Tour, idx) => <ToursCard Tour={Tour} key={idx} screen={'ToursPage'}/>);
+    // render items in flat list
+    const renderItem = ({ item }) => (
+        <ToursCard Tour={item} screen={'ToursPage'} />
+    );
 
     return (
         <View style={styles.container}>
             {isIOS() ? <MainMenu /> : null}
-            {showFilerList ? <Filter showFilerList={showFilerList} setShowFilterList={setShowFilterList} sortBy={sortBy} setSortBy={setSortBy}/> : null}
+            {showFilerList ? <Filter showFilerList={showFilerList} setShowFilterList={setShowFilterList} sortBy={sortBy} setSortBy={setSortBy} /> : null}
             <View style={styles.header}>
-                <TouchableOpacity style={styles.aboutus} onPress={() => { setScreen('ToursPage'), showModal() } }>
+                <TouchableOpacity style={styles.aboutus} onPress={() => { setScreen('ToursPage'), showModal() }}>
                     <Image source={require('../../assets/KnowledgeCheck/tabler_exclamation-circle.png')} />
                 </TouchableOpacity>
                 <Text style={styles.title}>{translate('Tours.title')}</Text>
-                <TouchableOpacity 
+                <TouchableOpacity
                     onPress={goBack}
                     style={styles.closeContainer}
                 >
-                    <Image source={require('../../assets/Scan/Arr.png')} style={styles.close}/>
+                    <Image source={require('../../assets/Scan/Arr.png')} style={styles.close} />
                 </TouchableOpacity>
             </View>
             <View style={styles.inputContainer}>
@@ -104,7 +105,7 @@ export default function ToursPage({ }) {
                     onChangeText={(searchTerm) => setSearchTerm(searchTerm)}
                     cursorColor={colors.DarkCyan}
                 />
-                <TouchableOpacity 
+                <TouchableOpacity
                     style={styles.filter}
                     onPress={() => { setShowFilterList(true) }}
                 >
@@ -112,19 +113,14 @@ export default function ToursPage({ }) {
                 </TouchableOpacity>
             </View>
             <FlatList
-                data={Tours}
-                renderItem={({ item }) => item}
-                keyExtractor={(item, index) => index.toString()}
+                data={filteredTours}
+                renderItem={renderItem}
+                keyExtractor={(_, index) => index.toString()}
                 showsVerticalScrollIndicator={false}
                 showsHorizontalScrollIndicator={false}
                 contentContainerStyle={styles.contentContainer}
                 style={styles.Box}
             />
-            {/* <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
-                <View style={styles.Box}>
-                    {Tours}
-                </View>
-            </ScrollView> */}
         </View>
     );
 }

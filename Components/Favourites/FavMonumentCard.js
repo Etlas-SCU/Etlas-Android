@@ -2,9 +2,10 @@ import { View, Image, Text, TouchableOpacity } from 'react-native'
 import { styles } from './Styles'
 import Backend from '../../Backend/Backend';
 import { goPage } from '../../Backend/Navigator';
+import { memo } from 'react';
 
 
-export default function FavMonumentCard({ screen, Monument }) {
+function FavMonumentCard({ screen, Monument }) {
 
     const { Title, HistoricDate, scannedDate, Img, ID } = Monument;
 
@@ -34,3 +35,5 @@ export default function FavMonumentCard({ screen, Monument }) {
         </TouchableOpacity>
     );
 }
+
+export default memo(FavMonumentCard);

@@ -62,7 +62,6 @@ export default function ArticlesPage({ }) {
     const [sortBy, setSortBy] = useState('Latest');
     const [numColumns, setNumColumn] = useState(2);
 
-
     // handle number of column change
     const handleNumColumnChange = (newNumColumns) => {
         setNumColumn(newNumColumns);
@@ -84,8 +83,10 @@ export default function ArticlesPage({ }) {
     // filtered Articles
     const filteredArticles = ArticlesList.sort(SortFunctions[sortBy]);
 
-    // filter the articles based on the search term and filter option
-    const Articles = filteredArticles.map((article, idx) => <ArticleCard article={article} key={idx} screen={'ArticlesPage'} />);
+    // render item in flat list
+    const renderItem = ({ item }) => {
+        return <ArticleCard article={item} screen={'ArticlesPage'} />
+    }
 
     return (
         <View style={styles.container}>
@@ -115,9 +116,9 @@ export default function ArticlesPage({ }) {
                     <Image source={require('../../assets/ArticlesPage/Filter.png')} />
                 </TouchableOpacity>
             </View>
-            <FlatList 
-                data={Articles}
-                renderItem={({item}) => item}
+            <FlatList
+                data={filteredArticles}
+                renderItem={renderItem}
                 keyExtractor={(_, index) => index.toString()}
                 contentContainerStyle={styles.contentContainer}
                 columnWrapperStyle={styles.Gap}

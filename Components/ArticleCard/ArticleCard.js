@@ -2,9 +2,10 @@ import { Page, Swipper } from "./Styles";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import { translate } from "../../Localization";
 import { goPage } from "../../Backend/Navigator";
+import { memo } from "react";
 
 
-export default function ArticleCard({ article, screen }) {
+function ArticleCard({ article, screen }) {
 
     const { Title, Description, Date, Img } = article;
     const isPage = (screen != 'Home');
@@ -29,3 +30,6 @@ export default function ArticleCard({ article, screen }) {
         </TouchableOpacity>
     )
 }
+
+
+export default memo(ArticleCard);

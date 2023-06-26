@@ -7,7 +7,17 @@ import { translate } from "../../Localization";
 import { goBack, goPage } from "../../Backend/Navigator";
 
 
-function Container({ children, ConainerName, pageNav }) {
+function Container({ List, ConainerName, pageNav, isArticle }) {
+
+    // render item in flat list
+    const renderItem = ({ item }) => {
+        if (isArticle) {
+            return <FavArticleCard favArticle={item} screen={'favourites'} />
+        } else {
+            return <FavMonumentCard Monument={item} screen={'favourites'} />
+        }
+    }
+
     return (
         <View style={styles.container}>
             <View style={styles.containerTitle}>
@@ -21,11 +31,11 @@ function Container({ children, ConainerName, pageNav }) {
             </View>
             <View style={ConainerName !== 'Articles' ? styles.MonumentsScrollView : styles.ArticlesScrollView}>
                 <FlatList
-                    data={children}
+                    data={List}
                     showsHorizontalScrollIndicator={false}
-                    renderItem={({ item }) => item}
+                    renderItem={renderItem}
                     keyExtractor={(_, index) => index.toString()}
-                    initialNumToRender={10}
+                    initialNumToRender={5}
                     contentContainerStyle={styles.contentContainer}
                     nestedScrollEnabled={true}
                     showsVerticalScrollIndicator={false}
@@ -39,26 +49,8 @@ export default function Favourites({ }) {
 
     // get the lists from the backend
     const favArticlesList = Backend.getFavArticles();
-    const MonumentsList = Backend.getFavMonuments();
+    const favMonumentsList = Backend.getFavMonuments();
 
-    // mapping the cards
-    const favArticlesCards = favArticlesList.map((favArticle, index) => { return <FavArticleCard key={index} favArticle={favArticle} screen={'favourites'}/> });
-    const MonumentsCards = MonumentsList.map((Monument, index) => { return <FavMonumentCard key={index} Monument={Monument} screen={'favourites'}/> });
-
-    const ContainerData = [
-        {
-            ConainerName: translate('Favourites.3D'),
-            pageTitle: translate('Favourites.Models'),
-            pageNav: 'favMonumentsPage',
-            children: MonumentsCards
-        },
-        {
-            ConainerName: translate('Favourites.articles'),
-            pageTitle: translate('Favourites.articles'),
-            pageNav: 'favArticlesPage',
-            children: favArticlesCards
-        }
-    ];
 
     return (
         <View style={styles.container}>
@@ -76,15 +68,17 @@ export default function Favourites({ }) {
                     ConainerName={translate('Favourites.3D')}
                     pageTitle={translate('Favourites.Models')}
                     pageNav={'favMonumentsPage'}
-                    children={MonumentsCards}
+                    List={favMonumentsList}
+                    isArticle={false}
                 />
                 <Container
                     ConainerName={translate('Favourites.articles')}
                     pageTitle={translate('Favourites.articles')}
                     pageNav={'favArticlesPage'}
-                    children={favArticlesCards}
+                    List={favArticlesList}
+                    isArticle={true}
                 />
-        </View>
+            </View>
         </View>
     )
 

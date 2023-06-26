@@ -87,7 +87,7 @@ class Backend {
         try {
             const token = await this.getToken();
 
-            return await axios.post(this.HOST_URL + url, body, {
+            return axios.post(this.HOST_URL + url, body, {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
@@ -118,7 +118,7 @@ class Backend {
         try {
             const token = await this.getToken();
 
-            return await axios.post(this.HOST_URL + url, body, {
+            return axios.post(this.HOST_URL + url, body, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'Authorization': token ? `Bearer ${token}` : null,
@@ -148,7 +148,7 @@ class Backend {
         try {
             const token = await this.getToken();
 
-            return await axios.put(this.HOST_URL + url, body, {
+            return axios.put(this.HOST_URL + url, body, {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
@@ -179,7 +179,7 @@ class Backend {
         try {
             const token = await this.getToken();
 
-            return await axios.get(this.HOST_URL + url, {
+            return axios.get(this.HOST_URL + url, {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
@@ -209,8 +209,8 @@ class Backend {
     static async PATCH(url, body) {
         try {
             const token = await this.getToken();
-            
-            return await axios.patch(this.HOST_URL + url, body, {
+
+            return axios.patch(this.HOST_URL + url, body, {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
@@ -246,32 +246,43 @@ class Backend {
     }
 
     static getTours() {
-        const Tour = {
+        let Tour = {
+            id: 1,
             Title: "Giza tour",
             Description: "where you can visit the pyramids and ride the camels.",
             Rate: "3.5",
             Img: require('../assets/HomePage/tour.png'),
             fullDescription: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`
+            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`,
         };
-        return Array(20).fill(Tour);
+        let tours = [];
+        for(let i = 0; i < 10; i++){
+            let curr_tour = Tour;
+            curr_tour.id = i;
+            tours.push(curr_tour);
+        }
+        return tours;
     }
 
     static getArticles() {
-        const Article = {
-            ID: 1,
+        let Article = {
+            id: 1,
             Title: "Anubis",
             Description: "Know more about Anubis and his powers.",
             Date: "15 Jan 2023",
             Img: require('../assets/HomePage/monument.png'),
             fullDescription: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`
         };
-        return Array(20).fill(Article);
+        var articles = Array(10).fill(Article);
+        for(let i = 0; i < 10; i++){
+            articles[i].id = i;
+        }
+        return articles;
     }
 
     static getQuestions() {
-        const quesions = {
+        let quesion = {
             id: 3,
             statement: "What is this statue?",
             label: "statue",
@@ -284,22 +295,30 @@ class Backend {
                 { id: 4, choice_text: "Yonu" }
             ]
         };
-        return Array(20).fill(quesions);
+        var questions = Array(10).fill(quesion);
+        for(let i = 0; i < 10; i++){    
+            questions[i].id = i;    
+        }
+        return questions; 
     }
 
     static getFavArticles() {
-        const Article = {
+        let Article = {
             Title: "Anubis",
             Description: "Know more about Anubis and his powers.",
             Date: "15 Jan 2023",
             Img: require('../assets/HomePage/monument.png'),
             fullDescription: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`
         };
-        return Array(10).fill(Article);
+        var articles = Array(10).fill(Article);
+        for(let i = 0; i < 10; i++){
+            articles[i].id = i;
+        }
+        return articles;
     }
 
     static getFavMonuments() {
-        const Monument = {
+        let Monument = {
             ID: 1,
             Title: "Anubis Statue",
             HistoricDate: "200 BC | Egypt",
@@ -307,7 +326,11 @@ class Backend {
             scannedDate: 'Scanned 12 Oct 2021',
             fullDescription: `Anubis Statue is an ancient statue that where built in the old egypt and worshiped by the people.\n Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially\n unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Anubis Statue is an ancient statue that where built in the old egypt and worshiped by the people.\n Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially\nunchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`
         };
-        return Array(10).fill(Monument);
+        var monuments = Array(10).fill(Monument);
+        for(let i = 0; i < 10; i++){
+            monuments[i].id = i;
+        }
+        return monuments;
     }
 
     static removeFavArticle(ArticleID) {

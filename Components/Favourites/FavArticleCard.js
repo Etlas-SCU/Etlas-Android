@@ -2,9 +2,10 @@ import { View, Image, Text, TouchableOpacity } from 'react-native'
 import { styles } from './Styles'
 import Backend from '../../Backend/Backend';
 import { goPage } from '../../Backend/Navigator';
+import { memo } from 'react';
 
 
-export default function FavArticleCard({ screen, favArticle }) {
+function FavArticleCard({ screen, favArticle }) {
 
     const { Title, Description, Date, Img, ID } = favArticle;
 
@@ -40,3 +41,5 @@ export default function FavArticleCard({ screen, favArticle }) {
         </TouchableOpacity>
     );
 }
+
+export default memo(FavArticleCard);

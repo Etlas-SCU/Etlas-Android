@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, memo } from "react";
 import { View, Text, Image, TextInput, TouchableOpacity, ScrollView, FlatList } from "react-native";
 import { styles } from "./Styles";
 import { translate } from "../../Localization";
@@ -16,7 +16,17 @@ import Loader from "../Loader/Loader";
 import PopupMessage from "../PopupMessage/PopupMessage";
 
 
-function Section({ title, children, pageName }) {
+const Section = memo(({ title, List, pageName, isArticle }) => {
+
+    // render element to the list
+    const renderSectionItem = ({ item }) => {
+        if (isArticle) {
+            return <ArticleCard article={item} screen={'Home'} />
+        } else {
+            return <ToursCard Tour={item} screen={'Home'} />
+        }
+    }
+
     return (
         <View styles={styles.Box}>
             <View style={styles.boxHeader}>
@@ -27,17 +37,17 @@ function Section({ title, children, pageName }) {
                 </TouchableOpacity>
             </View>
             <FlatList
-                data={children}
+                data={List}
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
-                renderItem={({ item }) => item}
-                keyExtractor={(_, index) => index.toString()}
+                renderItem={renderSectionItem}
+                keyExtractor={(_, idx) => idx.toString()}
                 style={styles.swipper}
                 initialNumToRender={5}
             />
         </View>
     )
-}
+});
 
 export default function HomePage({ }) {
 
@@ -52,19 +62,6 @@ export default function HomePage({ }) {
     const { modalVisible, showModal, setScreen } = useContext(UserContext);
     const { updateUserData, updateScore } = useContext(UserDataContext);
     const [searchTerm, setSearchTerm] = useState('');
-
-    // getting the toursList and ArticlesList from Backend.js
-    const ToursList = Backend.getTours().filter((Tour) => {
-        return Tour.Title.toLowerCase().includes(searchTerm.toLowerCase());
-    });
-    const ArticlesList = Backend.getArticles().filter((Article) => {
-        return Article.Title.toLowerCase().includes(searchTerm.toLowerCase());
-    });
-
-    // mapping the toursList and ArticlesList to jsx elements
-    const Tours = ToursList.map((Tour, idx) => <ToursCard Tour={Tour} key={idx} screen={'Home'} />);
-    const Articles = ArticlesList.map((Article, idx) => <ArticleCard article={Article} key={idx} screen={'Home'} />);
-
 
     // get user data from backend
     const getUserData = async () => {
@@ -126,6 +123,15 @@ export default function HomePage({ }) {
         getScore();
     })
 
+
+    // get tours list from backend
+    const ToursList = Backend.getTours().filter((Tour) => {
+        return Tour.Title.toLowerCase().includes(searchTerm.toLowerCase());
+    });
+    const ArticlesList = Backend.getArticles().filter((Article) => {
+        return Article.Title.toLowerCase().includes(searchTerm.toLowerCase());
+    });
+
     return (
         <View style={styles.container}>
             {modalVisible ? <MainMenu /> : null}
@@ -149,12 +155,14 @@ export default function HomePage({ }) {
                 <Section
                     title={translate('Home.tours')}
                     pageName='ToursPage'
-                    children={Tours}
+                    List={ToursList}
+                    isArticle={false}
                 />
                 <Section
                     title={translate('Home.article')}
                     pageName='ArticlesPage'
-                    children={Articles}
+                    List={ArticlesList}
+                    isArticle={true}
                 />
             </ScrollView>
         </View>

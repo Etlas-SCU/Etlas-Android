@@ -14,8 +14,10 @@ export default function FavArticlesPage({ }) {
     // get the screen name from navigator
     const { prevPage } = getParams();
 
-    // mapping the cards
-    const favArticles = favArticlesList.map((favArticle, index) => { return <FavArticleCard key={index} favArticle={favArticle} screen={prevPage}/> });
+    // render items in flat list
+    const renderItem = ({ item }) => {
+        return <FavArticleCard favArticle={item} screen={prevPage} />
+    }
 
     return (
         <View style={styles.container}>
@@ -29,9 +31,9 @@ export default function FavArticlesPage({ }) {
                 </TouchableOpacity>
             </View>
             <FlatList
-                data={favArticles}
+                data={favArticlesList}
                 showsHorizontalScrollIndicator={false}
-                renderItem={({ item }) => item}
+                renderItem={renderItem}
                 keyExtractor={(_, index) => index.toString()}
                 initialNumToRender={10}
                 contentContainerStyle={styles.contentContainer}
