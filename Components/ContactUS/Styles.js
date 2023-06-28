@@ -77,7 +77,8 @@ export const styles = StyleSheet.create({
         textAlign: 'left',
         textAlignVertical: 'top',
         verticalAlign: "top",
-        justifyContent: 'flex-start'
+        justifyContent: 'flex-start',
+        color: colors.White
     },
     button: {
         width: responsiveWidth(200),
