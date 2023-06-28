@@ -10,8 +10,7 @@ import { UserContext } from "../Context/Context";
 import PopupMessage from "../PopupMessage/PopupMessage";
 import Backend from "../../Backend/Backend";
 import SvgMaker from "../SvgMaker/SvgMaker";
-import EyeIcon from '../../assets/register/codicon_eye.svg';
-import LeftArrow from '../../assets/register/left-arrow.svg';
+import { LeftArrow, EyeIcon } from "../../assets/SVG/Icons";
 
 
 export function FirstPage({ }) {

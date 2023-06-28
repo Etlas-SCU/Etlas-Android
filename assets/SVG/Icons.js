@@ -173,3 +173,7 @@ export const ErrorIcon = error;
 // avatar
 import avatar from '../Icons/Avatar.png';
 export const AvatarIcon = avatar;
+
+// inv_check
+import inv_check from '../Icons/inv_check.svg';
+export const InvCheckIcon = inv_check;

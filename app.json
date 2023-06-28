@@ -9,7 +9,7 @@
             "sourceExts": ["js", "jsx", "json", "wasm", "svg"]
         },
         "orientation": "portrait",
-        "icon": "./assets/logo/Etlas-logo.png",
+        "icon": "./assets/Images/Etlas-logo.png",
         "userInterfaceStyle": "light",
         "githubUrl": "https://github.com/Etlas-SCU/Etlas-Android",
         "splash": {

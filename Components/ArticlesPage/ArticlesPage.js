@@ -10,12 +10,12 @@ import { isIOS } from "../../AppStyles";
 import Backend from "../../Backend/Backend";
 import { goBack } from "../../Backend/Navigator";
 import SvgMaker from "../SvgMaker/SvgMaker";
-import { LeftArrow, MenuIcon, FilterIcon } from "../../assets/SVG/Icons";
+import { LeftArrow, MenuIcon, FilterIcon, InvCheckIcon } from "../../assets/SVG/Icons";
 
 
 function Filter({ showFilerList, setShowFilterList, sortBy, setSortBy }) {
 
-    const Checked = <Image source={require('../../assets/language_selection/check.png')} style={styles.check} />;
+    const Checked = <SvgMaker Svg={InvCheckIcon} style={styles.check} />;
 
     const optionsList = [
         'Name (a-z)',
@@ -100,7 +100,7 @@ export default function ArticlesPage({ }) {
                 </TouchableOpacity>
                 <Text style={styles.title}>{translate('Articles.title')}</Text>
                 <TouchableOpacity onPress={goBack}>
-                    <SvgMaker Svg={LeftArrow} /> 
+                    <SvgMaker Svg={LeftArrow} />
                 </TouchableOpacity>
             </View>
             <View style={styles.inputContainer}>

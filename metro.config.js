@@ -1,4 +1,4 @@
-const { getDefaultConfig } = require("metro-config");
+const { getDefaultConfig } = require("@expo/metro-config");
 
 module.exports = (async () => {
     const {
@@ -6,7 +6,7 @@ module.exports = (async () => {
             sourceExts,
             assetExts
         }
-    } = await getDefaultConfig();
+    } = await getDefaultConfig(__dirname);
 
     return {
         transformer: {

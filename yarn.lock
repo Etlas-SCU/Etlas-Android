@@ -1480,6 +1480,19 @@
     json5 "^2.2.2"
     write-file-atomic "^2.3.0"
 
+"@expo/metro-config@^0.7.1":
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/@expo/metro-config/-/metro-config-0.7.1.tgz#eaae792da23554c1abbc401df868566fab29951b"
+  integrity sha512-vGWU62Zp5pRGw5IEHDNdqvsy62/hu/Na7bswePYVjoaItOjJY7+qilFeF0AAK+3V8qAM8fpltH3ByylKfWaA7A==
+  dependencies:
+    "@expo/config" "~8.0.0"
+    chalk "^4.1.0"
+    debug "^4.3.2"
+    find-yarn-workspace-root "~2.0.0"
+    getenv "^1.0.0"
+    resolve-from "^5.0.0"
+    sucrase "^3.20.0"
+
 "@expo/metro-config@~0.7.0":
   version "0.7.1"
   resolved "https://registry.npmjs.org/@expo/metro-config/-/metro-config-0.7.1.tgz"

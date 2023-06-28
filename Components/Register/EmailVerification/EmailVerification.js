@@ -9,8 +9,8 @@ import { UserContext } from "../../Context/Context";
 import { goBack, goPage, getParams } from "../../../Backend/Navigator";
 import Loader from "../../Loader/Loader";
 import Backend from "../../../Backend/Backend";
-import LeftArrow from '../../../assets/register/left-arrow.svg';
 import SvgMaker from "../../SvgMaker/SvgMaker";
+import { LeftArrow } from "../../../assets/SVG/Icons";
 
 
 export default function ForgotPasswordSecond({ }) {

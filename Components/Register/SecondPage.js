@@ -12,8 +12,8 @@ import PopupMessage from "../PopupMessage/PopupMessage";
 import Backend from "../../Backend/Backend";
 import { UserContext } from "../Context/Context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import LeftArrow from '../../assets/register/left-arrow.svg';
 import SvgMaker from "../SvgMaker/SvgMaker";
+import { LeftArrow } from "../../assets/SVG/Icons";
 
 
 export function SecondPage({ }) {

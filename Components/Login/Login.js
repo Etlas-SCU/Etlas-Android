@@ -11,9 +11,8 @@ import { UserContext } from "../Context/Context";
 import Loader from "../Loader/Loader";
 import PopupMessage from "../PopupMessage/PopupMessage";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import LeftArrow from '../../assets/register/left-arrow.svg';
 import SvgMaker from '../../Components/SvgMaker/SvgMaker';
-import EyeIcon from '../../assets/register/codicon_eye.svg';
+import { LeftArrow, EyeIcon } from "../../assets/SVG/Icons";
 
 
 export default function Login({ }) {
