@@ -9,7 +9,8 @@ import MainMenu from "../MainMenu/MainMenu";
 import { isIOS } from "../../AppStyles";
 import Backend from "../../Backend/Backend";
 import { goBack } from "../../Backend/Navigator";
-
+import SvgMaker from "../SvgMaker/SvgMaker";
+import { LeftArrow , MenuIcon, FilterIcon} from "../../assets/SVG/Icons";
 
 function Filter({ showFilerList, setShowFilterList, sortBy, setSortBy }) {
 
@@ -87,14 +88,14 @@ export default function ToursPage({ }) {
             {showFilerList ? <Filter showFilerList={showFilerList} setShowFilterList={setShowFilterList} sortBy={sortBy} setSortBy={setSortBy} /> : null}
             <View style={styles.header}>
                 <TouchableOpacity style={styles.aboutus} onPress={() => { setScreen('ToursPage'), showModal() }}>
-                    <Image source={require('../../assets/KnowledgeCheck/tabler_exclamation-circle.png')} />
+                    <SvgMaker Svg={MenuIcon} />
                 </TouchableOpacity>
                 <Text style={styles.title}>{translate('Tours.title')}</Text>
                 <TouchableOpacity
                     onPress={goBack}
                     style={styles.closeContainer}
                 >
-                    <Image source={require('../../assets/Scan/Arr.png')} style={styles.close} />
+                    <SvgMaker Svg={LeftArrow} style={styles.close} />
                 </TouchableOpacity>
             </View>
             <View style={styles.inputContainer}>
@@ -109,7 +110,7 @@ export default function ToursPage({ }) {
                     style={styles.filter}
                     onPress={() => { setShowFilterList(true) }}
                 >
-                    <Image source={require('../../assets/ArticlesPage/Filter.png')} />
+                    <SvgMaker Svg={FilterIcon} />
                 </TouchableOpacity>
             </View>
             <FlatList

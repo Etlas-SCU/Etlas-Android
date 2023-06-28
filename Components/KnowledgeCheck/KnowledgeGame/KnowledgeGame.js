@@ -8,6 +8,8 @@ import { setStatusBarStyle } from 'expo-status-bar';
 import PopupMessage from '../../PopupMessage/PopupMessage';
 import { UserContext } from '../../Context/Context';
 import { UserDataContext } from '../../Context/DataContext';
+import SvgMaker from '../../SvgMaker/SvgMaker';
+import { LeftArrow, HelpIcon } from '../../../assets/SVG/Icons';
 
 
 export default function KnowledgeGame({ }) {
@@ -221,7 +223,7 @@ export default function KnowledgeGame({ }) {
         return (
             <View style={styles.gameFinishConainer}>
                 <ImageBackground
-                    source={require('../../../assets/HighScore/HighScore.png')}
+                    source={require('../../../assets/Backgrounds/HighScore.png')}
                     style={styles.gameFinishImage}
                 >
                     {popupMessageVisible ? <PopupMessage /> : null}
@@ -253,7 +255,7 @@ export default function KnowledgeGame({ }) {
                         onPress={goBack}
                         disabled={!isBackEnabled}
                     >
-                        <Image source={require('../../../assets/Scan/Arr.png')} style={styles.back} />
+                        <SvgMaker Svg={LeftArrow} style={styles.back} />
                     </TouchableOpacity>
                 </View>
                 <Image
@@ -276,7 +278,7 @@ export default function KnowledgeGame({ }) {
                         onPress={() => { takeHint() }}
                         disabled={(hint == 0) || (filterdOptions.length > 0)}
                     >
-                        <Image source={require('../../../assets/KnowledgeCheck/help.png')} />
+                        <SvgMaker Svg={HelpIcon} />
                         <View style={styles.hintRemain}>
                             <Text style={styles.hintText}>{hint}</Text>
                         </View>

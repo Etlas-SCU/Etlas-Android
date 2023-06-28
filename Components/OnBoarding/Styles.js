@@ -49,6 +49,8 @@ export const styles = StyleSheet.create({
         position: "absolute",
         top: responsiveHeight(391),
         right: responsiveWidth(0),
+        height: responsiveHeight(200),
+        width: responsiveWidth(139),
     },
     wolf: {
         resizeMode: 'contain',

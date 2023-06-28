@@ -9,6 +9,9 @@ import { goPage, goBack } from "../../Backend/Navigator";
 import { UserContext } from "../Context/Context";
 import PopupMessage from "../PopupMessage/PopupMessage";
 import Backend from "../../Backend/Backend";
+import SvgMaker from "../SvgMaker/SvgMaker";
+import EyeIcon from '../../assets/register/codicon_eye.svg';
+import LeftArrow from '../../assets/register/left-arrow.svg';
 
 
 export function FirstPage({ }) {
@@ -83,7 +86,7 @@ export function FirstPage({ }) {
                 <View style={styles.header_container}>
                     <Text style={styles.header}>{translate('Register.title')}</Text>
                     <TouchableOpacity style={styles.backContainer} onPress={goBack}>
-                        <Image style={styles.back} source={require('../../assets/register/left-arrow.png')} />
+                        <SvgMaker style={styles.back} Svg={LeftArrow} />
                     </TouchableOpacity>
                 </View>
                 <View style={styles.line} />
@@ -120,7 +123,7 @@ export function FirstPage({ }) {
                             cursorColor={colors.LightSeaGreen}
                         />
                         <TouchableOpacity style={styles.passwordEyeButton} onPress={() => setHidden(!hidden)}>
-                            <Image style={styles.passwordContainerImage} source={require('../../assets/register/codicon_eye.png')} />
+                            <SvgMaker Svg={EyeIcon} style={styles.passwordContainerImage} />
                         </TouchableOpacity>
                     </View>
                     <Text style={styles.passText}>{translate('Register.passwordhint')}</Text>

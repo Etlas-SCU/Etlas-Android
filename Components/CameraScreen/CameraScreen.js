@@ -11,6 +11,8 @@ import { goBack } from "../../Backend/Navigator";
 import { useIsFocused } from '@react-navigation/native';
 import { setStatusBarStyle } from "expo-status-bar";
 import { UserContext } from "../Context/Context";
+import SvgMaker from "../SvgMaker/SvgMaker";
+import { LeftArrow } from "../../assets/SVG/Icons";
 
 
 export default function CameraScreen({ }) {
@@ -94,7 +96,7 @@ export default function CameraScreen({ }) {
 
     // Toggle the camera
     const CameraClick = () => {
-        if (type == Camera.Constants.Type.back){
+        if (type == Camera.Constants.Type.back) {
             setType(Camera.Constants.Type.front);
             setmirrorStyle({ transform: [{ scaleX: -1 }] });
         }
@@ -110,7 +112,7 @@ export default function CameraScreen({ }) {
             <View style={styles.topBar}>
                 <Text style={styles.title}>{translate('Scan.title')}</Text>
                 <TouchableOpacity onPress={goBack}>
-                    <Image source={require('../../assets/Scan/Arr.png')} />
+                    <SvgMaker Svg={LeftArrow} />
                 </TouchableOpacity>
             </View>
             {

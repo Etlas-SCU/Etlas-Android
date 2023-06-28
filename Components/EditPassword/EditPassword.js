@@ -8,6 +8,8 @@ import Backend from "../../Backend/Backend";
 import Loader from "../Loader/Loader";
 import PopupMessage from "../PopupMessage/PopupMessage";
 import { UserContext } from "../Context/Context";
+import SvgMaker from "../SvgMaker/SvgMaker";
+import { LeftArrow, EyeIcon } from "../../assets/SVG/Icons";
 
 
 export default function EditPassword({ }) {
@@ -107,7 +109,7 @@ export default function EditPassword({ }) {
             <View style={styles.header_container}>
                 <Text style={styles.header}>{translate('forgotPassword.changePassword')}</Text>
                 <TouchableOpacity style={styles.backContainer} onPress={goBack}>
-                    <Image style={styles.back} source={require('../../assets/register/left-arrow.png')} />
+                    <SvgMaker Svg={LeftArrow} style={styles.back} />
                 </TouchableOpacity>
             </View>
             <View style={styles.line} />
@@ -126,7 +128,7 @@ export default function EditPassword({ }) {
                                 secureTextEntry={hiddenOldPassword}
                             />
                             <TouchableOpacity style={styles.passwordEyeButton} onPress={() => setHiddenOldPassword(!hiddenOldPassword)}>
-                                <Image style={styles.passwordContainerImage} source={require('../../assets/register/codicon_eye.png')} />
+                                <SvgMaker Svg={EyeIcon} style={styles.passwordContainerImage} />
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -142,7 +144,7 @@ export default function EditPassword({ }) {
                                 secureTextEntry={hiddenPassword}
                             />
                             <TouchableOpacity style={styles.passwordEyeButton} onPress={() => setHiddenPassword(!hiddenPassword)}>
-                                <Image style={styles.passwordContainerImage} source={require('../../assets/register/codicon_eye.png')} />
+                                <SvgMaker Svg={EyeIcon} style={styles.passwordContainerImage} />
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -158,7 +160,7 @@ export default function EditPassword({ }) {
                                 secureTextEntry={hiddenConfirmPassword}
                             />
                             <TouchableOpacity style={styles.passwordEyeButton} onPress={() => setHiddenConfirmPassword(!hiddenConfirmPassword)}>
-                                <Image style={styles.passwordContainerImage} source={require('../../assets/register/codicon_eye.png')} />
+                                <SvgMaker Svg={EyeIcon} style={styles.passwordContainerImage} />
                             </TouchableOpacity>
                         </View>
                     </View>

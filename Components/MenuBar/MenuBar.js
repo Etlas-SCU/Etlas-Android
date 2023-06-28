@@ -1,10 +1,9 @@
 import { styles } from "./Styles"
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Image, View, Keyboard } from 'react-native';
+import { View, Keyboard } from 'react-native';
 import KnowledgeCheck from "../KnowledgeCheck/KnowledgeCheck";
 import AboutUs from "../AboutUs/AboutUs";
 import CameraScreen from "../CameraScreen/CameraScreen";
-import Profile from "../Profile/Profile";
 import HomePage from "../HomePage/HomePage";
 import ArticlesPage from "../ArticlesPage/ArticlesPage";
 import ToursPage from "../ToursPage/ToursPage";
@@ -25,6 +24,8 @@ import BestScore from '../BestScore/BestScore';
 import EditProfile from '../EditProfile/EditProfile';
 import EditPassword from "../EditPassword/EditPassword";
 import { useState } from "react";
+import SvgMaker from "../SvgMaker/SvgMaker";
+import { HomeIcon, SettingsIcon, ARIcon, KnowlodgeCheckIcon, ScanIcon } from "../../assets/SVG/Icons";
 
 
 export default function MenuBar({ }) {
@@ -32,11 +33,11 @@ export default function MenuBar({ }) {
     const Tab = createBottomTabNavigator();
 
     const Icons = {
-        Home: require('../../assets/MenuBar/Home.png'),
-        AR: require('../../assets/MenuBar/AR.png'),
-        Scan: require('../../assets/MenuBar/Scan.png'),
-        KnowledgeCheck: require('../../assets/MenuBar/Knowledge_Check.png'),
-        Settings: require('../../assets/MenuBar/Settings.png')
+        Home: HomeIcon,
+        AR: ARIcon,
+        Scan: ScanIcon,
+        KnowledgeCheck: KnowlodgeCheckIcon,
+        Settings: SettingsIcon
     }
 
 
@@ -74,7 +75,8 @@ export default function MenuBar({ }) {
                     return (
                         <View style={styles.barContainer}>
                             <View style={isScan ? styles.Scan : null}>
-                                <Image source={Icons[route.name]} style={isScan ? styles.ScanIcon : styles.menuBarIcons} />
+                                <SvgMaker Svg={Icons[route.name]} style={isScan ? styles.ScanIcon : styles.menuBarIcons} />
+                                {/* <Image source={Icons[route.name]} style={isScan ? styles.ScanIcon : styles.menuBarIcons} /> */}
                                 {focused ? <View style={styles.line} /> : null}
                             </View>
                             {isRightBorder ? <View style={styles.rightBorder} /> : null}
@@ -98,7 +100,6 @@ export default function MenuBar({ }) {
             <Tab.Screen name="Settings" component={Settings} />
             <Tab.Screen name="AboutUs" component={AboutUs} options={{ tabBarButton: () => null, tabBarVisible: false }} />
             <Tab.Screen name="RecognitionFailed" component={RecognitionFailed} options={{ tabBarButton: () => null, tabBarVisible: false }} />
-            <Tab.Screen name="Profile" component={Profile} options={{ tabBarButton: () => null, tabBarVisible: false }} />
             <Tab.Screen name="ArticlesPage" component={ArticlesPage} options={{ tabBarButton: () => null, tabBarVisible: false }} />
             <Tab.Screen name="ToursPage" component={ToursPage} options={{ tabBarButton: () => null, tabBarVisible: false }} />
             <Tab.Screen name="mainMenu" component={MainMenu} options={{ tabBarButton: () => null, tabBarVisible: false }} />

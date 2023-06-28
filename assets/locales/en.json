@@ -169,7 +169,8 @@
         "write_message": "Write a message",
         "subject": "Subject",
         "subject_input": "I'd like to ask about ...",
-        "submit": "Submit"
+        "submit": "Submit",
+        "title": "Contact US" 
     },
     "Settings": {
         "title": "Settings",

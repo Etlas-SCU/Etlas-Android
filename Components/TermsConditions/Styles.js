@@ -1,9 +1,11 @@
 import { colors, dimensions, fontFamily, responsiveFontSize, responsiveHeight, responsiveWidth } from "../../AppStyles";
 import { StyleSheet } from "react-native";
 
+
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: colors.White,
     },
     contentContainer: {
         paddingTop: responsiveHeight(50),
@@ -20,7 +22,7 @@ export const styles = StyleSheet.create({
         fontSize: responsiveFontSize(18),
         color: colors.DarkCyan,
     },
-    close:{
+    close: {
         width: responsiveWidth(32),
         height: responsiveHeight(32),
         right: responsiveWidth(24),
@@ -46,17 +48,22 @@ export const styles = StyleSheet.create({
     },
     statue: {
         position: 'absolute',
-        top: responsiveHeight(80),
+        top: responsiveHeight(100),
         resizeMode: 'contain',
         left: responsiveWidth(0),
-        zIndex: -1
+        zIndex: -1,
+        width: responsiveWidth(132.65),
+        height: responsiveHeight(199.84),
+        transform: [{ rotate: '-13.24deg' }]
     },
     pyramids: {
         position: 'absolute',
-        right: responsiveWidth(-20),
+        right: responsiveWidth(-56),
         top: responsiveHeight(180),
         resizeMode: 'contain',
-        zIndex: 999
+        zIndex: 999,
+        width: responsiveWidth(281),
+        height: responsiveHeight(146)
     },
     copyright: {
         fontFamily: fontFamily.PoppinsRegular,

@@ -10,6 +10,8 @@ import { UserContext } from '../Context/Context';
 import { translate } from '../../Localization';
 import { goPageResetStack } from '../../Backend/Navigator';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import SvgMaker from '../SvgMaker/SvgMaker';
+import { GoogleIcon } from '../../assets/SVG/Icons';
 
 
 export default function GoogleAuth() {
@@ -104,7 +106,7 @@ export default function GoogleAuth() {
         >
             {loaderVisible ? <Loader /> : null}
             {popupMessageVisible ? <PopupMessage /> : null}
-            <Image source={require('../../assets/register/google.png')} />
+            <SvgMaker Svg={GoogleIcon} />
         </TouchableOpacity>
     )
 }

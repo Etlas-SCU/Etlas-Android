@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { Text, Image, Modal, View } from "react-native";
 import { UserContext } from "../Context/Context";
 import { Warning, Success, Error } from "./PopUpState";
+import SvgMaker from "../SvgMaker/SvgMaker";
 
 
 export default function PopupMessage({ }) {
@@ -31,7 +32,7 @@ export default function PopupMessage({ }) {
             visible={popupMessageVisible}
         >
             <View style={[styles.container, { backgroundColor: popUpState.backgroundColor }]}>
-                <Image source={popUpState.icon} style={styles.icon} />
+                <SvgMaker Svg={popUpState.icon} style={styles.icon} /> 
                 <Text style={styles.title}>{popUpState.title}</Text>
                 <Text style={styles.message}>{message}</Text>
             </View>

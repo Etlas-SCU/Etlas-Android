@@ -3,6 +3,8 @@ import { styles } from './Styles'
 import Backend from '../../Backend/Backend';
 import { goPage } from '../../Backend/Navigator';
 import { memo } from 'react';
+import SvgMaker from '../SvgMaker/SvgMaker';
+import { TrashIcon, ArrowOutwardIcon } from '../../assets/SVG/Icons';
 
 
 function FavArticleCard({ screen, favArticle }) {
@@ -28,13 +30,13 @@ function FavArticleCard({ screen, favArticle }) {
                         style={styles.CardIcon}
                         onPress={() => { goPage('ArticleDetails', screen, { favArticle: favArticle }) }}
                     >
-                        <Image source={require('../../assets/Favourites/Arrow.png')} style={styles.CardIconImg} />
+                        <SvgMaker Svg={ArrowOutwardIcon} style={styles.CardIconImg} />
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.CardIcon}
                         onPress={() => { Backend.removeFavArticle(ID) }}
                     >
-                        <Image source={require('../../assets/Favourites/Trash.png')} style={styles.CardIconImg} />
+                        <SvgMaker Svg={TrashIcon} style={styles.CardIconImg} />
                     </TouchableOpacity>
                 </View>
             </View>

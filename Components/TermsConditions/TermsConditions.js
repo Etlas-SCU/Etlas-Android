@@ -7,6 +7,9 @@ import { useEffect, useState, useContext } from "react";
 import { UserContext } from "../Context/Context";
 import Loader from "../Loader/Loader";
 import { goBack } from "../../Backend/Navigator";
+import SvgMaker from "../SvgMaker/SvgMaker";
+import { TermsStatue, TermsView } from "../../assets/SVG/Images";
+import { InvCloseIcon } from "../../assets/SVG/Icons";
 
 
 // to view the HTML text with the styles
@@ -49,11 +52,13 @@ export default function TermsConditions({ }) {
                     onPress={goBack} 
                     style={styles.close}
                 >
-                    <Image source={require('../../assets/HighScore/close.png')} style={styles.closeIcon}/>
+                    <SvgMaker Svg={InvCloseIcon} style={styles.closeIcon} />
                 </TouchableOpacity>
             </View>
-            <Image source={require('../../assets/TermsConditions/statue.png')} style={styles.statue}/>
-            <Image source={require('../../assets/TermsConditions/pyramids.png')} style={styles.pyramids}/>
+            <SvgMaker Svg={TermsStatue} style={styles.statue} />
+            <SvgMaker Svg={TermsView} style={styles.pyramids} />
+            {/* <Image source={require('../../assets/TermsConditions/statue.png')} style={styles.statue}/> */}
+            {/* <Image source={require('../../assets/TermsConditions/pyramids.png')} style={styles.pyramids}/> */}
             <View style={styles.DarkConatiner}>
                 <Text style={styles.copyright}>{translate('TermsConditions.copyright')}</Text>
                 <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.contentContainer}>

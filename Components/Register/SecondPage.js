@@ -12,6 +12,8 @@ import PopupMessage from "../PopupMessage/PopupMessage";
 import Backend from "../../Backend/Backend";
 import { UserContext } from "../Context/Context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import LeftArrow from '../../assets/register/left-arrow.svg';
+import SvgMaker from "../SvgMaker/SvgMaker";
 
 
 export function SecondPage({ }) {
@@ -63,7 +65,7 @@ export function SecondPage({ }) {
                 <View style={styles.header_container}>
                     <Text style={styles.header}>{translate('Register.title')}</Text>
                     <TouchableOpacity style={styles.backContainer} onPress={goBack}>
-                        <Image style={styles.back} source={require('../../assets/register/left-arrow.png')} />
+                        <SvgMaker style={styles.back} Svg={LeftArrow} />
                     </TouchableOpacity>
                 </View>
                 <View style={styles.line} />

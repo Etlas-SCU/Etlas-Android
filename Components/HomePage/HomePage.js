@@ -12,6 +12,8 @@ import { goPage } from "../../Backend/Navigator";
 import { useIsFocused } from "@react-navigation/native";
 import { setStatusBarStyle } from "expo-status-bar";
 import { UserDataContext } from "../Context/DataContext";
+import SvgMaker from "../SvgMaker/SvgMaker";
+import { Ehome, MenuIcon, NewIcon } from "../../assets/SVG/Icons";
 import Loader from "../Loader/Loader";
 import PopupMessage from "../PopupMessage/PopupMessage";
 
@@ -31,7 +33,7 @@ const Section = memo(({ title, List, pageName, isArticle }) => {
         <View styles={styles.Box}>
             <View style={styles.boxHeader}>
                 <Text style={styles.boxTitle}>{title}</Text>
-                <Image style={styles.new_image} source={require('../../assets/HomePage/New.png')} />
+                <SvgMaker Svg={NewIcon} style={styles.new_image} />
                 <TouchableOpacity style={styles.see_all} onPress={() => { goPage(pageName, 'Home') }}>
                     <Text style={styles.see_all_text}>{translate('Home.see_all')}</Text>
                 </TouchableOpacity>
@@ -148,15 +150,15 @@ export default function HomePage({ }) {
             <ScrollView
                 contentContainerStyle={styles.contentContainer}
                 showsVerticalScrollIndicator={false}
-                refreshControl={<RefreshControl colors={[styles.refreshColor]} refreshing={refreshing} onRefresh={onRefresh}/>}
+                refreshControl={<RefreshControl tintColor={styles.refreshColor} colors={[styles.refreshColor]} refreshing={refreshing} onRefresh={onRefresh} />}
             >
                 <View style={styles.header}>
                     <TouchableOpacity style={styles.aboutus} onPress={() => { showModal(), setScreen('Home') }}>
-                        <Image source={require('../../assets/KnowledgeCheck/tabler_exclamation-circle.png')} />
+                        <SvgMaker Svg={MenuIcon} />
                     </TouchableOpacity>
                     <Text style={styles.title}>{translate('Home.title')}</Text>
                 </View>
-                <Image style={styles.logo} source={require('../../assets/HomePage/e.png')} />
+                <SvgMaker Svg={Ehome} style={styles.logo} />
                 <Text style={styles.etlas}>{translate('Home.etlas')}</Text>
                 <Text style={styles.desc}>{translate('Home.desc')}</Text>
                 <TextInput

@@ -8,6 +8,8 @@ import Backend from "../../Backend/Backend";
 import Loader from "../Loader/Loader";
 import PopupMessage from "../PopupMessage/PopupMessage";
 import { UserContext } from "../Context/Context";
+import SvgMaker from '../../Components/SvgMaker/SvgMaker';
+import { LeftArrow, EyeIcon } from "../../assets/SVG/Icons";
 
 
 export default function ForgotPasswordThird({ }) {
@@ -92,7 +94,7 @@ export default function ForgotPasswordThird({ }) {
                 <View style={styles.header_container}>
                     <Text style={styles.header}>{translate('forgotPassword.title')}</Text>
                     <TouchableOpacity style={styles.backContainer} onPress={goBack}>
-                        <Image style={styles.back} source={require('../../assets/register/left-arrow.png')} />
+                        <SvgMaker style={styles.back} Svg={LeftArrow} />
                     </TouchableOpacity>
                 </View>
                 <View style={styles.line} />
@@ -110,7 +112,7 @@ export default function ForgotPasswordThird({ }) {
                                 secureTextEntry={hiddenPassword}
                             />
                             <TouchableOpacity style={styles.passwordEyeButton} onPress={() => setHiddenPassword(!hiddenPassword)}>
-                                <Image style={styles.passwordContainerImage} source={require('../../assets/register/codicon_eye.png')} />
+                                <SvgMaker style={styles.passwordContainerImage} Svg={EyeIcon} />
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -126,7 +128,7 @@ export default function ForgotPasswordThird({ }) {
                                 secureTextEntry={hiddenConfirmPassword}
                             />
                             <TouchableOpacity style={styles.passwordEyeButton} onPress={() => setHiddenConfirmPassword(!hiddenConfirmPassword)}>
-                                <Image style={styles.passwordContainerImage} source={require('../../assets/register/codicon_eye.png')} />
+                                <SvgMaker style={styles.passwordContainerImage} Svg={EyeIcon} />
                             </TouchableOpacity>
                         </View>
                     </View>

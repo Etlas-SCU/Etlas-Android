@@ -3,6 +3,8 @@ import { styles } from "./Styles";
 import { useState } from "react";
 import { goBack, getCurrentScreenParam } from "../../Backend/Navigator";
 import Backend from "../../Backend/Backend";
+import SvgMaker from "../SvgMaker/SvgMaker";
+import { LeftArrow, NonFilledHeartIcon, FilledHeartIcon } from "../../assets/SVG/Icons";
 
 
 export default function ArticleDetails({ }) {
@@ -16,15 +18,15 @@ export default function ArticleDetails({ }) {
 
 
     // get the icons of heart
-    const fav = require('../../assets/ArticleDetails/filled.png');
-    const notFav = require('../../assets/ArticleDetails/notfilled.png');
+    const fav = FilledHeartIcon;
+    const notFav = NonFilledHeartIcon;
 
     // get the icons of heart
-    const [favIcon, setFavIcon] = useState(notFav);
+    const [isFav, setIsFav] = useState(false);
 
     // change the icon of heart
     const toggleFav = () => {
-        setFavIcon(fav == favIcon ? notFav : fav);
+        setIsFav(!isFav);
     }
 
     return (
@@ -33,7 +35,7 @@ export default function ArticleDetails({ }) {
                 style={styles.backContainer}
                 onPress={goBack}
             >
-                <Image source={require('../../assets/Scan/Arr.png')} style={styles.back} />
+                <SvgMaker Svg={LeftArrow} style={styles.back} />
             </TouchableOpacity>
             <Image source={Img} style={styles.upperBox} resizeMode='cover' />
             <View style={styles.lowerBox}>
@@ -45,7 +47,7 @@ export default function ArticleDetails({ }) {
                     <View style={styles.favouriteConainer}>
                         <View style={styles.fav}>
                             <TouchableOpacity onPress={toggleFav}>
-                                <Image source={favIcon} style={styles.favIcon} resizeMode="contain" />
+                                <SvgMaker Svg={isFav ? fav : notFav} style={styles.favIcon} />
                             </TouchableOpacity>
                         </View>
                     </View>

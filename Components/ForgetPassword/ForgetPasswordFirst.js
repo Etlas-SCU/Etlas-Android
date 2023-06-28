@@ -8,6 +8,8 @@ import Backend from "../../Backend/Backend";
 import PopupMessage from "../PopupMessage/PopupMessage";
 import Loader from "../Loader/Loader";
 import { UserContext } from "../Context/Context";
+import SvgMaker from '../../Components/SvgMaker/SvgMaker';
+import { LeftArrow } from "../../assets/SVG/Icons";
 
 
 export default function ForgotPasswordFirst({ }) {
@@ -63,7 +65,7 @@ export default function ForgotPasswordFirst({ }) {
                 <View style={styles.header_container}>
                     <Text style={styles.header}>{translate('forgotPassword.title')}</Text>
                     <TouchableOpacity style={styles.backContainer} onPress={goBack}>
-                        <Image style={styles.back} source={require('../../assets/register/left-arrow.png')} />
+                        <SvgMaker style={styles.back} Svg={LeftArrow} />
                     </TouchableOpacity>
                 </View>
                 <View style={styles.line} />

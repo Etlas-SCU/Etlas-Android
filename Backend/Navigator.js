@@ -73,16 +73,12 @@ export function goPage(nextPage, prevPage, params) {
 
 // Go back to the previous page
 export function goBack() {
-    try {
-        navigationRef?.dispatch(CommonActions.goBack(null));
-        const currentPage = getCurrentRouteName();
-        if (getDarkPages().includes(currentPage))
-            setStatusBarStyle('dark');
-        else
-            setStatusBarStyle('light');
-    } catch (error) {
-        console.log('GoBack error:', error);
-    }
+    navigationRef?.dispatch(CommonActions.goBack(null));
+    const currentPage = getCurrentRouteName();
+    if (getDarkPages().includes(currentPage))
+        setStatusBarStyle('dark');
+    else
+        setStatusBarStyle('light');
 }
 
 // Get the params of the current page

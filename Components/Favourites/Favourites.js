@@ -6,7 +6,8 @@ import Backend from "../../Backend/Backend";
 import { translate } from "../../Localization";
 import { goBack, goPage } from "../../Backend/Navigator";
 import { LinearGradient } from 'expo-linear-gradient';
-import { colors } from "../../AppStyles";
+import SvgMaker from "../SvgMaker/SvgMaker";
+import { InvCloseIcon } from "../../assets/SVG/Icons";
 
 
 function Container({ List, ConainerName, pageNav, isArticle }) {
@@ -69,7 +70,7 @@ export default function Favourites({ }) {
                     onPress={goBack}
                     style={styles.close}
                 >
-                    <Image source={require('../../assets/HighScore/close.png')} style={styles.arrow} />
+                    <SvgMaker Svg={InvCloseIcon} style={styles.arrow} />
                 </TouchableOpacity>
             </View>
             <View style={styles.containersContainer}>

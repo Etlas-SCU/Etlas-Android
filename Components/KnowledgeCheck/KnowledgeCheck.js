@@ -1,4 +1,4 @@
-import { View, Image, Text, TouchableOpacity, ScrollView, RefreshControl } from "react-native";
+import { View, Image, Text, TouchableOpacity, ScrollView } from "react-native";
 import { styles } from './Styles'
 import { translate } from "../../Localization";
 import { UserContext } from "../Context/Context";
@@ -8,9 +8,10 @@ import { isIOS } from "../../AppStyles";
 import { goPage } from "../../Backend/Navigator";
 import { useIsFocused } from "@react-navigation/native";
 import { setStatusBarStyle } from "expo-status-bar";
-import PopupMessage from "../PopupMessage/PopupMessage";
-import Loader from "../Loader/Loader";
 import { UserDataContext } from "../Context/DataContext";
+import SvgMaker from "../SvgMaker/SvgMaker";
+import { MenuIcon } from "../../assets/SVG/Icons";
+import { StatueImage, LandmarkImage, MonumentImage } from '../../assets/SVG/Images';
 
 
 function Card({ title, img, desc, score }) {
@@ -27,7 +28,7 @@ function Card({ title, img, desc, score }) {
                 <Text numberOfLines={1} style={styles.bodyScore} adjustsFontSizeToFit={true}>{score}</Text>
             </View>
             <View style={styles.bodyImage}>
-                <Image source={img} style={styles.image} />
+                <SvgMaker Svg={img} style={styles.image} />
             </View>
         </TouchableOpacity>
     )
@@ -50,13 +51,13 @@ export default function KnowledgeCheck({ }) {
     return (
         <View style={styles.container}>
             {isIOS() ? <MainMenu /> : null}
-            <ScrollView 
-                contentContainerStyle={styles.contentContainer} 
+            <ScrollView
+                contentContainerStyle={styles.contentContainer}
                 showsVerticalScrollIndicator={false}
             >
                 <View style={styles.header}>
                     <TouchableOpacity style={styles.aboutus} onPress={() => { showModal(), setScreen('KnowledgeCheck') }}>
-                        <Image source={require('../../assets/KnowledgeCheck/tabler_exclamation-circle.png')} />
+                        <SvgMaker Svg={MenuIcon} />
                     </TouchableOpacity>
                     <Text style={styles.title}>{translate('KnowledgeCheck.title')}</Text>
                 </View>
@@ -65,19 +66,19 @@ export default function KnowledgeCheck({ }) {
                         title={translate('KnowledgeCheck.Statues')}
                         desc={translate('KnowledgeCheck.StatuesText')}
                         score={statueScore}
-                        img={require('../../assets/KnowledgeCheck/Statue_1.png')}
+                        img={StatueImage}
                     />
                     <Card
                         title={translate('KnowledgeCheck.Monuments')}
                         desc={translate('KnowledgeCheck.MonumentsText')}
                         score={monumentScore}
-                        img={require('../../assets/KnowledgeCheck/Statue_2.png')}
+                        img={MonumentImage}
                     />
                     <Card
                         title={translate('KnowledgeCheck.Landmarks')}
                         desc={translate('KnowledgeCheck.LandmarksText')}
                         score={landmarkScore}
-                        img={require('../../assets/KnowledgeCheck/Statue_3.png')}
+                        img={LandmarkImage}
                     />
                 </View>
             </ScrollView>

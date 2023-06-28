@@ -1,4 +1,4 @@
-import { TouchableOpacity, Image } from 'react-native'
+import { TouchableOpacity } from 'react-native'
 import { useState, useEffect, useContext } from 'react';
 import Backend from '../../Backend/Backend';
 import * as Facebook from 'expo-auth-session/providers/facebook';
@@ -10,6 +10,8 @@ import { UserContext } from '../Context/Context';
 import { translate } from '../../Localization';
 import { goPageResetStack } from '../../Backend/Navigator';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import SvgMaker from '../SvgMaker/SvgMaker';
+import { FacebookIcon } from '../../assets/SVG/Icons';
 
 
 export default function FacebookAuth() {
@@ -104,7 +106,7 @@ export default function FacebookAuth() {
         >
             {loaderVisible ? <Loader /> : null}
             {popupMessageVisible ? <PopupMessage /> : null}
-            <Image source={require('../../assets/register/facebook.png')} />
+            <SvgMaker Svg={FacebookIcon} />
         </TouchableOpacity>
     )
 }

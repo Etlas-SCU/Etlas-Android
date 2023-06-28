@@ -9,6 +9,8 @@ import { UserContext } from "../Context/Context";
 import Loader from "../Loader/Loader";
 import PopupMessage from "../PopupMessage/PopupMessage";
 import { UserDataContext } from "../Context/DataContext";
+import SvgMaker from "../SvgMaker/SvgMaker";
+import { InvCloseIcon, EditIcon, SaveIcon } from "../../assets/SVG/Icons";
 
 
 export default function EditProfile({ }) {
@@ -58,14 +60,14 @@ export default function EditProfile({ }) {
     }
 
     // for editable icons
-    const edit = require('../../assets/EditProfile/edit.png');
-    const save = require('../../assets/EditProfile/save.png');
+    const edit = EditIcon;
+    const save = SaveIcon;
 
     return (
         <View style={styles.container}>
             {loaderVisible ? <Loader /> : null}
             {popupMessageVisible ? <PopupMessage /> : null}
-            <ImageBackground source={require('../../assets/EditProfile/Background.png')} resizeMode="cover" style={styles.background}>
+            <ImageBackground source={require('../../assets/Backgrounds/EditProfile.png')} resizeMode="cover" style={styles.background}>
                 <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.contentContainer}>
                     <View style={styles.header}>
                         <Text style={styles.title}>{translate('EditProfile.title')}</Text>
@@ -73,7 +75,7 @@ export default function EditProfile({ }) {
                             onPress={goBack}
                             style={styles.close}
                         >
-                            <Image source={require('../../assets/HighScore/close.png')} style={styles.closeIcon} />
+                            <SvgMaker Svg={InvCloseIcon} style={styles.closeIcon} />
                         </TouchableOpacity>
                     </View>
                     <View style={styles.profileContainer}>
@@ -89,7 +91,7 @@ export default function EditProfile({ }) {
                                     editable={nameEdit}
                                 />
                                 <TouchableOpacity onPress={() => setNameEdit(!nameEdit)} style={styles.EditButton}>
-                                    <Image source={nameEdit ? save : edit} style={styles.editIcon} />
+                                    <SvgMaker Svg={nameEdit ? save : edit} style={styles.editIcon} />
                                 </TouchableOpacity>
                             </View>
                         </View>
@@ -105,7 +107,7 @@ export default function EditProfile({ }) {
                                     editable={emailEdit}
                                 />
                                 <TouchableOpacity onPress={() => setEmailEdit(!emailEdit)} style={styles.EditButton}>
-                                    <Image source={emailEdit ? save : edit} style={styles.editIcon} />
+                                    <SvgMaker Svg={emailEdit ? save : edit} style={styles.editIcon} />
                                 </TouchableOpacity>
                             </View>
                         </View>
@@ -121,7 +123,7 @@ export default function EditProfile({ }) {
                                     editable={phoneNumberEdit}
                                 />
                                 <TouchableOpacity onPress={() => setPhoneNumberEdit(!phoneNumberEdit)} style={styles.EditButton}>
-                                    <Image source={phoneNumberEdit ? save : edit} style={styles.editIcon} />
+                                    <SvgMaker Svg={phoneNumberEdit ? save : edit} style={styles.editIcon} />
                                 </TouchableOpacity>
                             </View>
                         </View>
@@ -137,7 +139,7 @@ export default function EditProfile({ }) {
                                     editable={addressEdit}
                                 />
                                 <TouchableOpacity onPress={() => setAddressEdit(!addressEdit)} style={styles.EditButton}>
-                                    <Image source={addressEdit ? save : edit} style={styles.editIcon} />
+                                    <SvgMaker Svg={addressEdit ? save : edit} style={styles.editIcon} />
                                 </TouchableOpacity>
                             </View>
                         </View>

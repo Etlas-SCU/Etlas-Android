@@ -6,6 +6,8 @@ import FavMonumentCard from "../Favourites/FavMonumentCard";
 import { goBack, getParams } from "../../Backend/Navigator";
 import { useIsFocused } from '@react-navigation/native';
 import { setStatusBarStyle } from "expo-status-bar";
+import SvgMaker from "../SvgMaker/SvgMaker";
+import { InvCloseIcon } from "../../assets/SVG/Icons";
 
 
 export default function FavMonumentsPage({ }) {
@@ -36,7 +38,7 @@ export default function FavMonumentsPage({ }) {
                     onPress={goBack}
                     style={styles.close}
                 >
-                    <Image source={require('../../assets/HighScore/close.png')} style={styles.arrow} />
+                    <SvgMaker Svg={InvCloseIcon} style={styles.arrow} />
                 </TouchableOpacity>
             </View>
             <FlatList

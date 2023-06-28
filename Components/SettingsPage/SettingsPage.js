@@ -17,12 +17,14 @@ import PopupMessage from "../PopupMessage/PopupMessage";
 import Loader from "../Loader/Loader";
 import { UserDataContext } from "../Context/DataContext";
 import { manipulateAsync } from 'expo-image-manipulator';
+import SvgMaker from "../SvgMaker/SvgMaker";
+import { InvertedMenuIcon, BestScoreIcon, LogoutIcon, FavHeartIcon, WorldIcon, InvRightArrowIcon, AvatarIcon } from "../../assets/SVG/Icons";
 
 
 export default function Settings({ }) {
 
     // default avatar
-    const defaultAvatar = require('../../assets/EditProfile/Avatar.png');
+    const defaultAvatar = AvatarIcon;
 
     // check if the currenpage is focused
     const isFocused = useIsFocused();
@@ -154,14 +156,14 @@ export default function Settings({ }) {
             {loaderVisible ? <Loader /> : null}
             <View style={styles.header}>
                 <TouchableOpacity onPress={() => { showModal(), setScreen('Settings') }} >
-                    <Image source={require('../../assets/KnowledgeCheck/tabler_exclamation-circle.png')} style={styles.circle} />
+                    <SvgMaker Svg={InvertedMenuIcon} style={styles.circle} />
                 </TouchableOpacity>
                 <Text style={styles.title}>{translate('Settings.title')}</Text>
                 <TouchableOpacity
                     onPress={() => { handle_logout() }}
                     disabled={pressed}
                 >
-                    <Image source={require('../../assets/Settings/logout.png')} />
+                    <SvgMaker Svg={LogoutIcon} />
                 </TouchableOpacity>
 
             </View>
@@ -191,17 +193,17 @@ export default function Settings({ }) {
                         style={styles.lineBar}
                         onPress={() => { goPage('favourites', 'Settings') }}
                     >
-                        <Image source={require('../../assets/Settings/fav.png')} style={styles.left} />
+                        <SvgMaker Svg={FavHeartIcon} style={styles.left} />
                         <Text style={[styles.text, styles.middle]}>{translate('Settings.fav')}</Text>
-                        <Image source={require('../../assets/Settings/arrow.png')} style={styles.right} />
+                        <SvgMaker Svg={InvRightArrowIcon} style={styles.right} />
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.lineBar}
                         onPress={() => { goPage('bestScore', 'Settings') }}
                     >
-                        <Image source={require('../../assets/Settings/best_score.png')} style={styles.left} />
+                        <SvgMaker Svg={BestScoreIcon} style={styles.left} />
                         <Text style={[styles.text, styles.middle]}>{translate('Settings.best_score')}</Text>
-                        <Image source={require('../../assets/Settings/arrow.png')} style={styles.right} />
+                        <SvgMaker Svg={InvRightArrowIcon} style={styles.right} />
                     </TouchableOpacity>
                 </View>
                 <View style={styles.Box}>
@@ -212,9 +214,9 @@ export default function Settings({ }) {
                         style={styles.lineBar}
                         onPress={() => { goPage('LanguageSelection', 'Settings') }}
                     >
-                        <Image source={require('../../assets/Settings/World.png')} style={styles.left} />
+                        <SvgMaker Svg={WorldIcon} style={styles.left} />
                         <Text style={[styles.text, styles.middle]}>{translate('Settings.language')}</Text>
-                        <Image source={require('../../assets/Settings/arrow.png')} style={styles.right} />
+                        <SvgMaker Svg={InvRightArrowIcon} style={styles.right} />
                     </TouchableOpacity>
                 </View>
             </ScrollView>

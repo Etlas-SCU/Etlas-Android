@@ -7,6 +7,8 @@ import { useEffect, useState, useContext } from 'react';
 import { UserContext } from '../Context/Context';
 import Loader from '../Loader/Loader';
 import PopupMessage from '../PopupMessage/PopupMessage';
+import SvgMaker from '../SvgMaker/SvgMaker';
+import { InvLeftArrowIcon } from '../../assets/SVG/Icons';
 
 
 export default function BestScore({ }) {
@@ -46,7 +48,7 @@ export default function BestScore({ }) {
         <View style={styles.container}>
             {loaderVisible ? <Loader /> : null}
             {popupMessageVisible ? <PopupMessage /> : null}
-            <ImageBackground source={require('../../assets/HighScore/HighScore.png')} resizeMode='cover' style={styles.image}>
+            <ImageBackground source={require('../../assets/Backgrounds/HighScore.png')} resizeMode='cover' style={styles.image}>
                 <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
                     <View style={styles.header}>
                         <Text style={styles.title}>{translate('BestScore.title')}</Text>
@@ -54,7 +56,7 @@ export default function BestScore({ }) {
                             onPress={goBack}
                             style={styles.closeContainer}
                         >
-                            <Image source={require('../../assets/Profile/Arr.png')} style={styles.close} />
+                            <SvgMaker Svg={InvLeftArrowIcon} style={styles.close} />
                         </TouchableOpacity>
                     </View>
                     <View style={styles.ScoreBox}>

@@ -8,6 +8,8 @@ import { UserContext } from '../Context/Context';
 import { isIOS } from '../../AppStyles';
 import Backend from '../../Backend/Backend';
 import { useIsFocused } from '@react-navigation/native';
+import SvgMaker from '../SvgMaker/SvgMaker';
+import { CloseIcon, FilledHeartIcon, NonFilledHeartIcon, PauseIcon, StopIcon, PlayIcon, SoundIcon } from '../../assets/SVG/Icons';
 
 
 export default function MonumentDetails({ }) {
@@ -24,24 +26,24 @@ export default function MonumentDetails({ }) {
     const { Title, HistoricDate, Img, fullDescription } = Monument;
     const { loaderVisible, showLoader, hideLoader } = useContext(UserContext);
     const [speechState, setSpeechState] = useState('end');
-    const [speechIcon, setSpeechIcon] = useState(sound);
+    const [speechIcon, setSpeechIcon] = useState('sound');
 
     // get the icons of heart
-    const fav = require('../../assets/ArticleDetails/filled.png');
-    const notFav = require('../../assets/ArticleDetails/notfilled.png');
+    const fav = FilledHeartIcon;
+    const notFav = NonFilledHeartIcon;
 
     // get the needed icons
-    const sound = require('../../assets/ArticleDetails/sound.png');
-    const pause = require('../../assets/ArticleDetails/pause.png');
-    const resume = require('../../assets/ArticleDetails/resume.png');
-    const stop = require('../../assets/ArticleDetails/stop.png');
+    const sound = SoundIcon;
+    const pause = PauseIcon;
+    const resume = PlayIcon;
+    const stop = StopIcon;
 
     // get the icons of heart
-    const [favIcon, setFavIcon] = useState(notFav);
+    const [isFav, setIsFav] = useState(false);
 
     // change the icon of heart
     const toggleFav = () => {
-        setFavIcon(fav == favIcon ? notFav : fav);
+        setIsFav(!isFav);
     }
 
     // get the voices
@@ -59,7 +61,7 @@ export default function MonumentDetails({ }) {
             await Speech.getAvailableVoicesAsync().then(Voices => {
                 filterVoices('en', Voices).then(voices => {
                     setVoices(voices);
-                }).then(hideLoader(), setSpeechIcon(sound), setSpeechState('end'), Stop());
+                }).then(hideLoader(), setSpeechIcon('sound'), setSpeechState('end'), Stop());
             });
         }
         getVoices();
@@ -71,7 +73,7 @@ export default function MonumentDetails({ }) {
         const subscription = AppState.addEventListener('change', nextAppState => {
             appState.current = nextAppState;
             setAppStateVisible(appState.current);
-            if(appState.current !== 'active'){
+            if (appState.current !== 'active') {
                 StopSound();
             }
         });
@@ -82,12 +84,12 @@ export default function MonumentDetails({ }) {
 
     // get the screen state for stop the sound
     useEffect(() => {
-        if(!isFocused){
+        if (!isFocused) {
             StopSound();
         }
     }, [isFocused]);
 
-    
+
     // read the description
     const Read = async () => {
         const options = {
@@ -95,7 +97,7 @@ export default function MonumentDetails({ }) {
             volume: 1,
             onDone: () => {
                 setSpeechState('end');
-                setSpeechIcon(sound);
+                setSpeechIcon('sound');
             },
         };
         await Speech.speak(fullDescription, options);
@@ -118,14 +120,14 @@ export default function MonumentDetails({ }) {
 
     // const Stop sound
     const StopSound = async () => {
-        if(isIOS()){
+        if (isIOS()) {
             Pause();
             setSpeechState('pause');
-            setSpeechIcon(resume);
-        }else {
+            setSpeechIcon('resume');
+        } else {
             Stop();
             setSpeechState('end');
-            setSpeechIcon(sound);
+            setSpeechIcon('sound');
         }
     }
 
@@ -135,26 +137,41 @@ export default function MonumentDetails({ }) {
             if (speechState === 'end') {
                 Read();
                 setSpeechState('play');
-                setSpeechIcon(pause);
+                setSpeechIcon('pause');
             } else if (speechState === 'play') {
                 Pause();
                 setSpeechState('pause');
-                setSpeechIcon(resume);
+                setSpeechIcon('resume');
             } else if (speechState === 'pause') {
                 Resume();
                 setSpeechState('play');
-                setSpeechIcon(pause);
+                setSpeechIcon('pause');
             }
         } else {
             if (speechState === 'end') {
                 Read();
                 setSpeechState('play');
-                setSpeechIcon(stop);
+                setSpeechIcon('stop');
             } else if (speechState === 'play') {
                 Stop();
                 setSpeechState('end');
-                setSpeechIcon(sound);
+                setSpeechIcon('sound');
             }
+        }
+    }
+
+    const getIcon = () => {
+        switch (speechIcon) {
+            case 'sound':
+                return sound;
+            case 'pause':
+                return pause;
+            case 'resume':
+                return resume;
+            case 'stop':
+                return stop;
+            default:
+                return sound;
         }
     }
 
@@ -166,7 +183,7 @@ export default function MonumentDetails({ }) {
                     onPress={goBack}
                     style={styles.close}
                 >
-                    <Image source={require('../../assets/HighScore/close.png')} style={styles.arrow} />
+                    <SvgMaker Svg={CloseIcon} style={styles.arrow} />
                 </TouchableOpacity>
                 <Image source={Img} style={styles.image} />
                 <View style={styles.TitleConainer}>
@@ -179,12 +196,12 @@ export default function MonumentDetails({ }) {
                 <View style={styles.iconConainer}>
                     <View style={styles.FavContainer}>
                         <TouchableOpacity onPress={() => { toggleFav() }}>
-                            <Image source={favIcon} style={styles.icon} />
+                            <SvgMaker Svg={isFav ? fav : notFav} style={styles.icon} />
                         </TouchableOpacity>
                     </View>
                     <View style={styles.SoundContainer}>
                         <TouchableOpacity onPress={speechControl}>
-                            <Image source={speechIcon} style={styles.speechIcon} />
+                            <SvgMaker Svg={getIcon()} style={styles.speechIcon} />
                         </TouchableOpacity>
                     </View>
                 </View>

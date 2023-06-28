@@ -9,6 +9,8 @@ import { UserContext } from "../../Context/Context";
 import { goBack, goPage, getParams } from "../../../Backend/Navigator";
 import Loader from "../../Loader/Loader";
 import Backend from "../../../Backend/Backend";
+import LeftArrow from '../../../assets/register/left-arrow.svg';
+import SvgMaker from "../../SvgMaker/SvgMaker";
 
 
 export default function ForgotPasswordSecond({ }) {
@@ -77,7 +79,7 @@ export default function ForgotPasswordSecond({ }) {
                 <View style={styles.header_container}>
                     <Text style={styles.header}>{translate('emailConfirmation.title')}</Text>
                     <TouchableOpacity style={styles.backContainer} onPress={goBack}>
-                        <Image style={styles.back} source={require('../../../assets/register/left-arrow.png')} />
+                        <SvgMaker style={styles.back} Svg={LeftArrow}/>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.line} />

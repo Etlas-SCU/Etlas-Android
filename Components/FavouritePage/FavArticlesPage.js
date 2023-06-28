@@ -4,6 +4,8 @@ import { translate } from "../../Localization";
 import Backend from "../../Backend/Backend";
 import FavArticleCard from "../Favourites/FavArticleCard";
 import { goBack, getParams } from "../../Backend/Navigator";
+import SvgMaker from "../SvgMaker/SvgMaker";
+import { InvCloseIcon } from "../../assets/SVG/Icons";
 
 
 export default function FavArticlesPage({ }) {
@@ -27,7 +29,7 @@ export default function FavArticlesPage({ }) {
                     onPress={goBack}
                     style={styles.close}
                 >
-                    <Image source={require('../../assets/HighScore/close.png')} style={styles.arrow} />
+                    <SvgMaker Svg={InvCloseIcon} style={styles.arrow} />
                 </TouchableOpacity>
             </View>
             <FlatList

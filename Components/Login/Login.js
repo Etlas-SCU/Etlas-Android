@@ -11,6 +11,9 @@ import { UserContext } from "../Context/Context";
 import Loader from "../Loader/Loader";
 import PopupMessage from "../PopupMessage/PopupMessage";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import LeftArrow from '../../assets/register/left-arrow.svg';
+import SvgMaker from '../../Components/SvgMaker/SvgMaker';
+import EyeIcon from '../../assets/register/codicon_eye.svg';
 
 
 export default function Login({ }) {
@@ -98,7 +101,7 @@ export default function Login({ }) {
                 <View style={styles.header_container}>
                     <Text style={styles.header}>{translate('Login.title')}</Text>
                     <TouchableOpacity style={styles.backContainer} onPress={goBack}>
-                        <Image style={styles.back} source={require('../../assets/register/left-arrow.png')} />
+                        <SvgMaker style={styles.back} Svg={LeftArrow} />
                     </TouchableOpacity>
                 </View>
                 <View style={styles.line} />
@@ -125,7 +128,7 @@ export default function Login({ }) {
                             cursorColor={colors.LightSeaGreen}
                         />
                         <TouchableOpacity style={styles.passwordEyeButton} onPress={() => setHidden(!hidden)}>
-                            <Image style={styles.passwordContainerImage} source={require('../../assets/register/codicon_eye.png')} />
+                            <SvgMaker style={styles.passwordContainerImage} Svg={EyeIcon} />
                         </TouchableOpacity>
                     </View>
                     <TouchableOpacity onPress={() => { goPage('forgotPasswordFirst', 'login') }}>
