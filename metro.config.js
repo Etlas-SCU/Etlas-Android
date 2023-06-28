@@ -1,17 +1,21 @@
-const { getDefaultConfig } = require("@expo/metro-config");
+const { getDefaultConfig } = require("expo/metro-config");
+
+const defaultConfig = getDefaultConfig(__dirname);
+
+defaultConfig.resolver.assetExts.push("hcscript");
+defaultConfig.transformer.assetPlugins = ["expo-asset/tools/hashAssetFiles"];
 
 module.exports = (async () => {
     const defaultConfig = await getDefaultConfig(__dirname);
 
     return {
         ...defaultConfig,
-        // Add any custom configuration specific to your project here
         transformer: {
-            babelTransformerPath: require.resolve("react-native-svg-transformer")
+            babelTransformerPath: require.resolve("react-native-svg-transformer"),
         },
         resolver: {
             assetExts: defaultConfig.resolver.assetExts.filter(ext => ext !== "svg"),
-            sourceExts: [...defaultConfig.resolver.sourceExts, "svg"]
-        }
+            sourceExts: [...defaultConfig.resolver.sourceExts, "svg"],
+        },
     };
 })();

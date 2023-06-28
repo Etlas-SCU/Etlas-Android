@@ -28,7 +28,7 @@ export const styles = StyleSheet.create({
         borderBottomLeftRadius: 30,
         borderBottomRightRadius: 30,
         width: responsiveWidth(430),
-        height: responsiveHeight(350),
+        height: responsiveHeight(288),
         zIndex: -1
     },
     cover: {
@@ -95,30 +95,15 @@ export const styles = StyleSheet.create({
         textAlign: "center",
         textAlignVertical: "center",
     },
-    logoContainer: {
-        position: "absolute",
-        alignSelf: 'center',
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    statue: {
-        width: responsiveWidth(500),
-        height: responsiveHeight(500),
-        position: "absolute",
-        right: responsiveHeight(-290),
-        bottom: responsiveHeight(-250),
-    },
-    logo: {
-        left: responsiveWidth(-150),
-        top: responsiveHeight(100)
-    },
     boxtitle: {
         color: colors.White,
         fontSize: responsiveFontSize(18),
         fontFamily: fontFamily.MontserratBold,
         textAlign: "center",
         textAlignVertical: "center",
+        position: 'absolute',
+        alignSelf: 'center',
+        zIndex: 999,
         marginTop: responsiveHeight(60),
     }
 });

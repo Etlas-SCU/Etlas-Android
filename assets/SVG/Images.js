@@ -18,10 +18,6 @@ export const TermsStatue = terms_statue;
 import terms_view from '../../assets/Images/terms_view.svg';
 export const TermsView = terms_view;
 
-// contact_us_logo
-import contact_us_logo from '../../assets/Images/contact_us_logo.svg';
-export const ContactUsLogo = contact_us_logo;
-
-// contact_us_statue
-import contact_us_statue from '../../assets/Images/contact_us_statue.svg';
-export const ContactUsStatue = contact_us_statue;
+// contact_us
+import contact_us from '../../assets/Images/Contact_us.png';
+export const ContactUs = contact_us;
