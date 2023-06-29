@@ -1,74 +1,71 @@
 {
-  "expo": {
-    "name": "Etlas",
-    "slug": "Etlas",
-    "version": "1.0.0",
-    "scheme": [
-      "com.etlas",
-      "fb473951754912606"
-    ],
-    "orientation": "portrait",
-    "icon": "./assets/logo/Etlas-logo.png",
-    "userInterfaceStyle": "light",
-    "githubUrl": "https://github.com/Etlas-SCU/Etlas-Android",
-    "splash": {
-      "image": "./assets/splash/Splash.png",
-      "resizeMode": "cover",
-      "backgroundColor": "#ffffff"
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": false,
-      "bundleIdentifier": "com.etlas"
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/logo/Etlas-logo.png",
-        "backgroundColor": "#ffffff"
-      },
-      "permissions": [
-        "android.permission.CAMERA"
-      ],
-      "package": "com.etlas"
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    },
-    "plugins": [
-      [
-        "expo-camera",
-        {
-          "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera",
-          "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone"
+    "expo": {
+        "name": "Etlas",
+        "slug": "Etlas",
+        "version": "1.0.0",
+        "scheme": ["com.etlas", "fb473951754912606"],
+        "packagerOpts": {
+            "config": "metro.config.js",
+            "sourceExts": ["js", "jsx", "json", "wasm", "svg"]
+        },
+        "orientation": "portrait",
+        "icon": "./assets/Images/Etlas-logo.png",
+        "userInterfaceStyle": "light",
+        "githubUrl": "https://github.com/Etlas-SCU/Etlas-Android",
+        "splash": {
+            "image": "./assets/Images/Splash.png",
+            "resizeMode": "cover",
+            "backgroundColor": "#ffffff"
+        },
+        "assetBundlePatterns": ["**/*"],
+        "ios": {
+            "supportsTablet": false,
+            "bundleIdentifier": "com.etlas"
+        },
+        "android": {
+            "adaptiveIcon": {
+                "foregroundImage": "./assets/Images/Etlas-logo.png",
+                "backgroundColor": "#ffffff"
+            },
+            "permissions": ["android.permission.CAMERA"],
+            "package": "com.etlas"
+        },
+        "web": {
+            "favicon": "./assets/favicon.png"
+        },
+        "plugins": [
+            [
+                "expo-camera",
+                {
+                    "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera",
+                    "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone"
+                }
+            ],
+            [
+                "expo-image-picker",
+                {
+                    "photosPermission": "custom photos permission",
+                    "cameraPermission": "Allow $(PRODUCT_NAME) to open the camera",
+                    "//": "Disables the microphone permission",
+                    "microphonePermission": false
+                }
+            ],
+            "expo-localization"
+        ],
+        "extra": {
+            "eas": {
+                "projectId": "2f0df44e-e5b0-4e95-9134-512e63e63018"
+            },
+            "expoConfig": {
+                "currentFullName": "@7oskaa/Etlas",
+                "originalFullName": "@7oskaa/Etlas"
+            }
+        },
+        "runtimeVersion": {
+            "policy": "sdkVersion"
+        },
+        "updates": {
+            "url": "https://u.expo.dev/2f0df44e-e5b0-4e95-9134-512e63e63018"
         }
-      ],
-      [
-        "expo-image-picker",
-        {
-          "photosPermission": "custom photos permission",
-          "cameraPermission": "Allow $(PRODUCT_NAME) to open the camera",
-          "//": "Disables the microphone permission",
-          "microphonePermission": false
-        }
-      ],
-      "expo-localization"
-    ],
-    "extra": {
-      "eas": {
-        "projectId": "2f0df44e-e5b0-4e95-9134-512e63e63018"
-      },
-      "expoConfig": {
-        "currentFullName": "@7oskaa/Etlas",
-        "originalFullName": "@7oskaa/Etlas"
-      }
-    },
-    "runtimeVersion": {
-      "policy": "sdkVersion"
-    },
-    "updates": {
-      "url": "https://u.expo.dev/2f0df44e-e5b0-4e95-9134-512e63e63018"
     }
-  }
 }

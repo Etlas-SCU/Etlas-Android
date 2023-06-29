@@ -5,11 +5,13 @@ import { colors, responsiveWidth } from "../../AppStyles";
 import Stars from "../ToursCard/Stars";
 import { goBack } from "../../Backend/Navigator";
 import Backend from "../../Backend/Backend";
+import SvgMaker from "../SvgMaker/SvgMaker";
+import { InvLeftArrowIcon } from "../../assets/SVG/Icons";
 
 
 export default function TourDetails({ }) {
 
-    let images_src = Array(5).fill(require('../../assets/TourPage/Tour1.png'));
+    let images_src = Array(5).fill(require('../../assets/ImagesToDelete/Tour1.png'));
     const images = images_src.map((src, idx) => (<Image source={src} style={styles.image} key={idx}/>));
     
     // get the parameters needed
@@ -23,7 +25,7 @@ export default function TourDetails({ }) {
                 onPress={goBack}
                 style={styles.backContainer}
             >
-                <Image source={require('../../assets/Scan/Arr.png')} style={styles.back}/>
+                <SvgMaker Svg={InvLeftArrowIcon} style={styles.back}/>
             </TouchableOpacity>
             <Swiper
                 showsButtons={false}
@@ -42,11 +44,11 @@ export default function TourDetails({ }) {
                 {images}
             </Swiper>
             <View style={styles.container}>
+                <View style={styles.header}>
+                    <Text style={styles.title}>{Title}</Text>
+                    <Stars rate={Rate} size={responsiveWidth(20)}/>
+                </View>
                 <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.ScrollContainer}>
-                    <View style={styles.header}>
-                        <Text style={styles.title}>{Title}</Text>
-                        <Stars rate={Rate} size={responsiveWidth(20)}/>
-                    </View>
                     <Text style={styles.description}>{fullDescription}</Text>
                 </ScrollView>
             </View>

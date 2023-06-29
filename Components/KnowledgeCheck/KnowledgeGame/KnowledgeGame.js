@@ -1,10 +1,15 @@
 import { View, Text, TouchableOpacity, Image, ScrollView, ImageBackground } from 'react-native';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { styles } from './Styles';
 import { translate } from '../../../Localization';
 import Backend from '../../../Backend/Backend';
-import { goBack, goPage, getParams } from '../../../Backend/Navigator';
+import { goBack, goPage } from '../../../Backend/Navigator';
 import { setStatusBarStyle } from 'expo-status-bar';
+import PopupMessage from '../../PopupMessage/PopupMessage';
+import { UserContext } from '../../Context/Context';
+import { UserDataContext } from '../../Context/DataContext';
+import SvgMaker from '../../SvgMaker/SvgMaker';
+import { LeftArrow, HelpIcon } from '../../../assets/SVG/Icons';
 
 
 export default function KnowledgeGame({ }) {
@@ -13,8 +18,8 @@ export default function KnowledgeGame({ }) {
     const quesionsList = Backend.getQuestions();
 
     // get the page name
-    const { pageName } = getParams();
-    
+    const lastGame = Backend.getLastGame();
+
     // make states for the game
     const [currQuestionIdx, setCurrQuestionIdx] = useState(0);
     const [currOptionSelected, setCurrOptionSelected] = useState(null);
@@ -28,6 +33,12 @@ export default function KnowledgeGame({ }) {
     const [isBackEnabled, setIsBackEnabled] = useState(true);
 
 
+    // get popup states
+    const { showPopupMessage, popupMessageVisible } = useContext(UserContext);
+
+    // get update function
+    const { updateScore } = useContext(UserDataContext);
+
     // to re initial all states if the component called again
     useEffect(() => {
         setCurrQuestionIdx(0);
@@ -38,8 +49,8 @@ export default function KnowledgeGame({ }) {
         setHint(2);
         setGameFinished(false);
         setFilterdOptions([]);
-        setIsBackEnabled(true);     
-    }, [reInit, pageName]);
+        setIsBackEnabled(true);
+    }, [reInit, lastGame]);
 
 
     // validate the answer
@@ -68,7 +79,56 @@ export default function KnowledgeGame({ }) {
         }
     };
 
-    
+    // update monuments score
+    async function updateMonumentsScore(score) {
+        const { statusCode, data } = await Backend.updateMonumentsScore(score);
+        if (!Backend.isSuccessfulRequest(statusCode)) {
+            const errorMessage = await Backend.getErrorMessage(data).then(response => response);
+            showPopupMessage('Error', errorMessage);
+            updateScore(score, 'Monuments');
+        }
+    }
+
+    // update landmarks score
+    async function updateLandmarksScore(score) {
+        const { statusCode, data } = await Backend.updateLandmarksScore(score);
+        if (!Backend.isSuccessfulRequest(statusCode)) {
+            const errorMessage = await Backend.getErrorMessage(data).then(response => response);
+            showPopupMessage('Error', errorMessage);
+            updateScore(score, 'Landmarks');
+        }
+    }
+
+    // update statues score
+    async function updateStatuesScore(score) {
+        const { statusCode, data } = await Backend.updateStatuesScore(score);
+        if (!Backend.isSuccessfulRequest(statusCode)) {
+            const errorMessage = await Backend.getErrorMessage(data).then(response => response);
+            showPopupMessage('Error', errorMessage);
+            updateScore(score, 'Statues');
+        }
+    }
+
+    // update the score after the game finished
+    useEffect(() => {
+        // update the score
+        if (gameFinished) {
+            switch (lastGame) {
+                case 'Statues':
+                    updateStatuesScore(score);
+                    break;
+                case 'Landmarks':
+                    updateLandmarksScore(score);
+                    break;
+                case 'Monuments':
+                    updateMonumentsScore(score);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }, [gameFinished]);
+
     // navigate to the next question
     const nextQuestion = () => {
         if (currQuestionIdx == quesionsList.length - 1) {
@@ -89,8 +149,8 @@ export default function KnowledgeGame({ }) {
         const array = [0, 1, 2, 3];
         const shuffledArray = array.sort((a, b) => 0.5 - Math.random());
         let validArr = [];
-        for (let i = 0; i < 4; i++){
-            if((quesionsList[currQuestionIdx].choices[shuffledArray[i]].choice_text !== quesionsList[currQuestionIdx].correct_chocie) && (validArr.length < 2)){
+        for (let i = 0; i < 4; i++) {
+            if ((quesionsList[currQuestionIdx].choices[shuffledArray[i]].choice_text !== quesionsList[currQuestionIdx].correct_chocie) && (validArr.length < 2)) {
                 validArr.push(shuffledArray[i] + 1);
             }
         }
@@ -108,10 +168,21 @@ export default function KnowledgeGame({ }) {
 
     // take hint in the game
     const takeHint = () => {
-        if (hint > 0 && (filterdOptions.length === 0)){
+        if (hint > 0 && (filterdOptions.length === 0)) {
             setHint(hint - 1);
             setFilterdOptions(generateValidArray());
         }
+    }
+
+    // Restart after finished
+    const restart = () => {
+        setReInit(!reInit);
+        setScore(0);
+        setStatusBarStyle('light');
+        goPage('KnowledgeCheck', 'KnowledgeGame', {
+            lastGame: lastGame,
+        });
+        setGameFinished(false);
     }
 
 
@@ -135,7 +206,7 @@ export default function KnowledgeGame({ }) {
             >
                 <Text style={styles.choiceText}>{choice.choice_text}</Text>
             </TouchableOpacity>
-        ));      
+        ));
     }
 
 
@@ -145,23 +216,24 @@ export default function KnowledgeGame({ }) {
 
     // if the game finished
     if (gameFinished) {
-        
+
         // set the status bar style
         setStatusBarStyle('dark');
-        
+
         return (
             <View style={styles.gameFinishConainer}>
-                <ImageBackground 
-                    source={require('../../../assets/HighScore/HighScore.png')}
+                <ImageBackground
+                    source={require('../../../assets/Backgrounds/HighScore.png')}
                     style={styles.gameFinishImage}
                 >
+                    {popupMessageVisible ? <PopupMessage /> : null}
                     <View style={styles.ScoreBox}>
                         <Text style={styles.finishedScoreText}>{score}/{quesionsList.length}</Text>
                         <Text style={styles.finishedTotal}>{translate('KnowledgeGame.currentScore')}</Text>
                     </View>
-                    <TouchableOpacity 
+                    <TouchableOpacity
                         style={styles.button}
-                        onPress={() => { setReInit(!reInit), goPage('KnowledgeCheck', 'KnowledgeGame') }}
+                        onPress={restart}
                     >
                         <Text style={styles.playAgain}>
                             {translate('KnowledgeGame.playAgain')}
@@ -171,19 +243,19 @@ export default function KnowledgeGame({ }) {
             </View>
         );
     }
-    
+
 
     return (
         <View style={styles.container}>
             <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.ScrollView}>
                 <View style={styles.header}>
-                    <Text style={styles.title}>{pageName}</Text>
-                    <TouchableOpacity 
-                        style={styles.backContainer} 
+                    <Text style={styles.title}>{lastGame}</Text>
+                    <TouchableOpacity
+                        style={styles.backContainer}
                         onPress={goBack}
                         disabled={!isBackEnabled}
                     >
-                        <Image source={require('../../../assets/Scan/Arr.png')} style={styles.back}/>
+                        <SvgMaker Svg={LeftArrow} style={styles.back} />
                     </TouchableOpacity>
                 </View>
                 <Image
@@ -201,12 +273,12 @@ export default function KnowledgeGame({ }) {
                         <Text style={styles.score}>{translate('KnowledgeGame.score')}:</Text>
                         <Text style={styles.score}>{score}/{quesionsList.length}</Text>
                     </View>
-                    <TouchableOpacity 
+                    <TouchableOpacity
                         style={styles.HintBox}
                         onPress={() => { takeHint() }}
                         disabled={(hint == 0) || (filterdOptions.length > 0)}
                     >
-                        <Image source={require('../../../assets/KnowledgeCheck/help.png')} />
+                        <SvgMaker Svg={HelpIcon} />
                         <View style={styles.hintRemain}>
                             <Text style={styles.hintText}>{hint}</Text>
                         </View>

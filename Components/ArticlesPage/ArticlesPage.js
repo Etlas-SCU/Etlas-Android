@@ -9,11 +9,13 @@ import MainMenu from "../MainMenu/MainMenu";
 import { isIOS } from "../../AppStyles";
 import Backend from "../../Backend/Backend";
 import { goBack } from "../../Backend/Navigator";
+import SvgMaker from "../SvgMaker/SvgMaker";
+import { LeftArrow, MenuIcon, FilterIcon, InvCheckIcon } from "../../assets/SVG/Icons";
 
 
 function Filter({ showFilerList, setShowFilterList, sortBy, setSortBy }) {
 
-    const Checked = <Image source={require('../../assets/language_selection/check.png')} style={styles.check} />;
+    const Checked = <SvgMaker Svg={InvCheckIcon} style={styles.check} />;
 
     const optionsList = [
         'Name (a-z)',
@@ -62,7 +64,6 @@ export default function ArticlesPage({ }) {
     const [sortBy, setSortBy] = useState('Latest');
     const [numColumns, setNumColumn] = useState(2);
 
-
     // handle number of column change
     const handleNumColumnChange = (newNumColumns) => {
         setNumColumn(newNumColumns);
@@ -84,8 +85,10 @@ export default function ArticlesPage({ }) {
     // filtered Articles
     const filteredArticles = ArticlesList.sort(SortFunctions[sortBy]);
 
-    // filter the articles based on the search term and filter option
-    const Articles = filteredArticles.map((article, idx) => <ArticleCard article={article} key={idx} screen={'ArticlesPage'} />);
+    // render item in flat list
+    const renderItem = ({ item }) => {
+        return <ArticleCard article={item} screen={'ArticlesPage'} />
+    }
 
     return (
         <View style={styles.container}>
@@ -93,11 +96,11 @@ export default function ArticlesPage({ }) {
             {showFilerList ? <Filter showFilerList={showFilerList} setShowFilterList={setShowFilterList} sortBy={sortBy} setSortBy={setSortBy} /> : null}
             <View style={styles.header}>
                 <TouchableOpacity style={styles.aboutus} onPress={() => { showModal(), setScreen('ArticlesPage') }}>
-                    <Image source={require('../../assets/KnowledgeCheck/tabler_exclamation-circle.png')} />
+                    <SvgMaker Svg={MenuIcon} />
                 </TouchableOpacity>
                 <Text style={styles.title}>{translate('Articles.title')}</Text>
                 <TouchableOpacity onPress={goBack}>
-                    <Image source={require('../../assets/Scan/Arr.png')} />
+                    <SvgMaker Svg={LeftArrow} />
                 </TouchableOpacity>
             </View>
             <View style={styles.inputContainer}>
@@ -112,12 +115,12 @@ export default function ArticlesPage({ }) {
                     style={styles.filter}
                     onPress={() => { setShowFilterList(true) }}
                 >
-                    <Image source={require('../../assets/ArticlesPage/Filter.png')} />
+                    <SvgMaker Svg={FilterIcon} />
                 </TouchableOpacity>
             </View>
-            <FlatList 
-                data={Articles}
-                renderItem={({item}) => item}
+            <FlatList
+                data={filteredArticles}
+                renderItem={renderItem}
                 keyExtractor={(_, index) => index.toString()}
                 contentContainerStyle={styles.contentContainer}
                 columnWrapperStyle={styles.Gap}

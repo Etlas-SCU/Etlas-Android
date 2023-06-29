@@ -1,13 +1,15 @@
 import { colors, responsiveFontSize, responsiveHeight, responsiveWidth, fontFamily } from "../../AppStyles";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 
 
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: colors.White,
     },
     scrollContainer: {
-        flex: 1
+        flex: 1,
+        backgroundColor: colors.White,
     },
     contentContainer: {
         gap: responsiveHeight(14),
@@ -40,7 +42,8 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         marginTop: responsiveHeight(50),
         paddingBottom: responsiveHeight(20),
-        maxHeight: responsiveHeight(750)
+        maxHeight: responsiveHeight(750),
+        gap: responsiveHeight(20)
     },
     ArticlesScrollView: {
         marginVertical: responsiveHeight(17),
@@ -50,7 +53,10 @@ export const styles = StyleSheet.create({
     MonumentsScrollView: {
         marginVertical: responsiveHeight(17),
         marginHorizontal: responsiveWidth(24),
-        maxHeight: responsiveHeight(280)
+        maxHeight: responsiveHeight(280),
+    },
+    containerScroll: {
+        flex: 1,
     },
     ScrollViewContent: {
         gap: responsiveHeight(14)
@@ -73,7 +79,7 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
     },
     see_all_text: {
-        fontFamily: fontFamily.MontserratRegular,
+        fontFamily: fontFamily.MontserratSemiBold,
         fontSize: responsiveFontSize(18),
         color: colors.Gold,
     },
@@ -140,7 +146,16 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         resizeMode: 'contain',
     },
-
+    shadowProp: {
+        backgroundColor: colors.White,
+        borderRadius: 20,
+    },
+    gradient: {
+        flex: 1,
+        borderRadius: 20,
+        overflow: 'hidden',
+        justifyContent: 'center',
+    },
     // MonumentCard
     MonumentcardTextContainer: {
         width: responsiveWidth(240),
@@ -182,5 +197,14 @@ export const styles = StyleSheet.create({
         width: responsiveWidth(100),
         borderRadius: 20,
         resizeMode: 'contain',
-    }
+    },
+    gradientColors: [colors.White, colors.SolidGrey],
+    startOff: {
+        x: 0,
+        y: 0
+    },
+    endOff: {
+        x: 0,
+        y: 2
+    },
 });

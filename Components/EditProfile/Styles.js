@@ -73,7 +73,7 @@ export const styles = StyleSheet.create({
         alignSelf: 'center',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: responsiveHeight(108),
+        marginTop: responsiveHeight(147),
     },
     saveButtonText: {
         color: colors.White,
@@ -99,5 +99,12 @@ export const styles = StyleSheet.create({
         top: responsiveHeight(20),
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    changePassword: {
+        color: colors.DarkCyan,
+        fontFamily: fontFamily.MontserratBold,
+        fontSize: responsiveFontSize(14),
+        marginTop: responsiveHeight(30),
+        textDecorationLine: 'underline'
     }
 });

@@ -24,26 +24,31 @@ export function setNavigationRef(ref) {
 
 
 // set variables
-function setBackendVariables(params){
+function setBackendVariables(params) {
     // set the article
-    if(params?.Article)
+    if (params?.Article)
         Backend.setArticle(params.Article);
 
     // set the tour
-    if(params?.Tour)
+    if (params?.Tour)
         Backend.setTour(params.Tour);
 
     // set the monument
-    if(params?.Monument)
+    if (params?.Monument)
         Backend.setMonument(params.Monument);
 
     // set the favourite monument
-    if(params?.favArticle)
+    if (params?.favArticle)
         Backend.setFavArticle(params.favArticle);
 
     // set the favourite monument
-    if(params?.favMonument)
+    if (params?.favMonument)
         Backend.setFavMonument(params.favMonument);
+
+    // set the last game
+    if (params?.lastGame) {
+        Backend.setLastGame(params.lastGame);
+    }
 }
 
 // Navigate to the next page
@@ -53,10 +58,10 @@ export function goPage(nextPage, prevPage, params) {
 
     // navigate to the next page
     navigationRef?.dispatch(
-      CommonActions.navigate(nextPage, {
-        prevPage: prevPage,
-        ...params,
-      })
+        CommonActions.navigate(nextPage, {
+            prevPage: prevPage,
+            ...params,
+        })
     );
 
     // set status bar color
@@ -67,7 +72,7 @@ export function goPage(nextPage, prevPage, params) {
 }
 
 // Go back to the previous page
-export function goBack(){
+export function goBack() {
     navigationRef?.dispatch(CommonActions.goBack(null));
     const currentPage = getCurrentRouteName();
     if (getDarkPages().includes(currentPage))
@@ -105,4 +110,26 @@ export function getCurrentScreenParam() {
     const currentRoute = navigationRef?.getCurrentRoute();
     return currentRoute?.params;
 }
-  
+
+
+// Go to page and reset stack
+export function goPageResetStack(nextPage, params) {
+    // set the backend variables
+    setBackendVariables(params);
+
+    // navigate to the next page
+    navigationRef?.dispatch(
+        CommonActions.reset({
+            index: 0,
+            routes: [
+                { name: nextPage, params: params },
+            ],
+        })
+    );
+
+    // set status bar color
+    if (getDarkPages().includes(nextPage))
+        setStatusBarStyle('dark');
+    else
+        setStatusBarStyle('light');
+}

@@ -8,14 +8,18 @@ import { isIOS } from "../../AppStyles";
 import { goPage } from "../../Backend/Navigator";
 import { useIsFocused } from "@react-navigation/native";
 import { setStatusBarStyle } from "expo-status-bar";
+import { UserDataContext } from "../Context/DataContext";
+import SvgMaker from "../SvgMaker/SvgMaker";
+import { MenuIcon } from "../../assets/SVG/Icons";
+import { StatueImage, LandmarkImage, MonumentImage } from '../../assets/SVG/Images';
 
 
 function Card({ title, img, desc, score }) {
     return (
-        <TouchableOpacity 
+        <TouchableOpacity
             style={styles.body}
-            onPress={() => { 
-                goPage('KnowledgeGame', 'KnowledgeCheck', { pageName: title })
+            onPress={() => {
+                goPage('KnowledgeGame', 'KnowledgeCheck', { lastGame: title })
             }}
         >
             <View style={styles.bodyContent}>
@@ -24,7 +28,7 @@ function Card({ title, img, desc, score }) {
                 <Text numberOfLines={1} style={styles.bodyScore} adjustsFontSizeToFit={true}>{score}</Text>
             </View>
             <View style={styles.bodyImage}>
-                <Image source={img} style={styles.image} />
+                <SvgMaker Svg={img} style={styles.image} />
             </View>
         </TouchableOpacity>
     )
@@ -34,20 +38,26 @@ export default function KnowledgeCheck({ }) {
 
     // check if the currenpage is focused
     const isFocused = useIsFocused();
-    
-    if(isFocused){
+
+    if (isFocused) {
         setStatusBarStyle('light');
     }
 
+    // main menu
     const { showModal, setScreen } = useContext(UserContext);
+
+    const { landmarkScore, monumentScore, statueScore } = useContext(UserDataContext);
 
     return (
         <View style={styles.container}>
             {isIOS() ? <MainMenu /> : null}
-            <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
+            <ScrollView
+                contentContainerStyle={styles.contentContainer}
+                showsVerticalScrollIndicator={false}
+            >
                 <View style={styles.header}>
                     <TouchableOpacity style={styles.aboutus} onPress={() => { showModal(), setScreen('KnowledgeCheck') }}>
-                        <Image source={require('../../assets/KnowledgeCheck/tabler_exclamation-circle.png')} />
+                        <SvgMaker Svg={MenuIcon} />
                     </TouchableOpacity>
                     <Text style={styles.title}>{translate('KnowledgeCheck.title')}</Text>
                 </View>
@@ -55,20 +65,20 @@ export default function KnowledgeCheck({ }) {
                     <Card
                         title={translate('KnowledgeCheck.Statues')}
                         desc={translate('KnowledgeCheck.StatuesText')}
-                        score={translate('KnowledgeCheck.StatuesScore')}
-                        img={require('../../assets/KnowledgeCheck/Statue_1.png')}
+                        score={statueScore}
+                        img={StatueImage}
                     />
                     <Card
                         title={translate('KnowledgeCheck.Monuments')}
                         desc={translate('KnowledgeCheck.MonumentsText')}
-                        score={translate('KnowledgeCheck.MonumentsScore')}
-                        img={require('../../assets/KnowledgeCheck/Statue_2.png')}
+                        score={monumentScore}
+                        img={MonumentImage}
                     />
                     <Card
                         title={translate('KnowledgeCheck.Landmarks')}
                         desc={translate('KnowledgeCheck.LandmarksText')}
-                        score={translate('KnowledgeCheck.LandmarksScore')}
-                        img={require('../../assets/KnowledgeCheck/Statue_3.png')}
+                        score={landmarkScore}
+                        img={LandmarkImage}
                     />
                 </View>
             </ScrollView>

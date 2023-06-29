@@ -4,6 +4,8 @@ import { translate } from "../../Localization";
 import Backend from "../../Backend/Backend";
 import FavArticleCard from "../Favourites/FavArticleCard";
 import { goBack, getParams } from "../../Backend/Navigator";
+import SvgMaker from "../SvgMaker/SvgMaker";
+import { InvCloseIcon } from "../../assets/SVG/Icons";
 
 
 export default function FavArticlesPage({ }) {
@@ -14,8 +16,10 @@ export default function FavArticlesPage({ }) {
     // get the screen name from navigator
     const { prevPage } = getParams();
 
-    // mapping the cards
-    const favArticles = favArticlesList.map((favArticle, index) => { return <FavArticleCard key={index} favArticle={favArticle} screen={prevPage}/> });
+    // render items in flat list
+    const renderItem = ({ item }) => {
+        return <FavArticleCard favArticle={item} screen={prevPage} />
+    }
 
     return (
         <View style={styles.container}>
@@ -25,13 +29,13 @@ export default function FavArticlesPage({ }) {
                     onPress={goBack}
                     style={styles.close}
                 >
-                    <Image source={require('../../assets/HighScore/close.png')} style={styles.arrow} />
+                    <SvgMaker Svg={InvCloseIcon} style={styles.arrow} />
                 </TouchableOpacity>
             </View>
             <FlatList
-                data={favArticles}
+                data={favArticlesList}
                 showsHorizontalScrollIndicator={false}
-                renderItem={({ item }) => item}
+                renderItem={renderItem}
                 keyExtractor={(_, index) => index.toString()}
                 initialNumToRender={10}
                 contentContainerStyle={styles.contentContainer}

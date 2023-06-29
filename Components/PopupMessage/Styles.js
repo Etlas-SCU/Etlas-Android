@@ -30,6 +30,7 @@ export const styles = StyleSheet.create({
         fontFamily: fontFamily.MontserratRegular,
         fontSize: responsiveFontSize(18),
         color: colors.White,
-        marginHorizontal: responsiveWidth(45)
+        marginHorizontal: responsiveWidth(45),
+        textAlign: "center"
     }
 });

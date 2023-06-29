@@ -1,4 +1,46 @@
 {
+    "messages":{
+        "fillAllFields": "Please Fill Email and Password",
+        "loggingIn": "Just a moment, we're logging you in",
+        "invalidEmail": "Invalid Email",
+        "fillAllFieldsReg": "Please Fill all needed information",
+        "passwordLength": "Password length should be between 8 and 20 characters",
+        "passwordNotMatch": "Passwords doesn't match",
+        "registering": "Just a moment, we're registering you",
+        "emailExist": "Email already exists",
+        "emailNotExist": "Email doesn't exist",
+        "passwordLowercase": "Password should contains atleast lowercase letter",
+        "passwordUppercase": "Password should contains atleast uppercase letter",
+        "passwordNumber": "Password should contains atleast one digit",
+        "passwordSpecial": "Password should contains atleast one symbol",
+        "passwordSpace": "Password shouldn't contains spaces",
+        "passwordNotValid": "Password is not valid",
+        "fullNameRequired": "Full Name is Required to fill",
+        "fullNameLength": "Full Name shouldn't exceed 50 characters",
+        "invalidOTP": "Invalid OTP",
+        "verifying": "While checking OTP",
+        "emailSent": "Theres is email sent to you with the OTP to verifying",
+        "sendingOTP": "While sending email for you",
+        "passwordMatch": "Confirm password should be the same with the password",
+        "ChangingPassword": "While validate the new password",
+        "bestScore": "While getting your best Score",
+        "notFound": "Not Found",
+        "getScore": "While getting your scores",
+        "getuserData": "While getting your Information",
+        "storageError": "No Access to Internal Storage",
+        "updateUserSuccess": "The Information has been updates successfully",
+        "updateUser": "While updating your information",
+        "alreadyExist": "This email is already registered",
+        "facebookSign": "Logging in with facebook",
+        "googleSign": "Logging in with google",
+        "somethingWrong": "Something went wrong, please try again later.",
+        "upload_pic": "While uploading your picture",
+        "profilePictureUpdated": "Your Image has been changed successfully"
+    },
+    "emailConfirmation": {
+        "title": "Email Confirmation",
+        "description": "Type the OTP you received on your e-mail to continue confirm your email"
+    },
     "LanguageSelection": {
         "title": "Language Selection",
         "description": "Please, choose your preferred language that you want to be set on the application, it can also be changed anytime.",
@@ -127,7 +169,8 @@
         "write_message": "Write a message",
         "subject": "Subject",
         "subject_input": "I'd like to ask about ...",
-        "submit": "Submit"
+        "submit": "Submit",
+        "title": "Contact US" 
     },
     "Settings": {
         "title": "Settings",
@@ -149,8 +192,12 @@
         "next": "Next",
         "Resend": "Resend the mail again.",
         "NewPassword": "New Password",
+        "OldPassword": "Old Password",
         "ConfirmPassword": "Confirm Password",
-        "finish": "Finish"
+        "finish": "Finish",
+        "description": "Enter your old password and make new password",
+        "save": "Save",
+        "changePassword": "Change Password"
     },
     "TermsConditions": {
         "title": "Terms and conditions",
@@ -164,7 +211,8 @@
         "password": "Password",
         "phone": "Phone Number",
         "address": "Address",
-        "save": "Save"
+        "save": "Save",
+        "changePassword": "Want to change password?"
     },
     "KnowledgeGame": {
         "score": "Your Score",

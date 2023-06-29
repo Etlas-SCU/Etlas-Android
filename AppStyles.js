@@ -83,6 +83,7 @@ export const hasNotch = (version) => {
 export const colors = {
     Gold: '#BF8148',
     White: '#FFFFFF',
+    Moka: '#EBE8E8',
     Black: '#000000',
     DarkCyan: '#003441',
     Cyan: '#55C4E0',

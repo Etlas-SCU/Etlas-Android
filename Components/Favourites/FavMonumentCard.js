@@ -2,9 +2,12 @@ import { View, Image, Text, TouchableOpacity } from 'react-native'
 import { styles } from './Styles'
 import Backend from '../../Backend/Backend';
 import { goPage } from '../../Backend/Navigator';
+import { memo } from 'react';
+import SvgMaker from '../SvgMaker/SvgMaker';
+import { TrashIcon } from '../../assets/SVG/Icons';
 
 
-export default function FavMonumentCard({ screen, Monument }) {
+function FavMonumentCard({ screen, Monument }) {
 
     const { Title, HistoricDate, scannedDate, Img, ID } = Monument;
 
@@ -27,10 +30,12 @@ export default function FavMonumentCard({ screen, Monument }) {
                         style={styles.CardIcon}
                         onPress={() => { Backend.removeFavMonument(ID) }}
                     >
-                        <Image source={require('../../assets/Favourites/Trash.png')} style={styles.CardIconImg} />
+                        <SvgMaker Svg={TrashIcon} style={styles.CardIconImg} />
                     </TouchableOpacity>
                 </View>
             </View>
         </TouchableOpacity>
     );
 }
+
+export default memo(FavMonumentCard);

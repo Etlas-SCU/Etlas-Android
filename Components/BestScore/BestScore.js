@@ -3,24 +3,60 @@ import { translate } from "../../Localization";
 import { View, Text, ImageBackground, TouchableOpacity, ScrollView, Image } from 'react-native';
 import Backend from '../../Backend/Backend';
 import { goBack, goPage } from '../../Backend/Navigator';
+import { useEffect, useState, useContext } from 'react';
+import { UserContext } from '../Context/Context';
+import Loader from '../Loader/Loader';
+import PopupMessage from '../PopupMessage/PopupMessage';
+import SvgMaker from '../SvgMaker/SvgMaker';
+import { InvLeftArrowIcon } from '../../assets/SVG/Icons';
 
 
 export default function BestScore({ }) {
 
     // get the bestScore from Backend
-    const bestScore = Backend.getBestScore();
+    const [bestScore, setBestScore] = useState(0);
+
+    // get the loader states
+    const { showLoader, hideLoader, loaderVisible } = useContext(UserContext);
+
+    // popup message
+    const { showPopupMessage, popupMessageVisible } = useContext(UserContext);
+
+    // get the bestScore from Backend
+    const getBestScore = async () => {
+        try {
+            showLoader(translate('messages.bestScore'));
+            const { statusCode, data } = await Backend.getBestScore();
+            hideLoader();
+            if (!Backend.isSuccessfulRequest(statusCode)) {
+                const errorMessage = await Backend.getErrorMessage(data).then(response => response);
+                showPopupMessage('Error', errorMessage);
+                return false;
+            }
+            setBestScore(data.total_best_score);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    // get the bestScore from Backend
+    useEffect(() => {
+        getBestScore();
+    }, []);
 
     return (
         <View style={styles.container}>
-            <ImageBackground source={require('../../assets/HighScore/HighScore.png')} resizeMode='cover' style={styles.image}>
+            {loaderVisible ? <Loader /> : null}
+            {popupMessageVisible ? <PopupMessage /> : null}
+            <ImageBackground source={require('../../assets/Backgrounds/HighScore.png')} resizeMode='cover' style={styles.image}>
                 <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
                     <View style={styles.header}>
                         <Text style={styles.title}>{translate('BestScore.title')}</Text>
-                        <TouchableOpacity 
-                            onPress={goBack} 
+                        <TouchableOpacity
+                            onPress={goBack}
                             style={styles.closeContainer}
                         >
-                            <Image source={require('../../assets/Profile/Arr.png')} style={styles.close}/>
+                            <SvgMaker Svg={InvLeftArrowIcon} style={styles.close} />
                         </TouchableOpacity>
                     </View>
                     <View style={styles.ScoreBox}>

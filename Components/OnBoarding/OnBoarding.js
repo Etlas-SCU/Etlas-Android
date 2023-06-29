@@ -2,6 +2,8 @@ import { Text, View, Image, TouchableOpacity, ScrollView } from "react-native";
 import { styles } from "./Styles";
 import { translate } from '../../Localization';
 import { goPage } from "../../Backend/Navigator";
+import SvgMaker from "../SvgMaker/SvgMaker";
+import { WolfIcon, EonBoarding } from "../../assets/SVG/Icons";
 
 
 export default function OnBoarding({ }) {
@@ -14,9 +16,7 @@ export default function OnBoarding({ }) {
                     <Text style={styles.desc}>{translate('OnBoarding.description')}</Text>
                 </View>
                 <Text style={styles.worry}>{translate('OnBoarding.worrytext')}</Text>
-                <View style={styles.logoContainer}>
-                    <Image style={styles.logo} source={require('../../assets/on_boarding/e.png')}></Image>
-                </View>
+                <SvgMaker Svg={EonBoarding} style={styles.logoContainer} />
                 <View style={styles.button_container}>
                     <TouchableOpacity style={[styles.sign_buttons, styles.sign_in]} onPress={() => { goPage('login', 'onBoarding') }}>
                         <Text style={styles.button_text}>{translate('OnBoarding.signin')}</Text>
@@ -25,9 +25,8 @@ export default function OnBoarding({ }) {
                         <Text style={styles.button_text}>{translate('OnBoarding.signup')}</Text>
                     </TouchableOpacity>
                 </View>
-            <Image style={styles.wolf} source={require('../../assets/on_boarding/EG_by_Onlywolfs.png')}></Image>
+                <SvgMaker style={styles.wolf} Svg={WolfIcon} />
             </ScrollView>
         </View>
     );
 }
-

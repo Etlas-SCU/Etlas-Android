@@ -1,9 +1,11 @@
-import { Text, View, TouchableOpacity, Image, ScrollView } from "react-native";
+import { Text, View, TouchableOpacity, ScrollView } from "react-native";
 import { styles } from "./Styles";
 import { translate } from '../../Localization';
 import { useState } from "react";
 import { goBack } from "../../Backend/Navigator";
 import { changeLanguage } from "../../Localization";
+import SvgMaker from '../../Components/SvgMaker/SvgMaker';
+import { InvLeftArrowIcon, CheckIcon } from "../../assets/SVG/Icons";
 
 
 export default function LanguageSelection({ }) {
@@ -46,14 +48,14 @@ export default function LanguageSelection({ }) {
         changeLanguage(languageSettings[key].languageCode, languageSettings[key].textDirection);
         setSelected(key);
     }
-    
+
 
     // create the buttons
     const buttons = Object.keys(languages).map((key, idx) => {
         return (
             <TouchableOpacity key={idx} style={styles.language} onPress={() => { change(key) }} disabled={key != 'en'}>
                 <Text style={styles.languageText}>{languages[key]}</Text>
-                {key == selected ? <Image source={require('../../assets/language_selection/check.png')} style={styles.check} /> : null}
+                {key == selected ? <SvgMaker Svg={CheckIcon} style={styles.check} /> : null}
             </TouchableOpacity>
         )
     });
@@ -64,11 +66,11 @@ export default function LanguageSelection({ }) {
             <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.contentContainer}>
                 <View style={styles.header}>
                     <Text style={styles.title}>{translate('LanguageSelection.title')}</Text>
-                    <TouchableOpacity 
-                        onPress={goBack} 
+                    <TouchableOpacity
+                        onPress={goBack}
                         style={styles.closeContainer}
                     >
-                        <Image source={require('../../assets/Profile/Arr.png')} style={styles.close}/>
+                        <SvgMaker Svg={InvLeftArrowIcon} style={styles.close} />
                     </TouchableOpacity>
                 </View>
                 <Text style={styles.chooseBar}>{translate('LanguageSelection.choose')}</Text>

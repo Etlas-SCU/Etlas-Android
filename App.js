@@ -1,26 +1,24 @@
-import React, { useState, useEffect, useRef } from 'react';
 import { useFonts } from 'expo-font';
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack'
 import OnBoarding from "./Components/OnBoarding/OnBoarding";
 import { FirstPage } from './Components/Register/FirstPage';
 import { SecondPage } from './Components/Register/SecondPage'
+import EmailVerification from './Components/Register/EmailVerification/EmailVerification';
 import Login from './Components/Login/Login'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { init } from './Localization';
 import { Easing, AppRegistry } from 'react-native';
-import { UserProvider } from './Components/Context/Context';
 import MenuBar from './Components/MenuBar/MenuBar';
 import ForgotPasswordFirst from './Components/ForgetPassword/ForgetPasswordFirst';
 import ForgotPasswordSecond from './Components/ForgetPassword/ForgetPasswordSecond';
 import ForgotPasswordThird from './Components/ForgetPassword/ForgetPasswordThird';
-import BestScore from './Components/BestScore/BestScore';
-import EditProfile from './Components/EditProfile/EditProfile';
 import { StatusBar } from 'expo-status-bar';
-import Favourites from './Components/Favourites/Favourites';
-import FavMonumentsPage from './Components/FavouritePage/FavMonumentsPage';
-import FavArticlesPage from './Components/FavouritePage/FavArticlesPage';
-import { setNavigationRef } from './Backend/Navigator';
+import { goPage, setNavigationRef } from './Backend/Navigator';
+import { useEffect, useState } from 'react';
+import Backend from './Backend/Backend';
+import { UserProvider } from './Components/Context/Context';
+import { UserDataProvider } from './Components/Context/DataContext';
 
 
 // import the screen
@@ -30,25 +28,6 @@ export default function App() {
 
     // initialize the language
     init();
-
-    // Retrieve onboarding status from local storage
-    const [language, setLanguage] = useState('None');
-
-    // Retrieve language choice from local storage
-    const getLanguageChoice = async () => {
-        try {
-            const getLang = await AsyncStorage.getItem('language');
-            if (getLang !== null)
-                setLanguage(getLang);
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-    // get the language choice
-    useEffect(() => {
-        getLanguageChoice();
-    }, []);
 
     // get the font from the local fonts
     let [fontsLoaded] = useFonts({
@@ -69,17 +48,6 @@ export default function App() {
         'Poppins-Black': require('./assets/fonts/Poppins-Black.ttf'),
     });
 
-    // clear the storage
-    // const clearAsyncStorage = async() => {
-    //     AsyncStorage.clear();
-    // }    
-    // clearAsyncStorage();
-
-    // if the font not loaded don't appear anything
-    if (!fontsLoaded)
-        return null
-
-
     // animation config
     const timingConfig = {
         animation: 'timing',
@@ -89,42 +57,136 @@ export default function App() {
         },
     };
 
+    // get the access token from the local storage
+    const [accessToken, setAccessToken] = useState(null);
+    const [refreshToken, setRefreshToken] = useState(null);
+    const [checked, setIsChecked] = useState(false);
+
+    const getAccessToken = async () => {
+        try {
+            // refresh the token before getting it
+            await refresh_the_token();
+
+            // get the access token and refresh token from the local storage
+            const access = await AsyncStorage.getItem('accessToken').then((accessToken) => {
+                if (accessToken !== null) {
+                    return accessToken;
+                } else {
+                    return null;
+                }
+            });
+            const refresh = await AsyncStorage.getItem('refreshToken').then((refreshToken) => {
+                if (refreshToken !== null) {
+                    return refreshToken;
+                } else {
+                    return null;
+                }
+            });
+            setAccessToken(access);
+            setRefreshToken(refresh);
+            setIsChecked(true);
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
+    // get the access token from the local storage
+    useEffect(() => {
+        getAccessToken();
+    }, []);
+
+
+    // Function to refresh token
+    const refresh_the_token = async () => {
+        try {
+            // get the access token first
+            const refreshToken = await AsyncStorage.getItem('refreshToken').then(response => response);
+
+            // if the access token is null, return
+            if (!refreshToken)
+                return;
+
+            // if the access token is null, return
+            const { statusCode, data } = await Backend.refresh_the_token(refreshToken).then(response => response);
+
+            // if the response is not null, set the access token
+            if (Backend.isSuccessfulRequest(statusCode)) {
+                await AsyncStorage.setItem('accessToken', data.access);
+                await AsyncStorage.setItem('refreshToken', data.refresh);
+                setAccessToken(data.access);
+                setRefreshToken(data.refresh);
+                console.log(data.refresh);
+            } else {
+                await AsyncStorage.removeItem('accessToken');
+                await AsyncStorage.removeItem('refreshToken');
+                setAccessToken(null);
+                setRefreshToken(null);
+                goPage('login');
+            }
+        } catch (e) {
+            console.log('Error refereshing:', e);
+        }
+    };
+
+    // get referesh token
+    useEffect(() => {
+
+        // Refresh token every 4 minutes (240,000 milliseconds)
+        const refreshInterval = setInterval(refresh_the_token, 240000);
+
+        // Clean up the interval on component unmount
+        return () => {
+            clearInterval(refreshInterval);
+        };
+    }, []);
+
+
+    // if the access token is null, return the login page
+    if (!checked || !fontsLoaded)
+        return null
+
+    // clear async storage
+    // AsyncStorage.clear();
+
     // if the font loaded, return the components
     return (
         <UserProvider>
-            <StatusBar 
-                backgroundColor={'transparent'}
-                barStyle='light-content'
-                style='light'
-                translucent={true}
-            />
-            <NavigationContainer
-                ref={navigationRef => {
-                    setNavigationRef(navigationRef);
-                }}
-            >
-                <Stack.Navigator screenOptions={{
-                    header: () => null,
-                    cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-                    transitionSpec: {
-                        open: timingConfig,
-                        close: timingConfig,
-                    },
-                    headerStatusBarHeight: 0
-                }}
+            <UserDataProvider>
+                <StatusBar
+                    backgroundColor={'transparent'}
+                    barStyle='light-content'
+                    style='light'
+                    translucent={true}
+                />
+                <NavigationContainer
+                    ref={navigationRef => {
+                        setNavigationRef(navigationRef);
+                    }}
                 >
-                    <Stack.Screen name="onBoarding" component={OnBoarding} />
-                    <Stack.Screen name="firstPage" component={FirstPage} />
-                    <Stack.Screen name="secondPage" component={SecondPage} />
-                    <Stack.Screen name="login" component={Login} />
-                    <Stack.Screen name="menuBar" component={MenuBar} />
-                    <Stack.Screen name="forgotPasswordFirst" component={ForgotPasswordFirst} />
-                    <Stack.Screen name="forgotPasswordSecond" component={ForgotPasswordSecond} />
-                    <Stack.Screen name="forgotPasswordThird" component={ForgotPasswordThird} />
-                    <Stack.Screen name="bestScore" component={BestScore} />
-                    <Stack.Screen name="editProfile" component={EditProfile} />
-                </Stack.Navigator>
-            </NavigationContainer>
+                    <Stack.Navigator
+                        screenOptions={{
+                            header: () => null,
+                            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+                            transitionSpec: {
+                                open: timingConfig,
+                                close: timingConfig,
+                            },
+                            headerStatusBarHeight: 0,
+                        }}
+                        initialRouteName={accessToken && refreshToken ? "menuBar" : "onBoarding"}
+                    >
+                        <Stack.Screen name="onBoarding" component={OnBoarding} />
+                        <Stack.Screen name="firstPage" component={FirstPage} />
+                        <Stack.Screen name="secondPage" component={SecondPage} />
+                        <Stack.Screen name="login" component={Login} />
+                        <Stack.Screen name="forgotPasswordFirst" component={ForgotPasswordFirst} />
+                        <Stack.Screen name="forgotPasswordSecond" component={ForgotPasswordSecond} />
+                        <Stack.Screen name="forgotPasswordThird" component={ForgotPasswordThird} />
+                        <Stack.Screen name="menuBar" component={MenuBar} />
+                        <Stack.Screen name="emailVerification" component={EmailVerification} />
+                    </Stack.Navigator>
+                </NavigationContainer>
+            </UserDataProvider>
         </UserProvider>
     );
 }

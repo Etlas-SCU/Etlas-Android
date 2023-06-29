@@ -4,6 +4,8 @@ import { translate } from '../../Localization'
 import { useContext } from 'react';
 import { UserContext } from '../Context/Context';
 import { goPage } from '../../Backend/Navigator';
+import SvgMaker from '../SvgMaker/SvgMaker';
+import { DiffCloseIcon } from '../../assets/SVG/Icons';
 
 
 function Button ({ title, pageNav, hideModal }){
@@ -46,9 +48,9 @@ export default function MainMenu({ }) {
             animationType='slide'
         >
             <View style={styles.container}>
-                <ImageBackground source={require('../../assets/MainMenu/Background.png')} style={styles.background} borderRadius={20}>
+                <ImageBackground source={require('../../assets/Backgrounds/MainMenu.png')} style={styles.background} borderRadius={20}>
                     <TouchableOpacity onPress={() => hideModal()}>
-                        <Image source={require('../../assets/MainMenu/close.png')} style={styles.close}/>
+                        <SvgMaker Svg={DiffCloseIcon} style={styles.close} />
                     </TouchableOpacity>
                     <Text style={styles.title}>{translate('MainMenu.message')}</Text>
                     <View style={styles.line}/>

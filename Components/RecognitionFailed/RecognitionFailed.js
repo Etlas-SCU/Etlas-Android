@@ -6,6 +6,8 @@ import { useContext } from "react";
 import MainMenu from "../MainMenu/MainMenu";
 import { isIOS } from "../../AppStyles";
 import { goPage } from "../../Backend/Navigator";
+import SvgMaker from "../SvgMaker/SvgMaker";
+import { MenuIcon, SadIcon, CloseIcon } from "../../assets/SVG/Icons";
 
 
 export default function KnowledgeCheck({ }) {
@@ -17,10 +19,10 @@ export default function KnowledgeCheck({ }) {
             {isIOS() ? <MainMenu /> : null}
             <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
                 <TouchableOpacity style={styles.aboutus} onPress={() => { showModal(), setScreen('RecognitionFailed') }}>
-                    <Image source={require('../../assets/KnowledgeCheck/tabler_exclamation-circle.png')} />
+                    <SvgMaker Svg={MenuIcon} style={styles.menu} />
                 </TouchableOpacity>
                 <View style={styles.body}>
-                    <Image source={require('../../assets/RecognizedFailed/Sad.png')} style={styles.sad} />
+                    <SvgMaker Svg={SadIcon} style={styles.sad} />
                     <Text style={styles.title}>{translate('RecognitionFailed.title')}</Text>
                     <Text style={styles.text}>{translate('RecognitionFailed.text')}</Text>
                     <TouchableOpacity style={styles.button} onPress={() => { goPage('Home', 'RecognitionFailed') }}>

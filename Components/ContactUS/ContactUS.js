@@ -1,8 +1,11 @@
 import { styles } from "./Styles";
 import { translate } from "../../Localization";
-import { View, Image, Text, TextInput, ScrollView, TouchableOpacity } from 'react-native'
+import { View, Text, TextInput, ScrollView, TouchableOpacity, Image } from 'react-native'
 import { colors } from "../../AppStyles";
 import { goBack } from "../../Backend/Navigator";
+import SvgMaker from "../SvgMaker/SvgMaker";
+import { CloseIcon } from "../../assets/SVG/Icons";
+import { ContactUs } from "../../assets/SVG/Images";
 
 
 export default function ContactUS({ }) {
@@ -14,9 +17,10 @@ export default function ContactUS({ }) {
                     style={styles.closeContainer}
                     onPress={goBack}
                 >
-                    <Image source={require('../../assets/AboutUs/ep_close-bold.png')} style={styles.close} />
+                    <SvgMaker Svg={CloseIcon} style={styles.close} />
                 </TouchableOpacity>
-                <Image source={require('../../assets/ContactUs/Contact_us.png')} style={styles.cover} />
+                <Text style={styles.boxtitle}>{translate('ContactUs.title')}</Text>
+                <Image source={ContactUs} style={styles.cover} />
             </View>
             <View style={styles.container} >
                 <ScrollView

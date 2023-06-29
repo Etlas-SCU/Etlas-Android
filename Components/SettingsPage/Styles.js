@@ -7,6 +7,7 @@ export const styles = StyleSheet.create({
         backgroundColor: colors.White,
     },
     scrollContainer: {
+        marginTop: responsiveHeight(20),
         paddingBottom: responsiveHeight(200),
     },
     header: {
