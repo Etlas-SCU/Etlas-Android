@@ -713,16 +713,24 @@ class Backend {
     static async getTermsConditions() {
         try {
             const termsUrl = 'https://api.jsonbin.io/v3/b/6462fff99d312622a35f186f';
-            const response = await fetch(termsUrl, {
-                method: 'GET',
+            return response = await axios.get(termsUrl, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'
                 },
                 redirect: 'follow',
+            }).then(response => {
+                return {
+                    statusCode: 200,
+                    data: response.data.record.TermsConditions
+                }
+            }).catch(error => {
+                console.log('Error Terms and Conditions:', error);
+                return {
+                    statusCode: 500,
+                    data: error
+                }
             });
-            const result = await response.json();
-            return result.record.TermsConditions;
         } catch (error) {
             console.log('Error Terms and Conditions:', error);
             return {
