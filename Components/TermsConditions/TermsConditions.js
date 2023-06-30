@@ -1,5 +1,5 @@
 import { styles } from "./Styles";
-import { View, Text, Image, TouchableOpacity, ScrollView, useWindowDimensions } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView, useWindowDimensions } from "react-native";
 import { translate } from "../../Localization";
 import RenderHTML from "react-native-render-html";
 import Backend from "../../Backend/Backend";
