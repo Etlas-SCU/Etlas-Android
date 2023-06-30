@@ -67,16 +67,27 @@ class Backend {
 
     // requests
 
+    static async getHeaders() {
+        const token = await this.getToken();
+        return {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': token ? `Bearer ${token}` : null,
+        };
+    }
+
+    static async getImgHeaders() {
+        const token = await this.getToken();
+        return {
+            'Content-Type': 'multipart/form-data',
+            'Authorization': token ? `Bearer ${token}` : null,
+        };
+    }
+
     static async POST(url, body) {
         try {
-            const token = await this.getToken();
-
             return axios.post(this.HOST_URL + url, body, {
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Authorization': token ? `Bearer ${token}` : null,
-                },
+                headers: await this.getHeaders(),
             }).then(response => {
                 return {
                     statusCode: response.status,
@@ -98,15 +109,20 @@ class Backend {
         }
     }
 
-    static async POST_PIC(url, body) {
+    static async POST_PIC(url, Image) {
         try {
-            const token = await this.getToken();
+            const body = new FormData();
+
+            // Append the image to the form data
+            const imageFileName = Image.split('/').pop();
+            body.append('image', {
+                uri: Image,
+                name: imageFileName,
+                type: 'image/jpeg', // Replace with the appropriate MIME type of your image
+            });
 
             return axios.post(this.HOST_URL + url, body, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                    'Authorization': token ? `Bearer ${token}` : null,
-                },
+                headers: await this.getImgHeaders(),
             }).then(response => {
                 return {
                     statusCode: response.status,
@@ -130,14 +146,8 @@ class Backend {
 
     static async PUT(url, body) {
         try {
-            const token = await this.getToken();
-
             return axios.put(this.HOST_URL + url, body, {
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Authorization': token ? `Bearer ${token}` : null,
-                },
+                headers: await this.getHeaders(),
             }).then(response => {
                 return {
                     statusCode: response.status,
@@ -161,14 +171,8 @@ class Backend {
 
     static async GET(url) {
         try {
-            const token = await this.getToken();
-
             return axios.get(this.HOST_URL + url, {
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Authorization': token ? `Bearer ${token}` : null,
-                },
+                headers: await this.getHeaders(),
             }).then(response => {
                 return {
                     statusCode: response.status,
@@ -192,14 +196,8 @@ class Backend {
 
     static async PATCH(url, body) {
         try {
-            const token = await this.getToken();
-
             return axios.patch(this.HOST_URL + url, body, {
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Authorization': token ? `Bearer ${token}` : null,
-                },
+                headers: await this.getHeaders(),
             }).then(response => {
                 return {
                     statusCode: response.status,
@@ -359,17 +357,7 @@ class Backend {
     static changeUserImage(Image) {
         try {
             const url = 'users/profile-image/';
-            const formData = new FormData();
-
-            // Append the image to the form data
-            const imageFileName = Image.split('/').pop();
-            formData.append('image', {
-                uri: Image,
-                name: imageFileName,
-                type: 'image/jpeg', // Replace with the appropriate MIME type of your image
-            });
-
-            return this.POST_PIC(url, formData).then(response => response);
+            return this.POST_PIC(url, Image).then(response => response);
         } catch (error) {
             console.log('Error Change Image:', error);
             return {
@@ -713,16 +701,21 @@ class Backend {
     static async getTermsConditions() {
         try {
             const termsUrl = 'https://api.jsonbin.io/v3/b/6462fff99d312622a35f186f';
-            const response = await fetch(termsUrl, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
+            return axios.get(termsUrl, {
+                headers: this.getHeaders(),
                 redirect: 'follow',
+            }).then(response => {
+                return {
+                    statusCode: 200,
+                    data: response.data.record.TermsConditions
+                }
+            }).catch(error => {
+                console.log('Error Terms and Conditions:', error);
+                return {
+                    statusCode: 500,
+                    data: error
+                }
             });
-            const result = await response.json();
-            return result.record.TermsConditions;
         } catch (error) {
             console.log('Error Terms and Conditions:', error);
             return {

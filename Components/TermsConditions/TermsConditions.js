@@ -1,5 +1,5 @@
 import { styles } from "./Styles";
-import { View, Text, Image, TouchableOpacity, ScrollView, useWindowDimensions } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView, useWindowDimensions } from "react-native";
 import { translate } from "../../Localization";
 import RenderHTML from "react-native-render-html";
 import Backend from "../../Backend/Backend";
@@ -34,11 +34,13 @@ export default function TermsConditions({ }) {
 
     // use the context to get the state of the modal
     useEffect(() => {
-        showLoader(translate('TermsConditions.getTerms'));
         async function fetchData() {
-            const response = await Backend.getTermsConditions();
-            setTerms(response);
+            showLoader(translate('TermsConditions.getTerms'));
+            const {statusCode, data} = await Backend.getTermsConditions();
             hideLoader();
+            if (Backend.isSuccessfulRequest(statusCode)) {
+                setTerms(data);
+            }
         }
         fetchData();
     }, []);
@@ -57,8 +59,6 @@ export default function TermsConditions({ }) {
             </View>
             <SvgMaker Svg={TermsStatue} style={styles.statue} />
             <SvgMaker Svg={TermsView} style={styles.pyramids} />
-            {/* <Image source={require('../../assets/TermsConditions/statue.png')} style={styles.statue}/> */}
-            {/* <Image source={require('../../assets/TermsConditions/pyramids.png')} style={styles.pyramids}/> */}
             <View style={styles.DarkConatiner}>
                 <Text style={styles.copyright}>{translate('TermsConditions.copyright')}</Text>
                 <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.contentContainer}>
