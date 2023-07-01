@@ -13,12 +13,18 @@ import { setStatusBarStyle } from "expo-status-bar";
 import { UserContext } from "../Context/Context";
 import SvgMaker from "../SvgMaker/SvgMaker";
 import { LeftArrow } from "../../assets/SVG/Icons";
+import Backend from "../../Backend/Backend";
+import Loader from "../Loader/Loader";
+import { manipulateAsync } from 'expo-image-manipulator';
 
 
 export default function CameraScreen({ }) {
 
     // use user context
     const { popupMessageVisible, showPopupMessage } = useContext(UserContext);
+
+    // for loader
+    const { showLoader, hideLoader, loaderVisible } = useContext(UserContext);
 
     // check if the currenpage is focused
     const isFocused = useIsFocused();
@@ -62,6 +68,7 @@ export default function CameraScreen({ }) {
                     base64: true,
                     skipProcessing: false,
                     isImageMirror: true,
+                    ratio: '1:1', // set aspect ratio
                 }
                 const data = await cameraRef.current.takePictureAsync(options);
                 setImage(data.uri);
@@ -73,15 +80,42 @@ export default function CameraScreen({ }) {
         }
     };
 
+    // Function to compress the selected image
+    const compressImage = async (imageUri) => {
+        const compressedImage = await manipulateAsync(
+            imageUri,
+            [{ resize: { width: 450, height: 450 } }],
+            { compress: 1, format: 'jpeg' }
+        );
+        return compressedImage.uri;
+    };
+
     // Save the current image to the media library
-    const saveImage = async () => {
+    const uploadImage = async () => {
         if (image) {
             try {
-                await MediaLibrary.createAssetAsync(image);
-                showPopupMessage('Success', translate('Scan.saved'));
-                setImage(null);
+                // await MediaLibrary.createAssetAsync(image);
+                // showPopupMessage('Success', translate('Scan.saved'));
+                // setImage(null);
+
+                // compress the image
+                const compressedImage = await compressImage(image);
+
+                // upload the image
+                showLoader(translate('messages.detect'));
+                const { data } = await Backend.detectMonumentsFromImageURL(compressedImage);
+                hideLoader();
+
+                // check if the image detected
+                if (data.status === "No monuments detected") {
+                    showPopupMessage('Error', data.status);
+                    setImage(null);
+                } else {
+                    showPopupMessage('Success', data.status);
+                    setImage(null);
+                }
             } catch (e) {
-                showPopupMessage('Error', translate('Scan.ErrorSave'));
+                console.log(e);
             }
         }
     }
@@ -108,6 +142,7 @@ export default function CameraScreen({ }) {
 
     return (
         <View style={styles.container}>
+            {loaderVisible ? <Loader /> : null}
             {popupMessageVisible ? <PopupMessage /> : null}
             <View style={styles.topBar}>
                 <Text style={styles.title}>{translate('Scan.title')}</Text>
@@ -153,9 +188,9 @@ export default function CameraScreen({ }) {
                             <Entypo name="retweet" size={30} style={styles.icon} />
                             <Text style={styles.buttonTxt}>{translate('Scan.retake')}</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={saveImage}>
-                            <Entypo name="check" size={30} style={styles.icon} />
-                            <Text style={styles.buttonTxt}>{translate('Scan.save')}</Text>
+                        <TouchableOpacity onPress={uploadImage}>
+                            <Entypo name="arrow-with-circle-up" size={30} style={styles.icon} />
+                            <Text style={styles.buttonTxt}>{translate('Scan.upload')}</Text>
                         </TouchableOpacity>
                     </View>
             }

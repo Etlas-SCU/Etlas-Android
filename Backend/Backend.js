@@ -705,6 +705,19 @@ class Backend {
         }
     }
 
+    // Monument detection
+    static async detectMonumentsFromImageURL(image_url) {
+        try {
+            const detectUrl = 'monuments/detect/';
+            return await this.POST_PIC(detectUrl, image_url).then(response => response);
+        } catch (error) {
+            return {
+                statusCode: 500,
+                data: error
+            }
+        }
+    }
+
     // terms and conditions
 
     static async getTermsConditions() {

@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native'
 
 export const CameraDimensions = {
     width: dimensions.fullWidth,
-    height: dimensions.fullWidth * 16 / 9,
+    height: dimensions.fullWidth,
 };
 
 

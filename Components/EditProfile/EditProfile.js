@@ -53,6 +53,7 @@ export default function EditProfile({ }) {
             }
 
             showPopupMessage('Success', translate('messages.updateUserSuccess'));
+            await updateUserData(data);
             goPage('Settings');
         } catch (error) {
             console.log(error);
