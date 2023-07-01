@@ -62,7 +62,6 @@ export default function HomePage({ }) {
         setStatusBarStyle('light');
     }
 
-
     const { modalVisible, showModal, setScreen } = useContext(UserContext);
     const { updateUserData, updateScore } = useContext(UserDataContext);
     const [searchTerm, setSearchTerm] = useState('');
@@ -115,13 +114,6 @@ export default function HomePage({ }) {
         }
     }
 
-    // get score of the user
-    const getScore = () => {
-        getLandmarkScore();
-        getMonumentsScore();
-        getStatuesScore();
-    }
-
     // refresh the page
     const onRefresh = () => {
         setRefreshing(true);
@@ -130,11 +122,13 @@ export default function HomePage({ }) {
         setRefreshing(false);
     }
 
+    // for user data and score
     useEffect(() => {
         getUserData();
-        getScore();
-    })
-
+        getLandmarkScore();
+        getMonumentsScore();
+        getStatuesScore();
+    }, []);
 
     // get tours list from backend
     const ToursList = Backend.getTours().filter((Tour) => {

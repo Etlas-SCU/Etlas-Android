@@ -79,10 +79,13 @@
     "react-native-svg-transformer": "^1.0.0",
     "react-native-svg-uri": "^1.2.3",
     "react-native-swiper": "^1.6.0-rc.3",
-    "react-native-vector-icons": "^9.2.0"
+    "react-native-vector-icons": "^9.2.0",
+    "webpack": "^5.88.1",
+    "webpack-cli": "^5.1.4"
   },
   "devDependencies": {
-    "@babel/core": "^7.21.3"
+    "@babel/core": "^7.21.3",
+    "babel-loader": "^9.1.2"
   },
   "private": true
 }

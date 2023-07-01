@@ -13,12 +13,18 @@ import { setStatusBarStyle } from "expo-status-bar";
 import { UserContext } from "../Context/Context";
 import SvgMaker from "../SvgMaker/SvgMaker";
 import { LeftArrow } from "../../assets/SVG/Icons";
+import Backend from "../../Backend/Backend";
+import Loader from "../Loader/Loader";
+import { manipulateAsync } from 'expo-image-manipulator';
 
 
 export default function CameraScreen({ }) {
 
     // use user context
     const { popupMessageVisible, showPopupMessage } = useContext(UserContext);
+
+    // for loader
+    const { showLoader, hideLoader, loaderVisible } = useContext(UserContext);
 
     // check if the currenpage is focused
     const isFocused = useIsFocused();
@@ -36,6 +42,7 @@ export default function CameraScreen({ }) {
     const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
     const [mirrorStyle, setmirrorStyle] = useState({});
     const cameraRef = useRef(null);
+    const [cameraEnabled, setCameraEnabled] = useState(true);
 
 
     // Request camera and media library permissions on component mount
@@ -55,33 +62,61 @@ export default function CameraScreen({ }) {
 
     // Take a picture with the camera and set the image state variable to the picture URI
     const takePicture = async () => {
-        if (cameraRef) {
+        if (cameraRef && cameraEnabled) {
             try {
+                setCameraEnabled(false); // Disable the camera temporarily
                 const options = {
                     quality: 1,
                     base64: true,
                     skipProcessing: false,
                     isImageMirror: true,
+                    ratio: '1:1', // set aspect ratio
                 }
+                cameraRef.current.pausePreview();
                 const data = await cameraRef.current.takePictureAsync(options);
                 setImage(data.uri);
                 setCameraHeight(data.height);
                 setCameraWidth(data.width);
             } catch (e) {
                 console.log(e);
+            } finally {
+                setCameraEnabled(true);
             }
         }
     };
 
+    // Function to compress the selected image
+    const compressImage = async (imageUri) => {
+        const compressedImage = await manipulateAsync(
+            imageUri,
+            [{ resize: { width: 450, height: 450 } }],
+            { compress: 1, format: 'jpeg' }
+        );
+        return compressedImage.uri;
+    };
+
     // Save the current image to the media library
-    const saveImage = async () => {
+    const uploadImage = async () => {
         if (image) {
             try {
-                await MediaLibrary.createAssetAsync(image);
-                showPopupMessage('Success', translate('Scan.saved'));
-                setImage(null);
+                // compress the image
+                const compressedImage = await compressImage(image);
+
+                // upload the image
+                showLoader(translate('messages.detect'));
+                const { data } = await Backend.detectMonumentsFromImageURL(compressedImage);
+                hideLoader();
+
+                // check if the image detected
+                if (data.status === "No monuments detected") {
+                    showPopupMessage('Error', data.status);
+                    setImage(null);
+                } else {
+                    showPopupMessage('Success', data.status);
+                    setImage(null);
+                }
             } catch (e) {
-                showPopupMessage('Error', translate('Scan.ErrorSave'));
+                console.log(e);
             }
         }
     }
@@ -108,6 +143,7 @@ export default function CameraScreen({ }) {
 
     return (
         <View style={styles.container}>
+            {loaderVisible ? <Loader /> : null}
             {popupMessageVisible ? <PopupMessage /> : null}
             <View style={styles.topBar}>
                 <Text style={styles.title}>{translate('Scan.title')}</Text>
@@ -124,6 +160,8 @@ export default function CameraScreen({ }) {
                         ref={cameraRef}
                         shouldRasterizeIOS={true}
                         useCamera2Api={true}
+                        ratio='1:1'
+                        zoom={0}
                     />
                     :
                     <Image
@@ -153,9 +191,9 @@ export default function CameraScreen({ }) {
                             <Entypo name="retweet" size={30} style={styles.icon} />
                             <Text style={styles.buttonTxt}>{translate('Scan.retake')}</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={saveImage}>
-                            <Entypo name="check" size={30} style={styles.icon} />
-                            <Text style={styles.buttonTxt}>{translate('Scan.save')}</Text>
+                        <TouchableOpacity onPress={uploadImage}>
+                            <Entypo name="arrow-with-circle-up" size={30} style={styles.icon} />
+                            <Text style={styles.buttonTxt}>{translate('Scan.upload')}</Text>
                         </TouchableOpacity>
                     </View>
             }

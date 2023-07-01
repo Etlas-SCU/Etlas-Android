@@ -31,32 +31,39 @@ const UserDataProvider = ({ children }) => {
     const [statueScore, setStatueScore] = useState('0/0');
 
     // check is greater
-    const isGreater = (new_score, old_score) => {
+    const isGreater = async (new_score, old_score) => {
         const new_score_split = new_score.split('/');
         const old_score_split = old_score.split('/');
         return parseInt(new_score_split[0]) > parseInt(old_score_split[0]);
     }
 
+    // adjust score
+    const adjustScore = async (new_score, old_score) => {
+        const new_score_split = new_score.split('/');
+        const old_score_split = old_score.split('/');
+        return `${parseInt(new_score_split[0])}/${parseInt(old_score_split[1])}`;
+    };
+
     // update score
-    const updateScore = (score, type) => {
+    const updateScore = async (score, type) => {
         switch (type) {
             case 'Landmarks':
-                if (isGreater(score, landmarkScore)) {
-                    setLandmarkScore(score);
+                if (await isGreater(score, landmarkScore)) {
+                    setLandmarkScore(await adjustScore(score, landmarkScore));
                 }
                 break;
             case 'Monuments':
-                if (isGreater(score, monumentScore)) {
-                    setMonumentScore(score);
+                if (await isGreater(score, monumentScore)) {
+                    setMonumentScore(await adjustScore(score, monumentScore));
                 }
                 break;
             case 'Statues':
-                if (isGreater(score, statueScore)) {
-                    setStatueScore(score);
+                if (await isGreater(score, statueScore)) {
+                    setStatueScore(await adjustScore(score, statueScore));
                 }
                 break;
         }
-    }        
+    }
 
     // get monument score
     const getMonumentScore = async () => {

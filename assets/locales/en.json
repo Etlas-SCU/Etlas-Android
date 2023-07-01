@@ -35,7 +35,8 @@
         "googleSign": "Logging in with google",
         "somethingWrong": "Something went wrong, please try again later.",
         "upload_pic": "While uploading your picture",
-        "profilePictureUpdated": "Your Image has been changed successfully"
+        "profilePictureUpdated": "Your Image has been changed successfully",
+        "detect": "While detecting your monument"
     },
     "emailConfirmation": {
         "title": "Email Confirmation",
@@ -121,7 +122,7 @@
     "Scan": {
         "title": "Scan your monument, please.",
         "retake": "Re-Take",
-        "save": "Save",
+        "upload": "Upload",
         "saved": "Picture has been saved 🎉",
         "ErrorAcces": "Can't Access the camera of Media Library",
         "ErrorSave": "Can't Save the picture"

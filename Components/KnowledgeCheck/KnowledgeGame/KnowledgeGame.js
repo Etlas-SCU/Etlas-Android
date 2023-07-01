@@ -85,8 +85,9 @@ export default function KnowledgeGame({ }) {
         if (!Backend.isSuccessfulRequest(statusCode)) {
             const errorMessage = await Backend.getErrorMessage(data).then(response => response);
             showPopupMessage('Error', errorMessage);
-            updateScore(score, 'Monuments');
+            return;
         }
+        await updateScore(`${score}/0`, 'Monuments');
     }
 
     // update landmarks score
@@ -95,8 +96,9 @@ export default function KnowledgeGame({ }) {
         if (!Backend.isSuccessfulRequest(statusCode)) {
             const errorMessage = await Backend.getErrorMessage(data).then(response => response);
             showPopupMessage('Error', errorMessage);
-            updateScore(score, 'Landmarks');
+            return;
         }
+        await updateScore(`${score}/0`, 'Landmarks');
     }
 
     // update statues score
@@ -105,8 +107,9 @@ export default function KnowledgeGame({ }) {
         if (!Backend.isSuccessfulRequest(statusCode)) {
             const errorMessage = await Backend.getErrorMessage(data).then(response => response);
             showPopupMessage('Error', errorMessage);
-            updateScore(score, 'Statues');
+            return;
         }
+        await updateScore(`${score}/0`, 'Statues');
     }
 
     // update the score after the game finished

@@ -1,6 +1,6 @@
 import { styles } from "./Styles";
 import { translate } from "../../Localization";
-import { View, Text, TouchableOpacity, ScrollView, Image } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { UserContext } from "../Context/Context";
 import { Avatar } from "@react-native-material/core";
 import { responsiveHeight } from "../../AppStyles";
@@ -60,7 +60,7 @@ export default function Settings({ }) {
     // update profile picture
     const updateProfilePicture = async (image_uri) => {
         // send request to the backend
-        const { statusCode, data } = await Backend.changeUserImage(image_uri).then(response => response).then(data => data);
+        const { statusCode, data } = await Backend.changeUserImage(image_uri);
 
         // hide loader
         hideLoader();
@@ -73,7 +73,7 @@ export default function Settings({ }) {
         }
 
         // update user data
-        updateUserData({ image_url: image_uri });
+        await updateUserData({ image_url: image_uri });
 
         // show success message
         showPopupMessage('Success', translate('messages.profilePictureUpdated'));
@@ -114,7 +114,7 @@ export default function Settings({ }) {
             const compressedImage = await compressImage(assets[0].uri);
 
             // update the profile picture
-            updateProfilePicture(compressedImage);
+            await updateProfilePicture(compressedImage);
         }
 
     };
@@ -125,7 +125,7 @@ export default function Settings({ }) {
     // handle logout
     const handle_logout = async () => {
         setPressed(true);
-        const { statusCode, data } = await Backend.logout().then(response => response).then(data => data);
+        const { statusCode, data } = await Backend.logout();
         setPressed(false);
         if (!Backend.isSuccessfulRequest(statusCode)) {
             const errorMessage = await Backend.getErrorMessage(data).then(response => response);
