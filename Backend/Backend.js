@@ -706,10 +706,30 @@ class Backend {
     }
 
     // Monument detection
+    
     static async detectMonumentsFromImageURL(image_url) {
         try {
             const detectUrl = 'monuments/detect/';
             return await this.POST_PIC(detectUrl, image_url).then(response => response);
+        } catch (error) {
+            return {
+                statusCode: 500,
+                data: error
+            }
+        }
+    }
+
+    // contact us
+    static async sendContactUsEmail(full_name, email, subject, message) {
+        try {
+            const contactUrl = 'contact-us/message/';
+            const body = {
+                full_name: full_name,
+                email: email,
+                subject: subject,
+                message: message
+            }
+            return await this.POST(contactUrl, body).then(response => response);
         } catch (error) {
             return {
                 statusCode: 500,

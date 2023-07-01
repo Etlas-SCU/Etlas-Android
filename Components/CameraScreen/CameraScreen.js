@@ -42,6 +42,7 @@ export default function CameraScreen({ }) {
     const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
     const [mirrorStyle, setmirrorStyle] = useState({});
     const cameraRef = useRef(null);
+    const [cameraEnabled, setCameraEnabled] = useState(true);
 
 
     // Request camera and media library permissions on component mount
@@ -61,8 +62,9 @@ export default function CameraScreen({ }) {
 
     // Take a picture with the camera and set the image state variable to the picture URI
     const takePicture = async () => {
-        if (cameraRef) {
+        if (cameraRef && cameraEnabled) {
             try {
+                setCameraEnabled(false); // Disable the camera temporarily
                 const options = {
                     quality: 1,
                     base64: true,
@@ -70,12 +72,15 @@ export default function CameraScreen({ }) {
                     isImageMirror: true,
                     ratio: '1:1', // set aspect ratio
                 }
+                cameraRef.current.pausePreview();
                 const data = await cameraRef.current.takePictureAsync(options);
                 setImage(data.uri);
                 setCameraHeight(data.height);
                 setCameraWidth(data.width);
             } catch (e) {
                 console.log(e);
+            } finally {
+                setCameraEnabled(true);
             }
         }
     };
@@ -94,10 +99,6 @@ export default function CameraScreen({ }) {
     const uploadImage = async () => {
         if (image) {
             try {
-                // await MediaLibrary.createAssetAsync(image);
-                // showPopupMessage('Success', translate('Scan.saved'));
-                // setImage(null);
-
                 // compress the image
                 const compressedImage = await compressImage(image);
 
@@ -159,6 +160,8 @@ export default function CameraScreen({ }) {
                         ref={cameraRef}
                         shouldRasterizeIOS={true}
                         useCamera2Api={true}
+                        ratio='1:1'
+                        zoom={0}
                     />
                     :
                     <Image
