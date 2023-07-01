@@ -46,9 +46,12 @@ function setBackendVariables(params) {
         Backend.setFavMonument(params.favMonument);
 
     // set the last game
-    if (params?.lastGame) {
+    if (params?.lastGame) 
         Backend.setLastGame(params.lastGame);
-    }
+
+    // set email
+    if (params?.email)
+        Backend.setEmail(params.email);
 }
 
 // Navigate to the next page

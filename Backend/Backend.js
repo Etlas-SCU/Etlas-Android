@@ -15,6 +15,7 @@ class Backend {
         this.favArticle = {};
         this.favMonument = {};
         this.lastGame = null;
+        this.email = null;
     }
 
     static getArticle() {
@@ -41,6 +42,10 @@ class Backend {
         return this.lastGame;
     }
 
+    static getEmail() {
+        return this.email;
+    }
+
     static setLastGame(lastGame) {
         this.lastGame = lastGame;
     }
@@ -63,6 +68,10 @@ class Backend {
 
     static setFavMonument(favMonument) {
         this.favMonument = favMonument;
+    }
+
+    static setEmail(email) {
+        this.email = email;
     }
 
     // requests
@@ -203,7 +212,7 @@ class Backend {
                     statusCode: response.status,
                     data: response.data
                 }
-            }).then(error => {
+            }).catch(error => {
                 error = error.response;
                 return {
                     statusCode: error.status,
@@ -519,7 +528,7 @@ class Backend {
             };
             return await this.PATCH(resetUrl, body).then(response => response);
         } catch (error) {
-            console.log('Error resetting password:', error);
+            console.log('Error resetting password confirmation:', error);
             return {
                 statusCode: 500,
                 data: error

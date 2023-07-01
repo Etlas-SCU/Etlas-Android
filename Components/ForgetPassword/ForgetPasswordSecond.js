@@ -19,7 +19,7 @@ export default function ForgotPasswordSecond({ }) {
     const otpInput = useRef(null);
     const { popupMessageVisible, showPopupMessage } = useContext(UserContext);
     const { loaderVisible, showLoader, hideLoader } = useContext(UserContext);
-    const { email } = getParams();
+    const email = Backend.getEmail();
 
 
     // check otp validation
@@ -35,7 +35,7 @@ export default function ForgotPasswordSecond({ }) {
 
     // referesh the OTP
     const resendOTP = async (email) => {
-        const { statusCode, data } = await Backend.refereshOTP(email);
+        const { statusCode, data } = await Backend.passwordReset(email);
         if (!Backend.isSuccessfulRequest(statusCode)) {
             const errorMessage = await Backend.getErrorMessage(data).then(response => response);
             showPopupMessage('Error', errorMessage);
