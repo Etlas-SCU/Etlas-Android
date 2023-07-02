@@ -115,10 +115,12 @@ export default function HomePage({ }) {
     }
 
     // refresh the page
-    const onRefresh = () => {
+    const onRefresh = async () => {
         setRefreshing(true);
-        getUserData();
-        getScore();
+        await getLandmarkScore();
+        await getMonumentsScore();
+        await getStatuesScore();
+        await getUserData();
         setRefreshing(false);
     }
 

@@ -36,7 +36,8 @@
         "somethingWrong": "Something went wrong, please try again later.",
         "upload_pic": "While uploading your picture",
         "profilePictureUpdated": "Your Image has been changed successfully",
-        "detect": "While detecting your monument"
+        "detect": "While detecting your monument",
+        "upload_pic_detect": "While uploading and detect your monument"
     },
     "emailConfirmation": {
         "title": "Email Confirmation",
@@ -125,7 +126,8 @@
         "upload": "Upload",
         "saved": "Picture has been saved 🎉",
         "ErrorAcces": "Can't Access the camera of Media Library",
-        "ErrorSave": "Can't Save the picture"
+        "ErrorSave": "Can't Save the picture",
+        "save": "Save"
     },
     "Profile": {
         "title": "Profile",

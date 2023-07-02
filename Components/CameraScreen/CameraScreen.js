@@ -6,7 +6,7 @@ import * as MediaLibrary from "expo-media-library";
 import PopupMessage from '../PopupMessage/PopupMessage'
 import { translate } from "../../Localization";
 import { Entypo } from "@expo/vector-icons";
-import { colors, dimensions } from "../../AppStyles";
+import { colors } from "../../AppStyles";
 import { goBack } from "../../Backend/Navigator";
 import { useIsFocused } from '@react-navigation/native';
 import { setStatusBarStyle } from "expo-status-bar";
@@ -16,6 +16,7 @@ import { LeftArrow } from "../../assets/SVG/Icons";
 import Backend from "../../Backend/Backend";
 import Loader from "../Loader/Loader";
 import { manipulateAsync } from 'expo-image-manipulator';
+import * as ImagePicker from 'expo-image-picker';
 
 
 export default function CameraScreen({ }) {
@@ -36,14 +37,16 @@ export default function CameraScreen({ }) {
     // Initialize state variables
     const [hasCameraPermission, setHasCameraPermission] = useState(null);
     const [image, setImage] = useState(null);
-    const [cameraWidth, setCameraWidth] = useState(dimensions.fullWidth);
-    const [cameraHeight, setCameraHeight] = useState(dimensions.fullHeight);
+    const [cameraWidth, setCameraWidth] = useState(styles.camera.width);
+    const [cameraHeight, setCameraHeight] = useState(styles.camera.height);
     const [type, setType] = useState(Camera.Constants.Type.back);
     const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
     const [mirrorStyle, setmirrorStyle] = useState({});
-    const cameraRef = useRef(null);
     const [cameraEnabled, setCameraEnabled] = useState(true);
+    const cameraRef = useRef(null);
 
+    // state for the gallery permission and the stored image
+    const [hasGelleryPermission, setHasGalleryPermission] = useState(null);
 
     // Request camera and media library permissions on component mount
     useEffect(() => {
@@ -62,7 +65,7 @@ export default function CameraScreen({ }) {
 
     // Take a picture with the camera and set the image state variable to the picture URI
     const takePicture = async () => {
-        if (cameraRef && cameraEnabled) {
+        if (cameraRef) {
             try {
                 setCameraEnabled(false); // Disable the camera temporarily
                 const options = {
@@ -78,6 +81,7 @@ export default function CameraScreen({ }) {
                 setCameraHeight(data.height);
                 setCameraWidth(data.width);
             } catch (e) {
+                cameraRef.current.resumePreview();
                 console.log(e);
             } finally {
                 setCameraEnabled(true);
@@ -110,11 +114,12 @@ export default function CameraScreen({ }) {
                 // check if the image detected
                 if (data.status === "No monuments detected") {
                     showPopupMessage('Error', data.status);
-                    setImage(null);
                 } else {
                     showPopupMessage('Success', data.status);
-                    setImage(null);
                 }
+                // make the camera resume again
+                setImage(null);
+                cameraRef.current.resumePreview();
             } catch (e) {
                 console.log(e);
             }
@@ -122,7 +127,7 @@ export default function CameraScreen({ }) {
     }
 
     // Toggle the flash
-    const flashClick = () => {
+    const flashClick = async () => {
         if (flash == Camera.Constants.FlashMode.off)
             setFlash(Camera.Constants.FlashMode.on);
         else
@@ -130,7 +135,7 @@ export default function CameraScreen({ }) {
     }
 
     // Toggle the camera
-    const CameraClick = () => {
+    const CameraClick = async () => {
         if (type == Camera.Constants.Type.back) {
             setType(Camera.Constants.Type.front);
             setmirrorStyle({ transform: [{ scaleX: -1 }] });
@@ -141,16 +146,99 @@ export default function CameraScreen({ }) {
         }
     }
 
+    // Save the current image to the media library
+    const saveImage = async () => {
+        if (image) {
+            try {
+                await MediaLibrary.createAssetAsync(image);
+                showPopupMessage('Success', translate('Scan.saved'));
+            } catch (e) {
+                showPopupMessage('Error', translate('Scan.ErrorSave'));
+            }
+        }
+    }
+
+    // pick image from gallery
+    const pickImage = async () => {
+        // ask for gallery permission
+        if (hasGelleryPermission === null) {
+            (async () => {
+                const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+                setHasGalleryPermission(status === 'granted');
+            })();
+        }
+
+        // if the user doesn't have permission
+        if (hasGelleryPermission === false) {
+            showPopupMessage('Error', translate('messages.storageError'));
+            return;
+        }
+
+        // No permissions request is necessary for launching the image library
+        const { assets, canceled } = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
+            allowsEditing: true,
+            aspect: [1, 1],
+            quality: 1,
+            base64: true,
+            allowsMultipleSelection: false,
+        });
+
+        // if the user didn't cancel the process
+        if (!canceled) {
+            // pause the camera
+            cameraRef.current.pausePreview();
+
+            // show loader
+            showLoader(translate('messages.upload_pic_detect'));
+
+            // compress the image
+            const compressedImage = await compressImage(assets[0].uri);
+
+            const { data } = await Backend.detectMonumentsFromImageURL(compressedImage);
+
+            // hide loader
+            hideLoader();
+
+            // check if the image detected
+            if (data.status === "No monuments detected") {
+                showPopupMessage('Error', data.status);
+            } else {
+                showPopupMessage('Success', data.status);
+            }
+
+            // resume the camera again
+            setImage(null);
+            cameraRef.current.resumePreview();
+        }
+
+    };
+
     return (
         <View style={styles.container}>
             {loaderVisible ? <Loader /> : null}
             {popupMessageVisible ? <PopupMessage /> : null}
-            <View style={styles.topBar}>
-                <Text style={styles.title}>{translate('Scan.title')}</Text>
-                <TouchableOpacity onPress={goBack}>
-                    <SvgMaker Svg={LeftArrow} />
-                </TouchableOpacity>
-            </View>
+            {
+                !image ?
+                    <View style={styles.topBar}>
+                        <TouchableOpacity onPress={flashClick}>
+                            <Entypo name="flash" size={30} style={[styles.flash, { color: flash == Camera.Constants.FlashMode.off ? colors.White : colors.Yellow }]} />
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={goBack}>
+                            <SvgMaker Svg={LeftArrow} />
+                        </TouchableOpacity>
+                    </View>
+                    :
+                    <View style={styles.topBar}>
+                        <TouchableOpacity onPress={saveImage}>
+                            <Entypo name="download" size={30} style={styles.icon} />
+                            <Text style={styles.buttonTxt}>{translate('Scan.save')}</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={goBack}>
+                            <SvgMaker Svg={LeftArrow} />
+                        </TouchableOpacity>
+                    </View>
+            }
             {
                 !image ?
                     <Camera
@@ -162,6 +250,8 @@ export default function CameraScreen({ }) {
                         useCamera2Api={true}
                         ratio='1:1'
                         zoom={0}
+                        autoFocus={Camera.Constants.AutoFocus.on}
+                        whiteBalance={Camera.Constants.WhiteBalance.auto}
                     />
                     :
                     <Image
@@ -174,15 +264,16 @@ export default function CameraScreen({ }) {
             {
                 !image ?
                     <View style={styles.bottomBar}>
-                        <TouchableOpacity onPress={CameraClick}>
-                            <Entypo name="retweet" size={30} style={styles.icon} />
+                        <TouchableOpacity onPress={pickImage}>
+                            <Entypo name="images" size={30} style={styles.icon} />
                         </TouchableOpacity>
                         <TouchableOpacity
                             style={styles.button}
                             onPress={takePicture}
+                            disabled={!cameraEnabled}
                         />
-                        <TouchableOpacity onPress={flashClick}>
-                            <Entypo name="flash" size={30} style={[styles.flash, { color: flash == Camera.Constants.FlashMode.off ? colors.White : colors.Yellow }]} />
+                        <TouchableOpacity onPress={CameraClick}>
+                            <Entypo name="retweet" size={30} style={styles.icon} />
                         </TouchableOpacity>
                     </View>
                     :
