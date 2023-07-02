@@ -90,5 +90,10 @@ export const styles = StyleSheet.create({
     },
     absolute: {
         position: 'absolute',
+    },
+    loader: {
+        ...StyleSheet.absoluteFillObject,
+        justifyContent: 'center',
+        alignItems: 'center',
     }
 });
