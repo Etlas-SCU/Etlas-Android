@@ -17,6 +17,7 @@ import Backend from "../../Backend/Backend";
 import Loader from "../Loader/Loader";
 import { manipulateAsync } from 'expo-image-manipulator';
 import * as ImagePicker from 'expo-image-picker';
+import { ActivityIndicator, Animated, Easing } from 'react-native';
 
 
 export default function CameraScreen({ }) {
@@ -42,11 +43,51 @@ export default function CameraScreen({ }) {
     const [type, setType] = useState(Camera.Constants.Type.back);
     const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
     const [mirrorStyle, setmirrorStyle] = useState({});
-    const [cameraEnabled, setCameraEnabled] = useState(true);
     const cameraRef = useRef(null);
 
     // state for the gallery permission and the stored image
     const [hasGelleryPermission, setHasGalleryPermission] = useState(null);
+
+    const [loading, setLoading] = useState(false);
+    const fadeAnim = useState(new Animated.Value(1))[0];
+
+    // make animation for take picture button
+    const handlePress = () => {
+        setLoading(true);
+        startAnimation();
+        // Simulate an asynchronous action, e.g., an API call
+        setTimeout(() => {
+            setLoading(false);
+            fadeAnim.setValue(1);
+        }, 3000); // Replace this with your actual asynchronous action
+    };
+
+    // make animation for take picture button
+    const startAnimation = () => {
+        Animated.loop(
+            Animated.sequence([
+                Animated.timing(fadeAnim, {
+                    toValue: 0.2,
+                    duration: 500,
+                    easing: Easing.linear,
+                    useNativeDriver: true,
+                }),
+                Animated.timing(fadeAnim, {
+                    toValue: 1,
+                    duration: 500,
+                    easing: Easing.linear,
+                    useNativeDriver: true,
+                }),
+            ]),
+        ).start();
+    };
+
+    // stop animation for take picture button
+    useEffect(() => {
+        return () => {
+            fadeAnim.stopAnimation();
+        };
+    }, []);
 
     // Request camera and media library permissions on component mount
     useEffect(() => {
@@ -67,7 +108,10 @@ export default function CameraScreen({ }) {
     const takePicture = async () => {
         if (cameraRef) {
             try {
-                setCameraEnabled(false); // Disable the camera temporarily
+                // make the button fading
+                handlePress();
+                
+                // option of the picture
                 const options = {
                     quality: 1,
                     base64: true,
@@ -75,7 +119,7 @@ export default function CameraScreen({ }) {
                     isImageMirror: true,
                     ratio: '1:1', // set aspect ratio
                 }
-                cameraRef.current.pausePreview();
+                // cameraRef.current.pausePreview();
                 const data = await cameraRef.current.takePictureAsync(options);
                 setImage(data.uri);
                 setCameraHeight(data.height);
@@ -83,8 +127,6 @@ export default function CameraScreen({ }) {
             } catch (e) {
                 cameraRef.current.resumePreview();
                 console.log(e);
-            } finally {
-                setCameraEnabled(true);
             }
         }
     };
@@ -247,7 +289,6 @@ export default function CameraScreen({ }) {
                         flashMode={flash ? Camera.Constants.FlashMode.torch : Camera.Constants.FlashMode.off}
                         ref={cameraRef}
                         shouldRasterizeIOS={true}
-                        useCamera2Api={true}
                         ratio='1:1'
                         zoom={0}
                         autoFocus={Camera.Constants.AutoFocus.on}
@@ -267,11 +308,13 @@ export default function CameraScreen({ }) {
                         <TouchableOpacity onPress={pickImage}>
                             <Entypo name="images" size={30} style={styles.icon} />
                         </TouchableOpacity>
-                        <TouchableOpacity
-                            style={styles.button}
-                            onPress={takePicture}
-                            disabled={!cameraEnabled}
-                        />
+                        <Animated.View style={[styles.buttonContent, { opacity: fadeAnim }]} >
+                            <TouchableOpacity
+                                style={styles.button}
+                                onPress={takePicture}
+                                disabled={loading}
+                            />
+                        </Animated.View>
                         <TouchableOpacity onPress={CameraClick}>
                             <Entypo name="retweet" size={30} style={styles.icon} />
                         </TouchableOpacity>
