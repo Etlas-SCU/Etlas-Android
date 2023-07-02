@@ -20,11 +20,12 @@ export const styles = StyleSheet.create({
     },
     camera: {
         flex: 1,
-        width: '100%',
-        height: '100%',
+        width: responsiveWidth(450),
+        height: responsiveHeight(450),
         alignItems: 'center',
         borderRadius: 20,
         resizeMode: 'contain',
+        aspectRatio: 1
     },
     button: {
         backgroundColor: colors.Cyan,
@@ -39,7 +40,7 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     topBar: {
-        height: responsiveHeight(120),
+        height: responsiveHeight(241),
         flexDirection: 'row',
         justifyContent: 'space-between',
         width: dimensions.fullWidth,
@@ -65,7 +66,7 @@ export const styles = StyleSheet.create({
         backgroundColor: colors.Black,
     },
     bottomBar: {
-        height: responsiveHeight(150),
+        height: responsiveHeight(241),
         flexDirection: 'row',
         justifyContent: 'space-between',
         width: dimensions.fullWidth,
