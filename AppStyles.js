@@ -40,7 +40,7 @@ export const BaseScale = {
 export const responsiveWidth = width => {
     return Math.round(PixelRatio.roundToNearestPixel(width * BaseScale.widthScale));
 };
-  
+
 
 // get the responsive height
 export const responsiveHeight = height => {
@@ -152,7 +152,7 @@ export const fontFamily = {
     PoppinsSemiBold: 'Poppins-SemiBold',
     PoppinsThin: 'Poppins-Thin',
     PoppinsLight: 'Poppins-Light',
-    PoppinsExtraLight: 'Poppins-Black', 
+    PoppinsExtraLight: 'Poppins-Black',
 }
 
 
@@ -166,4 +166,29 @@ export const fontWeight = {
     bold: '700',
     extraBold: '800',
     black: '900',
+}
+
+// convert date
+export const formatDate = (inputDate) => {
+    // Split the input date string into year, month, and day
+    const [year, month, day] = inputDate.split('-');
+
+    // Create a Date object using the year, month, and day
+    const dateObject = new Date(year, month - 1, day);
+
+    // Array of month names
+    const monthNames = [
+        'January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'
+    ];
+
+    // Get the day, month name, and year from the date object
+    const formattedDay = dateObject.getDate();
+    const formattedMonth = monthNames[dateObject.getMonth()];
+    const formattedYear = dateObject.getFullYear();
+
+    // Concatenate the formatted day, month name, and year
+    const formattedDate = `${formattedDay} ${formattedMonth} ${formattedYear}`;
+
+    return formattedDate;
 }

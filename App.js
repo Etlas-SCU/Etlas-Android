@@ -19,6 +19,7 @@ import { useEffect, useState } from 'react';
 import Backend from './Backend/Backend';
 import { UserProvider } from './Components/Context/Context';
 import { UserDataProvider } from './Components/Context/DataContext';
+import { ArticlesProvider } from './Components/Context/ArticlesContext';
 
 
 // import the screen
@@ -60,7 +61,7 @@ export default function App() {
     // get the access token from the local storage
     const [accessToken, setAccessToken] = useState(null);
     const [refreshToken, setRefreshToken] = useState(null);
-    const [checked, setIsChecked] = useState(false);
+    const [isTokensChecked, setIsTokensChecked] = useState(false);
 
     const getAccessToken = async () => {
         try {
@@ -84,7 +85,7 @@ export default function App() {
             });
             setAccessToken(access);
             setRefreshToken(refresh);
-            setIsChecked(true);
+            setIsTokensChecked(true);
         } catch (e) {
             console.log(e);
         }
@@ -142,7 +143,7 @@ export default function App() {
 
 
     // if the access token is null, return the login page
-    if (!checked || !fontsLoaded)
+    if (!isTokensChecked || !fontsLoaded)
         return null
 
     // clear async storage
@@ -152,40 +153,42 @@ export default function App() {
     return (
         <UserProvider>
             <UserDataProvider>
-                <StatusBar
-                    backgroundColor={'transparent'}
-                    barStyle='light-content'
-                    style='light'
-                    translucent={true}
-                />
-                <NavigationContainer
-                    ref={navigationRef => {
-                        setNavigationRef(navigationRef);
-                    }}
-                >
-                    <Stack.Navigator
-                        screenOptions={{
-                            header: () => null,
-                            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-                            transitionSpec: {
-                                open: timingConfig,
-                                close: timingConfig,
-                            },
-                            headerStatusBarHeight: 0,
+                <ArticlesProvider>
+                    <StatusBar
+                        backgroundColor={'transparent'}
+                        barStyle='light-content'
+                        style='light'
+                        translucent={true}
+                    />
+                    <NavigationContainer
+                        ref={navigationRef => {
+                            setNavigationRef(navigationRef);
                         }}
-                        initialRouteName={accessToken && refreshToken ? "menuBar" : "onBoarding"}
                     >
-                        <Stack.Screen name="onBoarding" component={OnBoarding} />
-                        <Stack.Screen name="firstPage" component={FirstPage} />
-                        <Stack.Screen name="secondPage" component={SecondPage} />
-                        <Stack.Screen name="login" component={Login} />
-                        <Stack.Screen name="forgotPasswordFirst" component={ForgotPasswordFirst} />
-                        <Stack.Screen name="forgotPasswordSecond" component={ForgotPasswordSecond} />
-                        <Stack.Screen name="forgotPasswordThird" component={ForgotPasswordThird} />
-                        <Stack.Screen name="menuBar" component={MenuBar} />
-                        <Stack.Screen name="emailVerification" component={EmailVerification} />
-                    </Stack.Navigator>
-                </NavigationContainer>
+                        <Stack.Navigator
+                            screenOptions={{
+                                header: () => null,
+                                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+                                transitionSpec: {
+                                    open: timingConfig,
+                                    close: timingConfig,
+                                },
+                                headerStatusBarHeight: 0,
+                            }}
+                            initialRouteName={accessToken && refreshToken ? "menuBar" : "onBoarding"}
+                        >
+                            <Stack.Screen name="onBoarding" component={OnBoarding} />
+                            <Stack.Screen name="firstPage" component={FirstPage} />
+                            <Stack.Screen name="secondPage" component={SecondPage} />
+                            <Stack.Screen name="login" component={Login} />
+                            <Stack.Screen name="forgotPasswordFirst" component={ForgotPasswordFirst} />
+                            <Stack.Screen name="forgotPasswordSecond" component={ForgotPasswordSecond} />
+                            <Stack.Screen name="forgotPasswordThird" component={ForgotPasswordThird} />
+                            <Stack.Screen name="menuBar" component={MenuBar} />
+                            <Stack.Screen name="emailVerification" component={EmailVerification} />
+                        </Stack.Navigator>
+                    </NavigationContainer>
+                </ArticlesProvider>
             </UserDataProvider>
         </UserProvider>
     );

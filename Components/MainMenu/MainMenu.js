@@ -8,7 +8,7 @@ import SvgMaker from '../SvgMaker/SvgMaker';
 import { DiffCloseIcon } from '../../assets/SVG/Icons';
 
 
-function Button ({ title, pageNav, hideModal }){
+function Button({ title, pageNav, hideModal }) {
 
     const { screen } = useContext(UserContext);
 
@@ -38,10 +38,10 @@ export default function MainMenu({ }) {
     ]
 
     // create the buttons
-    const buttons = buttonsVal.map((button, idx) => <Button key={idx} title={button.title} pageNav={button.pageNav} hideModal={hideModal} /> );
+    const buttons = buttonsVal.map((button, idx) => <Button key={idx} title={button.title} pageNav={button.pageNav} hideModal={hideModal} />);
 
     return (
-        <Modal 
+        <Modal
             transparent={true}
             visible={modalVisible}
             onRequestClose={() => hideModal()}
@@ -53,7 +53,7 @@ export default function MainMenu({ }) {
                         <SvgMaker Svg={DiffCloseIcon} style={styles.close} />
                     </TouchableOpacity>
                     <Text style={styles.title}>{translate('MainMenu.message')}</Text>
-                    <View style={styles.line}/>
+                    <View style={styles.line} />
                     <View style={styles.buttons}>
                         {buttons}
                     </View>

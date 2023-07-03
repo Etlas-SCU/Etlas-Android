@@ -11,6 +11,7 @@ import Backend from "../../Backend/Backend";
 import { goBack } from "../../Backend/Navigator";
 import SvgMaker from "../SvgMaker/SvgMaker";
 import { LeftArrow, MenuIcon, FilterIcon, InvCheckIcon } from "../../assets/SVG/Icons";
+import { ArticlesContext } from "../Context/ArticlesContext";
 
 
 function Filter({ showFilerList, setShowFilterList, sortBy, setSortBy }) {
@@ -63,23 +64,19 @@ export default function ArticlesPage({ }) {
     const [showFilerList, setShowFilterList] = useState(false);
     const [sortBy, setSortBy] = useState('Latest');
     const [numColumns, setNumColumn] = useState(2);
-
-    // handle number of column change
-    const handleNumColumnChange = (newNumColumns) => {
-        setNumColumn(newNumColumns);
-    }
+    const { articles, articlesPage, updateArticlesPage, updateArticles } = useContext(ArticlesContext);
 
     // get the articles from backend
-    const ArticlesList = Backend.getArticles().filter((Article) => {
-        return Article.Title.toLowerCase().includes(searchTerm.toLowerCase());
+    const ArticlesList = articles.filter((Article) => {
+        return Article.article_title.toLowerCase().includes(searchTerm.toLowerCase());
     });
 
     // filtered Sort
     SortFunctions = {
-        'Name (a-z)': (a, b) => { return a.Title.localeCompare(b.Title) },
-        'Name (z-a)': (a, b) => { return b.Title.localeCompare(a.Title) },
-        'Latest': (a, b) => { return a.Date.localeCompare(b.Date) },
-        'Oldest': (a, b) => { return b.Date.localeCompare(a.Date) },
+        'Name (a-z)': (a, b) => { return a.article_title.localeCompare(b.article_title) },
+        'Name (z-a)': (a, b) => { return b.article_title.localeCompare(a.article_title) },
+        'Latest': (a, b) => { return b.date.localeCompare(a.date) },
+        'Oldest': (a, b) => { return a.date.localeCompare(b.date) },
     }
 
     // filtered Articles
@@ -89,6 +86,22 @@ export default function ArticlesPage({ }) {
     const renderItem = ({ item }) => {
         return <ArticleCard article={item} screen={'ArticlesPage'} />
     }
+
+    // get articles from backend
+    const getArticles = async () => {
+        try {
+            const { statusCode, data } = await Backend.getArticles(articlesPage);
+            if (Backend.isSuccessfulRequest(statusCode)) {
+                updateArticles(data.results);
+                updateArticlesPage(articlesPage + 1);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    // handle end reached
+    
 
     return (
         <View style={styles.container}>
@@ -131,6 +144,8 @@ export default function ArticlesPage({ }) {
                 initialNumToRender={10}
                 showsHorizontalScrollIndicator={false}
                 showsVerticalScrollIndicator={false}
+                onEndReached={() => getArticles()}
+                onEndReachedThreshold={0.5}
             />
         </View>
     );
