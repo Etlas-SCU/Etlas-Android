@@ -1,4 +1,4 @@
-import { useContext, useEffect, memo } from "react";
+import { useContext, useEffect } from "react";
 import { View, Text, TouchableOpacity, FlatList } from "react-native";
 import { styles } from "./Styles";
 import { translate } from "../../Localization";
@@ -43,6 +43,11 @@ function ToursSection({ tourSearchTerm }) {
         return <ToursCard Tour={item} screen={'Home'} />
     }
 
+    // if the section is empty
+    if (ToursList.length == 0) {
+        return null;
+    }
+
     return (
         <View styles={styles.Box}>
             <View style={styles.boxHeader}>
@@ -60,7 +65,7 @@ function ToursSection({ tourSearchTerm }) {
                 keyExtractor={(_, idx) => idx.toString()}
                 style={styles.swipper}
                 initialNumToRender={5}
-                onEndReached={() => getTours()}
+                onEndReached={getTours}
                 onEndReachedThreshold={0.5}
                 key={1}
             />

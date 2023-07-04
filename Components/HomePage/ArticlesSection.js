@@ -43,6 +43,11 @@ function ArticlesSection({ articleSearchTerm }) {
         return Article.article_title.toLowerCase().includes(articleSearchTerm.toLowerCase());
     });
 
+    // if the section is empty
+    if (ArticlesList.length == 0) {
+        return null;
+    }
+
     return (
         <View styles={styles.Box}>
             <View style={styles.boxHeader}>
@@ -60,7 +65,7 @@ function ArticlesSection({ articleSearchTerm }) {
                 keyExtractor={(_, idx) => idx.toString()}
                 style={styles.swipper}
                 initialNumToRender={5}
-                onEndReached={() => getArticles()}
+                onEndReached={getArticles}
                 onEndReachedThreshold={0.5}
                 key={2}
             />

@@ -5,7 +5,7 @@ import { StyleSheet } from "react-native";
 export const Swipper = StyleSheet.create({
     ToursCard: {
         backgroundColor: colors.SolidGrey,
-        borderRadius: 30,
+        borderRadius: 20,
         flexDirection: 'row',
         width: responsiveWidth(346),
         marginHorizontal: responsiveWidth(7),
@@ -14,8 +14,8 @@ export const Swipper = StyleSheet.create({
     ToursCardImg: {
         height: "100%",
         width: responsiveWidth(116),
-        borderTopLeftRadius: 30,
-        borderBottomLeftRadius: 30,
+        borderTopLeftRadius: 20,
+        borderBottomLeftRadius: 20,
     },
     ToursCardText: {
         flexDirection: 'column',
@@ -58,7 +58,7 @@ export const Swipper = StyleSheet.create({
 export const Page = StyleSheet.create({
     ToursCard: {
         backgroundColor: colors.SolidGrey,
-        borderRadius: 30,
+        borderRadius: 20,
         flexDirection: 'row',
         width: responsiveWidth(382),
         marginHorizontal: responsiveWidth(7),
@@ -66,8 +66,8 @@ export const Page = StyleSheet.create({
     },
     ToursCardImg: {
         width: responsiveWidth(116),
-        borderTopLeftRadius: 30,
-        borderBottomLeftRadius: 30,
+        borderTopLeftRadius: 20,
+        borderBottomLeftRadius: 20,
         height: "100%"
     },
     ToursCardText: {

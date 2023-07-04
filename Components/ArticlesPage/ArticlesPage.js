@@ -144,7 +144,7 @@ export default function ArticlesPage({ }) {
                 initialNumToRender={10}
                 showsHorizontalScrollIndicator={false}
                 showsVerticalScrollIndicator={false}
-                onEndReached={() => getArticles()}
+                onEndReached={getArticles}
                 onEndReachedThreshold={0.5}
             />
         </View>
