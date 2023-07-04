@@ -65,20 +65,34 @@ export const styles = StyleSheet.create({
     },
     header: {
         flexDirection: "row",
-        marginTop: responsiveHeight(22),
         justifyContent: "space-between",
-        marginHorizontal: responsiveWidth(24)
+        marginHorizontal: responsiveWidth(24),
+        marginBottom: responsiveHeight(24)
     },
     title: {
         color: colors.Gold,
         fontSize: responsiveFontSize(22),
-        fontFamily: fontFamily.MontserratBold,
+        fontFamily: fontFamily.MontserratBold,    
     },
     description: {
         color: colors.DarkGrey,
-        fontSize: responsiveFontSize(18),
         fontFamily: fontFamily.MontserratRegular,
         marginHorizontal: responsiveWidth(24),
         marginTop: responsiveHeight(32),
-    }
+    },
+    section: {
+        marginVertical: responsiveHeight(20),
+        gap: responsiveHeight(10),
+        marginHorizontal: responsiveWidth(24),
+    },
+    sectionTitle: {
+        fontFamily: fontFamily.MontserratBold,
+        fontSize: responsiveFontSize(18),
+        color: colors.DarkCyan,
+    },
+    sectionDescription: {
+        fontFamily: fontFamily.MontserratRegular,
+        fontSize: responsiveFontSize(14),
+        color: colors.DarkCyan,
+    },
 })

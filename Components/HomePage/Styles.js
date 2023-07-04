@@ -90,7 +90,6 @@ export const styles = StyleSheet.create({
         textAlign: "center",
     },
     swipper: {
-        flex: 1,
         marginLeft: responsiveWidth(20),
         borderRadius: 20,
     },

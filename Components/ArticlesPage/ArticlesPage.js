@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { styles } from "./Styles";
-import { View, Text, TouchableOpacity, Image, TextInput, Modal, FlatList } from "react-native";
+import { View, Text, TouchableOpacity, TextInput, Modal, FlatList } from "react-native";
 import { translate } from "../../Localization";
 import { colors } from "../../AppStyles";
 import ArticleCard from "../ArticleCard/ArticleCard";

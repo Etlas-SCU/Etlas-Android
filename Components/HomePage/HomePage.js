@@ -1,109 +1,19 @@
-import { useState, useContext, useEffect, memo } from "react";
-import { View, Text, Image, TextInput, TouchableOpacity, ScrollView, FlatList, RefreshControl } from "react-native";
+import { useState, useContext, useEffect } from "react";
+import { View, Text, TextInput, TouchableOpacity, ScrollView, RefreshControl } from "react-native";
 import { styles } from "./Styles";
 import { translate } from "../../Localization";
 import { colors } from "../../AppStyles";
-import ToursCard from "../ToursCard/ToursCard";
-import ArticleCard from "../ArticleCard/ArticleCard";
 import { UserContext } from "../Context/Context";
 import MainMenu from "../MainMenu/MainMenu";
 import Backend from "../../Backend/Backend";
-import { goPage } from "../../Backend/Navigator";
 import { useIsFocused } from "@react-navigation/native";
 import { setStatusBarStyle } from "expo-status-bar";
 import { UserDataContext } from "../Context/DataContext";
 import SvgMaker from "../SvgMaker/SvgMaker";
-import { Ehome, MenuIcon, NewIcon } from "../../assets/SVG/Icons";
-import { ArticlesContext } from "../Context/ArticlesContext";
-import Loader from "../Loader/Loader";
-import PopupMessage from "../PopupMessage/PopupMessage";
+import { Ehome, MenuIcon } from "../../assets/SVG/Icons";
+import ArticlesSection from "./ArticlesSection";
+import ToursSection from "./ToursSection";
 
-
-const Section = memo(({ title, List, pageName, isArticle }) => {
-
-    // render element to the list
-    const renderSectionItem = ({ item }) => {
-        if (isArticle) {
-            return <ArticleCard article={item} screen={'Home'} />
-        } else {
-            return <ToursCard Tour={item} screen={'Home'} />
-        }
-    }
-
-    return (
-        <View styles={styles.Box}>
-            <View style={styles.boxHeader}>
-                <Text style={styles.boxTitle}>{title}</Text>
-                <SvgMaker Svg={NewIcon} style={styles.new_image} />
-                <TouchableOpacity style={styles.see_all} onPress={() => { goPage(pageName, 'Home') }}>
-                    <Text style={styles.see_all_text}>{translate('Home.see_all')}</Text>
-                </TouchableOpacity>
-            </View>
-            <FlatList
-                data={List}
-                horizontal={true}
-                showsHorizontalScrollIndicator={false}
-                renderItem={renderSectionItem}
-                keyExtractor={(_, idx) => idx.toString()}
-                style={styles.swipper}
-                initialNumToRender={5}
-            />
-        </View>
-    )
-});
-
-// get articles List
-const ArticlesListSection = memo(({ }) => {
-
-    // use the context to get the state of the modal
-    const { articles, articlesPage, updateArticlesPage, updateArticles } = useContext(ArticlesContext);
-
-    // get articles from backend
-    const getArticles = async () => {
-        try {
-            const { statusCode, data } = await Backend.getArticles(articlesPage);
-            if (Backend.isSuccessfulRequest(statusCode)) {
-                updateArticles(data.results);
-                updateArticlesPage(articlesPage + 1);
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    // render element to the list
-    const renderSectionItem = ({ item }) => {
-        return <ArticleCard article={item} screen={'Home'} />
-    }
-
-    // fetch the article in the first time 
-    useEffect(() => {
-        getArticles();
-    }, []);
-
-    return (
-        <View styles={styles.Box}>
-            <View style={styles.boxHeader}>
-                <Text style={styles.boxTitle}>{translate('Home.article')}</Text>
-                <SvgMaker Svg={NewIcon} style={styles.new_image} />
-                <TouchableOpacity style={styles.see_all} onPress={() => { goPage('ArticlesPage', 'Home') }}>
-                    <Text style={styles.see_all_text}>{translate('Home.see_all')}</Text>
-                </TouchableOpacity>
-            </View>
-            <FlatList
-                data={articles}
-                horizontal={true}
-                showsHorizontalScrollIndicator={false}
-                renderItem={renderSectionItem}
-                keyExtractor={(_, idx) => idx.toString()}
-                style={styles.swipper}
-                initialNumToRender={5}
-                onEndReached={() => getArticles()}
-                onEndReachedThreshold={0.5}
-            />
-        </View>
-    )
-});
 
 export default function HomePage({ }) {
     // Refreshing state
@@ -118,8 +28,15 @@ export default function HomePage({ }) {
 
     // use the context to get the state of the modal
     const { modalVisible, showModal, setScreen } = useContext(UserContext);
+
+    // get user data from context
     const { updateUserData, updateScore } = useContext(UserDataContext);
-    const [searchTerm, setSearchTerm] = useState('');
+
+    // The search term state for articles
+    const [articleSearchTerm, setArticleSearchTerm] = useState('');
+
+    // The search term state for tours
+    const [tourSearchTerm, setTourSearchTerm] = useState('');
 
     // get user data from backend
     const getUserData = async () => {
@@ -181,16 +98,14 @@ export default function HomePage({ }) {
 
     // for user data and score
     useEffect(() => {
-        getUserData();
-        getLandmarkScore();
-        getMonumentsScore();
-        getStatuesScore();
+        async function fetchData() {
+            await getUserData();
+            await getLandmarkScore();
+            await getMonumentsScore();
+            await getStatuesScore();
+        }
+        fetchData();
     }, []);
-
-    // get tours list from backend
-    const ToursList = Backend.getTours().filter((tour) => {
-        return tour.Title.toLowerCase().includes(searchTerm.toLowerCase());
-    });
 
     return (
         <View style={styles.container}>
@@ -213,16 +128,14 @@ export default function HomePage({ }) {
                     style={styles.SearchForm}
                     placeholder={translate('Home.search')}
                     placeholderTextColor={colors.Grey}
-                    onChangeText={(searchTerm) => setSearchTerm(searchTerm)}
+                    onChangeText={(searchTerm) => {
+                        setArticleSearchTerm(searchTerm);
+                        setTourSearchTerm(searchTerm);
+                    }}
                     cursorColor={colors.DarkCyan}
                 />
-                <Section
-                    title={translate('Home.tours')}
-                    pageName='ToursPage'
-                    List={ToursList}
-                    isArticle={false}
-                />
-                <ArticlesListSection />
+                <ToursSection tourSearchTerm={tourSearchTerm} />
+                <ArticlesSection articleSearchTerm={articleSearchTerm} />
             </ScrollView>
         </View>
     )

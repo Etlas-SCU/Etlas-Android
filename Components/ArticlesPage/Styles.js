@@ -56,7 +56,7 @@ export const styles = StyleSheet.create({
     // filterList
     modalContainer: {
         backgroundColor: colors.DarkCyan,
-        justifyContent: 'space-evenly',
+        justifyContent: "flex-start",
         alignItems: "center",
         width: responsiveWidth(323),
         height: responsiveHeight(281),
@@ -66,6 +66,7 @@ export const styles = StyleSheet.create({
         borderRadius: 30,
         borderColor: colors.White,
         borderWidth: 2,
+        paddingTop: responsiveHeight(28)
     },
     modal: {
         gap: responsiveHeight(5)

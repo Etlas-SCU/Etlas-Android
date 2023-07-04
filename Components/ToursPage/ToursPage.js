@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { styles } from "./Styles";
-import { View, ScrollView, Text, TouchableOpacity, Image, TextInput, Modal, FlatList } from "react-native";
+import { View, Text, TouchableOpacity, TextInput, Modal, FlatList } from "react-native";
 import { translate } from "../../Localization";
 import { colors } from "../../AppStyles";
 import ToursCard from "../ToursCard/ToursCard";
@@ -11,6 +11,7 @@ import Backend from "../../Backend/Backend";
 import { goBack } from "../../Backend/Navigator";
 import SvgMaker from "../SvgMaker/SvgMaker";
 import { LeftArrow, MenuIcon, FilterIcon, InvCheckIcon } from "../../assets/SVG/Icons";
+import { ToursContext } from "../Context/ToursContext";
 
 
 function Filter({ showFilerList, setShowFilterList, sortBy, setSortBy }) {
@@ -18,10 +19,10 @@ function Filter({ showFilerList, setShowFilterList, sortBy, setSortBy }) {
     const Checked = <SvgMaker Svg={InvCheckIcon} style={styles.check} />;
 
     const optionsList = [
-        'Low Rate',
-        'High Rate',
         'Name (a-z)',
         'Name (z-a)',
+        'Latest',
+        'Oldest',
     ];
 
     const options = optionsList.map((option, idx) => {
@@ -60,19 +61,20 @@ export default function ToursPage({ }) {
     const { showModal, setScreen } = useContext(UserContext);
     const [searchTerm, setSearchTerm] = useState('');
     const [showFilerList, setShowFilterList] = useState(false);
-    const [sortBy, setSortBy] = useState('High Rate');
+    const [sortBy, setSortBy] = useState('Name (a-z)');
 
     // get the tours from backend
-    const toursList = Backend.getTours().filter((Tour) => {
-        return Tour.Title.toLowerCase().includes(searchTerm.toLowerCase());
-    });
+    const { tours, toursPage, updateTours, updateToursPage } = useContext(ToursContext);
+
+    // get the tours from backend filtered
+    const toursList = tours.filter(tour => tour.title.toLowerCase().includes(searchTerm.toLowerCase()));
 
     // filtered Sort
     SortFunctions = {
-        'Low Rate': (a, b) => { return a.Rate - b.Rate },
-        'High Rate': (a, b) => { return b.Rate - a.Rate },
-        'Name (a-z)': (a, b) => { return a.Title.localeCompare(b.Title) },
-        'Name (z-a)': (a, b) => { return b.Title.localeCompare(a.Title) },
+        'Name (a-z)': (a, b) => { return a.title.localeCompare(b.title) },
+        'Name (z-a)': (a, b) => { return b.title.localeCompare(a.title) },
+        'Latest': (a, b) => { return a.id - b.id },
+        'Oldest': (a, b) => { return b.id - a.id },
     }
 
     // filtered tours
