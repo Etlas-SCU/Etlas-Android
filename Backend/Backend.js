@@ -265,40 +265,30 @@ class Backend {
         }
     }
 
-    static getTours() {
-        let Tour = {
-            id: 1,
-            Title: "Giza tour",
-            Description: "where you can visit the pyramids and ride the camels.",
-            Rate: "3.5",
-            Img: require('../assets/ImagesToDelete/tour.png'),
-            fullDescription: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`,
-        };
-        let tours = [];
-        for (let i = 0; i < 10; i++) {
-            let curr_tour = Tour;
-            curr_tour.id = i;
-            tours.push(curr_tour);
+    static async getTours(pageNumber) {
+        try {
+            const toursUrl = `tours/?page=${pageNumber}`;
+            return await this.GET(toursUrl);
+        } catch (error) {
+            console.log('Error getting tours:', error);
+            return {
+                statusCode: 500,
+                data: error
+            }
         }
-        return tours;
     }
 
-    static getArticles() {
-        let Article = {
-            id: 1,
-            Title: "Anubis",
-            Description: "Know more about Anubis and his powers.",
-            Date: "15 Jan 2023",
-            Img: require('../assets/ImagesToDelete/monument.png'),
-            fullDescription: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`
-        };
-        var articles = Array(10).fill(Article);
-        for (let i = 0; i < 10; i++) {
-            articles[i].id = i;
+    static async getArticles(pageNumber) {
+        try {
+            const articlesUrl = `articles/?page=${pageNumber}`;
+            return await this.GET(articlesUrl);
+        } catch (error) {
+            console.log('Error getting articles:', error);
+            return {
+                statusCode: 500,
+                data: error
+            }
         }
-        return articles;
     }
 
     static getQuestions() {
@@ -706,7 +696,7 @@ class Backend {
     }
 
     // Monument detection
-    
+
     static async detectMonumentsFromImageURL(image_url) {
         try {
             const detectUrl = 'monuments/detect/';

@@ -174,6 +174,7 @@ export default function Settings({ }) {
                         imageStyle={styles.profilePic}
                         style={styles.profile}
                         size={responsiveHeight(128)}
+                        initials={true}
                     />
                 </TouchableOpacity>
                 <Text style={styles.name}>{name}</Text>

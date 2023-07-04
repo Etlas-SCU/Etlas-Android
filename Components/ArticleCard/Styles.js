@@ -35,9 +35,9 @@ export const Swipper = StyleSheet.create({
         marginTop: responsiveHeight(5),
     },
     MonumentsCardDate: {
-        color: colors.Black,
+        color: colors.DarkCyan,
         fontSize: responsiveFontSize(12),
-        fontFamily: fontFamily.MontserratRegular,
+        fontFamily: fontFamily.MontserratSemiBold,
         marginTop: responsiveHeight(5),
     },
     line: {
@@ -90,9 +90,9 @@ export const Page = StyleSheet.create({
         marginTop: responsiveHeight(7.82),
     },
     MonumentsCardDate: {
-        color: colors.Black,
+        color: colors.DarkCyan,
         fontSize: responsiveFontSize(12),
-        fontFamily: fontFamily.MontserratRegular,
+        fontFamily: fontFamily.MontserratSemiBold,
         marginTop: responsiveHeight(7.83),
     },
     line: {

@@ -22,9 +22,9 @@ export const styles = StyleSheet.create({
     upperBox: {
         width: dimensions.fullWidth,
         height: responsiveHeight(431),
-        zIndex: -1
+        zIndex: -1,
     },
-    lowerBox: { 
+    lowerBox: {
         flex: 1,
         backgroundColor: colors.DarkCyan,
         borderTopLeftRadius: responsiveWidth(30),
@@ -35,6 +35,7 @@ export const styles = StyleSheet.create({
         fontFamily: fontFamily.MontserratBold,
         fontSize: responsiveFontSize(22),
         color: colors.Gold,
+        maxWidth: dimensions.fullWidth - responsiveWidth(100)
     },
     date: {
         fontFamily: fontFamily.MontserratRegular,
@@ -44,7 +45,7 @@ export const styles = StyleSheet.create({
     scrollView: {
         marginTop: responsiveHeight(32),
         marginHorizontal: responsiveWidth(24),
-        paddingBottom: responsiveHeight(150)
+        paddingBottom: responsiveHeight(180)
     },
     description: {
         fontFamily: fontFamily.MontserratRegular,
@@ -56,12 +57,18 @@ export const styles = StyleSheet.create({
         justifyContent: 'space-between',
         marginHorizontal: responsiveWidth(24),
         marginTop: responsiveHeight(22),
+        marginBottom: responsiveHeight(10),
+        gap: responsiveWidth(10),
+        width: responsiveWidth(382)
     },
     txts: {
-        gap: responsiveHeight(5)
+        gap: responsiveHeight(5),
+        flex: 1
     },
     favouriteConainer: {
-        justifyContent: 'center'
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        verticalAlign: 'top',
     },
     fav: {
         width: responsiveWidth(64),
@@ -74,5 +81,27 @@ export const styles = StyleSheet.create({
         width: responsiveWidth(39.75),
         height: responsiveHeight(35.26),
         alignSelf: 'center',
+    },
+    section: {
+        marginVertical: responsiveHeight(10),
+        gap: responsiveHeight(10)
+    },
+    sectionTitle: {
+        fontFamily: fontFamily.MontserratBold,
+        fontSize: responsiveFontSize(18),
+        color: colors.White,
+    },
+    sectionDescription: {
+        fontFamily: fontFamily.MontserratRegular,
+        fontSize: responsiveFontSize(14),
+        color: colors.White,
+    },
+    placeholder: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: colors.SolidGrey,
+        color: colors.Gold,
+        width: dimensions.fullWidth,
+        height: responsiveHeight(431),
     }
 })
