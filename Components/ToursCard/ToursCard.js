@@ -2,6 +2,7 @@ import { Page, Swipper } from "./Styles";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import { goPage } from "../../Backend/Navigator";
 import { memo } from "react";
+import { placeholder } from "../../AppStyles";
 
 
 function ToursCard({ Tour, screen }) {
@@ -19,7 +20,7 @@ function ToursCard({ Tour, screen }) {
                 goPage('TourDetails', screen, { Tour: Tour })
             }}
         >
-            <Image style={isPage ? Page.ToursCardImg : Swipper.ToursCardImg} source={{ uri: imageUrl }} />
+            <Image style={isPage ? Page.ToursCardImg : Swipper.ToursCardImg} source={{ uri: imageUrl }} defaultSource={placeholder} />
             <View style={isPage ? Page.ToursCardText : Swipper.ToursCardText}>
                 <Text style={isPage ? Page.ToursCardTitle : Swipper.ToursCardTitle} numberOfLines={1}>{Title}</Text>
                 <Text style={isPage ? Page.ToursCardDesc : Swipper.ToursCardDesc} numberOfLines={2}>{Description}</Text>

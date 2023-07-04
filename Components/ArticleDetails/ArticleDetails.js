@@ -6,6 +6,7 @@ import Backend from "../../Backend/Backend";
 import SvgMaker from "../SvgMaker/SvgMaker";
 import { LeftArrow, NonFilledHeartIcon, FilledHeartIcon } from "../../assets/SVG/Icons";
 import { formatDate } from '../../AppStyles';
+import { placeholder } from "../../AppStyles";
 
 
 const Section = ({ section }) => {
@@ -19,8 +20,6 @@ const Section = ({ section }) => {
 
 
 export default function ArticleDetails({ }) {
-
-    const logo = require('../../assets/Images/Etlas-logo.png');
 
     // get the previous page
     const { prevPage } = getCurrentScreenParam();
@@ -54,11 +53,11 @@ export default function ArticleDetails({ }) {
             >
                 <SvgMaker Svg={LeftArrow} style={styles.back} />
             </TouchableOpacity>
-            <Image 
-                source={{ uri: Img }} 
-                style={styles.upperBox} 
-                resizeMode='cover' 
-                defaultSource={logo}
+            <Image
+                source={{ uri: Img }}
+                style={styles.upperBox}
+                resizeMode='cover'
+                defaultSource={placeholder}
             />
             <View style={styles.lowerBox}>
                 <View style={styles.upperFields}>

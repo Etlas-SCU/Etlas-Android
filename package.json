@@ -60,6 +60,7 @@
     "react-native-device-info": "^10.6.0",
     "react-native-dotenv": "^3.4.8",
     "react-native-elements": "^3.4.3",
+    "react-native-fast-image": "^8.6.3",
     "react-native-fontawesome": "^7.0.0",
     "react-native-gesture-handler": "~2.9.0",
     "react-native-intl-phone-field": "^0.3.0",

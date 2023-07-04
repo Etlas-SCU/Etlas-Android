@@ -61,7 +61,7 @@ export default function ToursPage({ }) {
     const { showModal, setScreen } = useContext(UserContext);
     const [searchTerm, setSearchTerm] = useState('');
     const [showFilerList, setShowFilterList] = useState(false);
-    const [sortBy, setSortBy] = useState('Name (a-z)');
+    const [sortBy, setSortBy] = useState('Latest');
 
     // get the tours from backend
     const { tours, toursPage, updateTours, updateToursPage } = useContext(ToursContext);
@@ -84,6 +84,19 @@ export default function ToursPage({ }) {
     const renderItem = ({ item }) => (
         <ToursCard Tour={item} screen={'ToursPage'} />
     );
+
+    // get tours from backend
+    const getTours = async () => {
+        try {
+            const { statusCode, data } = await Backend.getTours(toursPage);
+            if (Backend.isSuccessfulRequest(statusCode)) {
+                updateTours(data);
+                updateToursPage(toursPage + 1);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     return (
         <View style={styles.container}>
@@ -124,6 +137,8 @@ export default function ToursPage({ }) {
                 showsHorizontalScrollIndicator={false}
                 contentContainerStyle={styles.contentContainer}
                 style={styles.Box}
+                onEndReached={getTours}
+                onEndReachedThreshold={0.5}
             />
         </View>
     );

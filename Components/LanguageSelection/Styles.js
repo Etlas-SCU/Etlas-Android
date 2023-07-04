@@ -4,6 +4,7 @@ import { fontFamily, colors, responsiveFontSize, responsiveHeight, responsiveWid
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: colors.White
     },
     contentContainer: {
         paddingBottom: responsiveHeight(200)

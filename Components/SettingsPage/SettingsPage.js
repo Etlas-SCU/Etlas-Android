@@ -50,7 +50,7 @@ export default function Settings({ }) {
     const compressImage = async (imageUri) => {
         const compressedImage = await manipulateAsync(
             imageUri,
-            [{ resize: { width: 200, height: 200 } }],
+            [{ resize: { width: 450, height: 450 } }],
             { compress: 0.8, format: 'jpeg' }
         );
         return compressedImage.uri;

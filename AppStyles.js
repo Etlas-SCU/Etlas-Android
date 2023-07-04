@@ -192,3 +192,6 @@ export const formatDate = (inputDate) => {
 
     return formattedDate;
 }
+
+// placeholder
+export const placeholder = require('./assets/Images/placeholder.png');

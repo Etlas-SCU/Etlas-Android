@@ -6,6 +6,7 @@ import { goBack } from "../../Backend/Navigator";
 import Backend from "../../Backend/Backend";
 import SvgMaker from "../SvgMaker/SvgMaker";
 import { InvLeftArrowIcon } from "../../assets/SVG/Icons";
+import { placeholder } from "../../AppStyles";
 
 
 const Section = ({ section }) => {
@@ -19,15 +20,12 @@ const Section = ({ section }) => {
 
 
 export default function TourDetails({ }) {
-
-    const logo = require('../../assets/Images/Etlas-logo.png');
-
     // get the parameters needed
     const Tour = Backend.getTour();
     const { title: Title, sections: Sections, images: ImagesUrl } = Tour;
 
 
-    const images = ImagesUrl.map((item, idx) => (<Image source={{ uri: item.image_url }} style={styles.image} key={idx} defaultSource={logo} />));
+    const images = ImagesUrl.map((item, idx) => (<Image source={{ uri: item.image_url }} style={styles.image} key={idx} defaultSource={placeholder} />));
 
     // get the full description
     const fullDescription = Sections.map((section) => {
@@ -47,6 +45,7 @@ export default function TourDetails({ }) {
                 showsButtons={false}
                 loop={true}
                 autoplay={true}
+                autoplayTimeout={5}
                 showsPagination={true}
                 paginationStyle={styles.pagination}
                 containerStyle={styles.Swiper}
