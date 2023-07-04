@@ -3,8 +3,8 @@ import { View, Text, Image, TouchableOpacity, ScrollView, TextInput } from "reac
 import { translate } from "../../Localization";
 import { colors } from "../../AppStyles";
 import { useState, useContext } from "react";
-import { goBack, goPage } from "../../Backend/Navigator";
-import Backend from "../../Backend/Backend";
+import { goBack, goPage } from "../../Helpers/Navigator";
+import Backend from "../../Helpers/Backend";
 import Loader from "../Loader/Loader";
 import PopupMessage from "../PopupMessage/PopupMessage";
 import { UserContext } from "../Context/Context";

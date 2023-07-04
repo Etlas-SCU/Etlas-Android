@@ -2,7 +2,7 @@ import { Text, View, TouchableOpacity, ScrollView } from "react-native";
 import { styles } from "./Styles";
 import { translate } from '../../Localization';
 import { useState } from "react";
-import { goBack } from "../../Backend/Navigator";
+import { goBack } from "../../Helpers/Navigator";
 import { changeLanguage } from "../../Localization";
 import SvgMaker from '../../Components/SvgMaker/SvgMaker';
 import { InvLeftArrowIcon, CheckIcon } from "../../assets/SVG/Icons";

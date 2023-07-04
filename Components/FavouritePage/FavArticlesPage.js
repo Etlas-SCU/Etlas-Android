@@ -1,9 +1,9 @@
 import { ScrollView, View, Text, TouchableOpacity, Image, FlatList } from "react-native";
 import { styles } from "./Styles";
 import { translate } from "../../Localization";
-import Backend from "../../Backend/Backend";
+import Backend from "../../Helpers/Backend";
 import FavArticleCard from "../Favourites/FavArticleCard";
-import { goBack, getParams } from "../../Backend/Navigator";
+import { goBack, getParams } from "../../Helpers/Navigator";
 import SvgMaker from "../SvgMaker/SvgMaker";
 import { InvCloseIcon } from "../../assets/SVG/Icons";
 

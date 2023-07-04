@@ -7,13 +7,13 @@ import PopupMessage from '../PopupMessage/PopupMessage'
 import { translate } from "../../Localization";
 import { Entypo } from "@expo/vector-icons";
 import { colors } from "../../AppStyles";
-import { goBack } from "../../Backend/Navigator";
+import { goBack } from "../../Helpers/Navigator";
 import { useIsFocused } from '@react-navigation/native';
 import { setStatusBarStyle } from "expo-status-bar";
 import { UserContext } from "../Context/Context";
 import SvgMaker from "../SvgMaker/SvgMaker";
 import { LeftArrow } from "../../assets/SVG/Icons";
-import Backend from "../../Backend/Backend";
+import Backend from "../../Helpers/Backend";
 import Loader from "../Loader/Loader";
 import { manipulateAsync } from 'expo-image-manipulator';
 import * as ImagePicker from 'expo-image-picker';

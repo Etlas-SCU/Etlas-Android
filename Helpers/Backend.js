@@ -74,6 +74,17 @@ class Backend {
         this.email = email;
     }
 
+    // handling the error of undefined
+    static handleUndefined(response) {
+        if(!response){
+            return {
+                status: 500,
+                data: translate('messages.undefined')
+            }
+        }
+        return response;
+    }
+
     // requests
 
     static async getHeaders() {
@@ -98,12 +109,14 @@ class Backend {
             return axios.post(this.HOST_URL + url, body, {
                 headers: await this.getHeaders(),
             }).then(response => {
+                response = this.handleUndefined(response);
                 return {
                     statusCode: response.status,
                     data: response.data
                 }
             }).catch(error => {
                 error = error.response;
+                error = this.handleUndefined(error);
                 return {
                     statusCode: error.status,
                     data: error.data
@@ -133,12 +146,14 @@ class Backend {
             return axios.post(this.HOST_URL + url, body, {
                 headers: await this.getImgHeaders(),
             }).then(response => {
+                response = this.handleUndefined(response);
                 return {
                     statusCode: response.status,
                     data: response.data
                 }
             }).catch(error => {
                 error = error.response;
+                error = this.handleUndefined(error);
                 return {
                     statusCode: error.status,
                     data: error.data
@@ -158,12 +173,14 @@ class Backend {
             return axios.put(this.HOST_URL + url, body, {
                 headers: await this.getHeaders(),
             }).then(response => {
+                response = this.handleUndefined(response);
                 return {
                     statusCode: response.status,
                     data: response.data
                 }
             }).catch((error) => {
                 error = error.response;
+                error = this.handleUndefined(error);
                 return {
                     statusCode: error.status,
                     data: error.data
@@ -183,12 +200,14 @@ class Backend {
             return axios.get(this.HOST_URL + url, {
                 headers: await this.getHeaders(),
             }).then(response => {
+                response = this.handleUndefined(response);
                 return {
                     statusCode: response.status,
                     data: response.data
                 }
             }).catch(error => {
                 error = error.response;
+                error = this.handleUndefined(error);
                 return {
                     statusCode: error.status,
                     data: error.data
@@ -208,12 +227,14 @@ class Backend {
             return axios.patch(this.HOST_URL + url, body, {
                 headers: await this.getHeaders(),
             }).then(response => {
+                response = this.handleUndefined(response);
                 return {
                     statusCode: response.status,
                     data: response.data
                 }
             }).catch(error => {
                 error = error.response;
+                error = this.handleUndefined(error);
                 return {
                     statusCode: error.status,
                     data: error.data
@@ -291,25 +312,17 @@ class Backend {
         }
     }
 
-    static getQuestions() {
-        let quesion = {
-            id: 3,
-            statement: "What is this statue?",
-            label: "statue",
-            image: require('../assets/ImagesToDelete/Question.png'),
-            correct_chocie: "Neith",
-            choices: [
-                { id: 1, choice_text: "Osiris" },
-                { id: 2, choice_text: "Sekhmet" },
-                { id: 3, choice_text: "Neith" },
-                { id: 4, choice_text: "Yonu" }
-            ]
-        };
-        var questions = Array(10).fill(quesion);
-        for (let i = 0; i < 10; i++) {
-            questions[i].id = i;
+    static async getQuestions(gameType) {
+        try {
+            const questionsUrl = `questions/${gameType.toLowerCase()}`;
+            return this.GET(questionsUrl);
+        } catch (error) {
+            console.log('Error getting questions:', error);
+            return {
+                statusCode: 500,
+                data: error
+            }
         }
-        return questions;
     }
 
     static getFavArticles() {

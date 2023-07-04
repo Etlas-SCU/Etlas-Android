@@ -14,9 +14,9 @@ import ForgotPasswordFirst from './Components/ForgetPassword/ForgetPasswordFirst
 import ForgotPasswordSecond from './Components/ForgetPassword/ForgetPasswordSecond';
 import ForgotPasswordThird from './Components/ForgetPassword/ForgetPasswordThird';
 import { StatusBar } from 'expo-status-bar';
-import { goPage, setNavigationRef } from './Backend/Navigator';
+import { goPage, setNavigationRef } from './Helpers/Navigator';
 import { useEffect, useState } from 'react';
-import Backend from './Backend/Backend';
+import Backend from './Helpers/Backend';
 import { UserProvider } from './Components/Context/Context';
 import { UserDataProvider } from './Components/Context/DataContext';
 import { ArticlesProvider } from './Components/Context/ArticlesContext';

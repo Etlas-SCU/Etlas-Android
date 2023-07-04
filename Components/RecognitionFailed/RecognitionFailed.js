@@ -5,7 +5,7 @@ import { UserContext } from "../Context/Context";
 import { useContext } from "react";
 import MainMenu from "../MainMenu/MainMenu";
 import { isIOS } from "../../AppStyles";
-import { goPage } from "../../Backend/Navigator";
+import { goPage } from "../../Helpers/Navigator";
 import SvgMaker from "../SvgMaker/SvgMaker";
 import { MenuIcon, SadIcon, CloseIcon } from "../../assets/SVG/Icons";
 

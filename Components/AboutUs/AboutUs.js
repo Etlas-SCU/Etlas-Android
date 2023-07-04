@@ -1,7 +1,7 @@
 import { translate } from '../../Localization'
 import { View, Text, Image, ImageBackground, TouchableOpacity, ScrollView } from 'react-native';
 import { styles } from './Styles';
-import { goBack } from '../../Backend/Navigator';
+import { goBack } from '../../Helpers/Navigator';
 import SvgMaker from '../SvgMaker/SvgMaker';
 import { CloseIcon, GoogleIcon, FacebookIcon, TwitterIcon, LogoWhiteIcon } from '../../assets/SVG/Icons';
 

@@ -39,7 +39,8 @@ export const styles = StyleSheet.create({
         marginTop: responsiveHeight(45),
         borderRadius: 20,
         borderColor: colors.White,
-        borderWidth: 2
+        borderWidth: 2,
+        resizeMode: 'stretch'
     },
     quesionsBox: {
         marginTop: responsiveHeight(36),
@@ -49,17 +50,18 @@ export const styles = StyleSheet.create({
     },
     question: {
         fontFamily: fontFamily.MontserratBold,
-        fontSize: responsiveFontSize(22),
+        fontSize: responsiveFontSize(18),
         color: colors.White,
-        textAlign: 'center'
+        textAlign: 'center',
+        marginHorizontal: responsiveWidth(24)
     },
     choices: {
         marginTop: responsiveHeight(49),
         gap: responsiveHeight(18)
     },
     choice: {
-        width: responsiveWidth(285),
-        height: responsiveHeight(57),
+        width: responsiveWidth(330),
+        height: responsiveHeight(65),
         borderRadius: 20,
         justifyContent: 'center',
         alignItems: 'center',
@@ -73,10 +75,24 @@ export const styles = StyleSheet.create({
     initialChoice: {
         backgroundColor: colors.Gold
     },
+    diableChoiceColor: {
+        backgroundColor: colors.LightSeaGreen
+    },
+    disabledChoice: {
+        width: responsiveWidth(330),
+        height: responsiveHeight(65),
+        borderRadius: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
+        opacity: 0.5,
+    },
     choiceText: {
         fontFamily: fontFamily.MontserratBold,
-        fontSize: responsiveFontSize(18),
+        fontSize: responsiveFontSize(16),
         color: colors.White,
+        textAlign: 'center',
+        textAlignVertical: 'center',
+        marginHorizontal: responsiveWidth(5)
     },
     bottomContainer: {
         flexDirection: 'row',

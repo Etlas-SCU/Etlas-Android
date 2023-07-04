@@ -6,10 +6,10 @@ import { colors } from "../../AppStyles";
 import { translate } from '../../Localization'
 import GoogleAuth from "../Authetincations/GoogleAuth";
 import FacebookAuth from "../Authetincations/FacebookAuth";
-import { getParams, goBack, goPage } from "../../Backend/Navigator";
+import { getParams, goBack, goPage } from "../../Helpers/Navigator";
 import Loader from "../Loader/Loader";
 import PopupMessage from "../PopupMessage/PopupMessage";
-import Backend from "../../Backend/Backend";
+import Backend from "../../Helpers/Backend";
 import { UserContext } from "../Context/Context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import SvgMaker from "../SvgMaker/SvgMaker";

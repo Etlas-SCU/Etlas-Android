@@ -3,7 +3,7 @@ import { styles } from './Styles'
 import { translate } from '../../Localization'
 import { useContext } from 'react';
 import { UserContext } from '../Context/Context';
-import { goPage } from '../../Backend/Navigator';
+import { goPage } from '../../Helpers/Navigator';
 import SvgMaker from '../SvgMaker/SvgMaker';
 import { DiffCloseIcon } from '../../assets/SVG/Icons';
 

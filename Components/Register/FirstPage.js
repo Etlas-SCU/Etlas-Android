@@ -1,14 +1,14 @@
 import { useState, useContext } from "react";
-import { View, Text, Image, TouchableOpacity, TextInput, ScrollView } from "react-native";
+import { View, Text, TouchableOpacity, TextInput, ScrollView } from "react-native";
 import { styles } from './Styles';
 import { colors } from "../../AppStyles";
 import { translate } from '../../Localization'
 import GoogleAuth from "../Authetincations/GoogleAuth";
 import FacebookAuth from "../Authetincations/FacebookAuth";
-import { goPage, goBack } from "../../Backend/Navigator";
+import { goPage, goBack } from "../../Helpers/Navigator";
 import { UserContext } from "../Context/Context";
 import PopupMessage from "../PopupMessage/PopupMessage";
-import Backend from "../../Backend/Backend";
+import Backend from "../../Helpers/Backend";
 import SvgMaker from "../SvgMaker/SvgMaker";
 import { LeftArrow, EyeIcon } from "../../assets/SVG/Icons";
 

@@ -1,6 +1,6 @@
 import { TouchableOpacity, Image } from 'react-native';
 import { useState, useEffect, useContext } from 'react';
-import Backend from '../../Backend/Backend';
+import Backend from '../../Helpers/Backend';
 import * as Google from 'expo-auth-session/providers/google';
 import * as WebBrowser from 'expo-web-browser';
 import Constants from 'expo-constants';
@@ -8,7 +8,7 @@ import Loader from '../Loader/Loader';
 import PopupMessage from '../PopupMessage/PopupMessage';
 import { UserContext } from '../Context/Context';
 import { translate } from '../../Localization';
-import { goPageResetStack } from '../../Backend/Navigator';
+import { goPageResetStack } from '../../Helpers/Navigator';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import SvgMaker from '../SvgMaker/SvgMaker';
 import { GoogleIcon } from '../../assets/SVG/Icons';

@@ -5,7 +5,7 @@ import { UserContext } from "../Context/Context";
 import { useContext } from "react";
 import MainMenu from "../MainMenu/MainMenu";
 import { isIOS } from "../../AppStyles";
-import { goPage } from "../../Backend/Navigator";
+import { goPage } from "../../Helpers/Navigator";
 import { useIsFocused } from "@react-navigation/native";
 import { setStatusBarStyle } from "expo-status-bar";
 import { UserDataContext } from "../Context/DataContext";

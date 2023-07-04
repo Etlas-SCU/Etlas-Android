@@ -1,6 +1,6 @@
 import { Page, Swipper } from "./Styles";
 import { View, Text, Image, TouchableOpacity } from "react-native";
-import { goPage } from "../../Backend/Navigator";
+import { goPage } from "../../Helpers/Navigator";
 import { memo } from "react";
 import { placeholder } from "../../AppStyles";
 

@@ -2,11 +2,11 @@ import { styles } from "./Styles";
 import { translate } from "../../Localization";
 import { View, Text, TextInput, ScrollView, TouchableOpacity, Image } from 'react-native'
 import { colors } from "../../AppStyles";
-import { goBack } from "../../Backend/Navigator";
+import { goBack } from "../../Helpers/Navigator";
 import SvgMaker from "../SvgMaker/SvgMaker";
 import { CloseIcon } from "../../assets/SVG/Icons";
 import { ContactUs } from "../../assets/SVG/Images";
-import Backend from "../../Backend/Backend";
+import Backend from "../../Helpers/Backend";
 import { UserContext } from "../Context/Context";
 import { useContext, useState, useRef } from "react";
 import PopupMessage from "../PopupMessage/PopupMessage";

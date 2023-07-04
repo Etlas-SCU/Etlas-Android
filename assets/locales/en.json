@@ -37,7 +37,9 @@
         "upload_pic": "While uploading your picture",
         "profilePictureUpdated": "Your Image has been changed successfully",
         "detect": "While detecting your monument",
-        "upload_pic_detect": "While uploading and detect your monument"
+        "upload_pic_detect": "While uploading and detect your monument",
+        "loadQuestions": "While loading the questions",
+        "undefined": "Unexpected error occurred"
     },
     "emailConfirmation": {
         "title": "Email Confirmation",
