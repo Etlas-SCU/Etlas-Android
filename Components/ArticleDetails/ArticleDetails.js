@@ -1,4 +1,5 @@
-import { View, Text, ScrollView, Image, TouchableOpacity } from "react-native";
+import { View, Text, ScrollView, TouchableOpacity } from "react-native";
+import { Image } from 'expo-image';
 import { styles } from "./Styles";
 import { useState } from "react";
 import { goBack, getCurrentScreenParam } from "../../Helpers/Navigator";
@@ -6,7 +7,7 @@ import Backend from "../../Helpers/Backend";
 import SvgMaker from "../SvgMaker/SvgMaker";
 import { LeftArrow, NonFilledHeartIcon, FilledHeartIcon } from "../../assets/SVG/Icons";
 import { formatDate } from '../../AppStyles';
-import { placeholder } from "../../AppStyles";
+import { blurhash } from "../../AppStyles";
 
 
 const Section = ({ section }) => {
@@ -54,10 +55,12 @@ export default function ArticleDetails({ }) {
                 <SvgMaker Svg={LeftArrow} style={styles.back} />
             </TouchableOpacity>
             <Image
-                source={{ uri: Img }}
+                source={Img}
                 style={styles.upperBox}
-                resizeMode='cover'
-                defaultSource={placeholder}
+                placeholder={blurhash}
+                cachePolicy={'memory-disk'}
+                contentFit='fill'
+                priority={'high'}
             />
             <View style={styles.lowerBox}>
                 <View style={styles.upperFields}>

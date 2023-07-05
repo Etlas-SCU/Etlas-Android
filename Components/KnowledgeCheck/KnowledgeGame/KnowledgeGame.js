@@ -1,4 +1,5 @@
-import { View, Text, TouchableOpacity, Image, ScrollView, ImageBackground } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, ImageBackground } from 'react-native';
+import { Image } from 'expo-image';
 import { useState, useEffect, useContext } from 'react';
 import { styles } from './Styles';
 import { translate } from '../../../Localization';
@@ -10,7 +11,7 @@ import { UserContext } from '../../Context/Context';
 import { UserDataContext } from '../../Context/DataContext';
 import SvgMaker from '../../SvgMaker/SvgMaker';
 import { LeftArrow, HelpIcon } from '../../../assets/SVG/Icons';
-import { placeholder } from '../../../AppStyles';
+import { placeholder, blurhash } from '../../../AppStyles';
 import Loader from '../../Loader/Loader';
 import { useIsFocused } from '@react-navigation/native';
 
@@ -49,7 +50,7 @@ export default function KnowledgeGame({ }) {
             if (isFocused) {
                 showLoader(translate('messages.loadQuestions'));
             }
-            const { statusCode, data } = await Backend.getQuestions('statues');
+            const { statusCode, data } = await Backend.getQuestions('landmarks');
             hideLoader();
             if (!Backend.isSuccessfulRequest(statusCode)) {
                 const errorMessage = await Backend.getErrorMessage(data).then(response => response);
@@ -250,6 +251,12 @@ export default function KnowledgeGame({ }) {
             )
         }
 
+        // shuffled choices
+        if (!question || !question.shuffled_choices) {
+            return null;
+        }
+
+        // return the options
         return question?.shuffled_choices.map((choice, idx) => (generatedOption(choice, idx)));
     }
 
@@ -297,13 +304,16 @@ export default function KnowledgeGame({ }) {
                         <SvgMaker Svg={LeftArrow} style={styles.back} />
                     </TouchableOpacity>
                 </View>
-                <Image
-                    source={questionsList[currQuestionIdx]?.image_url ? { uri: questionsList[currQuestionIdx]?.image_url } : placeholder}
-                    defaultSource={placeholder}
-                    style={styles.image}
-                    resizeMethod='resize'
-                    resizeMode='stretch'
-                />
+                <View style={styles.imageContainer}>
+                    <Image
+                        source={questionsList[currQuestionIdx]?.image_url ? { uri: questionsList[currQuestionIdx]?.image_url } : placeholder}
+                        style={styles.image}
+                        contentFit='fill'
+                        cachePolicy={'memory-disk'}
+                        priority={'high'}
+                        placeholder={blurhash}
+                    />
+                </View>
                 <View style={styles.quesionsBox}>
                     <Text style={styles.question}>{questionsList[currQuestionIdx]?.statement}</Text>
                     <View style={styles.choices}>

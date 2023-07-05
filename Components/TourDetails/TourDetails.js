@@ -1,4 +1,5 @@
-import { View, Text, ScrollView, Image, TouchableOpacity } from "react-native";
+import { View, Text, ScrollView, TouchableOpacity } from "react-native";
+import { Image } from 'expo-image';
 import { styles } from "./Styles";
 import Swiper from 'react-native-swiper'
 import { colors } from "../../AppStyles";
@@ -6,7 +7,7 @@ import { goBack } from "../../Helpers/Navigator";
 import Backend from "../../Helpers/Backend";
 import SvgMaker from "../SvgMaker/SvgMaker";
 import { InvLeftArrowIcon } from "../../assets/SVG/Icons";
-import { placeholder } from "../../AppStyles";
+import { blurhash } from "../../AppStyles";
 
 
 const Section = ({ section }) => {
@@ -25,7 +26,17 @@ export default function TourDetails({ }) {
     const { title: Title, sections: Sections, images: ImagesUrl } = Tour;
 
 
-    const images = ImagesUrl.map((item, idx) => (<Image source={{ uri: item.image_url }} style={styles.image} key={idx} defaultSource={placeholder} />));
+    const images = ImagesUrl.map((item, idx) => (
+        <Image
+            source={item.image_url}
+            style={styles.image}
+            key={idx}
+            contentFit='fill'
+            cachePolicy={'memory-disk'}
+            priority={'high'}
+            placeholder={blurhash}
+        />
+    ));
 
     // get the full description
     const fullDescription = Sections.map((section) => {
