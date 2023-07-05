@@ -1,4 +1,4 @@
-import { View, Image, Text, TouchableOpacity, ScrollView } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { styles } from './Styles'
 import { translate } from "../../Localization";
 import { UserContext } from "../Context/Context";

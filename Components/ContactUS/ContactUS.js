@@ -1,6 +1,7 @@
 import { styles } from "./Styles";
 import { translate } from "../../Localization";
-import { View, Text, TextInput, ScrollView, TouchableOpacity, Image } from 'react-native'
+import { View, Text, TextInput, ScrollView, TouchableOpacity } from 'react-native';
+import { Image } from 'expo-image';
 import { colors } from "../../AppStyles";
 import { goBack } from "../../Helpers/Navigator";
 import SvgMaker from "../SvgMaker/SvgMaker";
@@ -10,6 +11,7 @@ import Backend from "../../Helpers/Backend";
 import { UserContext } from "../Context/Context";
 import { useContext, useState, useRef } from "react";
 import PopupMessage from "../PopupMessage/PopupMessage";
+import { blurhash } from '../../AppStyles';
 
 
 export default function ContactUS({ }) {
@@ -97,7 +99,14 @@ export default function ContactUS({ }) {
                     <SvgMaker Svg={CloseIcon} style={styles.close} />
                 </TouchableOpacity>
                 <Text style={styles.boxtitle}>{translate('ContactUs.title')}</Text>
-                <Image source={ContactUs} style={styles.cover} />
+                <Image
+                    source={ContactUs}
+                    style={styles.cover}
+                    placeholder={blurhash}
+                    contentFit='cover'
+                    cachePolicy={'memory-disk'}
+                    priority={'high'}
+                />
             </View>
             <View style={styles.container} >
                 <ScrollView

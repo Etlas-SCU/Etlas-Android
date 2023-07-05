@@ -1318,27 +1318,6 @@
     node-forge "^1.2.1"
     nullthrows "^1.1.1"
 
-"@expo/config-plugins@6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@expo/config-plugins/-/config-plugins-6.0.0.tgz#b17d633b708a547e229c981b95e23773fec7fa47"
-  integrity sha512-Hp9ZbAvonzPTJFcoBBfmxwLwxHFOQuj8YcbYzSW2UiXeco79Q0itsCEKenvfc16V+ZwMkcjpbahy5/8uVn6aiA==
-  dependencies:
-    "@expo/config-types" "^48.0.0"
-    "@expo/json-file" "~8.2.37"
-    "@expo/plist" "^0.0.20"
-    "@expo/sdk-runtime-versions" "^1.0.0"
-    "@react-native/normalize-color" "^2.0.0"
-    chalk "^4.1.2"
-    debug "^4.3.1"
-    find-up "~5.0.0"
-    getenv "^1.0.0"
-    glob "7.1.6"
-    resolve-from "^5.0.0"
-    semver "^7.3.5"
-    slash "^3.0.0"
-    xcode "^3.0.1"
-    xml2js "0.4.23"
-
 "@expo/config-plugins@6.0.2", "@expo/config-plugins@~6.0.0":
   version "6.0.2"
   resolved "https://registry.npmjs.org/@expo/config-plugins/-/config-plugins-6.0.2.tgz"
@@ -5344,6 +5323,11 @@ expo-image-picker@~14.1.1:
   integrity sha512-SvWtnkLW7jp5Ntvk3lVcRQmhFYja8psmiR7O6P/+7S6f4llt3vaFwb4I3+pUXqJxxpi7BHc2+95qOLf0SFOIag==
   dependencies:
     expo-image-loader "~4.1.0"
+
+expo-image@~1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/expo-image/-/expo-image-1.0.1.tgz#0cc04fac8e5204fc0d4d86f30f26273c0b1dce08"
+  integrity sha512-h3xDHaw3ZWzOKar1eFXY4CsFgDstw6fo5Tzv6BXXs+Zte5betPMb567f8zCNnhpkr7UCo5CN7Cg92o+lqzdvRA==
 
 expo-json-utils@~0.5.0:
   version "0.5.1"
