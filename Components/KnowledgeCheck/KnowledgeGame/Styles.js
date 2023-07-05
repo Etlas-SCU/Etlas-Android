@@ -32,14 +32,22 @@ export const styles = StyleSheet.create({
         height: responsiveHeight(32),
         tintColor: colors.White,
     },
-    image: {
+    imageContainer: {
         width: responsiveWidth(381),
         height: responsiveHeight(188),
         alignSelf: 'center',
         marginTop: responsiveHeight(45),
-        borderRadius: 20,
+    },
+    image: {
+        width: '100%',
+        height: '100%',
         borderColor: colors.White,
+        borderRadius: 20,
         borderWidth: 2,
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignSelf: 'center',
+        resizeMode: 'stretch',
     },
     quesionsBox: {
         marginTop: responsiveHeight(36),

@@ -49,7 +49,7 @@ export default function KnowledgeGame({ }) {
             if (isFocused) {
                 showLoader(translate('messages.loadQuestions'));
             }
-            const { statusCode, data } = await Backend.getQuestions('statues');
+            const { statusCode, data } = await Backend.getQuestions('landmarks');
             hideLoader();
             if (!Backend.isSuccessfulRequest(statusCode)) {
                 const errorMessage = await Backend.getErrorMessage(data).then(response => response);
@@ -250,6 +250,12 @@ export default function KnowledgeGame({ }) {
             )
         }
 
+        // shuffled choices
+        if(!question || !question.shuffled_choices){
+            return null;
+        }
+
+        // return the options
         return question?.shuffled_choices.map((choice, idx) => (generatedOption(choice, idx)));
     }
 
@@ -297,13 +303,15 @@ export default function KnowledgeGame({ }) {
                         <SvgMaker Svg={LeftArrow} style={styles.back} />
                     </TouchableOpacity>
                 </View>
-                <Image
-                    source={questionsList[currQuestionIdx]?.image_url ? { uri: questionsList[currQuestionIdx]?.image_url } : placeholder}
-                    defaultSource={placeholder}
-                    style={styles.image}
-                    resizeMethod='resize'
-                    resizeMode='stretch'
-                />
+                <View style={styles.imageContainer}>
+                    <Image
+                        source={questionsList[currQuestionIdx]?.image_url ? { uri: questionsList[currQuestionIdx]?.image_url } : placeholder}
+                        defaultSource={placeholder}
+                        style={styles.image}
+                        resizeMethod='scale'
+                        resizeMode='stretch'
+                    />
+                </View>
                 <View style={styles.quesionsBox}>
                     <Text style={styles.question}>{questionsList[currQuestionIdx]?.statement}</Text>
                     <View style={styles.choices}>
