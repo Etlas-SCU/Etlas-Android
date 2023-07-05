@@ -40,7 +40,6 @@ export const styles = StyleSheet.create({
         borderRadius: 20,
         borderColor: colors.White,
         borderWidth: 2,
-        resizeMode: 'stretch'
     },
     quesionsBox: {
         marginTop: responsiveHeight(36),

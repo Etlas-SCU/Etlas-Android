@@ -301,6 +301,8 @@ export default function KnowledgeGame({ }) {
                     source={questionsList[currQuestionIdx]?.image_url ? { uri: questionsList[currQuestionIdx]?.image_url } : placeholder}
                     defaultSource={placeholder}
                     style={styles.image}
+                    resizeMethod='resize'
+                    resizeMode='stretch'
                 />
                 <View style={styles.quesionsBox}>
                     <Text style={styles.question}>{questionsList[currQuestionIdx]?.statement}</Text>
