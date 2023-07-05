@@ -5,8 +5,8 @@ import { translate } from '../../Localization'
 import GoogleAuth from "../Authetincations/GoogleAuth";
 import FacebookAuth from "../Authetincations/FacebookAuth";
 import { useState, useContext } from "react";
-import { goBack, goPage, goPageResetStack } from "../../Backend/Navigator";
-import Backend from "../../Backend/Backend";
+import { goBack, goPage, goPageResetStack } from "../../Helpers/Navigator";
+import Backend from "../../Helpers/Backend";
 import { UserContext } from "../Context/Context";
 import Loader from "../Loader/Loader";
 import PopupMessage from "../PopupMessage/PopupMessage";

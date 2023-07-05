@@ -7,33 +7,20 @@ import PopupMessage from '../PopupMessage/PopupMessage'
 import { translate } from "../../Localization";
 import { Entypo } from "@expo/vector-icons";
 import { colors } from "../../AppStyles";
-import { goBack } from "../../Backend/Navigator";
+import { goBack, goPage } from "../../Helpers/Navigator";
 import { useIsFocused } from '@react-navigation/native';
 import { setStatusBarStyle } from "expo-status-bar";
 import { UserContext } from "../Context/Context";
 import SvgMaker from "../SvgMaker/SvgMaker";
 import { LeftArrow } from "../../assets/SVG/Icons";
-import Backend from "../../Backend/Backend";
+import Backend from "../../Helpers/Backend";
 import Loader from "../Loader/Loader";
 import { manipulateAsync } from 'expo-image-manipulator';
 import * as ImagePicker from 'expo-image-picker';
-import { ActivityIndicator, Animated, Easing } from 'react-native';
+import { Animated, Easing } from 'react-native';
 
 
 export default function CameraScreen({ }) {
-
-    // use user context
-    const { popupMessageVisible, showPopupMessage } = useContext(UserContext);
-
-    // for loader
-    const { showLoader, hideLoader, loaderVisible } = useContext(UserContext);
-
-    // check if the currenpage is focused
-    const isFocused = useIsFocused();
-
-    if (isFocused) {
-        setStatusBarStyle('light');
-    }
 
     // Initialize state variables
     const [hasCameraPermission, setHasCameraPermission] = useState(null);
@@ -50,6 +37,19 @@ export default function CameraScreen({ }) {
 
     const [loading, setLoading] = useState(false);
     const fadeAnim = useState(new Animated.Value(1))[0];
+
+    // use user context
+    const { popupMessageVisible, showPopupMessage } = useContext(UserContext);
+
+    // for loader
+    const { showLoader, hideLoader, loaderVisible } = useContext(UserContext);
+
+    // check if the currenpage is focused
+    const isFocused = useIsFocused();
+
+    if (isFocused) {
+        setStatusBarStyle('light');
+    }
 
     // make animation for take picture button
     const handlePress = () => {
@@ -98,19 +98,24 @@ export default function CameraScreen({ }) {
         })();
     }, []);
 
-    // If camera permission is not granted, show an error message
-    if (hasCameraPermission === false) {
-        showPopupMessage('Error', translate('Scan.ErrorAcces'));
-        goBack();
-    }
+    // if the camera is focused
+    useEffect(() => {
+        if (isFocused && hasCameraPermission === false) {
+            showPopupMessage('Error', translate('Scan.ErrorAcces'));
+        }
+    }, [isFocused]);
 
     // Take a picture with the camera and set the image state variable to the picture URI
     const takePicture = async () => {
         if (cameraRef) {
+            if(hasCameraPermission === false){
+                showPopupMessage('Error', translate('Scan.ErrorAcces'));
+                return;
+            }
             try {
                 // make the button fading
                 handlePress();
-                
+
                 // option of the picture
                 const options = {
                     quality: 1,
@@ -170,6 +175,10 @@ export default function CameraScreen({ }) {
 
     // Toggle the flash
     const flashClick = async () => {
+        if(hasCameraPermission === false){
+            showPopupMessage('Error', translate('Scan.ErrorAcces'));
+            return;
+        }
         if (flash == Camera.Constants.FlashMode.off)
             setFlash(Camera.Constants.FlashMode.on);
         else
@@ -178,6 +187,10 @@ export default function CameraScreen({ }) {
 
     // Toggle the camera
     const CameraClick = async () => {
+        if(hasCameraPermission === false){
+            showPopupMessage('Error', translate('Scan.ErrorAcces'));
+            return;
+        }
         if (type == Camera.Constants.Type.back) {
             setType(Camera.Constants.Type.front);
             setmirrorStyle({ transform: [{ scaleX: -1 }] });

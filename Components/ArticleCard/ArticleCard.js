@@ -1,7 +1,7 @@
 import { Page, Swipper } from "./Styles";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import { translate } from "../../Localization";
-import { goPage } from "../../Backend/Navigator";
+import { goPage } from "../../Helpers/Navigator";
 import { memo } from "react";
 import { formatDate } from '../../AppStyles';
 import { placeholder } from "../../AppStyles";

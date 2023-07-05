@@ -1,8 +1,8 @@
 import { styles } from './Styles'
 import { translate } from "../../Localization";
 import { View, Text, ImageBackground, TouchableOpacity, ScrollView, Image } from 'react-native';
-import Backend from '../../Backend/Backend';
-import { goBack, goPage } from '../../Backend/Navigator';
+import Backend from '../../Helpers/Backend';
+import { goBack, goPage } from '../../Helpers/Navigator';
 import { useEffect, useState, useContext } from 'react';
 import { UserContext } from '../Context/Context';
 import Loader from '../Loader/Loader';

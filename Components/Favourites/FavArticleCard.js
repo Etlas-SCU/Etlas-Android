@@ -1,7 +1,7 @@
 import { View, Image, Text, TouchableOpacity } from 'react-native'
 import { styles } from './Styles'
-import Backend from '../../Backend/Backend';
-import { goPage } from '../../Backend/Navigator';
+import Backend from '../../Helpers/Backend';
+import { goPage } from '../../Helpers/Navigator';
 import { memo } from 'react';
 import SvgMaker from '../SvgMaker/SvgMaker';
 import { TrashIcon, ArrowOutwardIcon } from '../../assets/SVG/Icons';

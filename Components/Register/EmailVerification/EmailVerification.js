@@ -6,9 +6,9 @@ import { colors } from "../../../AppStyles";
 import { useContext, useRef, useState } from "react";
 import PopupMessage from "../../PopupMessage/PopupMessage";
 import { UserContext } from "../../Context/Context";
-import { goBack, goPage, getParams } from "../../../Backend/Navigator";
+import { goBack, goPage, getParams } from "../../../Helpers/Navigator";
 import Loader from "../../Loader/Loader";
-import Backend from "../../../Backend/Backend";
+import Backend from "../../../Helpers/Backend";
 import SvgMaker from "../../SvgMaker/SvgMaker";
 import { LeftArrow } from "../../../assets/SVG/Icons";
 

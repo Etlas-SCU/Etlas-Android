@@ -1,8 +1,8 @@
 import { View, Text, ScrollView, Image, TouchableOpacity } from "react-native";
 import { styles } from "./Styles";
 import { useState } from "react";
-import { goBack, getCurrentScreenParam } from "../../Backend/Navigator";
-import Backend from "../../Backend/Backend";
+import { goBack, getCurrentScreenParam } from "../../Helpers/Navigator";
+import Backend from "../../Helpers/Backend";
 import SvgMaker from "../SvgMaker/SvgMaker";
 import { LeftArrow, NonFilledHeartIcon, FilledHeartIcon } from "../../assets/SVG/Icons";
 import { formatDate } from '../../AppStyles';

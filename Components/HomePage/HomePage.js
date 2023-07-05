@@ -5,7 +5,7 @@ import { translate } from "../../Localization";
 import { colors } from "../../AppStyles";
 import { UserContext } from "../Context/Context";
 import MainMenu from "../MainMenu/MainMenu";
-import Backend from "../../Backend/Backend";
+import Backend from "../../Helpers/Backend";
 import { useIsFocused } from "@react-navigation/native";
 import { setStatusBarStyle } from "expo-status-bar";
 import { UserDataContext } from "../Context/DataContext";

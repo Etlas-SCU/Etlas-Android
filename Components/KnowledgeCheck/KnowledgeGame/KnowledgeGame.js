@@ -2,20 +2,20 @@ import { View, Text, TouchableOpacity, Image, ScrollView, ImageBackground } from
 import { useState, useEffect, useContext } from 'react';
 import { styles } from './Styles';
 import { translate } from '../../../Localization';
-import Backend from '../../../Backend/Backend';
-import { goBack, goPage } from '../../../Backend/Navigator';
+import Backend from '../../../Helpers/Backend';
+import { goBack, goPage } from '../../../Helpers/Navigator';
 import { setStatusBarStyle } from 'expo-status-bar';
 import PopupMessage from '../../PopupMessage/PopupMessage';
 import { UserContext } from '../../Context/Context';
 import { UserDataContext } from '../../Context/DataContext';
 import SvgMaker from '../../SvgMaker/SvgMaker';
 import { LeftArrow, HelpIcon } from '../../../assets/SVG/Icons';
+import { placeholder } from '../../../AppStyles';
+import Loader from '../../Loader/Loader';
+import { useIsFocused } from '@react-navigation/native';
 
 
 export default function KnowledgeGame({ }) {
-
-    // get the questions list
-    const quesionsList = Backend.getQuestions();
 
     // get the page name
     const lastGame = Backend.getLastGame();
@@ -31,16 +31,40 @@ export default function KnowledgeGame({ }) {
     const [reInit, setReInit] = useState(false);
     const [filterdOptions, setFilterdOptions] = useState([]);
     const [isBackEnabled, setIsBackEnabled] = useState(true);
-
+    const [questionsList, setQuestionsList] = useState([]);
+    const isFocused = useIsFocused();
 
     // get popup states
     const { showPopupMessage, popupMessageVisible } = useContext(UserContext);
 
+    // get loader states
+    const { showLoader, hideLoader, loaderVisible } = useContext(UserContext);
+
     // get update function
     const { updateScore } = useContext(UserDataContext);
 
+    // get questions
+    const getQuestions = async () => {
+        try {
+            if (isFocused) {
+                showLoader(translate('messages.loadQuestions'));
+            }
+            const { statusCode, data } = await Backend.getQuestions('statues');
+            hideLoader();
+            if (!Backend.isSuccessfulRequest(statusCode)) {
+                const errorMessage = await Backend.getErrorMessage(data).then(response => response);
+                showPopupMessage('Error', errorMessage);
+            }
+            setQuestionsList(data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     // to re initial all states if the component called again
     useEffect(() => {
+        setQuestionsList([]);
+        getQuestions();
         setCurrQuestionIdx(0);
         setCurrOptionSelected(null);
         setCorrectOption(null);
@@ -52,12 +76,11 @@ export default function KnowledgeGame({ }) {
         setIsBackEnabled(true);
     }, [reInit, lastGame]);
 
-
     // validate the answer
     const validateAnswer = (selectedOption) => {
         setIsBackEnabled(false);
-        const currQuestion = quesionsList[currQuestionIdx];
-        const correctOption = currQuestion.correct_chocie;
+        const currQuestion = questionsList[currQuestionIdx];
+        const correctOption = currQuestion?.correct_choice;
         setCurrOptionSelected(selectedOption);
         setCorrectOption(correctOption);
         setIsOptionsDisabled(true);
@@ -75,6 +98,8 @@ export default function KnowledgeGame({ }) {
                 setCurrOptionSelected(null);
                 setCorrectOption(null);
                 setIsOptionsDisabled(false);
+                setFilterdOptions([]);
+                setQuestionsList([]);
             }, 1500);
         }
     };
@@ -130,11 +155,13 @@ export default function KnowledgeGame({ }) {
                     break;
             }
         }
+        // set the status bar style
+        setStatusBarStyle(gameFinished ? 'dark' : 'light');
     }, [gameFinished]);
 
     // navigate to the next question
     const nextQuestion = () => {
-        if (currQuestionIdx == quesionsList.length - 1) {
+        if (currQuestionIdx == questionsList.length - 1) {
             setGameFinished(true);
             setCurrQuestionIdx(0);
         } else {
@@ -151,10 +178,17 @@ export default function KnowledgeGame({ }) {
     const generateValidArray = () => {
         const array = [0, 1, 2, 3];
         const shuffledArray = array.sort((a, b) => 0.5 - Math.random());
+
+        // valid array to store options
         let validArr = [];
+
+        // current question
+        const question = questionsList[currQuestionIdx];
+
+        // push the correct choice
         for (let i = 0; i < 4; i++) {
-            if ((quesionsList[currQuestionIdx].choices[shuffledArray[i]].choice_text !== quesionsList[currQuestionIdx].correct_chocie) && (validArr.length < 2)) {
-                validArr.push(shuffledArray[i] + 1);
+            if ((question?.shuffled_choices[shuffledArray[i]]?.choice_text !== question?.correct_choice) && (validArr.length < 2)) {
+                validArr.push(question?.shuffled_choices[shuffledArray[i]]?.choice_text);
             }
         }
         return validArr;
@@ -163,7 +197,7 @@ export default function KnowledgeGame({ }) {
 
     // filtered the array
     const filteredFunction = (choice) => {
-        if (filterdOptions.includes(choice.id))
+        if (filterdOptions.includes(choice.choice_text))
             return false;
         return true;
     }
@@ -181,7 +215,6 @@ export default function KnowledgeGame({ }) {
     const restart = () => {
         setReInit(!reInit);
         setScore(0);
-        setStatusBarStyle('light');
         goPage('KnowledgeCheck', 'KnowledgeGame', {
             lastGame: lastGame,
         });
@@ -191,38 +224,37 @@ export default function KnowledgeGame({ }) {
 
     // get the current options
     const getCurrentOptions = () => {
-        return quesionsList[currQuestionIdx].choices.filter(filteredFunction).map((choice, idx) => (
-            <TouchableOpacity
-                key={idx}
-                style={
-                    [
-                        styles.choice,
-                        choice.choice_text === currOptionSelected ?
-                            choice.choice_text === correctOption ? styles.correct : styles.wrong
-                            :
-                            styles.initialChoice
+        // current question
+        const question = questionsList[currQuestionIdx];
 
-                    ]
-                }
-                onPress={() => { validateAnswer(choice.choice_text) }}
-                disabled={isOptionsDisabled}
-            >
-                <Text style={styles.choiceText}>{choice.choice_text}</Text>
-            </TouchableOpacity>
-        ));
+        // return the options
+        const generatedOption = (choice, idx) => {
+            return (
+                <TouchableOpacity
+                    key={idx}
+                    style={
+                        [
+                            filteredFunction(choice) ? styles.choice : styles.disabledChoice,
+                            choice.choice_text === currOptionSelected ?
+                                choice.choice_text === correctOption ? styles.correct : styles.wrong
+                                :
+                                filteredFunction(choice) ? styles.initialChoice : styles.diableChoiceColor
+
+                        ]
+                    }
+                    onPress={() => { validateAnswer(choice.choice_text) }}
+                    disabled={isOptionsDisabled || !filteredFunction(choice)}
+                >
+                    <Text style={styles.choiceText}>{choice.choice_text}</Text>
+                </TouchableOpacity>
+            )
+        }
+
+        return question?.shuffled_choices.map((choice, idx) => (generatedOption(choice, idx)));
     }
-
-
-    // optionsList
-    const optionsList = getCurrentOptions();
-
 
     // if the game finished
     if (gameFinished) {
-
-        // set the status bar style
-        setStatusBarStyle('dark');
-
         return (
             <View style={styles.gameFinishConainer}>
                 <ImageBackground
@@ -231,7 +263,7 @@ export default function KnowledgeGame({ }) {
                 >
                     {popupMessageVisible ? <PopupMessage /> : null}
                     <View style={styles.ScoreBox}>
-                        <Text style={styles.finishedScoreText}>{score}/{quesionsList.length}</Text>
+                        <Text style={styles.finishedScoreText}>{score}/{questionsList.length}</Text>
                         <Text style={styles.finishedTotal}>{translate('KnowledgeGame.currentScore')}</Text>
                     </View>
                     <TouchableOpacity
@@ -247,9 +279,13 @@ export default function KnowledgeGame({ }) {
         );
     }
 
+    // get the current options
+    const optionsList = getCurrentOptions();
 
     return (
         <View style={styles.container}>
+            {popupMessageVisible ? <PopupMessage /> : null}
+            {loaderVisible ? <Loader /> : null}
             <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.ScrollView}>
                 <View style={styles.header}>
                     <Text style={styles.title}>{lastGame}</Text>
@@ -262,11 +298,14 @@ export default function KnowledgeGame({ }) {
                     </TouchableOpacity>
                 </View>
                 <Image
-                    source={quesionsList[currQuestionIdx].image}
+                    source={questionsList[currQuestionIdx]?.image_url ? { uri: questionsList[currQuestionIdx]?.image_url } : placeholder}
+                    defaultSource={placeholder}
                     style={styles.image}
+                    resizeMethod='resize'
+                    resizeMode='stretch'
                 />
                 <View style={styles.quesionsBox}>
-                    <Text style={styles.question}>{quesionsList[currQuestionIdx].statement}</Text>
+                    <Text style={styles.question}>{questionsList[currQuestionIdx]?.statement}</Text>
                     <View style={styles.choices}>
                         {optionsList}
                     </View>
@@ -274,12 +313,12 @@ export default function KnowledgeGame({ }) {
                 <View style={styles.bottomContainer}>
                     <View style={styles.scoreBox}>
                         <Text style={styles.score}>{translate('KnowledgeGame.score')}:</Text>
-                        <Text style={styles.score}>{score}/{quesionsList.length}</Text>
+                        <Text style={styles.score}>{score}/{questionsList.length}</Text>
                     </View>
                     <TouchableOpacity
                         style={styles.HintBox}
                         onPress={() => { takeHint() }}
-                        disabled={(hint == 0) || (filterdOptions.length > 0)}
+                        disabled={(hint == 0) || (filterdOptions.length > 0) || isOptionsDisabled}
                     >
                         <SvgMaker Svg={HelpIcon} />
                         <View style={styles.hintRemain}>

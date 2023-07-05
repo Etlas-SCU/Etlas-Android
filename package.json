@@ -1,6 +1,7 @@
 {
   "name": "etlas-android-app",
   "version": "1.0.0",
+  "license": "MIT",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
@@ -14,6 +15,7 @@
     ]
   },
   "dependencies": {
+    "@expo/config-plugins": "~6.0.0",
     "@expo/metro-config": "^0.7.1",
     "@expo/vector-icons": "^13.0.0",
     "@fortawesome/fontawesome-svg-core": "^6.4.0",

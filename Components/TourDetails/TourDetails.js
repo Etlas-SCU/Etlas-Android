@@ -2,8 +2,8 @@ import { View, Text, ScrollView, Image, TouchableOpacity } from "react-native";
 import { styles } from "./Styles";
 import Swiper from 'react-native-swiper'
 import { colors } from "../../AppStyles";
-import { goBack } from "../../Backend/Navigator";
-import Backend from "../../Backend/Backend";
+import { goBack } from "../../Helpers/Navigator";
+import Backend from "../../Helpers/Backend";
 import SvgMaker from "../SvgMaker/SvgMaker";
 import { InvLeftArrowIcon } from "../../assets/SVG/Icons";
 import { placeholder } from "../../AppStyles";
