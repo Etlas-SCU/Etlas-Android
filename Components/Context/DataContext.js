@@ -41,7 +41,11 @@ const UserDataProvider = ({ children }) => {
     const adjustScore = async (new_score, old_score) => {
         const new_score_split = new_score.split('/');
         const old_score_split = old_score.split('/');
-        return `${parseInt(new_score_split[0])}/${parseInt(old_score_split[1])}`;
+        if (parseInt(old_score_split[1]) === 0) {
+            return `${parseInt(new_score_split[0])}/${parseInt(new_score_split[1])}`;
+        } else {
+            return `${parseInt(new_score_split[0])}/${parseInt(old_score_split[1])}`;
+        }
     };
 
     // update score
