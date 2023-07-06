@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { View, Text, Image, TouchableOpacity, TextInput, ScrollView } from "react-native";
+import { View, Text, TouchableOpacity, TextInput, ScrollView } from "react-native";
 import IntlPhoneField from 'react-native-intl-phone-field';
 import { styles } from './Styles';
 import { colors } from "../../AppStyles";
@@ -14,9 +14,12 @@ import { UserContext } from "../Context/Context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import SvgMaker from "../SvgMaker/SvgMaker";
 import { LeftArrow } from "../../assets/SVG/Icons";
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 
 export function SecondPage({ }) {
+    // get insets of safe area
+    const insets = useSafeAreaInsets();
 
     // get the fullname, email and password from route params 
     const { fullname, email, password } = getParams();
@@ -58,10 +61,10 @@ export function SecondPage({ }) {
     };
 
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             {loaderVisible ? <Loader /> : null}
             {popupMessageVisible ? <PopupMessage /> : null}
-            <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
+            <ScrollView contentContainerStyle={[styles.contentContainer, { marginTop: -insets.top }]} showsVerticalScrollIndicator={false}>
                 <View style={styles.header_container}>
                     <Text style={styles.header}>{translate('Register.title')}</Text>
                     <TouchableOpacity style={styles.backContainer} onPress={goBack}>
@@ -88,6 +91,7 @@ export function SecondPage({ }) {
                         placeholderTextColor={colors.Grey}
                         onChangeText={(address) => setAddress(address)}
                         cursorColor={colors.LightSeaGreen}
+                        importantForAutofill={'no'}
                     />
                 </View>
                 <View style={styles.usingAppSecond}>
@@ -110,6 +114,6 @@ export function SecondPage({ }) {
                     </TouchableOpacity>
                 </View>
             </ScrollView>
-        </View>
+        </SafeAreaView>
     );
 }

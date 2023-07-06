@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Image, FlatList } from "react-native";
+import { View, Text, TouchableOpacity, FlatList } from "react-native";
 import { styles } from "./Styles";
 import FavArticleCard from "./FavArticleCard";
 import FavMonumentCard from "./FavMonumentCard";

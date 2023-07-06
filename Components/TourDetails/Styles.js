@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { colors, fontFamily, responsiveFontSize, responsiveHeight, responsiveWidth, dimensions } from "../../AppStyles";
+import { colors, fontFamily, responsiveFontSize, responsiveHeight, responsiveWidth, dimensions, isIOS } from "../../AppStyles";
 
 export const styles = StyleSheet.create({
     container: {
@@ -67,12 +67,17 @@ export const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         marginHorizontal: responsiveWidth(24),
-        marginBottom: responsiveHeight(24)
+        marginBottom: responsiveHeight(24),
+        marginTop: responsiveHeight(isIOS() ? 24 : 0),
     },
     title: {
+        flex: 1,
         color: colors.Gold,
         fontSize: responsiveFontSize(22),
         fontFamily: fontFamily.MontserratBold,    
+    },
+    stars: {
+        flex: 1
     },
     description: {
         color: colors.DarkGrey,

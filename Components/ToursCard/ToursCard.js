@@ -4,11 +4,13 @@ import { Image } from 'expo-image';
 import { goPage } from "../../Helpers/Navigator";
 import { memo, useState } from "react";
 import { placeholder } from "../../AppStyles";
+import Stars from "./Stars";
+import { responsiveHeight, colors } from "../../AppStyles";
 
 
 function ToursCard({ Tour, screen }) {
 
-    const { title: Title, description: Description, images: Img } = Tour;
+    const { title: Title, description: Description, images: Img, rating: Rate } = Tour;
     const isPage = (screen != 'Home');
 
     // state for loading
@@ -35,6 +37,7 @@ function ToursCard({ Tour, screen }) {
             <View style={isPage ? Page.ToursCardText : Swipper.ToursCardText}>
                 <Text style={isPage ? Page.ToursCardTitle : Swipper.ToursCardTitle} numberOfLines={1}>{Title}</Text>
                 <Text style={isPage ? Page.ToursCardDesc : Swipper.ToursCardDesc} numberOfLines={2}>{Description}</Text>
+                <Stars rate={Rate} size={isPage ? responsiveHeight(22) : responsiveHeight(21)} color={colors.Gold} isPage={isPage} />
             </View>
         </TouchableOpacity>
     )

@@ -14,9 +14,12 @@ import { LeftArrow, HelpIcon } from '../../../assets/SVG/Icons';
 import { placeholder } from '../../../AppStyles';
 import Loader from '../../Loader/Loader';
 import { useIsFocused } from '@react-navigation/native';
+import { useSafeAreaInsets, SafeAreaView } from 'react-native-safe-area-context';
 
 
 export default function KnowledgeGame({ }) {
+    // get insets of safe area
+    const insets = useSafeAreaInsets();
 
     // get the page name
     const lastGame = Backend.getLastGame();
@@ -297,10 +300,10 @@ export default function KnowledgeGame({ }) {
     const optionsList = getCurrentOptions();
 
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             {popupMessageVisible ? <PopupMessage /> : null}
             {loaderVisible ? <Loader /> : null}
-            <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.ScrollView}>
+            <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={[styles.ScrollView, { marginTop: -insets.top }]}>
                 <View style={styles.header}>
                     <Text style={styles.title}>{lastGame}</Text>
                     <TouchableOpacity
@@ -344,6 +347,6 @@ export default function KnowledgeGame({ }) {
                     </TouchableOpacity>
                 </View>
             </ScrollView>
-        </View>
+        </SafeAreaView>
     );
 }

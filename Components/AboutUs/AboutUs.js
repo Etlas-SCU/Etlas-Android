@@ -1,17 +1,20 @@
 import { translate } from '../../Localization'
-import { View, Text, Image, ImageBackground, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, ImageBackground, TouchableOpacity, ScrollView } from 'react-native';
 import { styles } from './Styles';
 import { goBack } from '../../Helpers/Navigator';
 import SvgMaker from '../SvgMaker/SvgMaker';
 import { CloseIcon, GoogleIcon, FacebookIcon, TwitterIcon, LogoWhiteIcon } from '../../assets/SVG/Icons';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 
 export default function AboutUs({ }) {
+    // get insets of safe area
+    const insets = useSafeAreaInsets();
 
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <ImageBackground source={require('../../assets/Backgrounds/AboutUs.png')} style={styles.background}>
-                <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
+                <ScrollView contentContainerStyle={[styles.contentContainer, { marginTop: -insets.top }]} showsVerticalScrollIndicator={false}>
                     <TouchableOpacity
                         onPress={goBack}
                         style={styles.closeContainer}
@@ -38,6 +41,6 @@ export default function AboutUs({ }) {
                     </View>
                 </ScrollView>
             </ImageBackground>
-        </View>
+        </SafeAreaView>
     );
 }

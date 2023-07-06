@@ -11,9 +11,12 @@ import PopupMessage from "../PopupMessage/PopupMessage";
 import Backend from "../../Helpers/Backend";
 import SvgMaker from "../SvgMaker/SvgMaker";
 import { LeftArrow, EyeIcon } from "../../assets/SVG/Icons";
+import { useSafeAreaInsets, SafeAreaView } from 'react-native-safe-area-context';
 
 
 export function FirstPage({ }) {
+    // get insets of safe area
+    const insets = useSafeAreaInsets();
 
     // get the data from input
     const [fullname, setFullName] = useState('');
@@ -79,9 +82,9 @@ export function FirstPage({ }) {
 
 
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             {popupMessageVisible ? <PopupMessage /> : null}
-            <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
+            <ScrollView contentContainerStyle={[styles.contentContainer, { marginTop: -insets.top }]} showsVerticalScrollIndicator={false}>
                 <View style={styles.header_container}>
                     <Text style={styles.header}>{translate('Register.title')}</Text>
                     <TouchableOpacity style={styles.backContainer} onPress={goBack}>
@@ -98,6 +101,7 @@ export function FirstPage({ }) {
                         placeholderTextColor={colors.Grey}
                         onChangeText={(fullname) => setFullName(fullname)}
                         cursorColor={colors.LightSeaGreen}
+                        importantForAutofill={'no'}
                     />
                 </View>
                 <View style={styles.inputView}>
@@ -108,6 +112,9 @@ export function FirstPage({ }) {
                         placeholderTextColor={colors.Grey}
                         onChangeText={(email) => setEmail(email)}
                         cursorColor={colors.LightSeaGreen}
+                        importantForAutofill={'no'}
+                        keyboardType={'email-address'}
+                        inputMode={'email'}
                     />
                 </View>
                 <View style={styles.inputView}>
@@ -120,6 +127,7 @@ export function FirstPage({ }) {
                             onChangeText={(password) => setPassword(password)}
                             secureTextEntry={!hidden}
                             cursorColor={colors.LightSeaGreen}
+                            importantForAutofill={'no'}
                         />
                         <TouchableOpacity style={styles.passwordEyeButton} onPress={() => setHidden(!hidden)}>
                             <SvgMaker Svg={EyeIcon} style={styles.passwordContainerImage} />
@@ -147,6 +155,6 @@ export function FirstPage({ }) {
                     </TouchableOpacity>
                 </View>
             </ScrollView>
-        </View>
+        </SafeAreaView>
     );
 }

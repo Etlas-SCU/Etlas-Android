@@ -90,6 +90,9 @@ export default function EditProfile({ }) {
                                     defaultValue={userName}
                                     onChangeText={(userName) => setUserName(userName)}
                                     editable={nameEdit}
+                                    inputMode={'text'}
+                                    autoCapitalize={'words'}
+                                    importantForAutofill={'no'}
                                 />
                                 <TouchableOpacity onPress={() => setNameEdit(!nameEdit)} style={styles.EditButton}>
                                     <SvgMaker Svg={nameEdit ? save : edit} style={styles.editIcon} />
@@ -106,6 +109,9 @@ export default function EditProfile({ }) {
                                     defaultValue={userEmail}
                                     onChangeText={(userEmail) => setUserEmail(userEmail)}
                                     editable={emailEdit}
+                                    inputMode={'email'}
+                                    keyboardType={'email-address'}
+                                    importantForAutofill={'no'}
                                 />
                                 <TouchableOpacity onPress={() => setEmailEdit(!emailEdit)} style={styles.EditButton}>
                                     <SvgMaker Svg={emailEdit ? save : edit} style={styles.editIcon} />
@@ -122,6 +128,9 @@ export default function EditProfile({ }) {
                                     defaultValue={userPhoneNumber}
                                     onChangeText={(userPhoneNumber) => setUserPhoneNumber(userPhoneNumber)}
                                     editable={phoneNumberEdit}
+                                    inputMode={'tel'}
+                                    keyboardType={'number-pad'}
+                                    importantForAutofill={'no'}
                                 />
                                 <TouchableOpacity onPress={() => setPhoneNumberEdit(!phoneNumberEdit)} style={styles.EditButton}>
                                     <SvgMaker Svg={phoneNumberEdit ? save : edit} style={styles.editIcon} />
@@ -138,6 +147,9 @@ export default function EditProfile({ }) {
                                     defaultValue={userAddress}
                                     onChangeText={(userAddress) => setUserAddress(userAddress)}
                                     editable={addressEdit}
+                                    inputMode={'text'}
+                                    autoCapitalize={'words'}
+                                    importantForAutofill={'no'}
                                 />
                                 <TouchableOpacity onPress={() => setAddressEdit(!addressEdit)} style={styles.EditButton}>
                                     <SvgMaker Svg={addressEdit ? save : edit} style={styles.editIcon} />

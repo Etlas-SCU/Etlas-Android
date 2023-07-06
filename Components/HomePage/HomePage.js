@@ -13,9 +13,13 @@ import SvgMaker from "../SvgMaker/SvgMaker";
 import { Ehome, MenuIcon } from "../../assets/SVG/Icons";
 import ArticlesSection from "./ArticlesSection";
 import ToursSection from "./ToursSection";
+import { useSafeAreaInsets, SafeAreaView } from "react-native-safe-area-context";
 
 
 export default function HomePage({ }) {
+    // get insets of safe area
+    const insets = useSafeAreaInsets();
+
     // Refreshing state
     const [refreshing, setRefreshing] = useState(false);
 
@@ -108,10 +112,10 @@ export default function HomePage({ }) {
     }, []);
 
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             {modalVisible ? <MainMenu /> : null}
             <ScrollView
-                contentContainerStyle={styles.contentContainer}
+                contentContainerStyle={[styles.contentContainer, { marginTop: -insets.top }]}
                 showsVerticalScrollIndicator={false}
                 refreshControl={<RefreshControl tintColor={styles.refreshColor} colors={[styles.refreshColor]} refreshing={refreshing} onRefresh={onRefresh} />}
             >
@@ -137,6 +141,6 @@ export default function HomePage({ }) {
                 <ToursSection tourSearchTerm={tourSearchTerm} />
                 <ArticlesSection articleSearchTerm={articleSearchTerm} />
             </ScrollView>
-        </View>
+        </SafeAreaView>
     )
 }

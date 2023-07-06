@@ -9,6 +9,8 @@ import SvgMaker from "../SvgMaker/SvgMaker";
 import { InvLeftArrowIcon } from "../../assets/SVG/Icons";
 import { placeholder } from "../../AppStyles";
 import { useState } from "react";
+import { responsiveWidth } from "../../AppStyles";
+import Stars from "../ToursCard/Stars";
 
 
 const Section = ({ section }) => {
@@ -24,7 +26,7 @@ const Section = ({ section }) => {
 export default function TourDetails({ }) {
     // get the parameters needed
     const Tour = Backend.getTour();
-    const { title: Title, sections: Sections, images: ImagesUrl } = Tour;
+    const { title: Title, sections: Sections, images: ImagesUrl, rating: Rate } = Tour;
 
 
     const images = ImagesUrl.map((item, idx) => {
@@ -77,6 +79,7 @@ export default function TourDetails({ }) {
             <View style={styles.container}>
                 <View style={styles.header}>
                     <Text style={styles.title}>{Title}</Text>
+                    <Stars rate={Rate} size={responsiveWidth(20)} style={styles.stars} isPage={false}/>
                 </View>
                 <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.ScrollContainer}>
                     {fullDescription}
