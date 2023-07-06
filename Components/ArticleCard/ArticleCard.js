@@ -2,9 +2,9 @@ import { Page, Swipper } from "./Styles";
 import { View, Text, TouchableOpacity } from "react-native";
 import { translate } from "../../Localization";
 import { goPage } from "../../Helpers/Navigator";
-import { memo } from "react";
+import { memo, useState } from "react";
 import { formatDate } from '../../AppStyles';
-import { blurhash } from "../../AppStyles";
+import { placeholder } from "../../AppStyles";
 import { Image } from 'expo-image';
 
 
@@ -12,6 +12,9 @@ function ArticleCard({ article, screen }) {
 
     const { article_title: Title, description: Description, date: Date, image_url: Img } = article;
     const isPage = (screen != 'Home');
+
+    // state for loading
+    const [imgLoaded, setImgLoaded] = useState(false);
 
     return (
         <TouchableOpacity
@@ -21,11 +24,11 @@ function ArticleCard({ article, screen }) {
             <Image
                 style={isPage ? Page.MonumentsCardImg : Swipper.MonumentsCardImg}
                 borderRadius={20}
-                source={Img}
+                source={imgLoaded ? Img : placeholder}
                 contentFit='fill'
                 cachePolicy={'memory-disk'}
                 priority={'high'}
-                placeholder={blurhash}
+                onLoadEnd={() => setImgLoaded(true)}
             />
             <View style={isPage ? Page.MonumentsCardText : Swipper.MonumentsCardText}>
                 <Text style={isPage ? Page.MonumentsCardTitle : Swipper.MonumentsCardTitle} numberOfLines={1}>{Title}</Text>

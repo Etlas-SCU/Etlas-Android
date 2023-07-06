@@ -7,7 +7,7 @@ import Backend from "../../Helpers/Backend";
 import SvgMaker from "../SvgMaker/SvgMaker";
 import { LeftArrow, NonFilledHeartIcon, FilledHeartIcon } from "../../assets/SVG/Icons";
 import { formatDate } from '../../AppStyles';
-import { blurhash } from "../../AppStyles";
+import { placeholder } from "../../AppStyles";
 
 
 const Section = ({ section }) => {
@@ -46,6 +46,9 @@ export default function ArticleDetails({ }) {
         return <Section section={section} key={section.id} />
     });
 
+    // check if the image is loaded
+    const [isImgLoaded, setIsImgLoaded] = useState(false);
+
     return (
         <View style={styles.container}>
             <TouchableOpacity
@@ -55,12 +58,12 @@ export default function ArticleDetails({ }) {
                 <SvgMaker Svg={LeftArrow} style={styles.back} />
             </TouchableOpacity>
             <Image
-                source={Img}
+                source={isImgLoaded ? Img : placeholder}
                 style={styles.upperBox}
-                placeholder={blurhash}
                 cachePolicy={'memory-disk'}
                 contentFit='fill'
                 priority={'high'}
+                onLoadEnd={() => setIsImgLoaded(true)}
             />
             <View style={styles.lowerBox}>
                 <View style={styles.upperFields}>

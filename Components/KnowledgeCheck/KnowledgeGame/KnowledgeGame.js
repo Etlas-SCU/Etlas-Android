@@ -11,7 +11,7 @@ import { UserContext } from '../../Context/Context';
 import { UserDataContext } from '../../Context/DataContext';
 import SvgMaker from '../../SvgMaker/SvgMaker';
 import { LeftArrow, HelpIcon } from '../../../assets/SVG/Icons';
-import { placeholder, blurhash } from '../../../AppStyles';
+import { placeholder } from '../../../AppStyles';
 import Loader from '../../Loader/Loader';
 import { useIsFocused } from '@react-navigation/native';
 
@@ -33,7 +33,11 @@ export default function KnowledgeGame({ }) {
     const [filterdOptions, setFilterdOptions] = useState([]);
     const [isBackEnabled, setIsBackEnabled] = useState(true);
     const [questionsList, setQuestionsList] = useState([]);
+    const [questionListSize, setQuestionsListSize] = useState(0);
     const isFocused = useIsFocused();
+
+    // check if the current image is loaded
+    const [isImageLoaded, setIsImageLoaded] = useState(false);
 
     // get popup states
     const { showPopupMessage, popupMessageVisible } = useContext(UserContext);
@@ -57,6 +61,7 @@ export default function KnowledgeGame({ }) {
                 showPopupMessage('Error', errorMessage);
             }
             setQuestionsList(data);
+            setQuestionsListSize(data.length);
         } catch (error) {
             console.log(error);
         }
@@ -65,6 +70,7 @@ export default function KnowledgeGame({ }) {
     // to re initial all states if the component called again
     useEffect(() => {
         setQuestionsList([]);
+        setQuestionsListSize(0);
         getQuestions();
         setCurrQuestionIdx(0);
         setCurrOptionSelected(null);
@@ -172,6 +178,7 @@ export default function KnowledgeGame({ }) {
         setCorrectOption(null);
         setIsOptionsDisabled(false);
         setFilterdOptions([]);
+        setIsImageLoaded(false);
     };
 
 
@@ -270,7 +277,7 @@ export default function KnowledgeGame({ }) {
                 >
                     {popupMessageVisible ? <PopupMessage /> : null}
                     <View style={styles.ScoreBox}>
-                        <Text style={styles.finishedScoreText}>{score}/{questionsList.length}</Text>
+                        <Text style={styles.finishedScoreText}>{score}/{questionListSize}</Text>
                         <Text style={styles.finishedTotal}>{translate('KnowledgeGame.currentScore')}</Text>
                     </View>
                     <TouchableOpacity
@@ -306,12 +313,12 @@ export default function KnowledgeGame({ }) {
                 </View>
                 <View style={styles.imageContainer}>
                     <Image
-                        source={questionsList[currQuestionIdx]?.image_url ? { uri: questionsList[currQuestionIdx]?.image_url } : placeholder}
+                        source={questionsList[currQuestionIdx]?.image_url && isImageLoaded ? { uri: questionsList[currQuestionIdx]?.image_url } : placeholder}
                         style={styles.image}
                         contentFit='fill'
                         cachePolicy={'memory-disk'}
                         priority={'high'}
-                        placeholder={blurhash}
+                        onLoadEnd={() => { setIsImageLoaded(true) }}
                     />
                 </View>
                 <View style={styles.quesionsBox}>
@@ -323,7 +330,7 @@ export default function KnowledgeGame({ }) {
                 <View style={styles.bottomContainer}>
                     <View style={styles.scoreBox}>
                         <Text style={styles.score}>{translate('KnowledgeGame.score')}:</Text>
-                        <Text style={styles.score}>{score}/{questionsList.length}</Text>
+                        <Text style={styles.score}>{score}/{questionListSize}</Text>
                     </View>
                     <TouchableOpacity
                         style={styles.HintBox}

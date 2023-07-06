@@ -7,7 +7,8 @@ import { goBack } from "../../Helpers/Navigator";
 import Backend from "../../Helpers/Backend";
 import SvgMaker from "../SvgMaker/SvgMaker";
 import { InvLeftArrowIcon } from "../../assets/SVG/Icons";
-import { blurhash } from "../../AppStyles";
+import { placeholder } from "../../AppStyles";
+import { useState } from "react";
 
 
 const Section = ({ section }) => {
@@ -26,17 +27,21 @@ export default function TourDetails({ }) {
     const { title: Title, sections: Sections, images: ImagesUrl } = Tour;
 
 
-    const images = ImagesUrl.map((item, idx) => (
-        <Image
-            source={item.image_url}
-            style={styles.image}
-            key={idx}
-            contentFit='fill'
-            cachePolicy={'memory-disk'}
-            priority={'high'}
-            placeholder={blurhash}
-        />
-    ));
+    const images = ImagesUrl.map((item, idx) => {
+        // check if the image is loaded
+        const [isImgLoaded, setImgLoaded] = useState(false);
+        return (
+            <Image
+                source={isImgLoaded ? item.image_url : placeholder}
+                style={styles.image}
+                key={idx}
+                contentFit='fill'
+                cachePolicy={'memory-disk'}
+                priority={'high'}
+                onLoadEnd={() => setImgLoaded(true)}
+            />
+        )
+    });
 
     // get the full description
     const fullDescription = Sections.map((section) => {
