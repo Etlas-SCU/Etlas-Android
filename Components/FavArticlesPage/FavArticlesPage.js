@@ -1,17 +1,34 @@
-import { ScrollView, View, Text, TouchableOpacity, Image, FlatList } from "react-native";
+import { View, Text, TouchableOpacity, FlatList } from "react-native";
 import { styles } from "./Styles";
 import { translate } from "../../Localization";
 import Backend from "../../Helpers/Backend";
-import FavArticleCard from "../Favourites/FavArticleCard";
+import FavArticleCard from "../FavArticleCard/FavArticleCard";
 import { goBack, getParams } from "../../Helpers/Navigator";
 import SvgMaker from "../SvgMaker/SvgMaker";
 import { InvCloseIcon } from "../../assets/SVG/Icons";
+import { useContext } from "react";
+import { FavArticlesContext } from "../Context/FavArticlesContext";
 
 
 export default function FavArticlesPage({ }) {
 
-    // get the article list
-    const favArticlesList = Backend.getFavArticles();
+    // get favourite articles
+    const { favArticles, updateFavArticles, FavArticlesPage, updateFavArticlesPage } = useContext(FavArticlesContext);
+
+    // get articles from backend
+    const getFavArticle = async () => {
+        try {
+            const { statusCode, data } = await Backend.getFavourites(FavArticlesPage);
+            if (Backend.isSuccessfulRequest(statusCode)) {
+                const newFavArticles = await Backend.getArticleFromFavourits(data.results);
+                updateFavArticles(newFavArticles);
+                updateFavArticlesPage(FavArticlesPage + 1);
+                console.log("Successfully fetched user's favorite monuments");
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     // get the screen name from navigator
     const { prevPage } = getParams();
@@ -33,7 +50,7 @@ export default function FavArticlesPage({ }) {
                 </TouchableOpacity>
             </View>
             <FlatList
-                data={favArticlesList}
+                data={favArticles}
                 showsHorizontalScrollIndicator={false}
                 renderItem={renderItem}
                 keyExtractor={(_, index) => index.toString()}
@@ -41,6 +58,8 @@ export default function FavArticlesPage({ }) {
                 contentContainerStyle={styles.contentContainer}
                 nestedScrollEnabled={true}
                 showsVerticalScrollIndicator={false}
+                onEndReached={() => getFavArticle()}
+                onEndReachedThreshold={0.5}
             />
         </View>
     )

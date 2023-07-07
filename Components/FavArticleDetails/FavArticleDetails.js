@@ -24,7 +24,7 @@ const Section = ({ section }) => {
 }
 
 
-export default function ArticleDetails({ }) {
+export default function FavArticleDetails({ }) {
 
     // get loader functions and states
     const { loaderVisible, showLoader, hideLoader } = useContext(UserContext);
@@ -32,7 +32,7 @@ export default function ArticleDetails({ }) {
     // get popup functions and states
     const { popupMessageVisible, showPopupMessage } = useContext(UserContext);
 
-    // get fav articles
+    // fav articles functions
     const { addFavArticle, removeFavArticle } = useContext(FavArticlesContext);
 
     // get the icons of heart
@@ -44,7 +44,7 @@ export default function ArticleDetails({ }) {
     const [isButtonPressed, setIsButtonPressed] = useState(false);
 
     // get the parameters needed
-    const Article = Backend.getArticle();
+    const Article = Backend.getFavArticle();
     const { id: ID, article_title: Title, date: Date, image_url: Img, sections: Sections } = Article;
 
     // getting is the current article favourite or not
@@ -53,6 +53,7 @@ export default function ArticleDetails({ }) {
             showLoader(translate('messages.loadArticle'));
             const { statusCode, data } = await Backend.isFavArticle(ID);
             hideLoader();
+            console.log(statusCode, data);
             if (!Backend.isSuccessfulRequest(statusCode)) {
                 const errorMessage = await Backend.getErrorMessage(data).then(response => response);
                 showPopupMessage('Error', errorMessage);
@@ -71,14 +72,13 @@ export default function ArticleDetails({ }) {
             setIsFav(true);
             const { statusCode, data } = await Backend.addFavArticle(ID);
             setIsButtonPressed(false);
+            console.log(statusCode, data);
             if (!Backend.isSuccessfulRequest(statusCode)) {
                 const errorMessage = await Backend.getErrorMessage(data).then(response => response);
                 showPopupMessage('Error', errorMessage);
                 setIsFav(false);
                 return false;
             }
-            
-            // add the current Article to favArticles
             addFavArticle(Article);
         } catch (error) {
             console.log(error);

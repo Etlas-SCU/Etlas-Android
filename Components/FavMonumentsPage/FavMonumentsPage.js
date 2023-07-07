@@ -1,8 +1,8 @@
-import { ScrollView, View, Text, TouchableOpacity, Image, FlatList } from "react-native";
+import { View, Text, TouchableOpacity, FlatList } from "react-native";
 import { styles } from "./Styles";
 import { translate } from "../../Localization";
 import Backend from "../../Helpers/Backend";
-import FavMonumentCard from "../Favourites/FavMonumentCard";
+import FavMonumentCard from "../FavMonumentsCard/FavMonumentCard";
 import { goBack, getParams } from "../../Helpers/Navigator";
 import { useIsFocused } from '@react-navigation/native';
 import { setStatusBarStyle } from "expo-status-bar";

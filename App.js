@@ -17,11 +17,7 @@ import { StatusBar } from 'expo-status-bar';
 import { goPage, setNavigationRef } from './Helpers/Navigator';
 import { useEffect, useState } from 'react';
 import Backend from './Helpers/Backend';
-import { UserProvider } from './Components/Context/Context';
-import { UserDataProvider } from './Components/Context/DataContext';
-import { ArticlesProvider } from './Components/Context/ArticlesContext';
-import { ToursProvider } from './Components/Context/ToursContext';
-import { SafeAreaProvider, initialWindowMetrics } from 'react-native-safe-area-context';
+import MainContext from './Components/Context/MainContext';
 
 
 // import the screen
@@ -153,50 +149,42 @@ export default function App() {
 
     // if the font loaded, return the components
     return (
-        <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-            <UserProvider>
-                <UserDataProvider>
-                    <ArticlesProvider>
-                        <ToursProvider>
-                            <StatusBar
-                                backgroundColor={'transparent'}
-                                barStyle='light-content'
-                                style='light'
-                                translucent={true}
-                            />
-                            <NavigationContainer
-                                ref={navigationRef => {
-                                    setNavigationRef(navigationRef);
-                                }}
-                            >
-                                <Stack.Navigator
-                                    screenOptions={{
-                                        header: () => null,
-                                        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-                                        transitionSpec: {
-                                            open: timingConfig,
-                                            close: timingConfig,
-                                        },
-                                        headerStatusBarHeight: 0,
-                                    }}
-                                    initialRouteName={accessToken && refreshToken ? "menuBar" : "onBoarding"}
-                                >
-                                    <Stack.Screen name="onBoarding" component={OnBoarding} />
-                                    <Stack.Screen name="firstPage" component={FirstPage} />
-                                    <Stack.Screen name="secondPage" component={SecondPage} />
-                                    <Stack.Screen name="login" component={Login} />
-                                    <Stack.Screen name="forgotPasswordFirst" component={ForgotPasswordFirst} />
-                                    <Stack.Screen name="forgotPasswordSecond" component={ForgotPasswordSecond} />
-                                    <Stack.Screen name="forgotPasswordThird" component={ForgotPasswordThird} />
-                                    <Stack.Screen name="menuBar" component={MenuBar} />
-                                    <Stack.Screen name="emailVerification" component={EmailVerification} />
-                                </Stack.Navigator>
-                            </NavigationContainer>
-                        </ToursProvider>
-                    </ArticlesProvider>
-                </UserDataProvider>
-            </UserProvider>
-        </SafeAreaProvider>
+        <MainContext >
+            <StatusBar
+                backgroundColor={'transparent'}
+                barStyle='light-content'
+                style='light'
+                translucent={true}
+            />
+            <NavigationContainer
+                ref={navigationRef => {
+                    setNavigationRef(navigationRef);
+                }}
+            >
+                <Stack.Navigator
+                    screenOptions={{
+                        header: () => null,
+                        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+                        transitionSpec: {
+                            open: timingConfig,
+                            close: timingConfig,
+                        },
+                        headerStatusBarHeight: 0,
+                    }}
+                    initialRouteName={accessToken && refreshToken ? "menuBar" : "onBoarding"}
+                >
+                    <Stack.Screen name="onBoarding" component={OnBoarding} />
+                    <Stack.Screen name="firstPage" component={FirstPage} />
+                    <Stack.Screen name="secondPage" component={SecondPage} />
+                    <Stack.Screen name="login" component={Login} />
+                    <Stack.Screen name="forgotPasswordFirst" component={ForgotPasswordFirst} />
+                    <Stack.Screen name="forgotPasswordSecond" component={ForgotPasswordSecond} />
+                    <Stack.Screen name="forgotPasswordThird" component={ForgotPasswordThird} />
+                    <Stack.Screen name="menuBar" component={MenuBar} />
+                    <Stack.Screen name="emailVerification" component={EmailVerification} />
+                </Stack.Navigator>
+            </NavigationContainer>
+        </MainContext>
     );
 }
 

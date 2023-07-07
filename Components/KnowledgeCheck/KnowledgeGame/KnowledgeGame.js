@@ -57,7 +57,7 @@ export default function KnowledgeGame({ }) {
             if (isFocused) {
                 showLoader(translate('messages.loadQuestions'));
             }
-            const { statusCode, data } = await Backend.getQuestions('landmarks');
+            const { statusCode, data } = await Backend.getQuestions(lastGame);
             hideLoader();
             if (!Backend.isSuccessfulRequest(statusCode)) {
                 const errorMessage = await Backend.getErrorMessage(data).then(response => response);
