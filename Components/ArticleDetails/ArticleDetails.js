@@ -1,7 +1,7 @@
 import { View, Text, ScrollView, TouchableOpacity } from "react-native";
 import { Image } from 'expo-image';
 import { styles } from "./Styles";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, useRef } from "react";
 import { goBack } from "../../Helpers/Navigator";
 import Backend from "../../Helpers/Backend";
 import SvgMaker from "../SvgMaker/SvgMaker";
@@ -25,6 +25,9 @@ const Section = ({ section }) => {
 
 
 export default function ArticleDetails({ }) {
+
+    // refrence of the scrollview
+    const scrollViewRef = useRef();
 
     // get loader functions and states
     const { loaderVisible, showLoader, hideLoader } = useContext(UserContext);
@@ -77,7 +80,7 @@ export default function ArticleDetails({ }) {
                 setIsFav(false);
                 return false;
             }
-            
+
             // add the current Article to favArticles
             addFavArticle(Article);
         } catch (error) {
@@ -122,6 +125,10 @@ export default function ArticleDetails({ }) {
     // check if the current article is favourite or not
     useEffect(() => {
         isFavourite();
+        scrollViewRef.current?.scrollTo({
+            y: 0,
+            animated: true,
+        });
     }, [Article]);
 
     return (
@@ -156,7 +163,11 @@ export default function ArticleDetails({ }) {
                         </View>
                     </View>
                 </View>
-                <ScrollView contentContainerStyle={styles.scrollView} showsVerticalScrollIndicator={false}>
+                <ScrollView
+                    contentContainerStyle={styles.scrollView}
+                    showsVerticalScrollIndicator={false}
+                    ref={scrollViewRef}
+                >
                     {fullDescription}
                 </ScrollView>
             </View>

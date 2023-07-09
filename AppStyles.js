@@ -171,6 +171,9 @@ export const fontWeight = {
 
 // convert date
 export const formatDate = (inputDate) => {
+    // get first part of timestamp
+    inputDate = inputDate.split('T')[0];
+
     // Split the input date string into year, month, and day
     const [year, month, day] = inputDate.split('-');
 

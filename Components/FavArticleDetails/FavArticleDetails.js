@@ -1,7 +1,7 @@
 import { View, Text, ScrollView, TouchableOpacity } from "react-native";
 import { Image } from 'expo-image';
 import { styles } from "./Styles";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, useRef } from "react";
 import { goBack } from "../../Helpers/Navigator";
 import Backend from "../../Helpers/Backend";
 import SvgMaker from "../SvgMaker/SvgMaker";
@@ -25,6 +25,8 @@ const Section = ({ section }) => {
 
 
 export default function FavArticleDetails({ }) {
+    // refrence of the scroll view
+    const scrollViewRef = useRef();
 
     // get loader functions and states
     const { loaderVisible, showLoader, hideLoader } = useContext(UserContext);
@@ -53,7 +55,6 @@ export default function FavArticleDetails({ }) {
             showLoader(translate('messages.loadArticle'));
             const { statusCode, data } = await Backend.isFavArticle(ID);
             hideLoader();
-            console.log(statusCode, data);
             if (!Backend.isSuccessfulRequest(statusCode)) {
                 const errorMessage = await Backend.getErrorMessage(data).then(response => response);
                 showPopupMessage('Error', errorMessage);
@@ -72,7 +73,6 @@ export default function FavArticleDetails({ }) {
             setIsFav(true);
             const { statusCode, data } = await Backend.addFavArticle(ID);
             setIsButtonPressed(false);
-            console.log(statusCode, data);
             if (!Backend.isSuccessfulRequest(statusCode)) {
                 const errorMessage = await Backend.getErrorMessage(data).then(response => response);
                 showPopupMessage('Error', errorMessage);
@@ -122,6 +122,10 @@ export default function FavArticleDetails({ }) {
     // check if the current article is favourite or not
     useEffect(() => {
         isFavourite();
+        scrollViewRef.current?.scrollTo({
+            y: 0,
+            animated: true,
+        });
     }, [Article]);
 
     return (

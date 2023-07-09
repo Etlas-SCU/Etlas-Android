@@ -40,7 +40,8 @@
         "upload_pic_detect": "While uploading and detect your monument",
         "loadQuestions": "While loading the questions",
         "undefined": "Unexpected error occurred",
-        "loadArticle": "While loading the article"
+        "loadArticle": "While loading the article",
+        "loadMonument": "While loading the monument"
     },
     "emailConfirmation": {
         "title": "Email Confirmation",

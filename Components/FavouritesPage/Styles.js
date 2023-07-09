@@ -46,12 +46,12 @@ export const styles = StyleSheet.create({
     ArticlesScrollView: {
         marginVertical: responsiveHeight(17),
         marginHorizontal: responsiveWidth(24),
-        height: responsiveHeight(260)
+        maxHeight: responsiveHeight(260)
     },
     MonumentsScrollView: {
         marginVertical: responsiveHeight(17),
         marginHorizontal: responsiveWidth(24),
-        height: responsiveHeight(280),
+        maxHeight: responsiveHeight(280),
     },
     containerScroll: {
         flex: 1,

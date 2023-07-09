@@ -64,20 +64,23 @@ export const styles = StyleSheet.create({
         borderRadius: 50,
     },
     header: {
-        flexDirection: "row",
-        justifyContent: "space-between",
+        width: responsiveWidth(dimensions.fullWidth),
+        flexDirection: "column",
         marginHorizontal: responsiveWidth(24),
         marginBottom: responsiveHeight(24),
         marginTop: responsiveHeight(isIOS() ? 24 : 0),
+        gap: responsiveHeight(10)
     },
     title: {
-        flex: 1,
         color: colors.Gold,
         fontSize: responsiveFontSize(22),
-        fontFamily: fontFamily.MontserratBold,    
+        fontFamily: fontFamily.MontserratBold,
+        textAlign: 'left'
     },
     stars: {
-        flex: 1
+        alignContent: 'flex-end',
+        justifyContent: 'flex-end',
+        flexDirection: 'row',
     },
     description: {
         color: colors.DarkGrey,

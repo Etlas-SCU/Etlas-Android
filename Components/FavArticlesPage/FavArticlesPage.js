@@ -3,7 +3,7 @@ import { styles } from "./Styles";
 import { translate } from "../../Localization";
 import Backend from "../../Helpers/Backend";
 import FavArticleCard from "../FavArticleCard/FavArticleCard";
-import { goBack, getParams } from "../../Helpers/Navigator";
+import { goBack } from "../../Helpers/Navigator";
 import SvgMaker from "../SvgMaker/SvgMaker";
 import { InvCloseIcon } from "../../assets/SVG/Icons";
 import { useContext } from "react";
@@ -30,12 +30,9 @@ export default function FavArticlesPage({ }) {
         }
     }
 
-    // get the screen name from navigator
-    const { prevPage } = getParams();
-
     // render items in flat list
     const renderItem = ({ item }) => {
-        return <FavArticleCard favArticle={item} screen={prevPage} />
+        return <FavArticleCard favArticle={item}/>
     }
 
     return (

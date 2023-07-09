@@ -3,6 +3,7 @@ import { UserDataProvider } from "./DataContext";
 import { ArticlesProvider } from "./ArticlesContext";
 import { ToursProvider } from "./ToursContext";
 import { FavArticlesProvider } from "./FavArticlesContext";
+import { FavMonumentsProvider } from './FavMonumentsContext';
 import { SafeAreaProvider, initialWindowMetrics } from 'react-native-safe-area-context';
 
 
@@ -13,9 +14,11 @@ export default function MainContext({ children }) {
                 <UserDataProvider>
                     <ArticlesProvider>
                         <FavArticlesProvider>
-                            <ToursProvider>
-                                {children}
-                            </ToursProvider>
+                            <FavMonumentsProvider>
+                                <ToursProvider>
+                                    {children}
+                                </ToursProvider>
+                            </FavMonumentsProvider>
                         </FavArticlesProvider>
                     </ArticlesProvider>
                 </UserDataProvider>

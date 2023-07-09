@@ -6,25 +6,22 @@ import { translate } from "../../Localization";
 import { goPage } from "../../Helpers/Navigator";
 import { LinearGradient } from 'expo-linear-gradient';
 import { useContext, useEffect } from "react";
-import { FavArticlesContext } from "../Context/FavArticlesContext";
+import { FavMonumentsContext } from "../Context/FavMonumentsContext";
 
 
 export default function FavMonumentsSection({ }) {
 
     // get favourite articles
-    const MonumentsList = Backend.getFavMonuments();
+    const { favMonumentsPage, updateFavMonumentsPage, favMonuments, updateFavMonuments } = useContext(FavMonumentsContext)
 
     // get articles from backend
     const getFavMonuments = async () => {
         try {
-            const { statusCode, data } = await Backend.getFavourites();
+            const { statusCode, data } = await Backend.getFavourites(favMonumentsPage);
             if (Backend.isSuccessfulRequest(statusCode)) {
-                let favArticlesResponse = [];
-                data.results.forEach((obj) => {
-                    if (obj.article)
-                        favArticlesResponse.push(obj.article)
-                });
-                updateFavArticles(favArticlesResponse);
+                const newFavMonuments = await Backend.getMonumentFromFavourits(data.results);
+                updateFavMonuments(newFavMonuments);
+                updateFavMonumentsPage(favMonumentsPage + 1);
                 console.log("Successfully fetched user's favorite monuments");
             }
         } catch (error) {
@@ -33,16 +30,16 @@ export default function FavMonumentsSection({ }) {
     }
 
     useEffect(() => {
-
+        getFavMonuments();
     }, []);
 
 
     // render item in flat list
     const renderItem = ({ item }) => {
-        return <FavMonumentCard Monument={item} screen={'favourites'} />
+        return <FavMonumentCard favMonument={item} />
     }
 
-    if(MonumentsList.length === 0){
+    if (favMonuments.length === 0) {
         return null;
     }
 
@@ -65,7 +62,7 @@ export default function FavMonumentsSection({ }) {
                 </View>
                 <View style={styles.MonumentsScrollView}>
                     <FlatList
-                        data={MonumentsList}
+                        data={favMonuments}
                         showsHorizontalScrollIndicator={false}
                         renderItem={renderItem}
                         keyExtractor={(_, index) => index.toString()}
@@ -73,6 +70,8 @@ export default function FavMonumentsSection({ }) {
                         contentContainerStyle={styles.contentContainer}
                         nestedScrollEnabled={true}
                         showsVerticalScrollIndicator={false}
+                        onEndReached={() => getFavMonuments()}
+                        onEndReachedThreshold={0.5}
                     />
                 </View>
             </LinearGradient>

@@ -15,14 +15,14 @@ export default function FavArticlesSection({ }) {
     const { favArticles, updateFavArticles, favArticlesPage, updateFavArticlesPage } = useContext(FavArticlesContext);
 
     // get articles from backend
-    const getFavArticle = async () => {
+    const getFavArticles = async () => {
         try {
             const { statusCode, data } = await Backend.getFavourites(favArticlesPage);
             if (Backend.isSuccessfulRequest(statusCode)) {
                 const newFavArticles = await Backend.getArticleFromFavourits(data.results);
                 updateFavArticles(newFavArticles);
                 updateFavArticlesPage(favArticlesPage + 1);
-                console.log("Successfully fetched user's favorite monuments");
+                console.log("Successfully fetched user's favorite articles");
             }
         } catch (error) {
             console.log(error);
@@ -30,7 +30,7 @@ export default function FavArticlesSection({ }) {
     }
 
     useEffect(() => {
-        getFavArticle();
+        getFavArticles();
     }, []);
 
 
@@ -70,6 +70,8 @@ export default function FavArticlesSection({ }) {
                         contentContainerStyle={styles.contentContainer}
                         nestedScrollEnabled={true}
                         showsVerticalScrollIndicator={false}
+                        onEndReached={() => getFavArticles()}
+                        onEndReachedThreshold={0.5}
                     />
                 </View>
             </LinearGradient>

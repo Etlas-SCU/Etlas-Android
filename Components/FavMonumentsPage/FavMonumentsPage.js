@@ -3,11 +3,13 @@ import { styles } from "./Styles";
 import { translate } from "../../Localization";
 import Backend from "../../Helpers/Backend";
 import FavMonumentCard from "../FavMonumentsCard/FavMonumentCard";
-import { goBack, getParams } from "../../Helpers/Navigator";
+import { goBack } from "../../Helpers/Navigator";
 import { useIsFocused } from '@react-navigation/native';
 import { setStatusBarStyle } from "expo-status-bar";
 import SvgMaker from "../SvgMaker/SvgMaker";
 import { InvCloseIcon } from "../../assets/SVG/Icons";
+import { useContext } from "react";
+import { FavMonumentsContext } from "../Context/FavMonumentsContext";
 
 
 export default function FavMonumentsPage({ }) {
@@ -19,15 +21,27 @@ export default function FavMonumentsPage({ }) {
         setStatusBarStyle('dark');
     }
 
-    // get the monument list from backend
-    const MonumentsList = Backend.getFavMonuments();
+    // get favourite monuments
+    const { favMonumentsPage, updateFavMonumentsPage, favMonuments, updateFavMonuments } = useContext(FavMonumentsContext);
 
-    // get the screen name from navigator
-    const { prevPage } = getParams() ? getParams() : { prevPage: 'Home' };
+    // get monuments from backend
+    const getFavMonuments = async () => {
+        try {
+            const { statusCode, data } = await Backend.getFavourites(favMonumentsPage);
+            if (Backend.isSuccessfulRequest(statusCode)) {
+                const newFavMonuments = await Backend.getMonumentFromFavourits(data.results);
+                updateFavMonuments(newFavMonuments);
+                updateFavMonumentsPage(favMonumentsPage + 1);
+                console.log("Successfully fetched user's favorite monuments");
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     // render items in flat list
     const renderItem = ({ item }) => {
-        return <FavMonumentCard Monument={item} screen={prevPage} />
+        return <FavMonumentCard favMonument={item} />
     }
 
     return (
@@ -42,7 +56,7 @@ export default function FavMonumentsPage({ }) {
                 </TouchableOpacity>
             </View>
             <FlatList
-                data={MonumentsList}
+                data={favMonuments}
                 showsHorizontalScrollIndicator={false}
                 renderItem={renderItem}
                 keyExtractor={(_, index) => index.toString()}
@@ -50,6 +64,8 @@ export default function FavMonumentsPage({ }) {
                 contentContainerStyle={styles.contentContainer}
                 nestedScrollEnabled={true}
                 showsVerticalScrollIndicator={false}
+                onEndReached={() => getFavMonuments()}
+                onEndReachedThreshold={0.5}
             />
         </View>
     )
