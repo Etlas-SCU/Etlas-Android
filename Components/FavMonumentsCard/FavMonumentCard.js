@@ -34,7 +34,7 @@ function FavMonumentCard({ favMonument }) {
                 showPopupMessage('Error', errorMessage);
                 return false;
             }
-            removeFavMonument(Monument);
+            removeFavMonument(favMonument);
         } catch (error) {
             console.log(error);
         }

@@ -249,9 +249,9 @@ class Backend {
         }
     }
 
-    static async DELETE(url, body) {
+    static async DELETE(url) {
         try {
-            return axios.delete(this.HOST_URL + url, body, {
+            return axios.delete(this.HOST_URL + url, {
                 headers: await this.getHeaders(),
             }).then(response => {
                 response = this.handleUndefined(response);
@@ -776,11 +776,8 @@ class Backend {
 
     static async removeFavArticle(id) {
         try {
-            const url = 'favorites/article/delete/';
-            const body = {
-                id: id,
-            }
-            return await this.DELETE(url, body).then(response => response);
+            const url = `favorites/article/delete/${id}/`;
+            return await this.DELETE(url).then(response => response);
         } catch (error) {
             return {
                 statusCode: 500,
@@ -791,11 +788,8 @@ class Backend {
 
     static async removeFavMonument(id) {
         try {
-            const url = 'favorites/monument/delete/';
-            const body = {
-                id: id,
-            }
-            return await this.DELETE(url, body).then(response => response);
+            const url = `favorites/monument/delete/${id}/`;
+            return await this.DELETE(url).then(response => response);
         } catch (error) {
             return {
                 statusCode: 500,

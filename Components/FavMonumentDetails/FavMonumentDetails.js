@@ -43,7 +43,7 @@ export default function FavMonumentDetails({ }) {
     const { name: Title, location: HistoricCounty, description: fullDescription, id: ID, three_d_model: Model, image_url: Img, date: HistoricDate } = Monument;
 
 
-    // const { model_obj, model_texture } = Model;
+    const { model_obj, model_texture } = Model;
 
     // get the icons of heart
     const fav = FilledHeartIcon;
@@ -264,6 +264,12 @@ export default function FavMonumentDetails({ }) {
     }, [Monument]);
 
 
+    // return (
+    //     <View style={{flex: 1}}>
+    //         <ModelViewer/>
+    //     </View>
+    // )
+
     return (
         <View style={styles.container}>
             {popupMessageVisible ? <PopupMessage /> : null}
@@ -274,7 +280,6 @@ export default function FavMonumentDetails({ }) {
                 >
                     <SvgMaker Svg={CloseIcon} style={styles.arrow} />
                 </TouchableOpacity>
-                {/* <ModelViewer textureURL={model_texture} modelURL={model_obj} /> */}
                 <Image
                     source={Img}
                     style={styles.image}

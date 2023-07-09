@@ -12,13 +12,14 @@ const FavMonumentsProvider = ({ children }) => {
 
     // update Monuments
     const updateFavMonuments = async (data) => {
-        if (!data) return;
-        setFavMonuments([...favMonuments, ...data]);
+        const newFav = [...favMonuments, ...data];
+        setFavMonuments([... new Set(newFav)]);
     }
 
     // add monument to favourite Monuments
     const addFavMonument = async (monument) => {
-        setFavMonuments([...favMonuments, monument]);
+        const newFav = [...favMonuments, monument];
+        setFavMonuments([... new Set(newFav)]);
     }
 
     // remove monument from favourite Monuments

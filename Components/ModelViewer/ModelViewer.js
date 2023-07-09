@@ -1,68 +1,79 @@
-import React, { useEffect } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, PanResponder } from 'react-native';
+import ExpoTHREE, { THREE, Renderer, TextureLoader, loadObjAsync, loadTextureAsync } from 'expo-three';
+import React, { useEffect, useRef } from 'react';
 import { GLView } from 'expo-gl';
-import { Renderer, THREE } from 'expo-three';
-import ExpoTHREE from 'expo-three';
 
-
-const ModelViewer = ({ textureURL, modelURL }) => {
-    // Create a scene
-    let scene = new THREE.Scene();
-
-    const load3DModel = async () => {
-        // Load texture
-        const texture = await ExpoTHREE.loadAsync(textureURL);
-
-        // Load object
-        const object = await ExpoTHREE.loadAsync(modelURL);
-
-        // Create a material with the texture
-        const material = new THREE.MeshBasicMaterial({ map: texture });
-
-        // Create a mesh using the object and material
-        const mesh = new THREE.Mesh(object, material);
-
-        console.log(mesh);
-
-        // Add the mesh to the scene
-        scene.add(mesh);
-    };
+export default function ModelViewer() {
+    const rendererRef = useRef(null);
+    const sceneRef = useRef(null);
+    const cameraRef = useRef(null);
+    const cubeRef = useRef(null);
+    const panResponderRef = useRef(
+        PanResponder.create({
+            onStartShouldSetPanResponder: () => true,
+            onPanResponderMove: (_, gestureState) => {
+                const cube = cubeRef.current;
+                cube.rotation.x += gestureState.dy * 0.0005; // Adjust the rotation factor to control the speed
+                cube.rotation.y += gestureState.dx * 0.0005; // Adjust the rotation factor to control the speed
+                rendererRef.current.render(sceneRef.current, cameraRef.current);
+            },
+        })
+    );
 
     const onContextCreate = async (gl) => {
+        const { drawingBufferWidth: width, drawingBufferHeight: height } = gl;
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+        camera.position.z = 5;
+
         const renderer = new Renderer({ gl });
-        renderer.setSize(gl.drawingBufferWidth, gl.drawingBufferHeight);
+        renderer.setSize(width, height);
+        renderer.setClearColor(0xffffff);
 
-        // Load the 3D model
-        await load3DModel();
+        const texture = await ExpoTHREE.loadAsync(require('./texture.png'));
+        const textureLoader = new TextureLoader();
+        const loadedTexture = textureLoader.load(require('./texture.png'));
 
-        // Render the scene
-        const render = () => {
+        // const modelAsset = require('./nefertiti_HQ2.obj.obj'); // Replace with the actual path to your 3D model file
+
+        const model = await ExpoTHREE.loadObjAsync({
+            asset: modelAsset,
+            onAssetRequested: (asset) => asset,
+        });
+
+
+        scene.add(model);
+
+        rendererRef.current = renderer;
+        sceneRef.current = scene;
+        cameraRef.current = camera;
+        cubeRef.current = model;
+
+        const animate = () => {
+            requestAnimationFrame(animate);
+            cube.rotation.x += 0.01;
+            cube.rotation.y += 0.01;
             renderer.render(scene, camera);
             gl.endFrameEXP();
-            requestAnimationFrame(render);
         };
 
-        render();
+        animate();
     };
-
-    useEffect(() => {
-        load3DModel();
-    }, []);
 
     return (
         <View style={styles.container}>
-            <GLView style={styles.glView} onContextCreate={onContextCreate} />
+            <GLView
+                style={{ flex: 1 }}
+                onContextCreate={onContextCreate}
+                {...panResponderRef.current.panHandlers}
+            />
         </View>
-    )
-};
+    );
+}
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
-    glView: {
-        flex: 1,
-    },
 });
-
-export default ModelViewer;

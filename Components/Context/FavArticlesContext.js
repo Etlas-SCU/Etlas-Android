@@ -12,13 +12,14 @@ const FavArticlesProvider = ({ children }) => {
 
     // update articles
     const updateFavArticles = async (data) => {
-        if(!data) return;
-        setFavArticles([...favArticles, ...data]);
+        const newFav = [...favArticles, ...data];
+        setFavArticles([... new Set(newFav)]);
     }
 
     // add article to favourite articles
     const addFavArticle = async (article) => {
-        setFavArticles([...favArticles, article]);
+        const newFav = [...favArticles, article];
+        setFavArticles([... new Set(newFav)]);
     }
 
     // remove article from favourite articles
