@@ -974,7 +974,6 @@ class Backend {
     static async isDetectSuccessful(detection){
         return detection !== "No monuments detected";
     }
-
 }
 
 export default Backend;

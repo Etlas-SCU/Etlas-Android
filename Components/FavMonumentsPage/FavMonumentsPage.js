@@ -32,7 +32,6 @@ export default function FavMonumentsPage({ }) {
                 const newFavMonuments = await Backend.getMonumentFromFavourits(data.results);
                 updateFavMonuments(newFavMonuments);
                 updateFavMonumentsPage(favMonumentsPage + 1);
-                console.log("Successfully fetched user's favorite monuments");
             }
         } catch (error) {
             console.log(error);

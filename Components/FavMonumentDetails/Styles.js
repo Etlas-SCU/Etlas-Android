@@ -9,9 +9,10 @@ export const styles = StyleSheet.create({
         paddingTop: StatusBar.currentHeight
     },
     image: {
-        width: responsiveWidth(100),
+        width: dimensions.fullWidth,
         height: responsiveHeight(255),
         resizeMode: 'contain',
+        marginBottom: responsiveHeight(14)
     },
     UpperBox: {
         flexGrow: 1,

@@ -22,7 +22,6 @@ export default function FavArticlesSection({ }) {
                 const newFavArticles = await Backend.getArticleFromFavourits(data.results);
                 updateFavArticles(newFavArticles);
                 updateFavArticlesPage(favArticlesPage + 1);
-                console.log("Successfully fetched user's favorite articles");
             }
         } catch (error) {
             console.log(error);
@@ -70,7 +69,7 @@ export default function FavArticlesSection({ }) {
                         contentContainerStyle={styles.contentContainer}
                         nestedScrollEnabled={true}
                         showsVerticalScrollIndicator={false}
-                        onEndReached={() => getFavArticles()}
+                        onEndReached={getFavArticles}
                         onEndReachedThreshold={0.5}
                     />
                 </View>

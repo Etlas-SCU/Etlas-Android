@@ -160,11 +160,10 @@ export default function CameraScreen({ }) {
 
                 // check if the image detected
                 if (!Backend.isDetectSuccessful(data.Detection)) {
-                    showPopupMessage('Error', data.status);
+                    showPopupMessage('Error', data.Detection);
                 } else {
-                    console.log(data);
                     // go to the monument page
-                    goPage('MonumentDetails', null, { monument: data.Monument });
+                    goPage('MonumentDetails', null, { Monument: data.Monument });
                 }
                 // make the camera resume again
                 setImage(null);

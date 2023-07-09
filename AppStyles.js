@@ -197,5 +197,11 @@ export const formatDate = (inputDate) => {
     return formattedDate;
 }
 
+// format historic date
+export const formatHistoricDate = (country, date) => {
+    const formatDate = `${date} | ${country}`;
+    return formatDate;
+}
+
 // placeholder
 export const placeholder = require('./assets/Images/placeholder.png');

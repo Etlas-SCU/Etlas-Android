@@ -23,7 +23,6 @@ export default function FavArticlesPage({ }) {
                 const newFavArticles = await Backend.getArticleFromFavourits(data.results);
                 updateFavArticles(newFavArticles);
                 updateFavArticlesPage(FavArticlesPage + 1);
-                console.log("Successfully fetched user's favorite monuments");
             }
         } catch (error) {
             console.log(error);

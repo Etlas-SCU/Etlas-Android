@@ -7,10 +7,8 @@ import Backend from "../../Helpers/Backend";
 import SvgMaker from "../SvgMaker/SvgMaker";
 import { LeftArrow, NonFilledHeartIcon, FilledHeartIcon } from "../../assets/SVG/Icons";
 import { formatDate, placeholder } from '../../AppStyles';
-import Loader from "../Loader/Loader";
 import PopupMessage from "../PopupMessage/PopupMessage";
 import { UserContext } from "../Context/Context";
-import { translate } from "../../Localization";
 import { FavArticlesContext } from "../Context/FavArticlesContext";
 
 
@@ -28,9 +26,6 @@ export default function ArticleDetails({ }) {
 
     // refrence of the scrollview
     const scrollViewRef = useRef();
-
-    // get loader functions and states
-    const { loaderVisible, showLoader, hideLoader } = useContext(UserContext);
 
     // get popup functions and states
     const { popupMessageVisible, showPopupMessage } = useContext(UserContext);
@@ -53,9 +48,9 @@ export default function ArticleDetails({ }) {
     // getting is the current article favourite or not
     const isFavourite = async () => {
         try {
-            showLoader(translate('messages.loadArticle'));
+            setIsButtonPressed(true);
             const { statusCode, data } = await Backend.isFavArticle(ID);
-            hideLoader();
+            setIsButtonPressed(false);
             if (!Backend.isSuccessfulRequest(statusCode)) {
                 const errorMessage = await Backend.getErrorMessage(data).then(response => response);
                 showPopupMessage('Error', errorMessage);
@@ -133,7 +128,6 @@ export default function ArticleDetails({ }) {
 
     return (
         <View style={styles.container}>
-            {loaderVisible ? <Loader /> : null}
             {popupMessageVisible ? <PopupMessage /> : null}
             <TouchableOpacity
                 style={styles.backContainer}
