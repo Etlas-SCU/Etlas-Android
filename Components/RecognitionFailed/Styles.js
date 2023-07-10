@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
     },
     body: {
         flex: 1,
-        marginTop: responsiveHeight(127)
+        marginTop: responsiveHeight(200)
     },
     sad: {
         alignSelf: "center",

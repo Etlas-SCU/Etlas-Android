@@ -13,7 +13,8 @@ export default function Subscribe({ }) {
     
     // redirect to subscribe page
     const reDirect = async () => {
-        const subscribeUrl = 'https://etlas-scu.github.io/pricing';
+        const subscribeUrl = 'https://etlas-scu.github.io/website/#/pricing';
+        hideSubscribeModal();
         await Linking.openURL(subscribeUrl);
     }
 

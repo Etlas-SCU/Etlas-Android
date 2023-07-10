@@ -953,6 +953,10 @@ class Backend {
         const fail = 'No monuments detected';
         return detection === fail;
     }
+
+    static isPaymentFailure(statusCode){
+        return statusCode === 403;
+    }
 }
 
 export default Backend;
