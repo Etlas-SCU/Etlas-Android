@@ -39,10 +39,6 @@ export default function FavMonumentsSection({ }) {
         return <FavMonumentCard favMonument={item} />
     }
 
-    if (favMonuments.length === 0) {
-        return null;
-    }
-
     return (
         <View style={[styles.containerScroll, styles.shadowProp]}>
             <LinearGradient
