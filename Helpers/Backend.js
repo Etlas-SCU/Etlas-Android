@@ -965,8 +965,9 @@ class Backend {
         return favMonumentsResponse;
     }
 
-    static async isDetectSuccessful(detection){
-        return detection !== "No monuments detected";
+    static isDetectFailure(detection){
+        const fail = 'No monuments detected';
+        return detection === fail;
     }
 }
 

@@ -12,7 +12,13 @@ export const styles = StyleSheet.create({
         width: dimensions.fullWidth,
         height: responsiveHeight(255),
         resizeMode: 'contain',
-        marginBottom: responsiveHeight(14)
+        marginBottom: responsiveHeight(14),
+    },
+    _3D: {
+        width: dimensions.fullWidth,
+        height: responsiveHeight(255),
+        marginBottom: responsiveHeight(14),
+        backgroundColor: colors.DarkCyan,
     },
     UpperBox: {
         flexGrow: 1,
@@ -24,7 +30,10 @@ export const styles = StyleSheet.create({
         zIndex: 0
     },
     TitleConainer: {
-        gap: responsiveHeight(17)
+        gap: responsiveHeight(17),
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: responsiveHeight(14)
     },
     title: {
         fontFamily: fontFamily.CapitalisTypOasis,

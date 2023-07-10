@@ -42,8 +42,6 @@ export default function MonumentDetails({ }) {
     const [speechIcon, setSpeechIcon] = useState('sound');
     const { name: Title, location: HistoricCounty, description: fullDescription, id: ID, three_d_model: Model, image_url: Img, date: HistoricDate } = Monument;
 
-    // const { model_obj, model_texture } = Model;
-
     // get the icons of heart
     const fav = FilledHeartIcon;
     const notFav = NonFilledHeartIcon;
@@ -272,12 +270,11 @@ export default function MonumentDetails({ }) {
                 >
                     <SvgMaker Svg={CloseIcon} style={styles.arrow} />
                 </TouchableOpacity>
-                {/* <ModelViewer textureURL={model_texture} modelURL={model_obj} /> */}
                 <Image
                     source={Img}
                     style={styles.image}
                     priority={'high'}
-                    contentFit={'fill'}
+                    contentFit='fill'
                     cachePolicy={'memory-disk'}
                 />
                 <View style={styles.TitleConainer}>

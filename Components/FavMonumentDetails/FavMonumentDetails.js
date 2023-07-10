@@ -43,8 +43,6 @@ export default function FavMonumentDetails({ }) {
     const { name: Title, location: HistoricCounty, description: fullDescription, id: ID, three_d_model: Model, image_url: Img, date: HistoricDate } = Monument;
 
 
-    const { model_obj, model_texture } = Model;
-
     // get the icons of heart
     const fav = FilledHeartIcon;
     const notFav = NonFilledHeartIcon;
@@ -263,12 +261,6 @@ export default function FavMonumentDetails({ }) {
         }
     }, [Monument]);
 
-
-    // return (
-    //     <View style={{flex: 1}}>
-    //         <ModelViewer/>
-    //     </View>
-    // )
 
     return (
         <View style={styles.container}>

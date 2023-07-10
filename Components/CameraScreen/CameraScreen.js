@@ -159,7 +159,7 @@ export default function CameraScreen({ }) {
                 hideLoader();
 
                 // check if the image detected
-                if (!Backend.isDetectSuccessful(data.Detection)) {
+                if (Backend.isDetectFailure(data.Detection)) {
                     showPopupMessage('Error', data.Detection);
                 } else {
                     // go to the monument page
