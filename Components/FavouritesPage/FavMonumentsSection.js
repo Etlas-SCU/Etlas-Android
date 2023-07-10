@@ -7,6 +7,7 @@ import { goPage } from "../../Helpers/Navigator";
 import { LinearGradient } from 'expo-linear-gradient';
 import { useContext, useEffect } from "react";
 import { FavMonumentsContext } from "../Context/FavMonumentsContext";
+import EmptyContainer from "./EmptyContainer";
 
 
 export default function FavMonumentsSection({ }) {
@@ -71,6 +72,7 @@ export default function FavMonumentsSection({ }) {
                         showsVerticalScrollIndicator={false}
                         onEndReached={() => getFavMonuments()}
                         onEndReachedThreshold={0.5}
+                        ListEmptyComponent={<EmptyContainer />}
                     />
                 </View>
             </LinearGradient>

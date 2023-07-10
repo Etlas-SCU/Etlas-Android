@@ -10,6 +10,7 @@ import SvgMaker from "../SvgMaker/SvgMaker";
 import { InvCloseIcon } from "../../assets/SVG/Icons";
 import { useContext } from "react";
 import { FavMonumentsContext } from "../Context/FavMonumentsContext";
+import EmptyContainer from "../FavouritesPage/EmptyContainer";
 
 
 export default function FavMonumentsPage({ }) {
@@ -65,6 +66,7 @@ export default function FavMonumentsPage({ }) {
                 showsVerticalScrollIndicator={false}
                 onEndReached={() => getFavMonuments()}
                 onEndReachedThreshold={0.5}
+                ListEmptyComponent={<EmptyContainer />}
             />
         </View>
     )

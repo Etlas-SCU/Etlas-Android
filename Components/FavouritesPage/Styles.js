@@ -99,5 +99,17 @@ export const styles = StyleSheet.create({
     endOff: {
         x: 0,
         y: 2
+    },
+    EmptyContainer: {
+        flex: 1,
+    },
+    EmptyText: {
+        fontFamily: fontFamily.PoppinsBold,
+        fontSize: responsiveFontSize(20),
+        color: colors.DarkCyan,
+        textAlign: 'center',
+        textAlignVertical: "center",
+        marginTop: responsiveHeight(50),
+        opacity: 0.8
     }
 });

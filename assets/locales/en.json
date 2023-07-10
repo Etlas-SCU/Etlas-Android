@@ -41,7 +41,8 @@
         "loadQuestions": "While loading the questions",
         "undefined": "Unexpected error occurred",
         "loadArticle": "While loading the article",
-        "loadMonument": "While loading the monument"
+        "loadMonument": "While loading the monument",
+        "noFav": "You have no favourites yet"
     },
     "emailConfirmation": {
         "title": "Email Confirmation",
