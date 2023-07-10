@@ -18,6 +18,7 @@ import Loader from "../Loader/Loader";
 import { manipulateAsync } from 'expo-image-manipulator';
 import * as ImagePicker from 'expo-image-picker';
 import { Animated, Easing } from 'react-native';
+import Subscribe from "../Subscribe/Subscribe";
 
 
 export default function CameraScreen({ }) {
@@ -43,6 +44,9 @@ export default function CameraScreen({ }) {
 
     // for loader
     const { showLoader, hideLoader, loaderVisible } = useContext(UserContext);
+
+    // for subscribe modal
+    const { showSubscribeModal, subscribeModalVisible } = useContext(UserContext);
 
     // check if the currenpage is focused
     const isFocused = useIsFocused();
@@ -275,6 +279,7 @@ export default function CameraScreen({ }) {
         <View style={styles.container}>
             {loaderVisible ? <Loader /> : null}
             {popupMessageVisible ? <PopupMessage /> : null}
+            {subscribeModalVisible ? <Subscribe /> : null}
             {
                 !image ?
                     <View style={styles.topBar}>

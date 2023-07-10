@@ -145,6 +145,7 @@ export const fontFamily = {
     MontserratMedium: 'Montserrat-Medium',
     MontserratRegular: 'Montserrat-Regular',
     MontserratSemiBold: 'Montserrat-SemiBold',
+    MontserratBlack: 'Montserrat-Black',
     MontserratThin: 'Montserrat-Thin',
     MontserratLight: 'Montserrat-Light',
     PoppinsRegular: 'Poppins-Regular',

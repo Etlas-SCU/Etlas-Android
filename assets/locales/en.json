@@ -131,7 +131,12 @@
         "saved": "Picture has been saved 🎉",
         "ErrorAcces": "Can't Access the camera of Media Library",
         "ErrorSave": "Can't Save the picture",
-        "save": "Save"
+        "save": "Save",
+        "moreScan": "Need more scans?",
+        "ran_out": "Your scans ran out for today.",
+        "subscribeText": "Subscribe to our plans or wait for your of scans to renew.",
+        "subscribe": "Subscribe Now",
+        "cancel": "Cancel"
     },
     "Profile": {
         "title": "Profile",
