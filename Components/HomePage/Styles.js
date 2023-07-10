@@ -10,6 +10,7 @@ export const styles = StyleSheet.create({
     contentContainer: {
         paddingBottom: responsiveHeight(200)
     },
+    refreshColor: colors.Gold,
     header: {
         flexDirection: "row",
         marginTop: responsiveHeight(68),
@@ -89,7 +90,6 @@ export const styles = StyleSheet.create({
         textAlign: "center",
     },
     swipper: {
-        flex: 1,
         marginLeft: responsiveWidth(20),
         borderRadius: 20,
     },

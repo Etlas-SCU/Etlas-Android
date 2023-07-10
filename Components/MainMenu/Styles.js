@@ -63,6 +63,6 @@ export const styles = StyleSheet.create({
         fontSize: responsiveFontSize(16),
         fontFamily: fontFamily.PoppinsRegular,
         textAlign: "center",
-        marginTop: responsiveHeight(97),
+        marginTop: responsiveHeight(80),
     },
 });

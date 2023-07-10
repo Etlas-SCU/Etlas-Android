@@ -7,6 +7,7 @@ export const styles = StyleSheet.create({
         backgroundColor: colors.White,
     },
     scrollContainer: {
+        marginTop: responsiveHeight(20),
         paddingBottom: responsiveHeight(200),
     },
     header: {
@@ -83,13 +84,15 @@ export const styles = StyleSheet.create({
     },
     Bar: {
         backgroundColor: colors.SolidGrey,
-        borderRadius: 10,
         width: responsiveWidth(382),
         height: responsiveHeight(32),
         textAlign: 'left',
         justifyContent: 'center',
         verticalAlign: 'middle',
         paddingLeft: responsiveWidth(12),
+        borderRadius: 10,
+    },
+    BarText: {
         fontSize: responsiveFontSize(18),
         fontFamily: fontFamily.PoppinsRegular,
         color: colors.DarkCyan,

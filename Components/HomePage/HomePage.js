@@ -1,80 +1,146 @@
-import { useState, useContext } from "react";
-import { View, Text, Image, TextInput, TouchableOpacity, ScrollView, SafeAreaView } from "react-native";
+import { useState, useContext, useEffect } from "react";
+import { View, Text, TextInput, TouchableOpacity, ScrollView, RefreshControl } from "react-native";
 import { styles } from "./Styles";
 import { translate } from "../../Localization";
 import { colors } from "../../AppStyles";
-import ToursCard from "../ToursCard/ToursCard";
-import ArticleCard from "../ArticleCard/ArticleCard";
 import { UserContext } from "../Context/Context";
 import MainMenu from "../MainMenu/MainMenu";
-import Backend from "../../Backend/Backend";
+import Backend from "../../Helpers/Backend";
+import { useIsFocused } from "@react-navigation/native";
+import { setStatusBarStyle } from "expo-status-bar";
+import { UserDataContext } from "../Context/DataContext";
+import SvgMaker from "../SvgMaker/SvgMaker";
+import { Ehome, MenuIcon } from "../../assets/SVG/Icons";
+import ArticlesSection from "./ArticlesSection";
+import ToursSection from "./ToursSection";
+import { useSafeAreaInsets, SafeAreaView } from "react-native-safe-area-context";
 
 
-function Section({ navigation, title, children, pageName }) {
-    return (
-        <View styles={styles.Box}>
-            <View style={styles.boxHeader}>
-                <Text style={styles.boxTitle}>{title}</Text>
-                <Image style={styles.new_image} source={require('../../assets/HomePage/New.png')} />
-                <TouchableOpacity style={styles.see_all} onPress={() => { navigation.navigate(pageName, { screen: 'Home' }) }}>
-                    <Text style={styles.see_all_text}>{translate('Home.see_all')}</Text>
-                </TouchableOpacity>
-            </View>
-            <SafeAreaView style={styles.swipper} >
-                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} nestedScrollEnabled={true}>
-                    {children}
-                </ScrollView>
-            </SafeAreaView>
-        </View>
-    )
-}
+export default function HomePage({ }) {
+    // get insets of safe area
+    const insets = useSafeAreaInsets();
 
-export default function HomePage({ navigation }) {
+    // Refreshing state
+    const [refreshing, setRefreshing] = useState(false);
 
+    // check if the currenpage is focused
+    const isFocused = useIsFocused();
+
+    if (isFocused) {
+        setStatusBarStyle('light');
+    }
+
+    // use the context to get the state of the modal
     const { modalVisible, showModal, setScreen } = useContext(UserContext);
-    const [searchTerm, setSearchTerm] = useState('');
 
-    // getting the toursList and ArticlesList from Backend.js
-    const toursList = Backend.getTours();
-    const ArticlesList = Backend.getArticles();
+    // get user data from context
+    const { updateUserData, updateScore } = useContext(UserDataContext);
 
-    // mapping the toursList and ArticlesList to jsx elements
-    const tours = toursList.map((tour, idx) => <ToursCard tour={tour} key={idx} isPage={false} navigation={navigation} />);
-    const Articles = ArticlesList.map((Article, idx) => <ArticleCard article={Article} key={idx} navigation={navigation} screen={'Home'}/>);
+    // The search term state for articles
+    const [articleSearchTerm, setArticleSearchTerm] = useState('');
+
+    // The search term state for tours
+    const [tourSearchTerm, setTourSearchTerm] = useState('');
+
+    // get user data from backend
+    const getUserData = async () => {
+        try {
+            const { statusCode, data } = await Backend.getUserData();
+            if (Backend.isSuccessfulRequest(statusCode)) {
+                updateUserData(data);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    // get landmark score
+    const getLandmarkScore = async () => {
+        try {
+            const { statusCode, data } = await Backend.getLandmarkScore();
+            if (Backend.isSuccessfulRequest(statusCode)) {
+                updateScore(data.best_score_landmarks, "Landmarks");
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    // get monuments score
+    const getMonumentsScore = async () => {
+        try {
+            const { statusCode, data } = await Backend.getMonumentScore();
+            if (Backend.isSuccessfulRequest(statusCode)) {
+                updateScore(data.best_score_monuments, "Monuments");
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    // get statues score
+    const getStatuesScore = async () => {
+        try {
+            const { statusCode, data } = await Backend.getStatueScore();
+            if (Backend.isSuccessfulRequest(statusCode)) {
+                updateScore(data.best_score_statues, "Statues");
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    // refresh the page
+    const onRefresh = async () => {
+        setRefreshing(true);
+        await getLandmarkScore();
+        await getMonumentsScore();
+        await getStatuesScore();
+        await getUserData();
+        setRefreshing(false);
+    }
+
+    // for user data and score
+    useEffect(() => {
+        async function fetchData() {
+            await getUserData();
+            await getLandmarkScore();
+            await getMonumentsScore();
+            await getStatuesScore();
+        }
+        fetchData();
+    }, []);
 
     return (
-        <View style={styles.container}>
-            <MainMenu/>
-            <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
+        <SafeAreaView style={styles.container}>
+            {modalVisible ? <MainMenu /> : null}
+            <ScrollView
+                contentContainerStyle={[styles.contentContainer, { marginTop: -insets.top }]}
+                showsVerticalScrollIndicator={false}
+                refreshControl={<RefreshControl tintColor={styles.refreshColor} colors={[styles.refreshColor]} refreshing={refreshing} onRefresh={onRefresh} />}
+            >
                 <View style={styles.header}>
                     <TouchableOpacity style={styles.aboutus} onPress={() => { showModal(), setScreen('Home') }}>
-                        <Image source={require('../../assets/KnowledgeCheck/tabler_exclamation-circle.png')} />
+                        <SvgMaker Svg={MenuIcon} />
                     </TouchableOpacity>
                     <Text style={styles.title}>{translate('Home.title')}</Text>
                 </View>
-                <Image style={styles.logo} source={require('../../assets/HomePage/e.png')} />
+                <SvgMaker Svg={Ehome} style={styles.logo} />
                 <Text style={styles.etlas}>{translate('Home.etlas')}</Text>
                 <Text style={styles.desc}>{translate('Home.desc')}</Text>
                 <TextInput
                     style={styles.SearchForm}
                     placeholder={translate('Home.search')}
                     placeholderTextColor={colors.Grey}
-                    onChangeText={(searchTerm) => setSearchTerm(searchTerm)}
+                    onChangeText={(searchTerm) => {
+                        setArticleSearchTerm(searchTerm);
+                        setTourSearchTerm(searchTerm);
+                    }}
                     cursorColor={colors.DarkCyan}
                 />
-                <Section
-                    navigation={navigation}
-                    title={translate('Home.tours')}
-                    pageName='ToursPage'
-                    children={tours}
-                />
-                <Section
-                    navigation={navigation}
-                    title={translate('Home.article')}
-                    pageName='ArticlesPage'
-                    children={Articles}
-                />
+                <ToursSection tourSearchTerm={tourSearchTerm} />
+                <ArticlesSection articleSearchTerm={articleSearchTerm} />
             </ScrollView>
-        </View>
+        </SafeAreaView>
     )
 }

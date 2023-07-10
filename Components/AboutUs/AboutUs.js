@@ -1,39 +1,69 @@
 import { translate } from '../../Localization'
-import { View, Text, Image, ImageBackground, TouchableOpacity, ScrollView } from 'react-native';
+import { Linking, View, Text, ImageBackground, TouchableOpacity, ScrollView } from 'react-native';
 import { styles } from './Styles';
+import { goBack } from '../../Helpers/Navigator';
+import SvgMaker from '../SvgMaker/SvgMaker';
+import { CloseIcon, GoogleIcon, FacebookIcon, TwitterIcon, LogoWhiteIcon } from '../../assets/SVG/Icons';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useCallback } from 'react';
 
-export default function AboutUs({ navigation, route }) {
 
-    // get pageName from the parameters passed to the naviagtion
-    const { pageName } = route.params;
+export default function AboutUs({ }) {
+    // get insets of safe area
+    const insets = useSafeAreaInsets();
 
+    // facebook url
+    const facebookUrl = 'https://www.facebook.com/profile.php?id=100094434254575';
+    const twitterUrl = 'https://twitter.com/EtlasScu';
+    const googleUrl = 'mailto:team.etlas@gmail.com';
+
+    // open url
+    const openUrl = async (url) => {
+        await Linking.openURL(url);
+    }
+    
     return (
-        <View style={styles.container}>
-            <ImageBackground source={require('../../assets/AboutUs/AboutUs.png')} style={styles.background}>
-                <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
-                    <TouchableOpacity onPress={() => { navigation.navigate({ name: pageName }) }}>
-                        <Image source={require('../../assets/AboutUs/ep_close-bold.png')} style={styles.close} />
+        <SafeAreaView style={styles.container}>
+            <ImageBackground source={require('../../assets/Backgrounds/AboutUs.png')} style={styles.background}>
+                <ScrollView contentContainerStyle={[styles.contentContainer, { marginTop: -insets.top }]} showsVerticalScrollIndicator={false}>
+                    <TouchableOpacity
+                        onPress={goBack}
+                        style={styles.closeContainer}
+                    >
+                        <SvgMaker Svg={CloseIcon} style={styles.close} />
                     </TouchableOpacity>
-                    <Image style={styles.logo} source={require('../../assets/AboutUs/e.png')} />
+                    <SvgMaker Svg={LogoWhiteIcon} style={styles.logo} />
                     <Text style={styles.copyright}>{translate('AboutUs.copyright')}</Text>
                     <View style={styles.line} />
                     <Text style={styles.description}>{translate('AboutUs.description')}</Text>
                     <View style={styles.contactus}>
                         <View style={styles.usingAppicons}>
-                            <TouchableOpacity style={styles.IconButton}>
-                                <Image source={require('../../assets/register/google.png')} style={styles.icon} />
+                            <TouchableOpacity 
+                                activeOpacity={0.8} 
+                                style={styles.IconButton}
+                                onPress={() => openUrl(googleUrl)}
+                            >
+                                <SvgMaker Svg={GoogleIcon} style={styles.icon} />
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.IconButton}>
-                                <Image source={require('../../assets/register/twitter.png')} style={styles.icon} />
+                            <TouchableOpacity 
+                                activeOpacity={0.8} 
+                                style={styles.IconButton}
+                                onPress={() => openUrl(twitterUrl)}
+                            >
+                                <SvgMaker Svg={TwitterIcon} style={styles.icon} />
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.IconButton}>
-                                <Image source={require('../../assets/register/facebook.png')} style={styles.icon} />
+                            <TouchableOpacity 
+                                activeOpacity={0.8} 
+                                style={styles.IconButton}
+                                onPress={() => openUrl(facebookUrl)}
+                            >
+                                <SvgMaker Svg={FacebookIcon} style={styles.icon} />
                             </TouchableOpacity>
                         </View>
                         <Text style={styles.findus}>{translate('AboutUs.findus')}</Text>
                     </View>
                 </ScrollView>
             </ImageBackground>
-        </View>
+        </SafeAreaView>
     );
 }

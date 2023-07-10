@@ -1,53 +1,41 @@
 import { styles } from "./Styles";
 import { useContext } from "react";
-import { TouchableOpacity, Text, Image } from "react-native";
-import { FancyAlert } from 'react-native-expo-fancy-alerts';
-import { colors } from "../../AppStyles";
+import { Text, Image, Modal, View } from "react-native";
 import { UserContext } from "../Context/Context";
+import { Warning, Success, Error } from "./PopUpState";
+import SvgMaker from "../SvgMaker/SvgMaker";
 
 
-export default function PopupMessage({ state, message }) {
+export default function PopupMessage({ }) {
 
     // Use the useContext hook to get the state of the popup message
-    const { popupMessageVisible, hidePopupMessage } = useContext(UserContext);
+    const { popupMessageVisible, messageState, message } = useContext(UserContext);
 
-    // Use the useNavigation hook to get the navigation object
-    const toggleAlert = () => {
-        hidePopupMessage();
+    // if not needed in current time
+    if(!messageState)
+        return null;
+
+    // Create an instance of the Success, Error and Warning classes
+    const states = {
+        Success: new Success(),
+        Error: new Error(),
+        Warning: new Warning()
     };
 
-    // Define the icons to be used in the alert and their corresponding image paths
-    const Icons = {
-        Accept: require('../../assets/PopupMessage/Accept.png'),
-        Error: require('../../assets/PopupMessage/Error.png'),
-        Warning: require('../../assets/PopupMessage/Warning.png'),
-    }
-
-    // Define the colors to be used for the different types of buttons
-    const Button_colors = {
-        Accept: colors.Green,
-        Error: colors.Red,
-        Warning: colors.Yellow,
-    }
-
-    // Define the text to be displayed on the buttons for the different types of alerts
-    const ButtonText = {
-        Accept: 'Great',
-        Error: 'Ok',
-        Warning: 'Ok'
-    }
+    // Get the icon, title and background color of the popup message
+    const popUpState = states[messageState];
 
     return (
-        <FancyAlert
+        <Modal
+            animationType="fade"
+            transparent={true}
             visible={popupMessageVisible}
-            icon={<Image source={Icons[state]} style={styles.icon} />}
-            style={styles.container}
-            onRequestClose={() => toggleAlert()}
         >
-            <Text style={styles.message}>{message}</Text>
-            <TouchableOpacity onPress={() => toggleAlert()} style={[styles.button, { backgroundColor: Button_colors[state] }]}>
-                <Text style={styles.buttonText}>{ButtonText[state]}</Text>
-            </TouchableOpacity>
-        </FancyAlert>
+            <View style={[styles.container, { backgroundColor: popUpState.backgroundColor }]}>
+                <SvgMaker Svg={popUpState.icon} style={styles.icon} /> 
+                <Text style={styles.title}>{popUpState.title}</Text>
+                <Text style={styles.message}>{message}</Text>
+            </View>
+        </Modal>
     );
 }

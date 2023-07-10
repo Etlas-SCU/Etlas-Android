@@ -1,9 +1,17 @@
-import { Text, View, TouchableOpacity, Image, ScrollView } from "react-native";
+import { Text, View, TouchableOpacity, ScrollView } from "react-native";
 import { styles } from "./Styles";
 import { translate } from '../../Localization';
 import { useState } from "react";
+import { goBack } from "../../Helpers/Navigator";
+import { changeLanguage } from "../../Localization";
+import SvgMaker from '../../Components/SvgMaker/SvgMaker';
+import { InvLeftArrowIcon, CheckIcon } from "../../assets/SVG/Icons";
+import { useSafeAreaInsets, SafeAreaView } from 'react-native-safe-area-context';
 
-export default function LanguageSelection({ navigation }) {
+
+export default function LanguageSelection({ }) {
+    // gettings insets of safe area
+    const insets = useSafeAreaInsets();
 
     // state for the selected language
     const [selected, setSelected] = useState('en');
@@ -16,27 +24,59 @@ export default function LanguageSelection({ navigation }) {
         "sp": translate('LanguageSelection.spanish'),
     }
 
+
+    // languageCode and  textDirection
+    const languageSettings = {
+        "en": {
+            languageCode: 'en',
+            textDirection: 'ltr'
+        },
+        "ar": {
+            languageCode: 'ar',
+            textDirection: 'rtl'
+        },
+        "fr": {
+            languageCode: 'fr',
+            textDirection: 'ltr'
+        },
+        "sp": {
+            languageCode: 'sp',
+            textDirection: 'ltr'
+        },
+    }
+
+
+    // change the language and set the selecte one
+    const change = (key) => {
+        changeLanguage(languageSettings[key].languageCode, languageSettings[key].textDirection);
+        setSelected(key);
+    }
+
+
     // create the buttons
     const buttons = Object.keys(languages).map((key, idx) => {
         return (
-            <TouchableOpacity key={idx} style={styles.language} onPress={() => { setSelected(key) }} disabled={key != 'en'}>
+            <TouchableOpacity key={idx} style={styles.language} onPress={() => { change(key) }} disabled={key != 'en'}>
                 <Text style={styles.languageText}>{languages[key]}</Text>
-                {key == selected ? <Image source={require('../../assets/language_selection/check.png')} style={styles.check} /> : null}
+                {key == selected ? <SvgMaker Svg={CheckIcon} style={styles.check} /> : null}
             </TouchableOpacity>
         )
     });
 
     // if the font loaded, return the text
     return (
-        <View style={styles.container}>
-            <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.contentContainer}>
+        <SafeAreaView style={styles.container}>
+            <ScrollView
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={[styles.contentContainer, { marginTop: -insets.top }]}
+            >
                 <View style={styles.header}>
                     <Text style={styles.title}>{translate('LanguageSelection.title')}</Text>
-                    <TouchableOpacity 
-                        onPress={() => { navigation.navigate({ name: 'Settings' }) }} 
-                        style={styles.close}
+                    <TouchableOpacity
+                        onPress={goBack}
+                        style={styles.closeContainer}
                     >
-                        <Image source={require('../../assets/Profile/Arr.png')} />
+                        <SvgMaker Svg={InvLeftArrowIcon} style={styles.close} />
                     </TouchableOpacity>
                 </View>
                 <Text style={styles.chooseBar}>{translate('LanguageSelection.choose')}</Text>
@@ -44,6 +84,6 @@ export default function LanguageSelection({ navigation }) {
                     {buttons}
                 </View>
             </ScrollView>
-        </View>
+        </SafeAreaView>
     );
 }

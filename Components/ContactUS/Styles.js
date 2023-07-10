@@ -9,11 +9,16 @@ export const styles = StyleSheet.create({
     close: {
         width: responsiveWidth(32),
         height: responsiveHeight(32),
+    },
+    closeContainer: {
+        position: "absolute",
+        alignSelf: 'flex-end',
         right: responsiveWidth(24),
         top: responsiveHeight(60),
-        position: 'absolute',
-        zIndex: 999,
-        tintColor: colors.White
+        width: responsiveWidth(32),
+        height: responsiveHeight(32),
+        tintColor: colors.White,
+        zIndex: 1
     },
     scrollContainer: {
         paddingBottom: responsiveHeight(200)
@@ -31,7 +36,7 @@ export const styles = StyleSheet.create({
         borderBottomRightRadius: 30,
         width: responsiveWidth(430),
         height: responsiveHeight(288),
-        zIndex: -1
+        zIndex: -1,
     },
     textInputContainer: {
         flex: 1,
@@ -53,23 +58,27 @@ export const styles = StyleSheet.create({
         height: responsiveHeight(58),
         borderRadius: 20,
         backgroundColor: colors.DarkCyan,
-        paddingLeft: responsiveWidth(24),
+        paddingHorizontal: responsiveWidth(24),
         fontSize: responsiveFontSize(20),
         fontFamily: fontFamily.MontserratSemiBold,
+        textAlign: 'left',
+        textAlignVertical: 'center',
+        color: colors.White
     },
     input_message: {
         width: responsiveWidth(380),
         height: responsiveHeight(239),
         borderRadius: 20,
         backgroundColor: colors.DarkCyan,
-        paddingLeft: responsiveWidth(24),
+        paddingHorizontal: responsiveWidth(24),
         paddingTop: responsiveHeight(24),
         fontSize: responsiveFontSize(20),
         fontFamily: fontFamily.MontserratSemiBold,
         textAlign: 'left',
         textAlignVertical: 'top',
         verticalAlign: "top",
-        justifyContent: 'flex-start'
+        justifyContent: 'flex-start',
+        color: colors.White
     },
     button: {
         width: responsiveWidth(200),
@@ -86,5 +95,16 @@ export const styles = StyleSheet.create({
         fontFamily: fontFamily.MontserratBold,
         textAlign: "center",
         textAlignVertical: "center",
+    },
+    boxtitle: {
+        color: colors.White,
+        fontSize: responsiveFontSize(18),
+        fontFamily: fontFamily.MontserratBold,
+        textAlign: "center",
+        textAlignVertical: "center",
+        position: 'absolute',
+        alignSelf: 'center',
+        zIndex: 999,
+        marginTop: responsiveHeight(60),
     }
 });

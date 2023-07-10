@@ -4,29 +4,32 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-    },
-    container: {
-        flex: 1,
         backgroundColor: colors.DarkCyan,
     },
     contentContainer: {
+        flexGrow: 1,
         paddingBottom: responsiveHeight(30)
     },
-    arrow: {
+    backContainer:{
+        width: responsiveWidth(32),
+        height: responsiveHeight(32),
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    back: {
         width: responsiveWidth(32),
         height: responsiveHeight(32),
     },
     header_container: {
         flexDirection: 'row',
         justifyContent: 'space-between',
+        marginTop: responsiveHeight(80),
+        marginHorizontal: responsiveWidth(24),
     },
     header: {
         fontFamily: fontFamily.CapitalisTypOasis,
         fontSize: responsiveFontSize(20),
         color: colors.White,
-        marginTop: responsiveHeight(80),
-        marginLeft: responsiveWidth(24),
-        marginRight: responsiveWidth(24),
     },
     line: {
         borderBottomColor: colors.White,

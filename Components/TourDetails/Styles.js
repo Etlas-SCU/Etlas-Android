@@ -1,18 +1,24 @@
 import { StyleSheet } from "react-native";
-import { colors, fontFamily, responsiveFontSize, responsiveHeight, responsiveWidth, dimensions } from "../../AppStyles";
+import { colors, fontFamily, responsiveFontSize, responsiveHeight, responsiveWidth, dimensions, isIOS } from "../../AppStyles";
 
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: colors.White,
     },
+    backContainer: {
+        position: "absolute",
+        alignSelf: 'flex-end',
+        right: responsiveWidth(24),
+        top: responsiveHeight(60),
+        width: responsiveWidth(32),
+        height: responsiveHeight(32),
+        zIndex: 999
+    },
     back: {
         width: responsiveWidth(32),
         height: responsiveHeight(32),
         tintColor: colors.DarkCyan,
-        position: 'absolute',
-        top: responsiveHeight(60),
-        right: responsiveWidth(24),
     },
     ScrollContainer: {
         paddingBottom: responsiveHeight(200)
@@ -28,7 +34,7 @@ export const styles = StyleSheet.create({
         flex: 1,
         height: responsiveHeight(469),
         width: dimensions.fullWidth,
-        zIndex: -1,
+        zIndex: -999,
         borderBottomRightRadius: 30,
         borderBottomLeftRadius: 30,
     },
@@ -58,21 +64,43 @@ export const styles = StyleSheet.create({
         borderRadius: 50,
     },
     header: {
-        flexDirection: "row",
-        marginTop: responsiveHeight(22),
-        justifyContent: "space-between",
-        marginHorizontal: responsiveWidth(24)
+        width: responsiveWidth(dimensions.fullWidth),
+        flexDirection: "column",
+        marginHorizontal: responsiveWidth(24),
+        marginBottom: responsiveHeight(24),
+        marginTop: responsiveHeight(isIOS() ? 24 : 0),
+        gap: responsiveHeight(10)
     },
     title: {
         color: colors.Gold,
         fontSize: responsiveFontSize(22),
         fontFamily: fontFamily.MontserratBold,
+        textAlign: 'left'
+    },
+    stars: {
+        alignContent: 'flex-end',
+        justifyContent: 'flex-end',
+        flexDirection: 'row',
     },
     description: {
         color: colors.DarkGrey,
-        fontSize: responsiveFontSize(18),
         fontFamily: fontFamily.MontserratRegular,
         marginHorizontal: responsiveWidth(24),
         marginTop: responsiveHeight(32),
-    }
+    },
+    section: {
+        marginVertical: responsiveHeight(20),
+        gap: responsiveHeight(10),
+        marginHorizontal: responsiveWidth(24),
+    },
+    sectionTitle: {
+        fontFamily: fontFamily.MontserratBold,
+        fontSize: responsiveFontSize(18),
+        color: colors.DarkCyan,
+    },
+    sectionDescription: {
+        fontFamily: fontFamily.MontserratRegular,
+        fontSize: responsiveFontSize(14),
+        color: colors.DarkCyan,
+    },
 })

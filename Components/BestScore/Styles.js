@@ -8,11 +8,15 @@ export const styles = StyleSheet.create({
     scrollContainer: {
         paddingBottom: responsiveHeight(200),
     },
-    close: {
+    closeContainer: {
+        position: "absolute",
         width: responsiveWidth(32),
         height: responsiveHeight(32),
         right: responsiveWidth(24),
-        position: 'absolute',
+    },
+    close: {
+        width: responsiveWidth(32),
+        height: responsiveHeight(32),
     },
     image: {
         flex: 1,

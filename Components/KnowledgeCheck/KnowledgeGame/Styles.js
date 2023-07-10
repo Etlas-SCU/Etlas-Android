@@ -21,21 +21,33 @@ export const styles = StyleSheet.create({
         fontSize: responsiveFontSize(18),
         color: colors.White,
     },
+    backContainer: {
+        width: responsiveWidth(32),
+        height: responsiveHeight(32),
+        position: 'absolute',
+        right: responsiveWidth(0),
+    },
     back: {
         width: responsiveWidth(32),
         height: responsiveHeight(32),
         tintColor: colors.White,
-        position: 'absolute',
-        right: responsiveWidth(0)
     },
-    image: {
+    imageContainer: {
         width: responsiveWidth(381),
         height: responsiveHeight(188),
         alignSelf: 'center',
         marginTop: responsiveHeight(45),
-        borderRadius: 20,
+    },
+    image: {
+        width: '100%',
+        height: '100%',
         borderColor: colors.White,
-        borderWidth: 2
+        borderRadius: 20,
+        borderWidth: 2,
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignSelf: 'center',
+        resizeMode: 'stretch',
     },
     quesionsBox: {
         marginTop: responsiveHeight(36),
@@ -45,17 +57,18 @@ export const styles = StyleSheet.create({
     },
     question: {
         fontFamily: fontFamily.MontserratBold,
-        fontSize: responsiveFontSize(22),
+        fontSize: responsiveFontSize(18),
         color: colors.White,
-        textAlign: 'center'
+        textAlign: 'center',
+        marginHorizontal: responsiveWidth(24)
     },
     choices: {
         marginTop: responsiveHeight(49),
         gap: responsiveHeight(18)
     },
     choice: {
-        width: responsiveWidth(285),
-        height: responsiveHeight(57),
+        width: responsiveWidth(330),
+        height: responsiveHeight(65),
         borderRadius: 20,
         justifyContent: 'center',
         alignItems: 'center',
@@ -69,10 +82,24 @@ export const styles = StyleSheet.create({
     initialChoice: {
         backgroundColor: colors.Gold
     },
+    diableChoiceColor: {
+        backgroundColor: colors.LightSeaGreen
+    },
+    disabledChoice: {
+        width: responsiveWidth(330),
+        height: responsiveHeight(65),
+        borderRadius: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
+        opacity: 0.5,
+    },
     choiceText: {
         fontFamily: fontFamily.MontserratBold,
-        fontSize: responsiveFontSize(18),
+        fontSize: responsiveFontSize(16),
         color: colors.White,
+        textAlign: 'center',
+        textAlignVertical: 'center',
+        marginHorizontal: responsiveWidth(5)
     },
     bottomContainer: {
         flexDirection: 'row',

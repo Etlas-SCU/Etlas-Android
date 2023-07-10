@@ -3,27 +3,19 @@ import { styles } from './Styles'
 import { translate } from '../../Localization'
 import { useContext } from 'react';
 import { UserContext } from '../Context/Context';
-import { useNavigation } from '@react-navigation/native';
+import { goPage } from '../../Helpers/Navigator';
+import SvgMaker from '../SvgMaker/SvgMaker';
+import { DiffCloseIcon } from '../../assets/SVG/Icons';
 
 
-function Button ({ title, pageNav, hideModal }){
+function Button({ title, pageNav, hideModal }) {
 
     const { screen } = useContext(UserContext);
 
-    // use the navigation
-    const navigation = useNavigation();
-    
     // navigate to the page
     const ButtonNav = (pageNav) => {
         hideModal();
-        navigation.navigate(
-            { 
-                name: pageNav,
-                params: {
-                    pageName: screen
-                }   
-            },
-        );
+        goPage(pageNav, screen);
     }
 
     return (
@@ -46,22 +38,22 @@ export default function MainMenu({ }) {
     ]
 
     // create the buttons
-    const buttons = buttonsVal.map((button, idx) => <Button key={idx} title={button.title} pageNav={button.pageNav} hideModal={hideModal} /> );
+    const buttons = buttonsVal.map((button, idx) => <Button key={idx} title={button.title} pageNav={button.pageNav} hideModal={hideModal} />);
 
     return (
-        <Modal 
+        <Modal
             transparent={true}
             visible={modalVisible}
             onRequestClose={() => hideModal()}
             animationType='slide'
         >
             <View style={styles.container}>
-                <ImageBackground source={require('../../assets/MainMenu/Background.png')} style={styles.background} borderRadius={20}>
+                <ImageBackground source={require('../../assets/Backgrounds/MainMenu.png')} style={styles.background} borderRadius={20}>
                     <TouchableOpacity onPress={() => hideModal()}>
-                        <Image source={require('../../assets/MainMenu/close.png')} style={styles.close}/>
+                        <SvgMaker Svg={DiffCloseIcon} style={styles.close} />
                     </TouchableOpacity>
                     <Text style={styles.title}>{translate('MainMenu.message')}</Text>
-                    <View style={styles.line}/>
+                    <View style={styles.line} />
                     <View style={styles.buttons}>
                         {buttons}
                     </View>

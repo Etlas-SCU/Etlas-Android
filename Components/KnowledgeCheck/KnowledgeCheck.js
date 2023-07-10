@@ -1,19 +1,26 @@
-import { View, Image, Text, TouchableOpacity, ScrollView } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { styles } from './Styles'
 import { translate } from "../../Localization";
 import { UserContext } from "../Context/Context";
 import { useContext } from "react";
 import MainMenu from "../MainMenu/MainMenu";
 import { isIOS } from "../../AppStyles";
-import KnowledgeGame from "./KnowledgeGame/KnowledgeGame";
+import { goPage } from "../../Helpers/Navigator";
+import { useIsFocused } from "@react-navigation/native";
+import { setStatusBarStyle } from "expo-status-bar";
+import { UserDataContext } from "../Context/DataContext";
+import SvgMaker from "../SvgMaker/SvgMaker";
+import { MenuIcon } from "../../assets/SVG/Icons";
+import { StatueImage, LandmarkImage, MonumentImage } from '../../assets/SVG/Images';
+import { useSafeAreaInsets, SafeAreaView } from "react-native-safe-area-context";
 
 
-function Card({ navigation, title, img, desc, score, pageName }) {
+function Card({ title, img, desc, score }) {
     return (
-        <TouchableOpacity 
+        <TouchableOpacity
             style={styles.body}
-            onPress={() => { 
-                navigation.navigate('KnowledgeGame', { pageName: title })
+            onPress={() => {
+                goPage('KnowledgeGame', 'KnowledgeCheck', { lastGame: title })
             }}
         >
             <View style={styles.bodyContent}>
@@ -22,50 +29,62 @@ function Card({ navigation, title, img, desc, score, pageName }) {
                 <Text numberOfLines={1} style={styles.bodyScore} adjustsFontSizeToFit={true}>{score}</Text>
             </View>
             <View style={styles.bodyImage}>
-                <Image source={img} style={styles.image} />
+                <SvgMaker Svg={img} style={styles.image} />
             </View>
         </TouchableOpacity>
     )
 }
 
-export default function KnowledgeCheck({ navigation }) {
+export default function KnowledgeCheck({ }) {
+    const insets = useSafeAreaInsets();
 
+
+    // check if the currenpage is focused
+    const isFocused = useIsFocused();
+
+    if (isFocused) {
+        setStatusBarStyle('light');
+    }
+
+    // main menu
     const { showModal, setScreen } = useContext(UserContext);
 
+    const { landmarkScore, monumentScore, statueScore } = useContext(UserDataContext);
+
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             {isIOS() ? <MainMenu /> : null}
-            <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
+            <ScrollView
+                contentContainerStyle={[styles.contentContainer, { marginTop: -insets.top }]}
+                showsVerticalScrollIndicator={false}
+            >
                 <View style={styles.header}>
                     <TouchableOpacity style={styles.aboutus} onPress={() => { showModal(), setScreen('KnowledgeCheck') }}>
-                        <Image source={require('../../assets/KnowledgeCheck/tabler_exclamation-circle.png')} />
+                        <SvgMaker Svg={MenuIcon} />
                     </TouchableOpacity>
                     <Text style={styles.title}>{translate('KnowledgeCheck.title')}</Text>
                 </View>
                 <View style={styles.cards}>
                     <Card
-                        navigation={navigation}
                         title={translate('KnowledgeCheck.Statues')}
                         desc={translate('KnowledgeCheck.StatuesText')}
-                        score={translate('KnowledgeCheck.StatuesScore')}
-                        img={require('../../assets/KnowledgeCheck/Statue_1.png')}
+                        score={statueScore}
+                        img={StatueImage}
                     />
                     <Card
-                        navigation={navigation}
                         title={translate('KnowledgeCheck.Monuments')}
                         desc={translate('KnowledgeCheck.MonumentsText')}
-                        score={translate('KnowledgeCheck.MonumentsScore')}
-                        img={require('../../assets/KnowledgeCheck/Statue_2.png')}
+                        score={monumentScore}
+                        img={MonumentImage}
                     />
                     <Card
-                        navigation={navigation}
                         title={translate('KnowledgeCheck.Landmarks')}
                         desc={translate('KnowledgeCheck.LandmarksText')}
-                        score={translate('KnowledgeCheck.LandmarksScore')}
-                        img={require('../../assets/KnowledgeCheck/Statue_3.png')}
+                        score={landmarkScore}
+                        img={LandmarkImage}
                     />
                 </View>
             </ScrollView>
-        </View>
+        </SafeAreaView>
     );
 }

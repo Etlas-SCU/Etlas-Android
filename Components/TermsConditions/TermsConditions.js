@@ -1,8 +1,16 @@
 import { styles } from "./Styles";
-import { View, Text, Image, TouchableOpacity, ScrollView, useWindowDimensions } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView, useWindowDimensions } from "react-native";
 import { translate } from "../../Localization";
 import RenderHTML from "react-native-render-html";
-import { TermsCondition } from "../../assets/locales/Terms";
+import Backend from "../../Helpers/Backend";
+import { useEffect, useState, useContext } from "react";
+import { UserContext } from "../Context/Context";
+import Loader from "../Loader/Loader";
+import { goBack } from "../../Helpers/Navigator";
+import SvgMaker from "../SvgMaker/SvgMaker";
+import { TermsStatue, TermsView } from "../../assets/SVG/Images";
+import { InvCloseIcon } from "../../assets/SVG/Icons";
+
 
 // to view the HTML text with the styles
 const HTMLView = ({ htmlContent }) => {
@@ -19,28 +27,42 @@ const HTMLView = ({ htmlContent }) => {
 };
 
 
-export default function TermsConditions({ navigation, route }) {
+export default function TermsConditions({ }) {
 
-    // get pageName from the parameters passed to the naviagtion
-    const { pageName } = route.params;
+    const [Terms, setTerms] = useState('');
+    const { loaderVisible, hideLoader, showLoader } = useContext(UserContext);
+
+    // use the context to get the state of the modal
+    useEffect(() => {
+        async function fetchData() {
+            showLoader(translate('TermsConditions.getTerms'));
+            const {statusCode, data} = await Backend.getTermsConditions();
+            hideLoader();
+            if (Backend.isSuccessfulRequest(statusCode)) {
+                setTerms(data);
+            }
+        }
+        fetchData();
+    }, []);
 
     return (
         <View style={styles.container}>
+            { loaderVisible ? <Loader /> : null }
             <View style={styles.header}>
                 <Text style={styles.title}>{translate('TermsConditions.title')}</Text>
                 <TouchableOpacity 
-                    onPress={() => { navigation.navigate({ name: pageName }) }} 
+                    onPress={goBack} 
                     style={styles.close}
                 >
-                    <Image source={require('../../assets/HighScore/close.png')} style={styles.closeIcon}/>
+                    <SvgMaker Svg={InvCloseIcon} style={styles.closeIcon} />
                 </TouchableOpacity>
             </View>
-            <Image source={require('../../assets/TermsConditions/statue.png')} style={styles.statue}/>
-            <Image source={require('../../assets/TermsConditions/pyramids.png')} style={styles.pyramids}/>
+            <SvgMaker Svg={TermsStatue} style={styles.statue} />
+            <SvgMaker Svg={TermsView} style={styles.pyramids} />
             <View style={styles.DarkConatiner}>
                 <Text style={styles.copyright}>{translate('TermsConditions.copyright')}</Text>
                 <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.contentContainer}>
-                    <HTMLView htmlContent={TermsCondition} />
+                    <HTMLView htmlContent={Terms} />
                 </ScrollView>
             </View>
         </View>

@@ -55,12 +55,19 @@ export const styles = StyleSheet.create({
         paddingLeft: responsiveWidth(24),
         fontSize: responsiveFontSize(20),
         fontFamily: fontFamily.MontserratSemiBold,
+        overflow: 'hidden',
+        textAlign: 'left',
+        paddingRight: responsiveWidth(50)
     },
     editable:{
         color: colors.White
     },
     uneditable:{
         color: colors.Grey
+    },
+    focus: {
+        borderWidth: 4,
+        borderColor: colors.LightSeaGreen,
     },
     inputContainer: {
         gap: responsiveHeight(13)
@@ -73,7 +80,7 @@ export const styles = StyleSheet.create({
         alignSelf: 'center',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: responsiveHeight(108),
+        marginTop: responsiveHeight(147),
     },
     saveButtonText: {
         color: colors.White,
@@ -99,5 +106,12 @@ export const styles = StyleSheet.create({
         top: responsiveHeight(20),
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    changePassword: {
+        color: colors.DarkCyan,
+        fontFamily: fontFamily.MontserratBold,
+        fontSize: responsiveFontSize(14),
+        marginTop: responsiveHeight(30),
+        textDecorationLine: 'underline'
     }
 });

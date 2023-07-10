@@ -4,6 +4,7 @@ import { fontFamily, colors, responsiveFontSize, responsiveHeight, responsiveWid
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: colors.White
     },
     contentContainer: {
         paddingBottom: responsiveHeight(200)
@@ -19,13 +20,18 @@ export const styles = StyleSheet.create({
         fontSize: responsiveFontSize(18),
         color: colors.DarkCyan,
     },
-    close:{
+    closeContainer: {
         width: responsiveWidth(32),
         height: responsiveHeight(32),
         right: responsiveWidth(24),
         position: "absolute",
         alignContent: 'center',
         justifyContent: 'center',
+        alignItems: 'center',
+    },
+    close:{
+        width: responsiveWidth(32),
+        height: responsiveHeight(32),
     },
     chooseBar: {
         flexDirection: "row",

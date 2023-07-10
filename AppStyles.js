@@ -1,6 +1,7 @@
 import { StyleSheet, Dimensions, PixelRatio, Platform } from "react-native";
 import * as Device from 'expo-device';
 
+
 // styles in app.js
 export const styles = StyleSheet.create({
     container: {
@@ -40,7 +41,7 @@ export const BaseScale = {
 export const responsiveWidth = width => {
     return Math.round(PixelRatio.roundToNearestPixel(width * BaseScale.widthScale));
 };
-  
+
 
 // get the responsive height
 export const responsiveHeight = height => {
@@ -83,6 +84,7 @@ export const hasNotch = (version) => {
 export const colors = {
     Gold: '#BF8148',
     White: '#FFFFFF',
+    Moka: '#EBE8E8',
     Black: '#000000',
     DarkCyan: '#003441',
     Cyan: '#55C4E0',
@@ -102,6 +104,9 @@ export const colors = {
     Brown: '#A52A2A',
     DarkBlue: '#00008B',
     DarkGreen: '#006400',
+    NavyRed: '#410000',
+    NavyYellow: '#412300',
+    NavyGreen: '#014000',
 }
 
 
@@ -148,7 +153,7 @@ export const fontFamily = {
     PoppinsSemiBold: 'Poppins-SemiBold',
     PoppinsThin: 'Poppins-Thin',
     PoppinsLight: 'Poppins-Light',
-    PoppinsExtraLight: 'Poppins-Black', 
+    PoppinsExtraLight: 'Poppins-Black',
 }
 
 
@@ -163,3 +168,40 @@ export const fontWeight = {
     extraBold: '800',
     black: '900',
 }
+
+// convert date
+export const formatDate = (inputDate) => {
+    // get first part of timestamp
+    inputDate = inputDate.split('T')[0];
+
+    // Split the input date string into year, month, and day
+    const [year, month, day] = inputDate.split('-');
+
+    // Create a Date object using the year, month, and day
+    const dateObject = new Date(year, month - 1, day);
+
+    // Array of month names
+    const monthNames = [
+        'January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'
+    ];
+
+    // Get the day, month name, and year from the date object
+    const formattedDay = dateObject.getDate();
+    const formattedMonth = monthNames[dateObject.getMonth()];
+    const formattedYear = dateObject.getFullYear();
+
+    // Concatenate the formatted day, month name, and year
+    const formattedDate = `${formattedDay} ${formattedMonth} ${formattedYear}`;
+
+    return formattedDate;
+}
+
+// format historic date
+export const formatHistoricDate = (country, date) => {
+    const formatDate = `${date} | ${country}`;
+    return formatDate;
+}
+
+// placeholder
+export const placeholder = require('./assets/Images/placeholder.png');

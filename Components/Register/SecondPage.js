@@ -1,28 +1,74 @@
-import React, { useState } from "react";
-import { View, Text, Image, TouchableOpacity, TextInput, ScrollView } from "react-native";
+import { useState, useContext } from "react";
+import { View, Text, TouchableOpacity, TextInput, ScrollView } from "react-native";
 import IntlPhoneField from 'react-native-intl-phone-field';
 import { styles } from './Styles';
 import { colors } from "../../AppStyles";
 import { translate } from '../../Localization'
 import GoogleAuth from "../Authetincations/GoogleAuth";
 import FacebookAuth from "../Authetincations/FacebookAuth";
-import TwitterAuth from "../Authetincations/TwitterAuth";
+import { getParams, goBack, goPage } from "../../Helpers/Navigator";
+import Loader from "../Loader/Loader";
+import PopupMessage from "../PopupMessage/PopupMessage";
+import Backend from "../../Helpers/Backend";
+import { UserContext } from "../Context/Context";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import SvgMaker from "../SvgMaker/SvgMaker";
+import { LeftArrow } from "../../assets/SVG/Icons";
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 
-export function SecondPage({ route, navigation }) {
+export function SecondPage({ }) {
+    // get insets of safe area
+    const insets = useSafeAreaInsets();
 
     // get the fullname, email and password from route params 
-    const { fullname, email, password } = route.params;
+    const { fullname, email, password } = getParams();
     const [phoneNumber, setPhoneNumber] = useState('');
     const [address, setAddress] = useState('');
+    const { showLoader, hideLoader, loaderVisible } = useContext(UserContext);
+    const { showPopupMessage, popupMessageVisible } = useContext(UserContext);
+
+    // register
+    const handle_register = () => {
+        async function register_fetch() {
+            showLoader(translate('messages.registering'));
+            const { statusCode, data } = await Backend.register(fullname, email, password, phoneNumber, address);
+            hideLoader();
+            if (!Backend.isSuccessfulRequest(statusCode)) {
+                const errorMessage = await Backend.getErrorMessage(data).then(response => response);
+                showPopupMessage('Error', errorMessage);
+            }
+            else {
+                // store user data to use
+                const user = {
+                    id: data.id,
+                    email: data.email,
+                    full_name: data.full_name,
+                    address: data.address,
+                    phone_number: data.phone_number,
+                    image_url: data.image_url,
+                };
+                await AsyncStorage.setItem('user', JSON.stringify(user));
+
+                showPopupMessage('Success', translate('messages.emailSent'));
+                // store token to use
+                goPage('emailVerification', 'secondPage', {
+                    email: email,
+                });
+            }
+        }
+        register_fetch();
+    };
 
     return (
-        <View style={styles.container}>
-            <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
+        <SafeAreaView style={styles.container}>
+            {loaderVisible ? <Loader /> : null}
+            {popupMessageVisible ? <PopupMessage /> : null}
+            <ScrollView contentContainerStyle={[styles.contentContainer, { marginTop: -insets.top }]} showsVerticalScrollIndicator={false}>
                 <View style={styles.header_container}>
                     <Text style={styles.header}>{translate('Register.title')}</Text>
-                    <TouchableOpacity style={styles.header} onPress={() => navigation.goBack()}>
-                        <Image style={styles.arrow} source={require('../../assets/register/left-arrow.png')}></Image>
+                    <TouchableOpacity style={styles.backContainer} onPress={goBack}>
+                        <SvgMaker style={styles.back} Svg={LeftArrow} />
                     </TouchableOpacity>
                 </View>
                 <View style={styles.line} />
@@ -45,26 +91,29 @@ export function SecondPage({ route, navigation }) {
                         placeholderTextColor={colors.Grey}
                         onChangeText={(address) => setAddress(address)}
                         cursorColor={colors.LightSeaGreen}
+                        importantForAutofill={'no'}
                     />
                 </View>
                 <View style={styles.usingAppSecond}>
                     <Text style={styles.usingAppText}>{translate('Register.or')} <Text style={{ fontWeight: 'bold' }}>{translate('Register.signup')}</Text> {translate('Register.using')}</Text>
                     <View style={styles.usingAppicons}>
                         <GoogleAuth />
-                        <TwitterAuth />
                         <FacebookAuth />
                     </View>
                 </View>
-                <TouchableOpacity style={styles.nextButtonSecond}>
+                <TouchableOpacity
+                    style={styles.nextButtonSecond}
+                    onPress={() => { handle_register() }}
+                >
                     <Text style={styles.nextText}>{translate('Register.signup')}</Text>
                 </TouchableOpacity>
                 <View style={styles.signIn}>
                     <Text style={styles.haveAccount}>{translate('Register.haveaccount')} </Text>
-                    <TouchableOpacity onPress={() => navigation.navigate('login')}>
+                    <TouchableOpacity onPress={() => { goPage('login') }}>
                         <Text style={styles.signInText}>{translate('Register.signin')}</Text>
                     </TouchableOpacity>
                 </View>
             </ScrollView>
-        </View>
+        </SafeAreaView>
     );
 }

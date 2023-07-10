@@ -1,6 +1,13 @@
 import { colors, fontFamily, responsiveFontSize, responsiveHeight, responsiveWidth, dimensions } from '../../AppStyles'
 import { StyleSheet } from 'react-native'
 
+
+export const CameraDimensions = {
+    width: dimensions.fullWidth,
+    height: dimensions.fullWidth,
+};
+
+
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -8,12 +15,17 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    containerCamera: {
+        flex: 1,
+    },
     camera: {
         flex: 1,
-        width: dimensions.fullWidth,
-        height: dimensions.fullHeight,
+        width: responsiveWidth(450),
+        height: responsiveHeight(450),
         alignItems: 'center',
         borderRadius: 20,
+        resizeMode: 'contain',
+        aspectRatio: 1
     },
     button: {
         backgroundColor: colors.Cyan,
@@ -28,7 +40,7 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     topBar: {
-        height: responsiveHeight(120),
+        height: responsiveHeight(241),
         flexDirection: 'row',
         justifyContent: 'space-between',
         width: dimensions.fullWidth,
@@ -46,15 +58,15 @@ export const styles = StyleSheet.create({
     },
     imageCap: {
         flex: 1,
-        width: dimensions.fullWidth,
-        height: dimensions.fullHeight,
+        width: '100%',
+        height: '100%',
         alignItems: 'center',
         borderRadius: 20,
-        resizeMode: 'contain',
-        backgroundColor: colors.Black
+        resizeMode: 'stretch',
+        backgroundColor: colors.Black,
     },
     bottomBar: {
-        height: responsiveHeight(150),
+        height: responsiveHeight(241),
         flexDirection: 'row',
         justifyContent: 'space-between',
         width: dimensions.fullWidth,
@@ -78,5 +90,10 @@ export const styles = StyleSheet.create({
     },
     absolute: {
         position: 'absolute',
+    },
+    loader: {
+        ...StyleSheet.absoluteFillObject,
+        justifyContent: 'center',
+        alignItems: 'center',
     }
 });
