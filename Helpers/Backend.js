@@ -76,7 +76,7 @@ class Backend {
 
     // handling the error of undefined
     static handleUndefined(response) {
-        if(!response){
+        if (!response) {
             return {
                 status: 500,
                 data: translate('messages.undefined')
@@ -249,6 +249,33 @@ class Backend {
         }
     }
 
+    static async DELETE(url) {
+        try {
+            return axios.delete(this.HOST_URL + url, {
+                headers: await this.getHeaders(),
+            }).then(response => {
+                response = this.handleUndefined(response);
+                return {
+                    statusCode: response.status,
+                    data: response.data
+                }
+            }).catch(error => {
+                error = error.response;
+                error = this.handleUndefined(error);
+                return {
+                    statusCode: error.status,
+                    data: error.data
+                }
+            });
+        } catch (error) {
+            console.log('DELETE error', error);
+            return {
+                statusCode: 500,
+                data: error
+            }
+        }
+    }
+
     // tokens
 
     static async getToken() {
@@ -325,21 +352,6 @@ class Backend {
         }
     }
 
-    static getFavArticles() {
-        let Article = {
-            Title: "Anubis",
-            Description: "Know more about Anubis and his powers.",
-            Date: "15 Jan 2023",
-            Img: require('../assets/ImagesToDelete/monument.png'),
-            fullDescription: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`
-        };
-        var articles = Array(10).fill(Article);
-        for (let i = 0; i < 10; i++) {
-            articles[i].id = i;
-        }
-        return articles;
-    }
-
     static getFavMonuments() {
         let Monument = {
             ID: 1,
@@ -354,14 +366,6 @@ class Backend {
             monuments[i].id = i;
         }
         return monuments;
-    }
-
-    static removeFavArticle(ArticleID) {
-        // To Do
-    }
-
-    static removeFavMonument(MonumentID) {
-        // To Do
     }
 
     // user info and updates
@@ -708,6 +712,104 @@ class Backend {
         }
     }
 
+    // favourites
+
+    static async isFavArticle(article_id) {
+        try {
+            const url = 'favorites/is-favorite/';
+            const body = {
+                article_id: article_id,
+            }
+            return await this.POST(url, body).then(response => response);
+        } catch (error) {
+            return {
+                statusCode: 500,
+                data: error
+            }
+        }
+    }
+
+    static async isFavMonument(monument_id) {
+        try {
+            const url = 'favorites/is-favorite/';
+            const body = {
+                monument_id: monument_id,
+            }
+            return await this.POST(url, body).then(response => response);
+        } catch (error) {
+            return {
+                statusCode: 500,
+                data: error
+            }
+        }
+    }
+
+    static async addFavArticle(id) {
+        try {
+            const url = 'favorites/article/add/';
+            const body = {
+                id: id,
+            }
+            return await this.POST(url, body).then(response => response);
+        } catch (error) {
+            return {
+                statusCode: 500,
+                data: error
+            }
+        }
+    }
+
+    static async addFavMonument(id) {
+        try {
+            const url = 'favorites/monument/add/';
+            const body = {
+                id: id,
+            }
+            return await this.POST(url, body).then(response => response);
+        } catch (error) {
+            return {
+                statusCode: 500,
+                data: error
+            }
+        }
+    }
+
+    static async removeFavArticle(id) {
+        try {
+            const url = `favorites/article/delete/${id}/`;
+            return await this.DELETE(url).then(response => response);
+        } catch (error) {
+            return {
+                statusCode: 500,
+                data: error
+            }
+        }
+    }
+
+    static async removeFavMonument(id) {
+        try {
+            const url = `favorites/monument/delete/${id}/`;
+            return await this.DELETE(url).then(response => response);
+        } catch (error) {
+            return {
+                statusCode: 500,
+                data: error
+            }
+        }
+    }
+
+    static async getFavourites(pageNumber){
+        try {
+            const url = `favorites/?page=${pageNumber}`;
+            return await this.GET(url).then(response => response);
+        } catch (error) {
+            return {
+                statusCode: 500,
+                data: error
+            }
+        }
+    }
+
     // Monument detection
 
     static async detectMonumentsFromImageURL(image_url) {
@@ -723,6 +825,7 @@ class Backend {
     }
 
     // contact us
+
     static async sendContactUsEmail(full_name, email, subject, message) {
         try {
             const contactUrl = 'contact-us/message/';
@@ -844,6 +947,28 @@ class Backend {
         return { state: true, message: '' };
     }
 
+    static async getArticleFromFavourits(favourites){
+        let favArticlesResponse = [];
+        favourites.forEach((obj) => {
+            if (obj.article)
+                favArticlesResponse.push(obj.article)
+        });
+        return favArticlesResponse;
+    }
+
+    static async getMonumentFromFavourits(favourites){
+        let favMonumentsResponse = [];
+        favourites.forEach((obj) => {
+            if (obj.monument)
+                favMonumentsResponse.push(obj.monument)
+        });
+        return favMonumentsResponse;
+    }
+
+    static isDetectFailure(detection){
+        const fail = 'No monuments detected';
+        return detection === fail;
+    }
 }
 
 export default Backend;

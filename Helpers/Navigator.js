@@ -136,3 +136,12 @@ export function goPageResetStack(nextPage, params) {
     else
         setStatusBarStyle('light');
 }
+
+// refresh the current page
+export function refreshPage() {
+    navigationRef?.dispatch(
+        CommonActions.setParams({
+            refresh: true,
+        })
+    );
+}

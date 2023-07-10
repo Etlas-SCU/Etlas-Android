@@ -1,6 +1,7 @@
 import { StyleSheet, Dimensions, PixelRatio, Platform } from "react-native";
 import * as Device from 'expo-device';
 
+
 // styles in app.js
 export const styles = StyleSheet.create({
     container: {
@@ -170,6 +171,9 @@ export const fontWeight = {
 
 // convert date
 export const formatDate = (inputDate) => {
+    // get first part of timestamp
+    inputDate = inputDate.split('T')[0];
+
     // Split the input date string into year, month, and day
     const [year, month, day] = inputDate.split('-');
 
@@ -193,8 +197,11 @@ export const formatDate = (inputDate) => {
     return formattedDate;
 }
 
+// format historic date
+export const formatHistoricDate = (country, date) => {
+    const formatDate = `${date} | ${country}`;
+    return formatDate;
+}
+
 // placeholder
 export const placeholder = require('./assets/Images/placeholder.png');
-
-// placeholder blur
-export const placeholderBlur = '|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[';

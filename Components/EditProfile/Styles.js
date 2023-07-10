@@ -55,12 +55,19 @@ export const styles = StyleSheet.create({
         paddingLeft: responsiveWidth(24),
         fontSize: responsiveFontSize(20),
         fontFamily: fontFamily.MontserratSemiBold,
+        overflow: 'hidden',
+        textAlign: 'left',
+        paddingRight: responsiveWidth(50)
     },
     editable:{
         color: colors.White
     },
     uneditable:{
         color: colors.Grey
+    },
+    focus: {
+        borderWidth: 4,
+        borderColor: colors.LightSeaGreen,
     },
     inputContainer: {
         gap: responsiveHeight(13)

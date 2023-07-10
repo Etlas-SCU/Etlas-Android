@@ -1,18 +1,28 @@
 import { useState, useEffect, useContext, useRef } from 'react';
-import { View, ScrollView, Text, Image, TouchableOpacity, AppState } from 'react-native';
+import { View, ScrollView, Text, TouchableOpacity, AppState } from 'react-native';
 import { styles } from './Styles';
 import * as Speech from 'expo-speech';
 import { goBack } from '../../Helpers/Navigator';
-import Loader from '../Loader/Loader';
 import { UserContext } from '../Context/Context';
 import { isIOS } from '../../AppStyles';
 import Backend from '../../Helpers/Backend';
 import { useIsFocused } from '@react-navigation/native';
 import SvgMaker from '../SvgMaker/SvgMaker';
 import { CloseIcon, FilledHeartIcon, NonFilledHeartIcon, PauseIcon, StopIcon, PlayIcon, SoundIcon } from '../../assets/SVG/Icons';
+import { FavMonumentsContext } from '../Context/FavMonumentsContext';
+import PopupMessage from '../PopupMessage/PopupMessage';
+import { Image } from 'expo-image';
+import { formatHistoricDate } from '../../AppStyles';
+import ModelViewer from '../ModelViewer/ModelViewer';
 
 
 export default function MonumentDetails({ }) {
+    // add and remove element from fav monuments
+    const { addFavMonument, removeFavMonument } = useContext(FavMonumentsContext);
+
+    // get the icons of heart
+    const [isFav, setIsFav] = useState(false);
+    const [isButtonPressed, setIsButtonPressed] = useState(false);
 
     // get the app state
     const appState = useRef(AppState.currentState);
@@ -23,10 +33,14 @@ export default function MonumentDetails({ }) {
 
     // get the data from the route
     const Monument = Backend.getMonument();
-    const { Title, HistoricDate, Img, fullDescription } = Monument;
-    const { loaderVisible, showLoader, hideLoader } = useContext(UserContext);
+
+    // for popup message
+    const { popupMessageVisible, showPopupMessage } = useContext(UserContext);
+
+    // get the voices and speech
     const [speechState, setSpeechState] = useState('end');
     const [speechIcon, setSpeechIcon] = useState('sound');
+    const { name: Title, location: HistoricCounty, description: fullDescription, id: ID, three_d_model: Model, image_url: Img, date: HistoricDate } = Monument;
 
     // get the icons of heart
     const fav = FilledHeartIcon;
@@ -37,9 +51,6 @@ export default function MonumentDetails({ }) {
     const pause = PauseIcon;
     const resume = PlayIcon;
     const stop = StopIcon;
-
-    // get the icons of heart
-    const [isFav, setIsFav] = useState(false);
 
     // change the icon of heart
     const toggleFav = () => {
@@ -56,12 +67,11 @@ export default function MonumentDetails({ }) {
 
     // get the voices
     useEffect(() => {
-        showLoader();
         async function getVoices() {
             await Speech.getAvailableVoicesAsync().then(Voices => {
                 filterVoices('en', Voices).then(voices => {
                     setVoices(voices);
-                }).then(hideLoader(), setSpeechIcon('sound'), setSpeechState('end'), Stop());
+                }).then(setSpeechIcon('sound'), setSpeechState('end'), Stop());
             });
         }
         getVoices();
@@ -88,6 +98,11 @@ export default function MonumentDetails({ }) {
             StopSound();
         }
     }, [isFocused]);
+
+    // check if the page loaded
+    useEffect(() => {
+        isFavourite();
+    }, [Monument]);
 
 
     // read the description
@@ -175,9 +190,79 @@ export default function MonumentDetails({ }) {
         }
     }
 
+    // check if the currrent momuent is favourite or not
+    const isFavourite = async () => {
+        try {
+            const { statusCode, data } = await Backend.isFavMonument(ID);
+            if (!Backend.isSuccessfulRequest(statusCode)) {
+                const errorMessage = await Backend.getErrorMessage(data);
+                showPopupMessage('Error', errorMessage);
+                return false;
+            }
+            setIsFav(data.is_favorite);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    // add the current monument to favourite
+    const addToFavourites = async () => {
+        try {
+            setIsButtonPressed(true);
+            setIsFav(true);
+            const { statusCode, data } = await Backend.addFavMonument(ID);
+            setIsButtonPressed(false);
+            if (!Backend.isSuccessfulRequest(statusCode)) {
+                const errorMessage = await Backend.getErrorMessage(data);
+                showPopupMessage('Error', errorMessage);
+                setIsFav(false);
+                return false;
+            }
+            addFavMonument(Monument);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    // remove favourite
+    const removeFromFavourites = async () => {
+        try {
+            setIsButtonPressed(true);
+            setIsFav(false);
+            const { statusCode, data } = await Backend.removeFavMonument(ID);
+            setIsButtonPressed(false);
+            if (!Backend.isSuccessfulRequest(statusCode)) {
+                const errorMessage = await Backend.getErrorMessage(data);
+                showPopupMessage('Error', errorMessage);
+                setIsFav(true);
+                return false;
+            }
+            removeFavMonument(Monument);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    // handle pressed
+    const handlePressed = () => {
+        if (isButtonPressed) return;
+        if (isFav) removeFromFavourites();
+        else addToFavourites();
+    }
+
+    // handle scroll to top of scroll view
+    const scrollViewRef = useRef(null);
+
+    // on the pages loading
+    useEffect(() => {
+        if (scrollViewRef.current) {
+            scrollViewRef.current.scrollTo({ y: 0, animated: true });
+        }
+    }, [Monument]);
+
     return (
         <View style={styles.container}>
-            {loaderVisible ? <Loader message={'Please Wait while get Monument Details and voices'} /> : null}
+            {popupMessageVisible ? <PopupMessage /> : null}
             <View style={styles.UpperBox}>
                 <TouchableOpacity
                     onPress={goBack}
@@ -185,17 +270,26 @@ export default function MonumentDetails({ }) {
                 >
                     <SvgMaker Svg={CloseIcon} style={styles.arrow} />
                 </TouchableOpacity>
-                <Image source={Img} style={styles.image} />
+                <Image
+                    source={Img}
+                    style={styles.image}
+                    priority={'high'}
+                    contentFit='fill'
+                    cachePolicy={'memory-disk'}
+                />
                 <View style={styles.TitleConainer}>
                     <Text style={styles.title}>{Title}</Text>
-                    <Text style={styles.description}>{HistoricDate}</Text>
+                    <Text style={styles.description}>{formatHistoricDate(HistoricCounty, HistoricDate)}</Text>
                 </View>
             </View>
             <View style={styles.LowerBox}>
                 <View style={styles.line} />
                 <View style={styles.iconConainer}>
                     <View style={styles.FavContainer}>
-                        <TouchableOpacity onPress={() => { toggleFav() }}>
+                        <TouchableOpacity
+                            onPress={handlePressed}
+                            disabled={isButtonPressed}
+                        >
                             <SvgMaker Svg={isFav ? fav : notFav} style={styles.icon} />
                         </TouchableOpacity>
                     </View>
@@ -208,6 +302,7 @@ export default function MonumentDetails({ }) {
                 <ScrollView
                     contentContainerStyle={styles.scrollContainer}
                     showsVerticalScrollIndicator={false}
+                    ref={scrollViewRef}
                 >
                     <Text style={styles.fulldescription}>{fullDescription}</Text>
                 </ScrollView>

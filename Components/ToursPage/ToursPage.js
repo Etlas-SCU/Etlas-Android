@@ -90,7 +90,7 @@ export default function ToursPage({ }) {
         try {
             const { statusCode, data } = await Backend.getTours(toursPage);
             if (Backend.isSuccessfulRequest(statusCode)) {
-                updateTours(data);
+                updateTours(data.results);
                 updateToursPage(toursPage + 1);
             }
         } catch (error) {
@@ -139,6 +139,7 @@ export default function ToursPage({ }) {
                 style={styles.Box}
                 onEndReached={getTours}
                 onEndReachedThreshold={0.5}
+                initialNumToRender={5}
             />
         </View>
     );

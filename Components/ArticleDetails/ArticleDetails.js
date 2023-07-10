@@ -1,13 +1,15 @@
 import { View, Text, ScrollView, TouchableOpacity } from "react-native";
 import { Image } from 'expo-image';
 import { styles } from "./Styles";
-import { useState } from "react";
-import { goBack, getCurrentScreenParam } from "../../Helpers/Navigator";
+import { useState, useContext, useEffect, useRef } from "react";
+import { goBack } from "../../Helpers/Navigator";
 import Backend from "../../Helpers/Backend";
 import SvgMaker from "../SvgMaker/SvgMaker";
 import { LeftArrow, NonFilledHeartIcon, FilledHeartIcon } from "../../assets/SVG/Icons";
-import { formatDate } from '../../AppStyles';
-import { placeholder } from "../../AppStyles";
+import { formatDate, placeholder } from '../../AppStyles';
+import PopupMessage from "../PopupMessage/PopupMessage";
+import { UserContext } from "../Context/Context";
+import { FavArticlesContext } from "../Context/FavArticlesContext";
 
 
 const Section = ({ section }) => {
@@ -22,12 +24,14 @@ const Section = ({ section }) => {
 
 export default function ArticleDetails({ }) {
 
-    // get the previous page
-    const { prevPage } = getCurrentScreenParam();
+    // refrence of the scrollview
+    const scrollViewRef = useRef();
 
-    // get the parameters needed
-    const Article = (prevPage !== 'favourites' ? Backend.getArticle() : Backend.getFavArticle());
-    const { article_title: Title, date: Date, image_url: Img, sections: Sections } = Article;
+    // get popup functions and states
+    const { popupMessageVisible, showPopupMessage } = useContext(UserContext);
+
+    // get fav articles
+    const { addFavArticle, removeFavArticle } = useContext(FavArticlesContext);
 
     // get the icons of heart
     const fav = FilledHeartIcon;
@@ -35,10 +39,74 @@ export default function ArticleDetails({ }) {
 
     // get the icons of heart
     const [isFav, setIsFav] = useState(false);
+    const [isButtonPressed, setIsButtonPressed] = useState(false);
 
-    // change the icon of heart
-    const toggleFav = () => {
-        setIsFav(!isFav);
+    // get the parameters needed
+    const Article = Backend.getArticle();
+    const { id: ID, article_title: Title, date: Date, image_url: Img, sections: Sections } = Article;
+
+    // getting is the current article favourite or not
+    const isFavourite = async () => {
+        try {
+            setIsButtonPressed(true);
+            const { statusCode, data } = await Backend.isFavArticle(ID);
+            setIsButtonPressed(false);
+            if (!Backend.isSuccessfulRequest(statusCode)) {
+                const errorMessage = await Backend.getErrorMessage(data).then(response => response);
+                showPopupMessage('Error', errorMessage);
+                return false;
+            }
+            setIsFav(data.is_favorite);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    // add the current article to favourites
+    const addToFavourites = async () => {
+        try {
+            setIsButtonPressed(true);
+            setIsFav(true);
+            const { statusCode, data } = await Backend.addFavArticle(ID);
+            setIsButtonPressed(false);
+            if (!Backend.isSuccessfulRequest(statusCode)) {
+                const errorMessage = await Backend.getErrorMessage(data).then(response => response);
+                showPopupMessage('Error', errorMessage);
+                setIsFav(false);
+                return false;
+            }
+
+            // add the current Article to favArticles
+            addFavArticle(Article);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    // remove the current article from favourites
+    const removeFromFavourites = async () => {
+        try {
+            setIsButtonPressed(true);
+            setIsFav(false);
+            const { statusCode, data } = await Backend.removeFavArticle(ID);
+            setIsButtonPressed(false);
+            if (!Backend.isSuccessfulRequest(statusCode)) {
+                const errorMessage = await Backend.getErrorMessage(data).then(response => response);
+                showPopupMessage('Error', errorMessage);
+                setIsFav(true);
+                return false;
+            }
+            removeFavArticle(Article);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    // add or remove the current article from favourites
+    const addOrRemoveFromFavourites = () => {
+        if (isButtonPressed) return;
+        if (isFav) removeFromFavourites();
+        else addToFavourites();
     }
 
     // get the full description
@@ -49,8 +117,18 @@ export default function ArticleDetails({ }) {
     // check if the image is loaded
     const [isImgLoaded, setIsImgLoaded] = useState(false);
 
+    // check if the current article is favourite or not
+    useEffect(() => {
+        isFavourite();
+        scrollViewRef.current?.scrollTo({
+            y: 0,
+            animated: true,
+        });
+    }, [Article]);
+
     return (
         <View style={styles.container}>
+            {popupMessageVisible ? <PopupMessage /> : null}
             <TouchableOpacity
                 style={styles.backContainer}
                 onPress={goBack}
@@ -73,13 +151,17 @@ export default function ArticleDetails({ }) {
                     </View>
                     <View style={styles.favouriteConainer}>
                         <View style={styles.fav}>
-                            <TouchableOpacity onPress={toggleFav}>
+                            <TouchableOpacity onPress={addOrRemoveFromFavourites} disabled={isButtonPressed}>
                                 <SvgMaker Svg={isFav ? fav : notFav} style={styles.favIcon} />
                             </TouchableOpacity>
                         </View>
                     </View>
                 </View>
-                <ScrollView contentContainerStyle={styles.scrollView} showsVerticalScrollIndicator={false}>
+                <ScrollView
+                    contentContainerStyle={styles.scrollView}
+                    showsVerticalScrollIndicator={false}
+                    ref={scrollViewRef}
+                >
                     {fullDescription}
                 </ScrollView>
             </View>

@@ -1,5 +1,5 @@
 import { styles } from "./Styles";
-import { View, Text, Image, TouchableOpacity, ScrollView, TextInput } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView, TextInput } from "react-native";
 import { translate } from "../../Localization";
 import { colors } from "../../AppStyles";
 import { useState, useContext } from "react";
@@ -10,9 +10,12 @@ import PopupMessage from "../PopupMessage/PopupMessage";
 import { UserContext } from "../Context/Context";
 import SvgMaker from '../../Components/SvgMaker/SvgMaker';
 import { LeftArrow, EyeIcon } from "../../assets/SVG/Icons";
+import { useSafeAreaInsets, SafeAreaView } from 'react-native-safe-area-context';
 
 
 export default function ForgotPasswordThird({ }) {
+    // get insets of safe area
+    const insets = useSafeAreaInsets();
 
     // for password
     const [password, setPassword] = useState('');
@@ -87,10 +90,10 @@ export default function ForgotPasswordThird({ }) {
     }
 
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             {loaderVisible ? <Loader /> : null}
             {popupMessageVisible ? <PopupMessage /> : null}
-            <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
+            <ScrollView contentContainerStyle={[styles.contentContainer, { marginTop: -insets.top }]} showsVerticalScrollIndicator={false}>
                 <View style={styles.header_container}>
                     <Text style={styles.header}>{translate('forgotPassword.title')}</Text>
                     <TouchableOpacity style={styles.backContainer} onPress={goBack}>
@@ -140,6 +143,6 @@ export default function ForgotPasswordThird({ }) {
                     <Text style={styles.buttonText}>{translate('forgotPassword.finish')}</Text>
                 </TouchableOpacity>
             </ScrollView>
-        </View>
+        </SafeAreaView>
     );
 }

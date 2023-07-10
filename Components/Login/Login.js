@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity, TextInput, ScrollView } from "react-native";
+import { View, Text, TouchableOpacity, TextInput, ScrollView } from "react-native";
 import { styles } from './Styles';
 import { colors } from "../../AppStyles";
 import { translate } from '../../Localization'
@@ -13,6 +13,7 @@ import PopupMessage from "../PopupMessage/PopupMessage";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import SvgMaker from '../../Components/SvgMaker/SvgMaker';
 import { LeftArrow, EyeIcon } from "../../assets/SVG/Icons";
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 
 export default function Login({ }) {
@@ -91,12 +92,14 @@ export default function Login({ }) {
         login_fetch();
     };
 
+    // get insets area
+    const insets = useSafeAreaInsets();
 
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container} >
             {popupMessageVisible ? <PopupMessage /> : null}
             {loaderVisible ? <Loader /> : null}
-            <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
+            <ScrollView contentContainerStyle={[styles.contentContainer, { marginTop: -insets.top }]} showsVerticalScrollIndicator={false}>
                 <View style={styles.header_container}>
                     <Text style={styles.header}>{translate('Login.title')}</Text>
                     <TouchableOpacity style={styles.backContainer} onPress={goBack}>
@@ -113,6 +116,9 @@ export default function Login({ }) {
                         placeholderTextColor={colors.Grey}
                         onChangeText={(email) => setEmail(email)}
                         cursorColor={colors.LightSeaGreen}
+                        inputMode={'email'}
+                        keyboardType={'email-address'}
+                        importantForAutofill={'no'}
                     />
                 </View>
                 <View style={styles.inputView}>
@@ -125,6 +131,7 @@ export default function Login({ }) {
                             onChangeText={(password) => setPassword(password)}
                             secureTextEntry={!hidden}
                             cursorColor={colors.LightSeaGreen}
+                            importantForAutofill={'no'}
                         />
                         <TouchableOpacity style={styles.passwordEyeButton} onPress={() => setHidden(!hidden)}>
                             <SvgMaker style={styles.passwordContainerImage} Svg={EyeIcon} />
@@ -154,6 +161,6 @@ export default function Login({ }) {
                     </TouchableOpacity>
                 </View>
             </ScrollView>
-        </View>
+        </SafeAreaView>
     );
 }

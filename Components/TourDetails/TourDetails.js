@@ -3,12 +3,14 @@ import { Image } from 'expo-image';
 import { styles } from "./Styles";
 import Swiper from 'react-native-swiper'
 import { colors } from "../../AppStyles";
-import { goBack } from "../../Helpers/Navigator";
+import { goBack, refreshPage } from "../../Helpers/Navigator";
 import Backend from "../../Helpers/Backend";
 import SvgMaker from "../SvgMaker/SvgMaker";
 import { InvLeftArrowIcon } from "../../assets/SVG/Icons";
 import { placeholder } from "../../AppStyles";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import { responsiveWidth } from "../../AppStyles";
+import Stars from "../ToursCard/Stars";
 
 
 const Section = ({ section }) => {
@@ -24,7 +26,9 @@ const Section = ({ section }) => {
 export default function TourDetails({ }) {
     // get the parameters needed
     const Tour = Backend.getTour();
-    const { title: Title, sections: Sections, images: ImagesUrl } = Tour;
+    const { title: Title, sections: Sections, images: ImagesUrl, rating: Rate } = Tour;
+    const scrollViewRef = useRef();
+    const swiperRef = useRef();
 
 
     const images = ImagesUrl.map((item, idx) => {
@@ -48,6 +52,18 @@ export default function TourDetails({ }) {
         return <Section section={section} key={section.id} />
     });
 
+    // update the page depend on the Tour
+    useEffect(() => {
+        scrollViewRef.current?.scrollTo({
+            y: 0,
+            animated: true,
+        });
+        swiperRef.current?.scrollTo({
+            index: 0,
+            animated: true,
+        });
+    }, [Tour]);
+
 
     return (
         <View style={styles.container}>
@@ -58,6 +74,8 @@ export default function TourDetails({ }) {
                 <SvgMaker Svg={InvLeftArrowIcon} style={styles.back} />
             </TouchableOpacity>
             <Swiper
+                ref={swiperRef}
+                index={0}
                 showsButtons={false}
                 loop={true}
                 autoplay={true}
@@ -77,8 +95,15 @@ export default function TourDetails({ }) {
             <View style={styles.container}>
                 <View style={styles.header}>
                     <Text style={styles.title}>{Title}</Text>
+                    <View style={styles.stars}>
+                        <Stars rate={Rate} size={responsiveWidth(20)} isPage={false} />
+                    </View>
                 </View>
-                <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.ScrollContainer}>
+                <ScrollView
+                    showsVerticalScrollIndicator={false}
+                    contentContainerStyle={styles.ScrollContainer}
+                    ref={scrollViewRef}
+                >
                     {fullDescription}
                 </ScrollView>
             </View>

@@ -1,19 +1,22 @@
 import { styles } from "./Styles";
-import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { translate } from "../../Localization";
 import OTPTextInput from 'react-native-otp-textinput'
 import { colors } from "../../AppStyles";
 import { useContext, useRef, useState } from "react";
 import PopupMessage from "../PopupMessage/PopupMessage";
 import { UserContext } from "../Context/Context";
-import { goBack, goPage, getParams } from "../../Helpers/Navigator";
+import { goBack, goPage } from "../../Helpers/Navigator";
 import Backend from "../../Helpers/Backend";
 import Loader from "../Loader/Loader";
 import SvgMaker from '../../Components/SvgMaker/SvgMaker';
 import { LeftArrow } from "../../assets/SVG/Icons";
+import { useSafeAreaInsets, SafeAreaView } from 'react-native-safe-area-context';
 
 
 export default function ForgotPasswordSecond({ }) {
+    // get insets of safe area
+    const insets = useSafeAreaInsets();
 
     const [OTP, setOTP] = useState('');
     const otpInput = useRef(null);
@@ -78,10 +81,10 @@ export default function ForgotPasswordSecond({ }) {
 
 
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             {popupMessageVisible ? <PopupMessage /> : null}
             {loaderVisible ? <Loader /> : null}
-            <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
+            <ScrollView contentContainerStyle={[styles.contentContainer, { marginTop: -insets.top }]} showsVerticalScrollIndicator={false}>
                 <View style={styles.header_container}>
                     <Text style={styles.header}>{translate('forgotPassword.title')}</Text>
                     <TouchableOpacity style={styles.backContainer} onPress={goBack}>
@@ -112,6 +115,6 @@ export default function ForgotPasswordSecond({ }) {
                     <Text style={styles.buttonText}>{translate('forgotPassword.next')}</Text>
                 </TouchableOpacity>
             </ScrollView>
-        </View>
+        </SafeAreaView>
     );
 }

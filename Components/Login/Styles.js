@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
 import { fontFamily, colors, responsiveFontSize, responsiveHeight, responsiveWidth } from "../../AppStyles";
 
+
 export const styles = StyleSheet.create({
     // first Page
     container: {
@@ -23,7 +24,7 @@ export const styles = StyleSheet.create({
     header_container: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginTop: responsiveHeight(80),
+        marginTop: responsiveHeight(80 ),
         marginHorizontal: responsiveWidth(24),
     },
     header: {
@@ -63,7 +64,7 @@ export const styles = StyleSheet.create({
         backgroundColor: colors.White,
         borderRadius: 20,
         height: responsiveHeight(58),
-        paddingLeft: responsiveWidth(23.5),
+        paddingHorizontal: responsiveWidth(23.5),
         textAlign: 'left'
     },
     passwordContainer: {

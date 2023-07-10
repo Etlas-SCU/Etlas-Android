@@ -122,6 +122,8 @@ export default function ContactUS({ }) {
                                 placeholderTextColor={colors.Grey}
                                 onChangeText={(fullName) => setFullName(fullName)}
                                 ref={fullNameRef}
+                                importantForAutofill={'no'}
+                                autoCapitalize={'words'}
                             />
                         </View>
                         <View style={styles.inputContainer}>
@@ -132,6 +134,9 @@ export default function ContactUS({ }) {
                                 placeholder={translate('ContactUs.email')}
                                 onChangeText={(email) => setEmail(email)}
                                 ref={emailRef}
+                                importantForAutofill={'no'}
+                                inputMode={'email'}
+                                keyboardType={'email-address'}
                             />
                         </View>
                         <View style={styles.inputContainer}>
@@ -142,6 +147,7 @@ export default function ContactUS({ }) {
                                 placeholder={translate('ContactUs.subject_input')}
                                 onChangeText={(subject) => setSubject(subject)}
                                 ref={subjectRef}
+                                importantForAutofill={'no'}
                             />
                         </View>
                         <View style={styles.inputContainer}>
@@ -153,6 +159,7 @@ export default function ContactUS({ }) {
                                 placeholder={translate('ContactUs.message')}
                                 onChangeText={(message) => setMessage(message)}
                                 ref={messageRef}
+                                importantForAutofill={'no'}
                             />
                         </View>
                         <TouchableOpacity

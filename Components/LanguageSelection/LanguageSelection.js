@@ -6,9 +6,12 @@ import { goBack } from "../../Helpers/Navigator";
 import { changeLanguage } from "../../Localization";
 import SvgMaker from '../../Components/SvgMaker/SvgMaker';
 import { InvLeftArrowIcon, CheckIcon } from "../../assets/SVG/Icons";
+import { useSafeAreaInsets, SafeAreaView } from 'react-native-safe-area-context';
 
 
 export default function LanguageSelection({ }) {
+    // gettings insets of safe area
+    const insets = useSafeAreaInsets();
 
     // state for the selected language
     const [selected, setSelected] = useState('en');
@@ -62,8 +65,11 @@ export default function LanguageSelection({ }) {
 
     // if the font loaded, return the text
     return (
-        <View style={styles.container}>
-            <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.contentContainer}>
+        <SafeAreaView style={styles.container}>
+            <ScrollView
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={[styles.contentContainer, { marginTop: -insets.top }]}
+            >
                 <View style={styles.header}>
                     <Text style={styles.title}>{translate('LanguageSelection.title')}</Text>
                     <TouchableOpacity
@@ -78,6 +84,6 @@ export default function LanguageSelection({ }) {
                     {buttons}
                 </View>
             </ScrollView>
-        </View>
+        </SafeAreaView>
     );
 }

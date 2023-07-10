@@ -19,9 +19,12 @@ import { UserDataContext } from "../Context/DataContext";
 import { manipulateAsync } from 'expo-image-manipulator';
 import SvgMaker from "../SvgMaker/SvgMaker";
 import { InvertedMenuIcon, BestScoreIcon, LogoutIcon, FavHeartIcon, WorldIcon, InvRightArrowIcon, AvatarIcon } from "../../assets/SVG/Icons";
+import { useSafeAreaInsets, SafeAreaView } from "react-native-safe-area-context";
 
 
 export default function Settings({ }) {
+    // using safe area 
+    const insets = useSafeAreaInsets();
 
     // default avatar
     const defaultAvatar = AvatarIcon;
@@ -150,42 +153,45 @@ export default function Settings({ }) {
     const profileImage = userData.image_url ? { uri: userData.image_url } : defaultAvatar;
 
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             {isIOS() ? <MainMenu /> : null}
             {popupMessageVisible ? <PopupMessage /> : null}
             {loaderVisible ? <Loader /> : null}
-            <View style={styles.header}>
-                <TouchableOpacity onPress={() => { showModal(), setScreen('Settings') }} >
-                    <SvgMaker Svg={InvertedMenuIcon} style={styles.circle} />
-                </TouchableOpacity>
-                <Text style={styles.title}>{translate('Settings.title')}</Text>
-                <TouchableOpacity
-                    onPress={() => { handle_logout() }}
-                    disabled={pressed}
-                >
-                    <SvgMaker Svg={LogoutIcon} />
-                </TouchableOpacity>
-
-            </View>
-            <View style={styles.avatarBox}>
-                <TouchableOpacity onPress={() => { pickImage() }}>
-                    <Avatar
-                        image={profileImage}
-                        imageStyle={styles.profilePic}
-                        style={styles.profile}
-                        size={responsiveHeight(128)}
-                        initials={true}
-                    />
-                </TouchableOpacity>
-                <Text style={styles.name}>{name}</Text>
-            </View>
-            <TouchableOpacity
-                style={styles.buttonEdit}
-                onPress={() => { goPage('editProfile', 'Settings') }}
+            <ScrollView
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={[styles.scrollContainer, { marginTop: -insets.top }]}
             >
-                <Text style={styles.buttonText}>{translate('Settings.edit')}</Text>
-            </TouchableOpacity>
-            <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContainer}>
+                <View style={styles.header}>
+                    <TouchableOpacity onPress={() => { showModal(), setScreen('Settings') }} >
+                        <SvgMaker Svg={InvertedMenuIcon} style={styles.circle} />
+                    </TouchableOpacity>
+                    <Text style={styles.title}>{translate('Settings.title')}</Text>
+                    <TouchableOpacity
+                        onPress={() => { handle_logout() }}
+                        disabled={pressed}
+                    >
+                        <SvgMaker Svg={LogoutIcon} />
+                    </TouchableOpacity>
+
+                </View>
+                <View style={styles.avatarBox}>
+                    <TouchableOpacity onPress={() => { pickImage() }}>
+                        <Avatar
+                            image={profileImage}
+                            imageStyle={styles.profilePic}
+                            style={styles.profile}
+                            size={responsiveHeight(128)}
+                            initials={true}
+                        />
+                    </TouchableOpacity>
+                    <Text style={styles.name}>{name}</Text>
+                </View>
+                <TouchableOpacity
+                    style={styles.buttonEdit}
+                    onPress={() => { goPage('editProfile', 'Settings') }}
+                >
+                    <Text style={styles.buttonText}>{translate('Settings.edit')}</Text>
+                </TouchableOpacity>
                 <View style={styles.Box}>
                     <View style={styles.Bar}>
                         <Text style={styles.BarText}>{translate('Settings.content')}</Text>
@@ -221,7 +227,7 @@ export default function Settings({ }) {
                     </TouchableOpacity>
                 </View>
             </ScrollView>
-        </View>
+        </SafeAreaView>
     )
 
 }

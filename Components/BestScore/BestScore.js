@@ -1,6 +1,6 @@
 import { styles } from './Styles'
 import { translate } from "../../Localization";
-import { View, Text, ImageBackground, TouchableOpacity, ScrollView, Image } from 'react-native';
+import { View, Text, ImageBackground, TouchableOpacity, ScrollView } from 'react-native';
 import Backend from '../../Helpers/Backend';
 import { goBack, goPage } from '../../Helpers/Navigator';
 import { useEffect, useState, useContext } from 'react';
@@ -9,9 +9,12 @@ import Loader from '../Loader/Loader';
 import PopupMessage from '../PopupMessage/PopupMessage';
 import SvgMaker from '../SvgMaker/SvgMaker';
 import { InvLeftArrowIcon } from '../../assets/SVG/Icons';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 
 export default function BestScore({ }) {
+    // get insets of safe area
+    const insets = useSafeAreaInsets()
 
     // get the bestScore from Backend
     const [bestScore, setBestScore] = useState(0);
@@ -45,11 +48,14 @@ export default function BestScore({ }) {
     }, []);
 
     return (
-        <View style={styles.container}>
-            {loaderVisible ? <Loader /> : null}
-            {popupMessageVisible ? <PopupMessage /> : null}
-            <ImageBackground source={require('../../assets/Backgrounds/HighScore.png')} resizeMode='cover' style={styles.image}>
-                <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
+        <ImageBackground source={require('../../assets/Backgrounds/HighScore.png')} resizeMode='cover' style={styles.image}>
+            <SafeAreaView style={styles.container}>
+                {loaderVisible ? <Loader /> : null}
+                {popupMessageVisible ? <PopupMessage /> : null}
+                <ScrollView
+                    contentContainerStyle={[styles.contentContainer, { marginTop: -insets.top }]}
+                    showsVerticalScrollIndicator={false}
+                >
                     <View style={styles.header}>
                         <Text style={styles.title}>{translate('BestScore.title')}</Text>
                         <TouchableOpacity
@@ -72,7 +78,7 @@ export default function BestScore({ }) {
                         </TouchableOpacity>
                     </View>
                 </ScrollView>
-            </ImageBackground>
-        </View>
+            </SafeAreaView>
+        </ImageBackground>
     );
 }

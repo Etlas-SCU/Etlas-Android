@@ -108,7 +108,7 @@ export default function CameraScreen({ }) {
     // Take a picture with the camera and set the image state variable to the picture URI
     const takePicture = async () => {
         if (cameraRef) {
-            if(hasCameraPermission === false){
+            if (hasCameraPermission === false) {
                 showPopupMessage('Error', translate('Scan.ErrorAcces'));
                 return;
             }
@@ -159,10 +159,11 @@ export default function CameraScreen({ }) {
                 hideLoader();
 
                 // check if the image detected
-                if (data.status === "No monuments detected") {
-                    showPopupMessage('Error', data.status);
+                if (Backend.isDetectFailure(data.Detection)) {
+                    showPopupMessage('Error', data.Detection);
                 } else {
-                    showPopupMessage('Success', data.status);
+                    // go to the monument page
+                    goPage('MonumentDetails', null, { Monument: data.Monument });
                 }
                 // make the camera resume again
                 setImage(null);
@@ -175,7 +176,7 @@ export default function CameraScreen({ }) {
 
     // Toggle the flash
     const flashClick = async () => {
-        if(hasCameraPermission === false){
+        if (hasCameraPermission === false) {
             showPopupMessage('Error', translate('Scan.ErrorAcces'));
             return;
         }
@@ -187,7 +188,7 @@ export default function CameraScreen({ }) {
 
     // Toggle the camera
     const CameraClick = async () => {
-        if(hasCameraPermission === false){
+        if (hasCameraPermission === false) {
             showPopupMessage('Error', translate('Scan.ErrorAcces'));
             return;
         }
