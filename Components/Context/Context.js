@@ -39,13 +39,23 @@ const UserProvider  = ({ children }) => {
         }, 2000)
     }
 
+    // subscribe modal
+    const [ subscribeModalVisible, setSubscribeModalVisible ] = useState(false);
+
+    // show subscribe
+    const showSubscribeModal = () => setSubscribeModalVisible(true);
+
+    // hide subscribe
+    const hideSubscribeModal = () => setSubscribeModalVisible(false);
+
     return (
         <UserContext.Provider 
             value={{ 
                 modalVisible, hideModal, showModal, 
                 loaderVisible, loaderMessage, hideLoader, showLoader,
                 popupMessageVisible, messageState, message, hidePopupMessage, showPopupMessage,
-                screen, setScreen
+                screen, setScreen,
+                subscribeModalVisible, showSubscribeModal, hideSubscribeModal
             }}
         >
             {children}

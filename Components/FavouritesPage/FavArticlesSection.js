@@ -7,6 +7,7 @@ import { goPage } from "../../Helpers/Navigator";
 import { LinearGradient } from 'expo-linear-gradient';
 import { useContext, useEffect } from "react";
 import { FavArticlesContext } from "../Context/FavArticlesContext";
+import EmptyContainer from "./EmptyContainer";
 
 
 export default function FavArticlesSection({ }) {
@@ -38,10 +39,6 @@ export default function FavArticlesSection({ }) {
         return <FavArticleCard favArticle={item} screen={'favourites'} />
     }
 
-    if (favArticles.length === 0) {
-        return null;
-    }
-
     return (
         <View style={[styles.containerScroll, styles.shadowProp]}>
             <LinearGradient
@@ -71,6 +68,7 @@ export default function FavArticlesSection({ }) {
                         showsVerticalScrollIndicator={false}
                         onEndReached={getFavArticles}
                         onEndReachedThreshold={0.5}
+                        ListEmptyComponent={<EmptyContainer />}
                     />
                 </View>
             </LinearGradient>
