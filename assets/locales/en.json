@@ -19,7 +19,7 @@
         "fullNameLength": "Full Name shouldn't exceed 50 characters",
         "invalidOTP": "Invalid OTP",
         "verifying": "While checking OTP",
-        "emailSent": "Theres is email sent to you with the OTP to verifying",
+        "emailSent": "There is an email has been sent to you with the OTP to verifying",
         "sendingOTP": "While sending email for you",
         "passwordMatch": "Confirm password should be the same with the password",
         "ChangingPassword": "While validate the new password",
