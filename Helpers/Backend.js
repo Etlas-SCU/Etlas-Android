@@ -782,7 +782,7 @@ class Backend {
         }
     }
 
-    static async getFavourites(pageNumber){
+    static async getFavourites(pageNumber) {
         try {
             const url = `favorites/?page=${pageNumber}`;
             return await this.GET(url).then(response => response);
@@ -931,7 +931,7 @@ class Backend {
         return { state: true, message: '' };
     }
 
-    static async getArticleFromFavourits(favourites){
+    static async getArticleFromFavourits(favourites) {
         let favArticlesResponse = [];
         favourites.forEach((obj) => {
             if (obj.article)
@@ -940,7 +940,7 @@ class Backend {
         return favArticlesResponse;
     }
 
-    static async getMonumentFromFavourits(favourites){
+    static async getMonumentFromFavourits(favourites) {
         let favMonumentsResponse = [];
         favourites.forEach((obj) => {
             if (obj.monument)
@@ -949,7 +949,7 @@ class Backend {
         return favMonumentsResponse;
     }
 
-    static isDetectFailure(detection){
+    static isDetectFailure(detection) {
         const fail = 'No monuments detected';
         return detection === fail;
     }

@@ -1,10 +1,10 @@
-import { View, PanResponder, ActivityIndicator} from 'react-native';
+import { View, PanResponder, ActivityIndicator } from 'react-native';
 import { GLView } from 'expo-gl';
 import { THREE, Renderer, TextureLoader } from 'expo-three';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 import * as FileSystem from 'expo-file-system';
 import { useRef, useState, memo } from 'react';
-import { colors, responsiveHeight } from '../../AppStyles';
+import { colors } from '../../AppStyles';
 
 
 // Textures of the statue
@@ -166,7 +166,7 @@ function ModelViewer({ modelURL, modelName, style }) {
 
     return (
         <View style={style}>
-            {!isLoaded && <ActivityIndicator size="large" color={colors.White}/>}
+            {!isLoaded && <ActivityIndicator size="large" color={colors.White} />}
             <GLView
                 style={{ flex: 1 }}
                 onContextCreate={onContextCreate}

@@ -16,7 +16,7 @@ export default function SvgMaker({ Svg, style = {} }) {
             return <Svg height={style.height} />
         }
         else {
-            return <Svg/>
+            return <Svg />
         }
     }
     return (

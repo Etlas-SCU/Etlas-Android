@@ -288,7 +288,6 @@ export default function FavMonumentDetails({ }) {
                             cachePolicy={'memory-disk'}
                         />
                 }
-
                 <View style={styles.TitleConainer}>
                     <Text style={styles.title}>{Title}</Text>
                     <Text style={styles.description}>{formatHistoricDate(HistoricCounty, HistoricDate)}</Text>

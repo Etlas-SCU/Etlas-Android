@@ -3,7 +3,7 @@ import { Image } from 'expo-image';
 import { styles } from "./Styles";
 import Swiper from 'react-native-swiper'
 import { colors } from "../../AppStyles";
-import { goBack, refreshPage } from "../../Helpers/Navigator";
+import { goBack } from "../../Helpers/Navigator";
 import Backend from "../../Helpers/Backend";
 import SvgMaker from "../SvgMaker/SvgMaker";
 import { InvLeftArrowIcon } from "../../assets/SVG/Icons";

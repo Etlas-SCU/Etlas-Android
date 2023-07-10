@@ -14,6 +14,12 @@ export const styles = StyleSheet.create({
         resizeMode: 'contain',
         marginBottom: responsiveHeight(14)
     },
+    _3D: {
+        width: dimensions.fullWidth,
+        height: responsiveHeight(255),
+        marginBottom: responsiveHeight(14),
+        backgroundColor: colors.DarkCyan,
+    },
     UpperBox: {
         flexGrow: 1,
         width: dimensions.fullWidth,
