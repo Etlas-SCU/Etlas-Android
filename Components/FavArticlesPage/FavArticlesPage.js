@@ -31,7 +31,7 @@ export default function FavArticlesPage({ }) {
 
     // render items in flat list
     const renderItem = ({ item }) => {
-        return <FavArticleCard favArticle={item}/>
+        return <FavArticleCard favArticle={item} />
     }
 
     return (

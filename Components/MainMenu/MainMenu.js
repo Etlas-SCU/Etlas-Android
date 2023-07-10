@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Modal, ImageBackground, Image } from 'react-native'
+import { View, Text, TouchableOpacity, Modal, ImageBackground } from 'react-native'
 import { styles } from './Styles'
 import { translate } from '../../Localization'
 import { useContext } from 'react';

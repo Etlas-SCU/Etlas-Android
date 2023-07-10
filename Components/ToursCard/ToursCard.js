@@ -26,7 +26,7 @@ function ToursCard({ Tour, screen }) {
                 goPage('TourDetails', screen, { Tour: Tour })
             }}
         >
-            <Image 
+            <Image
                 style={isPage ? Page.ToursCardImg : Swipper.ToursCardImg}
                 cachePolicy={'memory-disk'}
                 priority={'high'}

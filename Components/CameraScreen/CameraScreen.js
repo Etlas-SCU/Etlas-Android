@@ -160,7 +160,7 @@ export default function CameraScreen({ }) {
 
                 // check if the image detected
                 if (Backend.isDetectFailure(data.Detection)) {
-                    showPopupMessage('Error', data.Detection);
+                    goPage('RecognitionFailed');
                 } else {
                     // go to the monument page
                     goPage('MonumentDetails', null, { Monument: data.Monument });
@@ -257,10 +257,11 @@ export default function CameraScreen({ }) {
             hideLoader();
 
             // check if the image detected
-            if (data.status === "No monuments detected") {
-                showPopupMessage('Error', data.status);
+            if (Backend.isDetectFailure(data.Detection)) {
+                goPage('RecognitionFailed');
             } else {
-                showPopupMessage('Success', data.status);
+                // go to the monument page
+                goPage('MonumentDetails', null, { Monument: data.Monument });
             }
 
             // resume the camera again

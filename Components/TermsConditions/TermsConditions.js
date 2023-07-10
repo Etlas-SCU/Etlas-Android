@@ -21,7 +21,7 @@ const HTMLView = ({ htmlContent }) => {
         <RenderHTML
             source={{ html: htmlContent }}
             contentWidth={width}
-            baseStyle={styles.HTML}  
+            baseStyle={styles.HTML}
         />
     );
 };
@@ -36,7 +36,7 @@ export default function TermsConditions({ }) {
     useEffect(() => {
         async function fetchData() {
             showLoader(translate('TermsConditions.getTerms'));
-            const {statusCode, data} = await Backend.getTermsConditions();
+            const { statusCode, data } = await Backend.getTermsConditions();
             hideLoader();
             if (Backend.isSuccessfulRequest(statusCode)) {
                 setTerms(data);
@@ -47,11 +47,11 @@ export default function TermsConditions({ }) {
 
     return (
         <View style={styles.container}>
-            { loaderVisible ? <Loader /> : null }
+            {loaderVisible ? <Loader /> : null}
             <View style={styles.header}>
                 <Text style={styles.title}>{translate('TermsConditions.title')}</Text>
-                <TouchableOpacity 
-                    onPress={goBack} 
+                <TouchableOpacity
+                    onPress={goBack}
                     style={styles.close}
                 >
                     <SvgMaker Svg={InvCloseIcon} style={styles.closeIcon} />

@@ -2,8 +2,8 @@ import { colors } from "../../AppStyles";
 import { SuccessIcon, WarningIcon, ErrorIcon } from "../../assets/SVG/Icons";
 
 
-export class Success { 
-    constructor() {
+export class Success {
+    constructor () {
         this.icon = SuccessIcon;
         this.title = 'Done!';
         this.backgroundColor = colors.NavyGreen;
@@ -11,7 +11,7 @@ export class Success {
 }
 
 export class Error {
-    constructor() {
+    constructor () {
         this.icon = ErrorIcon;
         this.title = 'Oops!';
         this.backgroundColor = colors.NavyRed;
@@ -19,7 +19,7 @@ export class Error {
 }
 
 export class Warning {
-    constructor() {
+    constructor () {
         this.icon = WarningIcon;
         this.title = 'Hmmm!';
         this.backgroundColor = colors.NavyYellow;

@@ -17,7 +17,7 @@ module.exports = async function (asyncConfig) {
             assetExts: defaultConfig.resolver.assetExts.filter(
                 (ext) => ext !== "svg"
             ),
-            sourceExts: [...defaultConfig.resolver.sourceExts, "svg", "obj"],
+            sourceExts: [...defaultConfig.resolver.sourceExts, "svg", "obj", "jpeg"],
         },
     };
 };

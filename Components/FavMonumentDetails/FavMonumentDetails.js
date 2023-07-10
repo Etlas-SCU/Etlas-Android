@@ -272,13 +272,22 @@ export default function FavMonumentDetails({ }) {
                 >
                     <SvgMaker Svg={CloseIcon} style={styles.arrow} />
                 </TouchableOpacity>
-                <Image
-                    source={Img}
-                    style={styles.image}
-                    priority={'high'}
-                    contentFit='fill'
-                    cachePolicy={'memory-disk'}
-                />
+                {
+                    Model ?
+                        <ModelViewer
+                            modelName={Title}
+                            modelURL={Model.model_obj}
+                            style={styles._3D}
+                        />
+                        :
+                        <Image
+                            source={Img}
+                            style={styles.image}
+                            priority={'high'}
+                            contentFit='fill'
+                            cachePolicy={'memory-disk'}
+                        />
+                }
                 <View style={styles.TitleConainer}>
                     <Text style={styles.title}>{Title}</Text>
                     <Text style={styles.description}>{formatHistoricDate(HistoricCounty, HistoricDate)}</Text>

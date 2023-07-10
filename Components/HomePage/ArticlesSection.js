@@ -1,4 +1,4 @@
-import { useContext, useEffect, memo } from "react";
+import { useContext, useEffect } from "react";
 import { View, Text, TouchableOpacity, FlatList } from "react-native";
 import { styles } from "./Styles";
 import { translate } from "../../Localization";

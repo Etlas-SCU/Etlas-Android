@@ -352,22 +352,6 @@ class Backend {
         }
     }
 
-    static getFavMonuments() {
-        let Monument = {
-            ID: 1,
-            Title: "Anubis Statue",
-            HistoricDate: "200 BC | Egypt",
-            Img: require('../assets/ImagesToDelete/Anubis.png'),
-            scannedDate: 'Scanned 12 Oct 2021',
-            fullDescription: `Anubis Statue is an ancient statue that where built in the old egypt and worshiped by the people.\n Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially\n unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Anubis Statue is an ancient statue that where built in the old egypt and worshiped by the people.\n Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially\nunchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`
-        };
-        var monuments = Array(10).fill(Monument);
-        for (let i = 0; i < 10; i++) {
-            monuments[i].id = i;
-        }
-        return monuments;
-    }
-
     // user info and updates
 
     static changeUserImage(Image) {
@@ -798,7 +782,7 @@ class Backend {
         }
     }
 
-    static async getFavourites(pageNumber){
+    static async getFavourites(pageNumber) {
         try {
             const url = `favorites/?page=${pageNumber}`;
             return await this.GET(url).then(response => response);
@@ -947,7 +931,7 @@ class Backend {
         return { state: true, message: '' };
     }
 
-    static async getArticleFromFavourits(favourites){
+    static async getArticleFromFavourits(favourites) {
         let favArticlesResponse = [];
         favourites.forEach((obj) => {
             if (obj.article)
@@ -956,7 +940,7 @@ class Backend {
         return favArticlesResponse;
     }
 
-    static async getMonumentFromFavourits(favourites){
+    static async getMonumentFromFavourits(favourites) {
         let favMonumentsResponse = [];
         favourites.forEach((obj) => {
             if (obj.monument)
@@ -965,7 +949,7 @@ class Backend {
         return favMonumentsResponse;
     }
 
-    static isDetectFailure(detection){
+    static isDetectFailure(detection) {
         const fail = 'No monuments detected';
         return detection === fail;
     }

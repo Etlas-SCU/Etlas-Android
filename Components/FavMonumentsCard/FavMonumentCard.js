@@ -54,9 +54,9 @@ function FavMonumentCard({ favMonument }) {
             {popupMessageVisible ? <PopupMessage /> : null}
             <View style={styles.cardContainer}>
                 <View style={styles.MonumentcardImgContainer}>
-                    <Image 
-                        source={Img} 
-                        style={styles.MonumentcardImg} 
+                    <Image
+                        source={Img}
+                        style={styles.MonumentcardImg}
                         cachePolicy={'memory-disk'}
                         contentFit={'fill'}
                         priority={'high'}

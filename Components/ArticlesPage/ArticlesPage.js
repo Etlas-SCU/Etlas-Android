@@ -101,7 +101,7 @@ export default function ArticlesPage({ }) {
     }
 
     // handle end reached
-    
+
 
     return (
         <View style={styles.container}>

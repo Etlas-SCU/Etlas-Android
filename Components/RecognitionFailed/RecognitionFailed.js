@@ -1,4 +1,4 @@
-import { View, Image, Text, TouchableOpacity, ScrollView, SafeAreaView } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView, SafeAreaView } from "react-native";
 import { styles } from './Styles'
 import { translate } from "../../Localization";
 import { UserContext } from "../Context/Context";
@@ -7,7 +7,7 @@ import MainMenu from "../MainMenu/MainMenu";
 import { isIOS } from "../../AppStyles";
 import { goPage } from "../../Helpers/Navigator";
 import SvgMaker from "../SvgMaker/SvgMaker";
-import { MenuIcon, SadIcon, CloseIcon } from "../../assets/SVG/Icons";
+import { MenuIcon, SadIcon } from "../../assets/SVG/Icons";
 
 
 export default function KnowledgeCheck({ }) {
