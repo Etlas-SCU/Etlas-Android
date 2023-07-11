@@ -73,7 +73,7 @@ export default function EditProfile({ }) {
                     <View style={styles.header}>
                         <Text style={styles.title}>{translate('EditProfile.title')}</Text>
                         <TouchableOpacity
-                            onPress={goBack}
+                            onPress={() => { goPage('Settings') }}
                             style={styles.close}
                         >
                             <SvgMaker Svg={InvCloseIcon} style={styles.closeIcon} />
