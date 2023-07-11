@@ -17,7 +17,7 @@
             "resizeMode": "cover",
             "backgroundColor": "#ffffff"
         },
-        "assetBundlePatterns": ["**/*", "assets/**", "assets/Textures/Ramsis_II_Bust.jpeg"],
+        "assetBundlePatterns": ["**/*", "assets/**"],
         "ios": {
             "supportsTablet": false,
             "bundleIdentifier": "com.etlas"
