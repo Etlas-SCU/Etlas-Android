@@ -73,8 +73,8 @@ export default function ToursPage({ }) {
     SortFunctions = {
         'Name (a-z)': (a, b) => { return a.title.localeCompare(b.title) },
         'Name (z-a)': (a, b) => { return b.title.localeCompare(a.title) },
-        'Latest': (a, b) => { return a.id - b.id },
-        'Oldest': (a, b) => { return b.id - a.id },
+        'Latest': (a, b) => { return b.id - a.id },
+        'Oldest': (a, b) => { return a.id - b.id },
     }
 
     // filtered tours
