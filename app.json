@@ -6,7 +6,7 @@
         "scheme": ["com.etlas", "fb473951754912606"],
         "packagerOpts": {
             "config": "metro.config.js",
-            "sourceExts": ["js", "jsx", "json", "wasm", "svg"]
+            "sourceExts": ["js", "jsx", "json", "wasm", "svg", "jpeg", "obj"]
         },
         "orientation": "portrait",
         "icon": "./assets/Images/Etlas-logo.png",
@@ -17,7 +17,7 @@
             "resizeMode": "cover",
             "backgroundColor": "#ffffff"
         },
-        "assetBundlePatterns": ["**/*"],
+        "assetBundlePatterns": ["**/*", "assets/*", "Textures/Ramsis_II_Bust.jpeg"],
         "ios": {
             "supportsTablet": false,
             "bundleIdentifier": "com.etlas"

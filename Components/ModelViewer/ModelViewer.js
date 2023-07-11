@@ -12,34 +12,16 @@ const Textures = {
     'Ramsis II Bust': require('../../assets/Textures/Ramsis_II_Bust.jpeg'),
 };
 
-// Poisitions of the statues
-const Positions = {
+const statueData = {
     'Ramsis II Bust': {
-        x: 0,
-        y: -1,
-        z: 0
-    }
-};
-
-// Rotations of the statues
-const Rotations = {
-    'Ramsis II Bust': {
-        x: -1.5,
-        y: 0,
-        z: 0
-    }
-};
-
-// Scale of the statues
-const Scales = {
-    'Ramsis II Bust': {
-        x: 1.2,
-        y: 1.2,
-        z: 1.2
+        position: { x: 0, y: -1, z: 0 },
+        rotation: { x: -1.5, y: 0, z: 0 },
+        scale: { x: 1.2, y: 1.2, z: 1.2 },
     },
 };
 
-function ModelViewer({ modelURL, modelName, style }) {
+
+function ModelViewer({ modelURL, textureUrl, modelName, style }) {
     // refrences
     const rendererRef = useRef(null);
     const sceneRef = useRef(null);
@@ -90,7 +72,10 @@ function ModelViewer({ modelURL, modelName, style }) {
 
         const loadModel = async (objFileUri) => {
             const loader = new OBJLoader();
+
+            // load the object file and texture file
             const objFileData = await FileSystem.readAsStringAsync(objFileUri);
+
 
             // load the texture
             const texture = new TextureLoader().load(Textures[modelName]);
@@ -122,20 +107,12 @@ function ModelViewer({ modelURL, modelName, style }) {
             renderer.setSize(width, height);
             renderer.setClearColor(colors.DarkCyan);
 
-            // change position of the model
-            model.position.x = Positions[modelName].x;
-            model.position.y = Positions[modelName].y;
-            model.position.z = Positions[modelName].z;
+            // Change position, rotation, and scale using the statueData object
+            const { position, rotation, scale } = statueData[modelName];
 
-            // change rotation of the model
-            model.rotation.x = Rotations[modelName].x;
-            model.rotation.y = Rotations[modelName].y;
-            model.rotation.z = Rotations[modelName].z;
-
-            // change scale of the model
-            model.scale.x = Scales[modelName].x;
-            model.scale.y = Scales[modelName].y;
-            model.scale.z = Scales[modelName].z;
+            model.position.set(position.x, position.y, position.z);
+            model.rotation.set(rotation.x, rotation.y, rotation.z);
+            model.scale.set(scale.x, scale.y, scale.z);
 
             // add the statue to the scene
             scene.add(model);

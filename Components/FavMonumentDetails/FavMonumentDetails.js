@@ -277,6 +277,7 @@ export default function FavMonumentDetails({ }) {
                         <ModelViewer
                             modelName={Title}
                             modelURL={Model.model_obj}
+                            textureUrl={Model.model_texture}
                             style={styles._3D}
                         />
                         :
