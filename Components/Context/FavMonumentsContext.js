@@ -27,12 +27,12 @@ const FavMonumentsProvider = ({ children }) => {
         const newFavMonuments = favMonuments.filter((favMonument) => {
             return favMonument.id !== monument.id;
         });
-        setFavMonuments(newFavMonuments);
+        setFavMonuments([... new Set(newFavMonuments)]);
     }
 
     // get Monuments
     const getFavMonuments = async () => {
-        return [...favMonuments];
+        return [... new Set(favMonuments)];
     }
 
     // remove Monuments

@@ -12,7 +12,6 @@ import { CloseIcon, FilledHeartIcon, NonFilledHeartIcon, PauseIcon, StopIcon, Pl
 import { FavMonumentsContext } from '../Context/FavMonumentsContext';
 import PopupMessage from '../PopupMessage/PopupMessage';
 import { Image } from 'expo-image';
-import ModelViewer from '../ModelViewer/ModelViewer';
 import { formatHistoricDate } from '../../AppStyles';
 
 
@@ -272,22 +271,13 @@ export default function FavMonumentDetails({ }) {
                 >
                     <SvgMaker Svg={CloseIcon} style={styles.arrow} />
                 </TouchableOpacity>
-                {
-                    Model ?
-                        <ModelViewer
-                            modelName={Title}
-                            modelURL={Model.model_obj}
-                            style={styles._3D}
-                        />
-                        :
-                        <Image
-                            source={Img}
-                            style={styles.image}
-                            priority={'high'}
-                            contentFit='fill'
-                            cachePolicy={'memory-disk'}
-                        />
-                }
+                <Image
+                    source={Img}
+                    style={styles.image}
+                    priority={'high'}
+                    contentFit='fill'
+                    cachePolicy={'memory-disk'}
+                />
                 <View style={styles.TitleConainer}>
                     <Text style={styles.title}>{Title}</Text>
                     <Text style={styles.description}>{formatHistoricDate(HistoricCounty, HistoricDate)}</Text>

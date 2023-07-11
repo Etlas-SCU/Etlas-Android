@@ -27,12 +27,12 @@ const FavArticlesProvider = ({ children }) => {
         const newFavArticles = favArticles.filter((favArticle) => {
             return favArticle.id !== article.id;
         });
-        setFavArticles(newFavArticles);
+        setFavArticles([... new Set(newFavArticles)]);
     }
 
     // get articles
     const getFavArticles = async () => {
-        return [...favArticles];
+        return [... new Set(favArticles)];
     }
 
     // remove articles
